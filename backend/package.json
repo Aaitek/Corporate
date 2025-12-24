@@ -1,0 +1,34 @@
+{
+  "name": "aaitek-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Aaitek Strapi Backend",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-i18n": "^4.15.0",
+    "@strapi/plugin-upload": "^4.15.0",
+    "@strapi/plugin-users-permissions": "^4.15.0",
+    "@strapi/strapi": "^4.15.0",
+    "pg": "^8.16.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.11"
+  },
+  "author": {
+    "name": "Aaitek"
+  },
+  "strapi": {
+    "uuid": "aaitek-strapi-uuid"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

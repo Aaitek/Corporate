@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "managed_services",
+  "info": {
+    "singularName": "managed-service",
+    "pluralName": "managed-services",
+    "displayName": "Managed Service",
+    "description": "Managed services offered by Aaitek"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "features": {
+      "type": "json"
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}
+
