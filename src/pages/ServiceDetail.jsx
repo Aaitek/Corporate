@@ -8,6 +8,20 @@ const ServiceDetail = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
+  const serviceSlugs = [
+    'product-development',
+    'software-engineering',
+    'cloud-devops',
+    'data-ai',
+    'digital-growth',
+    'managed-services',
+    'enterprise-platforms',
+  ]
+
+  const currentIndex = serviceSlugs.indexOf(slug || 'product-development')
+  const nextSlug = serviceSlugs[(currentIndex + 1) % serviceSlugs.length]
+  const prevSlug = serviceSlugs[(currentIndex - 1 + serviceSlugs.length) % serviceSlugs.length]
+
   const serviceData = {
     'product-development': {
       title: 'Product Development',
