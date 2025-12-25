@@ -46,9 +46,9 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center px-4 py-2 rounded-lg bg-sky-100 border border-sky-200 mb-6"
+                className="inline-flex items-center px-4 py-2 rounded-lg bg-sky-100 border border-sky-200 mb-6 w-fit"
               >
-                <span className="text-sm font-semibold text-sky-600 uppercase tracking-wider">ABOUT AAITEK</span>
+                <span className="text-sm font-semibold text-sky-600 uppercase tracking-wider whitespace-nowrap">ABOUT AAITEK</span>
               </motion.div>
 
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight">
