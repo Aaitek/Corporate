@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Services from './pages/Services'
+import ServiceDetail from './pages/ServiceDetail'
 import Products from './pages/Products'
 import HireDevelopers from './pages/HireDevelopers'
 import PartnerSuccess from './pages/PartnerSuccess'
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/products" element={<Products />} />
             <Route path="/hire-developers" element={<HireDevelopers />} />
             <Route path="/partner-success" element={<PartnerSuccess />} />

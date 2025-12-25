@@ -128,19 +128,23 @@ const ServicesStacked = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {serviceCategories.map((category, categoryIndex) => (
-            <motion.div
+            <Link
               key={categoryIndex}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: categoryIndex * 0.1,
-                ease: [0.25, 0.1, 0.25, 1]
-              }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+              to={`/services/${category.slug}`}
+              className="block"
             >
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: categoryIndex * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden cursor-pointer h-full"
+              >
               {/* Left Border on Hover */}
               <motion.div
                 className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
