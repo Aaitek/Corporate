@@ -10,6 +10,7 @@ const ServicesStacked = () => {
   const serviceCategories = [
     {
       category: 'Product Development',
+      slug: 'product-development',
       description: 'Transform your ideas into powerful digital products that engage users and drive business growth. From concept to launch, we deliver innovative solutions.',
       services: [
         'Website Development',
@@ -22,6 +23,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Software Engineering',
+      slug: 'software-engineering',
       description: 'Build robust, scalable software solutions tailored to your business needs. Our engineering expertise ensures reliable, high-performance applications.',
       services: [
         'Custom Software Development',
@@ -33,6 +35,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Cloud & DevOps',
+      slug: 'cloud-devops',
       description: 'Accelerate your digital transformation with cloud-native solutions and automated DevOps practices. Scale seamlessly with enterprise-grade infrastructure.',
       services: [
         'Cloud Architecture & Migration',
@@ -44,6 +47,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Data & AI',
+      slug: 'data-ai',
       description: 'Unlock the power of your data with intelligent AI solutions. Drive insights, automate processes, and make data-driven decisions that transform your business.',
       services: [
         'Data Engineering',
@@ -54,6 +58,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Digital Growth',
+      slug: 'digital-growth',
       description: 'Amplify your online presence and drive measurable growth. Our digital marketing strategies help you reach the right audience and convert leads into customers.',
       services: [
         'Search Engine Optimization',
@@ -65,6 +70,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Managed Services',
+      slug: 'managed-services',
       description: 'Ensure continuous performance and reliability with our comprehensive managed services. Focus on your business while we handle the technical operations.',
       services: [
         'Application Support',
@@ -76,6 +82,7 @@ const ServicesStacked = () => {
     },
     {
       category: 'Enterprise Platforms',
+      slug: 'enterprise-platforms',
       description: 'Leverage industry-leading enterprise platforms to streamline operations, enhance customer relationships, and drive organizational efficiency.',
       subcategories: [
         {
