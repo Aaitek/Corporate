@@ -33,7 +33,7 @@ const AboutUs = () => {
 
       <div className="container-custom relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left Column - Title & Stats */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -99,7 +99,7 @@ const AboutUs = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-              className="space-y-8 flex flex-col justify-start lg:pt-16"
+              className="space-y-8 flex flex-col justify-between lg:pt-20"
             >
               <div className="space-y-6">
                 <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -138,7 +138,7 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="pt-4 mt-auto"
+                className="pt-4"
               >
                 <motion.a
                   href="/about"
