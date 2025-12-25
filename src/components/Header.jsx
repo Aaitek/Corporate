@@ -173,7 +173,7 @@ const Header = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-primary-200' 
-            : 'bg-transparent backdrop-blur-sm'
+            : 'bg-gray-900/80 backdrop-blur-md'
         }`}
     >
       <nav className="container-custom">
@@ -198,8 +198,8 @@ const Header = () => {
               to="/"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/'
-                  ? isScrolled ? 'text-primary-600' : 'text-gray-900'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-gray-900/90 hover:text-primary-600'
+                  ? isScrolled ? 'text-primary-600' : 'text-white'
+                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
               }`}
             >
               Home
@@ -215,8 +215,8 @@ const Header = () => {
                   to={item.path}
                   className={`text-sm font-medium transition-colors flex items-center ${
                     location.pathname === item.path
-                      ? isScrolled ? 'text-primary-600' : 'text-gray-900'
-                      : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-gray-900/90 hover:text-primary-600'
+                      ? isScrolled ? 'text-primary-600' : 'text-white'
+                      : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
                   }`}
                 >
                   {item.label}
@@ -293,8 +293,8 @@ const Header = () => {
               to="/about"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/about'
-                  ? isScrolled ? 'text-primary-600' : 'text-gray-900'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-gray-900/90 hover:text-primary-600'
+                  ? isScrolled ? 'text-primary-600' : 'text-white'
+                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
               }`}
             >
               About
@@ -303,8 +303,8 @@ const Header = () => {
               to="/contact"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/contact'
-                  ? isScrolled ? 'text-primary-600' : 'text-gray-900'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-gray-900/90 hover:text-primary-600'
+                  ? isScrolled ? 'text-primary-600' : 'text-white'
+                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
               }`}
             >
               Contact
@@ -324,7 +324,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2"
+            className={`lg:hidden p-2 ${!isScrolled ? 'text-white' : 'text-gray-900'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -355,7 +355,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t">
+          <div className={`lg:hidden py-4 border-t ${!isScrolled ? 'border-gray-700' : 'border-gray-200'}`}>
             {Object.entries(menuItems).map(([key, item]) => (
               <div key={key} className="mb-2">
                 <Link

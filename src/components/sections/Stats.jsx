@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { CountUp } from '../../hooks/useCountUp'
 
 const Stats = () => {
   const stats = [
@@ -33,7 +34,7 @@ const Stats = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="section-padding bg-gradient-to-br from-sky-50 via-white to-blue-50 relative overflow-hidden">
+    <section className="section-padding bg-gray-50 relative overflow-hidden">
       <div className="container-custom" ref={ref}>
         <motion.div
           className="text-center mb-16"
@@ -84,14 +85,25 @@ const Stats = () => {
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: index * 0.2 + 0.5 }}
                 >
-                  {isInView ? stat.value : 0}{stat.suffix}
+                  {isInView ? (
+                    <CountUp
+                      start={0}
+                      end={stat.value}
+                      duration={2.5}
+                      suffix={stat.suffix}
+                      separator=","
+                      decimals={0}
+                    />
+                  ) : (
+                    `0${stat.suffix}`
+                  )}
                 </motion.span>
               </motion.div>
               
-              <h3 className="text-2xl font-bold text-gray-100 mb-3 relative z-10 group-hover:text-primary-400 transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 relative z-10 group-hover:text-primary-600 transition-colors">
                 {stat.label}
               </h3>
-              <p className="text-gray-300 relative z-10 leading-relaxed">{stat.description}</p>
+              <p className="text-gray-600 relative z-10 leading-relaxed">{stat.description}</p>
               
               {/* Decorative Elements */}
               <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-40 transition-opacity">

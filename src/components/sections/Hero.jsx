@@ -1,296 +1,328 @@
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [showText, setShowText] = useState(false)
+  const [startAnimations, setStartAnimations] = useState(false)
   const heroRef = useRef(null)
+  const typeItRef = useRef(null)
+  const typeItInstanceRef = useRef(null)
+  const heroInView = useInView(heroRef, { once: true, amount: 0.3 })
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start']
   })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+  
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95])
+
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const springConfig = { damping: 25, stiffness: 200 }
+  const x = useSpring(mouseX, springConfig)
+  const yMouse = useSpring(mouseY, springConfig)
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      })
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
+      const xPos = (clientX / innerWidth - 0.5) * 20
+      const yPos = (clientY / innerHeight - 0.5) * 20
+      mouseX.set(xPos)
+      mouseY.set(yPos)
+      setMousePosition({ x: xPos, y: yPos })
     }
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  }, [mouseX, mouseY])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  }
+  // Start animations when hero is in view
+  useEffect(() => {
+    if (heroInView) {
+      // Start animations after a short delay to ensure smooth rendering
+      const timer = setTimeout(() => {
+        setStartAnimations(true)
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [heroInView])
 
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
-      },
-    },
-  }
+  // TypeIt effect - starts when animations are triggered
+  useEffect(() => {
+    const initTypeIt = async () => {
+      if (typeItRef.current && !typeItInstanceRef.current && startAnimations) {
+        try {
+          // Wait a bit for element to be ready
+          await new Promise(resolve => setTimeout(resolve, 200))
+          
+          // Clear content completely
+          if (typeItRef.current) {
+            typeItRef.current.innerHTML = ''
+          }
+          
+          const TypeIt = (await import('typeit')).default
+          
+          typeItInstanceRef.current = new TypeIt(typeItRef.current, {
+            strings: [
+              "We're a <span style='color: #fb923c;'>Full Stack</span> <span style='color: #06b6d4;'>AI Hub</span>"
+            ],
+            speed: 100,
+            waitUntilVisible: true,
+            cursor: false,
+            deleteSpeed: 50,
+            lifeLike: true,
+            breakLines: false,
+            html: true,
+          }).go()
+          
+          setShowText(true)
+        } catch (error) {
+          console.error('TypeIt error:', error)
+          // Fallback: just set the text directly with colored spans
+          if (typeItRef.current) {
+            typeItRef.current.innerHTML = "We're a <span style='color: #fb923c;'>Full Stack</span> <span style='color: #06b6d4;'>AI Hub</span>"
+            setShowText(true)
+          }
+        }
+      }
+    }
+    
+    if (startAnimations) {
+      initTypeIt()
+    }
+    
+    return () => {
+      if (typeItInstanceRef.current) {
+        try {
+          typeItInstanceRef.current.destroy()
+        } catch (e) {
+          // Ignore destroy errors
+        }
+        typeItInstanceRef.current = null
+      }
+    }
+  }, [startAnimations])
 
-  const floatingShapes = Array.from({ length: 20 }, (_, i) => ({
+
+
+  // Animated particles
+  const particles = Array.from({ length: 15 }, (_, i) => ({
     id: i,
-    size: Math.random() * 100 + 50,
+    size: Math.random() * 4 + 2,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    duration: Math.random() * 10 + 10,
+    duration: Math.random() * 20 + 15,
+    delay: Math.random() * 5,
+  }))
+
+  // Tech elements for background
+  const techElements = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    icon: ['</>', '{ }', 'AI', 'API', 'DEV', 'CODE', 'JS', 'TS'][i],
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 20 + 30,
+    rotation: Math.random() * 360,
+    duration: Math.random() * 15 + 10,
     delay: Math.random() * 5,
   }))
 
   return (
     <section 
       ref={heroRef}
-      className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-sky-50 via-white to-blue-50 min-h-screen flex items-center"
+      className="relative pt-20 pb-32 overflow-hidden bg-gray-900 min-h-screen flex items-center"
     >
-      {/* Animated Background Waves */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg className="absolute bottom-0 w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <motion.path
-            fill="url(#gradient1)"
-            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            animate={{
-              d: [
-                "M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
-                "M0,160L48,144C96,128,192,96,288,96C384,96,480,128,576,133.3C672,139,768,117,864,112C960,107,1056,117,1152,122.7C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
-                "M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
-              ],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.1" />
-            </linearGradient>
-          </defs>
-        </svg>
+      {/* Gradient Background - Skyish Blue */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-900 via-sky-800 to-blue-900"></div>
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 50%, rgba(56, 189, 248, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 50% 20%, rgba(125, 211, 252, 0.3) 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.3) 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.3) 0%, transparent 50%)',
+              'radial-gradient(circle at 50% 80%, rgba(125, 211, 252, 0.25) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.3) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        />
       </div>
 
-      {/* Floating Geometric Shapes */}
-      {floatingShapes.map((shape) => (
+      {/* Floating Particles */}
+      {particles.map((particle) => (
         <motion.div
-          key={shape.id}
-          className="absolute rounded-full opacity-20"
+          key={particle.id}
+          className="absolute rounded-full bg-primary-400/20 z-20"
           style={{
-            width: shape.size,
-            height: shape.size,
-            left: `${shape.x}%`,
-            top: `${shape.y}%`,
-            background: `radial-gradient(circle, rgba(14, 165, 233, 0.3), rgba(2, 132, 199, 0.1))`,
+            width: particle.size,
+            height: particle.size,
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            x: useTransform(x, (val) => val * (particle.id % 2 === 0 ? 1 : -1) * 0.5),
+            y: useTransform(yMouse, (val) => val * (particle.id % 2 === 0 ? 1 : -1) * 0.5),
           }}
           animate={{
             y: [0, -30, 0],
-            x: [0, 20, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 15, 0],
+            opacity: [0.2, 0.4, 0.2],
           }}
           transition={{
-            duration: shape.duration,
+            duration: particle.duration,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: shape.delay,
+            ease: 'easeInOut',
+            delay: particle.delay,
           }}
         />
       ))}
 
-      {/* Animated Grid Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
-        />
-      </div>
 
-      {/* Parallax Content */}
+      {/* Main Content */}
       <motion.div 
-        style={{ y, opacity }}
-        className="container-custom relative z-10"
+        style={{ y, opacity, scale }}
+        className="container-custom relative z-20"
       >
-        <motion.div
-          className="max-w-5xl mx-auto text-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Animated Badge */}
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Text Content */}
           <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-8 backdrop-blur-sm"
-            whileHover={{ scale: 1.05 }}
-          >
-            <motion.span
-              className="w-2 h-2 rounded-full bg-primary-500"
-              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-sm font-semibold text-primary-600">
-              Full Stack AI Solutions
-            </span>
-          </motion.div>
-
-          {/* Main Heading with Text Animation */}
-          <motion.h1
-            className="heading-1 mb-6 text-gray-900 relative"
-            variants={itemVariants}
-            data-aos="fade-up"
-          >
-            <motion.span
-              className="block"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              We're a Full Stack
-            </motion.span>
-            <motion.span
-              className="block bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              style={{
-                x: mousePosition.x * 0.5,
-                y: mousePosition.y * 0.5,
-              }}
-            >
-              AI Hub
-            </motion.span>
-          </motion.h1>
-          
-          {/* Subtitle with Typewriter Effect */}
-          <motion.p
-            className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed"
-            variants={itemVariants}
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            When you combine that{' '}
-            <span className="font-semibold text-primary-600">AI firepower</span> with the{' '}
-            <span className="font-semibold text-primary-600">industry-specific expertise</span>, you get a fully integrated engine for transformation across the entire AI value chain.
-          </motion.p>
-          
-          {/* CTA Buttons with Hover Effects */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            variants={itemVariants}
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <motion.div 
-              whileHover={{ scale: 1.05, y: -2 }} 
-              whileTap={{ scale: 0.95 }}
-              className="relative group"
-            >
-              <Link 
-                to="/contact" 
-                className="btn-primary inline-block text-lg px-8 py-4 relative overflow-hidden"
-              >
-                <span className="relative z-10">Start a Project</span>
-                <motion.div
-                  className="absolute inset-0 bg-primary-600"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05, y: -2 }} 
-              whileTap={{ scale: 0.95 }}
-              className="relative group"
-            >
-              <Link 
-                to="/partner-success" 
-                className="btn-secondary inline-block text-lg px-8 py-4 relative overflow-hidden"
-              >
-                <span className="relative z-10">View Our Work</span>
-                <motion.div
-                  className="absolute inset-0 bg-primary-500"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Floating Stats Cards */}
-          <motion.div
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="relative z-10"
           >
-            {[
-              { number: '500+', label: 'Tech Professionals' },
-              { number: '21+', label: 'Years Experience' },
-              { number: '500+', label: 'Projects Delivered' },
-            ].map((stat, index) => (
+              {/* Badge */}
               <motion.div
-                key={index}
-                className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-primary-100"
-                whileHover={{ y: -10, scale: 1.05 }}
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: index * 0.5,
-                  ease: "easeInOut",
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-500/20 border border-primary-400/30 mb-6"
               >
-                <div className="text-3xl font-bold text-primary-600 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {stat.label}
-                </div>
+                <motion.div
+                  className="w-2 h-2 rounded-full bg-primary-400"
+                  animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="text-xs font-medium text-primary-300 uppercase tracking-wider">
+                  AI-Powered Solutions
+                </span>
               </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+
+              {/* Main Heading with TypeIt */}
+              <motion.h1
+                className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold text-white mb-6 leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
+                <motion.span
+                  ref={typeItRef}
+                  className="block text-white min-h-[1.2em]"
+                  style={{
+                    x: useTransform(x, (val) => val * 0.3),
+                    y: useTransform(yMouse, (val) => val * 0.3),
+                    opacity: showText ? 1 : 0,
+                  }}
+                />
+              </motion.h1>
+              
+              {/* Description */}
+              <motion.p
+                className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                When you combine that{' '}
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-2 py-1 rounded">AI firepower</span> with{' '}
+                <span className="font-semibold text-accent-400 bg-accent-400/10 px-2 py-1 rounded">industry-specific expertise</span>, 
+                you get a fully integrated engine for transformation across the entire AI value chain.
+              </motion.p>
+              
+              {/* CTA Buttons */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    to="/contact"
+                    className="group relative inline-flex items-center justify-center px-8 py-4 bg-primary-500 text-white font-semibold rounded-xl overflow-hidden shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all duration-300"
+                  >
+                    <span className="relative z-10">Start a Project</span>
+                    <motion.div
+                      className="absolute inset-0 bg-primary-600"
+                      initial={{ x: '-100%' }}
+                      whileHover={{ x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.svg
+                      className="relative z-10 ml-2 w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      initial={{ x: 0 }}
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </motion.svg>
+                  </Link>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    to="/partner-success"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all duration-300"
+                  >
+                    View Our Work
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+        </div>
       </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
       >
-        <div className="w-6 h-10 border-2 border-primary-500 rounded-full flex justify-center">
-          <motion.div
-            className="w-1 h-3 bg-primary-500 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
+        <motion.div
+          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">Scroll</span>
+          <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center p-2">
+            <motion.div
+              className="w-1.5 h-1.5 bg-primary-500 rounded-full"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   )

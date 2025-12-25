@@ -35,7 +35,7 @@ const Process = () => {
   ]
 
   return (
-    <section className="section-padding bg-black relative overflow-hidden">
+    <section className="section-padding bg-gray-50 relative overflow-hidden">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"
@@ -44,20 +44,20 @@ const Process = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-sm font-semibold text-primary-400 mb-4 uppercase tracking-wider">
+          <div className="text-sm font-semibold text-primary-600 mb-4 uppercase tracking-wider">
             Our Process
           </div>
-          <h2 className="heading-2 mb-4 text-white">
+          <h2 className="heading-2 mb-4 text-gray-900">
             How We Deliver Excellence
           </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             A proven methodology that ensures your project is delivered on time, within budget, and exceeds expectations.
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Connection Line */}
-          <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gray-800"></div>
+          <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gray-200"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {steps.map((step, index) => (
@@ -69,7 +69,7 @@ const Process = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-300 h-full">
+                <div className="group relative bg-white p-6 rounded-xl border border-gray-200 hover:border-primary-300 transition-all duration-300 h-full shadow-sm hover:shadow-lg">
                   {/* Step Number */}
                   <div className="absolute -top-4 left-6">
                     <div className="w-12 h-12 rounded-full bg-primary-500 flex items-center justify-center text-black font-bold text-lg shadow-lg">
@@ -81,10 +81,10 @@ const Process = () => {
                   <div className="text-4xl mb-4 mt-4">{step.icon}</div>
                   
                   {/* Content */}
-                  <h3 className="text-xl font-bold mb-3 text-white group-hover:text-primary-400 transition-colors">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed">
                     {step.description}
                   </p>
                   

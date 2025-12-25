@@ -1,313 +1,278 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const ServicesStacked = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const autoPlayIntervalRef = useRef(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
-  const services = [
+  const serviceCategories = [
     {
-      title: 'AI Chatbots',
-      description: 'Provide 24/7 customer support with intelligent virtual assistants that boost engagement and improve response times.',
-      link: '/services/ai-chatbots',
-      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop',
+      category: 'Product Development',
+      description: 'Transform your ideas into powerful digital products that engage users and drive business growth. From concept to launch, we deliver innovative solutions.',
+      services: [
+        'Website Development',
+        'Mobile App Development',
+        'eCommerce Experiences',
+        'UX/UI Design & Prototyping',
+        'Product Design & Discovery',
+        'Game & Interactive Experiences',
+      ],
     },
     {
-      title: 'AI Voice Agents',
-      description: 'Automate inbound and outbound calls with AI-driven voice solutions, ensuring seamless customer interactions.',
-      link: '/services/ai-voice-agents',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
+      category: 'Software Engineering',
+      description: 'Build robust, scalable software solutions tailored to your business needs. Our engineering expertise ensures reliable, high-performance applications.',
+      services: [
+        'Custom Software Development',
+        'API Design & Development',
+        'System Integration',
+        'Legacy Modernisation',
+        'Bespoke Application Development',
+      ],
     },
     {
-      title: 'AI Automation',
-      description: 'Eliminate repetitive tasks and optimize workflows with powerful AI-powered process automation.',
-      link: '/services/ai-automation',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      category: 'Cloud & DevOps',
+      description: 'Accelerate your digital transformation with cloud-native solutions and automated DevOps practices. Scale seamlessly with enterprise-grade infrastructure.',
+      services: [
+        'Cloud Architecture & Migration',
+        'Managed Cloud Hosting',
+        'DevOps & CI/CD Automation',
+        'Infrastructure & Server Support',
+        'Cloud Security & Governance',
+      ],
     },
     {
-      title: 'Custom AI Implementation',
-      description: 'Get tailor-made AI solutions designed to meet your unique business challenges.',
-      link: '/services/custom-ai',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop',
+      category: 'Data & AI',
+      description: 'Unlock the power of your data with intelligent AI solutions. Drive insights, automate processes, and make data-driven decisions that transform your business.',
+      services: [
+        'Data Engineering',
+        'AI & Machine Learning Solutions',
+        'Intelligent Automation',
+        'Analytics & Business Insights',
+      ],
     },
     {
-      title: 'Aaitek DXP',
-      description: 'Enterprise-grade DXP solutions across Sitecore, Kentico, Umbraco, and Optimizely. Delivering scalable, on-demand expertise that integrates seamlessly into your teams.',
-      link: '/services/dxp',
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop',
+      category: 'Digital Growth',
+      description: 'Amplify your online presence and drive measurable growth. Our digital marketing strategies help you reach the right audience and convert leads into customers.',
+      services: [
+        'Search Engine Optimization',
+        'Performance Marketing',
+        'Social Media Marketing',
+        'Online Reputation Management',
+        'Conversion & Performance Optimisation',
+      ],
+    },
+    {
+      category: 'Managed Services',
+      description: 'Ensure continuous performance and reliability with our comprehensive managed services. Focus on your business while we handle the technical operations.',
+      services: [
+        'Application Support',
+        'Platform Support & Optimisation',
+        'Development Support',
+        'Digital Fulfilment',
+        'IT Support Services',
+      ],
+    },
+    {
+      category: 'Enterprise Platforms',
+      description: 'Leverage industry-leading enterprise platforms to streamline operations, enhance customer relationships, and drive organizational efficiency.',
+      subcategories: [
+        {
+          name: 'CMS & DXP Platforms',
+          items: ['Sitecore', 'AEM', 'Umbraco', 'WordPress'],
+        },
+        {
+          name: 'CRM Platforms',
+          items: ['Salesforce', 'HubSpot', 'Microsoft Dynamics', 'Zoho'],
+        },
+        {
+          name: 'Service Management',
+          items: ['ServiceNow'],
+        },
+        {
+          name: 'ERP & Business Systems',
+          items: [],
+        },
+      ],
     },
   ]
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % services.length)
-    // Pause auto-play when user manually navigates
-    setIsAutoPlaying(false)
-    if (autoPlayIntervalRef.current) {
-      clearInterval(autoPlayIntervalRef.current)
-    }
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)
-    // Pause auto-play when user manually navigates
-    setIsAutoPlaying(false)
-    if (autoPlayIntervalRef.current) {
-      clearInterval(autoPlayIntervalRef.current)
-    }
-  }
-
-  // Auto-play functionality
-  useEffect(() => {
-    if (isAutoPlaying) {
-      autoPlayIntervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % services.length)
-      }, 2200) // Change slide every 2.2 seconds
-    }
-
-    return () => {
-      if (autoPlayIntervalRef.current) {
-        clearInterval(autoPlayIntervalRef.current)
-      }
-    }
-  }, [isAutoPlaying, services.length])
-
   return (
-    <section className="relative bg-gradient-to-br from-sky-50 via-white to-blue-50 py-32 overflow-hidden">
-      <div className="container-custom">
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-400 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container-custom relative z-10">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <div className="text-sm font-semibold text-primary-400 mb-4 uppercase tracking-wider">
-            Services
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-200 mb-6">
+            <span className="text-xs font-semibold text-primary-600 uppercase tracking-wider">Services</span>
           </div>
-          <h2 className="heading-2 mb-4 text-gray-900">
-            We don't serve we work together
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6">
+            SERVICES
           </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            Discover how our expert services can transform your digital presence and drive business growth.
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Comprehensive technology solutions designed to transform your business. From product development to enterprise platforms, we deliver end-to-end services that drive innovation and growth.
           </p>
         </motion.div>
 
-        <div className="relative max-w-7xl mx-auto">
-          {/* Navigation Arrows - Outside */}
-          <motion.button
-            onClick={prevSlide}
-            className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/90 hover:bg-white text-primary-600 transition-all backdrop-blur-sm border border-primary-200 hover:border-primary-500 shadow-lg hidden lg:flex items-center justify-center"
-            aria-label="Previous slide"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-            </svg>
-          </motion.button>
-          <motion.button
-            onClick={nextSlide}
-            className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/90 hover:bg-white text-primary-600 transition-all backdrop-blur-sm border border-primary-200 hover:border-primary-500 shadow-lg hidden lg:flex items-center justify-center"
-            aria-label="Next slide"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </motion.button>
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {serviceCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={categoryIndex}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: categoryIndex * 0.1,
+                ease: [0.25, 0.1, 0.25, 1]
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+            >
+              {/* Left Border on Hover */}
+              <motion.div
+                className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.3 }}
+              />
 
-          {/* Main Slider Container */}
-          <div className="relative h-[600px] lg:h-[700px] overflow-hidden rounded-2xl">
-            {services.map((service, index) => {
-              const offset = index - currentIndex
-              const isActive = index === currentIndex
-              const isVisible = Math.abs(offset) <= 1
+              {/* Animated Background Gradient on Hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-accent-50/0 group-hover:from-primary-50/50 group-hover:to-accent-50/50 transition-all duration-300"
+              />
 
-              if (!isVisible) return null
+              {/* Shine Effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              />
 
-              return (
-                <motion.div
-                  key={index}
-                  className="absolute inset-0"
-                  initial={false}
-                   animate={{
-                     y: offset * 100 + '%',
-                     opacity: isActive ? 1 : 0.2,
-                     scale: isActive ? 1 : 0.92,
-                     zIndex: services.length - Math.abs(offset),
-                   }}
-                   transition={{ 
-                     duration: 0.8, 
-                     ease: [0.25, 0.1, 0.25, 1], // Custom cubic-bezier for smoother animation
-                     opacity: { duration: 0.6 },
-                     scale: { duration: 0.6 }
-                   }}
-                >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 h-full rounded-2xl overflow-hidden shadow-2xl">
-                      {/* Left Side - Content */}
-                      <div className="bg-white/95 backdrop-blur-sm p-12 lg:p-16 flex flex-col justify-center border-r border-primary-100">
-                        <motion.h3
-                          className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
-                          animate={{
-                            opacity: isActive ? 1 : 0.5,
-                            x: isActive ? 0 : -40,
-                          }}
-                          transition={{ duration: 0.7, ease: 'easeOut' }}
-                        >
-                          {service.title}
-                        </motion.h3>
-                        
-                        <motion.p
-                          className="text-lg text-gray-300 mb-8 leading-relaxed"
-                          animate={{
-                            opacity: isActive ? 1 : 0.4,
-                            x: isActive ? 0 : -40,
-                          }}
-                          transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-                        >
-                          {service.description}
-                        </motion.p>
+              {/* Category Title */}
+              <div className="relative z-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                  <motion.span
+                    className="inline-block"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {category.category}
+                  </motion.span>
+                  <motion.svg
+                    className="w-5 h-5 text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    initial={{ x: -10 }}
+                    whileHover={{ x: 0 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </motion.svg>
+                </h3>
+                
+                {/* Description Paragraph */}
+                {category.description && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: categoryIndex * 0.1 + 0.2 }}
+                    className="text-sm text-gray-600 mb-4 leading-relaxed"
+                  >
+                    {category.description}
+                  </motion.p>
+                )}
+              </div>
 
+              {/* Services List */}
+              <div className="relative z-10">
+                {category.services ? (
+                  <ul className="space-y-3">
+                    {category.services.map((service, serviceIndex) => (
+                      <motion.li
+                        key={serviceIndex}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                        transition={{ duration: 0.4, delay: categoryIndex * 0.1 + serviceIndex * 0.05 }}
+                        whileHover={{ x: 5 }}
+                        className="flex items-start gap-3 text-gray-700 hover:text-primary-600 transition-colors group/item"
+                      >
                         <motion.div
-                          className="flex flex-col sm:flex-row gap-4"
-                          animate={{
-                            opacity: isActive ? 1 : 0,
-                            y: isActive ? 0 : 30,
-                          }}
-                          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+                          className="mt-1.5"
+                          whileHover={{ scale: 1.2, rotate: 90 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <Link
-                            to={service.link}
-                            className="bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block text-center"
+                          <svg
+                            className="w-4 h-4 text-primary-500 flex-shrink-0 group-hover/item:text-primary-600 transition-colors"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
                           >
-                            Discover More
-                          </Link>
-                          <Link
-                            to="/contact"
-                            className="bg-primary-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-600 transition-all duration-300 border-2 border-primary-500 hover:border-primary-600 shadow-lg hover:shadow-xl transform hover:scale-105 inline-flex items-center justify-center"
-                          >
-                            Conversations With Experts
-                            <svg className="ml-2 w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </Link>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2.5}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
                         </motion.div>
-                      </div>
-
-                      {/* Right Side - Image */}
-                      <div className="relative h-96 lg:h-full overflow-hidden">
-                        <motion.div
-                          className="absolute inset-0 bg-primary-500/20"
-                          animate={{
-                            opacity: isActive ? 0.3 : 0.05,
-                          }}
-                          transition={{ duration: 0.7 }}
-                        />
-                        <motion.img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                          animate={{
-                            scale: isActive ? 1 : 1.15,
-                            opacity: isActive ? 1 : 0.6,
-                          }}
-                          transition={{ duration: 0.9, ease: 'easeOut' }}
-                        />
-                        {/* Overlay effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-                        {/* Shine effect on active */}
-                        {isActive && (
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-                            animate={{
-                              x: ['-100%', '100%'],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              repeatDelay: 2,
-                              ease: 'linear',
-                            }}
-                          />
+                        <span className="text-sm font-medium group-hover/item:font-semibold transition-all">{service}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="space-y-4">
+                    {category.subcategories?.map((subcategory, subIndex) => (
+                      <motion.div
+                        key={subIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                        transition={{ duration: 0.4, delay: categoryIndex * 0.1 + subIndex * 0.1 }}
+                        className="space-y-2"
+                      >
+                        <h4 className="text-sm font-semibold text-gray-800 group-hover:text-primary-600 transition-colors">
+                          {subcategory.name}
+                        </h4>
+                        {subcategory.items && subcategory.items.length > 0 ? (
+                          <ul className="space-y-2 pl-4">
+                            {subcategory.items.map((item, itemIndex) => (
+                              <motion.li
+                                key={itemIndex}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                                transition={{ duration: 0.4, delay: categoryIndex * 0.1 + subIndex * 0.1 + itemIndex * 0.03 }}
+                                whileHover={{ x: 5 }}
+                                className="flex items-center gap-2 text-gray-600 text-sm hover:text-primary-600 transition-colors group/subitem"
+                              >
+                                <motion.div
+                                  className="w-2 h-2 rounded-full bg-primary-400 group-hover/subitem:bg-primary-600 transition-colors"
+                                  whileHover={{ scale: 1.3 }}
+                                />
+                                <span className="group-hover/subitem:font-semibold transition-all">{item}</span>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm text-gray-500 pl-4">Enterprise solutions</p>
                         )}
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
-          </div>
-
-          {/* Mobile Navigation Arrows - Inside for mobile */}
-          <motion.button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/90 hover:bg-white text-primary-600 transition-all backdrop-blur-sm border border-primary-200 hover:border-primary-500 shadow-lg lg:hidden"
-            aria-label="Previous slide"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-            </svg>
-          </motion.button>
-          <motion.button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/90 hover:bg-white text-primary-600 transition-all backdrop-blur-sm border border-primary-200 hover:border-primary-500 shadow-lg lg:hidden"
-            aria-label="Next slide"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </motion.button>
-
-          {/* Auto-play Toggle */}
-          <button
-            onClick={() => {
-              setIsAutoPlaying(!isAutoPlaying)
-            }}
-            className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/90 hover:bg-white text-primary-600 transition-all backdrop-blur-sm border border-primary-200 hover:border-primary-500"
-            aria-label={isAutoPlaying ? 'Pause auto-play' : 'Play auto-play'}
-          >
-            {isAutoPlaying ? (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            )}
-          </button>
-
-          {/* Slide Counter */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-4 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full border border-primary-200">
-            <div className="flex space-x-2">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setCurrentIndex(index)
-                    setIsAutoPlaying(false)
-                    if (autoPlayIntervalRef.current) {
-                      clearInterval(autoPlayIntervalRef.current)
-                    }
-                  }}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-primary-400 w-8' : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-            <div className="text-gray-300 text-sm ml-4 font-medium">
-              {String(currentIndex + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
-            </div>
-            <div className="text-gray-400 text-sm ml-2">Service</div>
-          </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

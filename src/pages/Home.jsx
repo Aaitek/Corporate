@@ -1,42 +1,54 @@
 import Hero from '../components/sections/Hero'
-import ClientLogos from '../components/sections/ClientLogos'
 import ServicesStacked from '../components/sections/ServicesStacked'
-import Process from '../components/sections/Process'
-import Industries from '../components/sections/Industries'
+import ContactMarketing from '../components/sections/ContactMarketing'
+import Features from '../components/sections/Features'
+import LanguagesFrameworks from '../components/sections/LanguagesFrameworks'
+import Technologies from '../components/sections/Technologies'
 import WhyChoose from '../components/sections/WhyChoose'
+import HireRequirement from '../components/sections/HireRequirement'
+import Process from '../components/sections/Process'
+import AboutUs from '../components/sections/AboutUs'
 import Stats from '../components/sections/Stats'
-import Testimonials from '../components/sections/Testimonials'
-import CTA from '../components/sections/CTA'
+import FAQ from '../components/sections/FAQ'
 
 const Home = () => {
   return (
     <div>
-      {/* 1. Hero Section - Above the Fold */}
+      {/* Section 1 – Hero Image */}
       <Hero />
       
-      {/* 2. Client Logos - Social Proof */}
-      <ClientLogos />
-      
-      {/* 3. Services Section - Stacked Cards with Scroll Animation */}
+      {/* Section 2 – Services – boxes */}
       <ServicesStacked />
       
-      {/* 4. How It Works / Process */}
-      <Process />
+      {/* Section 3 – Contact us marketing box with custom image */}
+      <ContactMarketing />
       
-      {/* 5. Industries / Solutions */}
-      <Industries />
+      {/* Section 4 – Feature section */}
+      <Features />
       
-      {/* 6. Why Choose Aaitek - Trust Section */}
+      {/* Section 5 – Language and framework */}
+      <LanguagesFrameworks />
+      
+      {/* Section 6 – Technology */}
+      <Technologies />
+      
+      {/* Section 7 – Why Choose us */}
       <WhyChoose />
       
-      {/* 7. Stats - Proof */}
+      {/* Section 8 – Hire as per requirement */}
+      <HireRequirement />
+      
+      {/* Section 9 – Our process */}
+      <Process />
+      
+      {/* Section 10 – Who We are */}
+      <AboutUs />
+      
+      {/* Section 11 – Achievements */}
       <Stats />
       
-      {/* 8. Testimonials - Social Proof */}
-      <Testimonials />
-      
-      {/* 9. CTA Section */}
-      <CTA />
+      {/* Section 12 – FAQ */}
+      <FAQ />
     </div>
   )
 }

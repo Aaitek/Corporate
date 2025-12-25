@@ -35,7 +35,7 @@ const WhyChoose = () => {
   ]
 
   return (
-    <section className="section-padding bg-black relative overflow-hidden">
+    <section className="section-padding bg-white relative overflow-hidden">
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"
@@ -44,13 +44,13 @@ const WhyChoose = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-sm font-semibold text-primary-400 mb-4 uppercase tracking-wider">
+          <div className="text-sm font-semibold text-primary-600 mb-4 uppercase tracking-wider">
             Why Choose Aaitek
           </div>
-          <h2 className="heading-2 mb-4 text-white">
+          <h2 className="heading-2 mb-4 text-gray-900">
             Your Trusted IT Partner
           </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Aaitek is a powerhouse of digital transformation, bringing together top-tier experts with a diverse skillset to craft custom, world-class solutions for businesses of all sizes. From visionary digital product design to seamless development, we're dedicated to delivering transformative digital experiences that redefine success.
           </p>
         </motion.div>
@@ -64,7 +64,7 @@ const WhyChoose = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary-500/20"
+              className="group relative bg-white p-6 rounded-xl border border-gray-200 hover:border-primary-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary-500/10"
             >
               {/* Icon Container */}
               <div className="w-14 h-14 rounded-lg bg-primary-500/20 group-hover:bg-primary-500/30 flex items-center justify-center mb-4 transition-colors duration-300">
@@ -72,10 +72,10 @@ const WhyChoose = () => {
               </div>
               
               {/* Content */}
-              <h3 className="text-xl font-bold mb-3 text-white group-hover:text-primary-400 transition-colors">
+              <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-600 text-sm leading-relaxed">
                 {feature.description}
               </p>
               
