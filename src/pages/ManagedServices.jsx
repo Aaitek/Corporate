@@ -76,7 +76,7 @@ const ManagedServices = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-200"
+              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-0 border border-gray-200"
             >
               <h2 className="heading-3 mb-4">{service.title}</h2>
               <p className="text-gray-600 mb-6">{service.description}</p>

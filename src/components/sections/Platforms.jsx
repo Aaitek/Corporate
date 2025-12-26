@@ -71,7 +71,7 @@ const Platforms = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="group bg-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-primary-500 transition-all duration-300 shadow-lg hover:shadow-2xl"
+              className="group bg-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-primary-500 transition-all duration-0 shadow-lg hover:shadow-2xl"
             >
               <div className="text-5xl mb-4">{platform.icon}</div>
               <h3 className="heading-3 mb-4 text-gray-100 group-hover:text-primary-400 transition-colors">

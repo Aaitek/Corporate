@@ -25,11 +25,11 @@
   }
   
   .btn-primary {
-    @apply bg-primary-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-600 transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40;
+    @apply bg-primary-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-600 transition-all duration-0 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40;
   }
   
   .btn-secondary {
-    @apply bg-white text-primary-600 px-6 py-3 rounded-xl font-semibold border-2 border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply bg-white text-primary-600 px-6 py-3 rounded-xl font-semibold border-2 border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-all duration-0 shadow-md hover:shadow-lg;
   }
   
   .section-padding {
@@ -49,7 +49,7 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:-translate-y-2;
+    @apply transition-all duration-0 hover:shadow-2xl hover:scale-105 hover:-translate-y-2;
   }
   
   .neon-glow {
@@ -61,5 +61,20 @@
   .glass-effect {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
+}
+
+/* Header dropdown overflow fix */
+header {
+  overflow: visible !important;
+}
+
+nav {
+  overflow: visible !important;
+}
+
+/* Ensure mega menus are not clipped */
+[data-dropdown] {
+  overflow: visible !important;
+  max-width: 100vw;
 }
 

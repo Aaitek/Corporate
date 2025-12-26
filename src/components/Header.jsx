@@ -19,7 +19,15 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      // Check if click is outside any dropdown
+      const dropdowns = document.querySelectorAll('[data-dropdown]')
+      let clickedOutside = true
+      dropdowns.forEach(dropdown => {
+        if (dropdown.contains(event.target)) {
+          clickedOutside = false
+        }
+      })
+      if (clickedOutside) {
         setActiveDropdown(null)
       }
     }
@@ -157,17 +165,21 @@ const Header = () => {
     },
     'partner-success': {
       label: 'Partner Success',
-      path: '/#why-choose-us',
+      path: '/partner-success',
       columns: [
         {
           title: 'Case Studies',
           icon: '📊',
           items: [
-            { label: 'Cloud Migration', path: '/#why-choose-us' },
-            { label: 'AI/ML Projects', path: '/#why-choose-us' },
-            { label: 'E-Commerce', path: '/#why-choose-us' },
-            { label: 'Mobile Apps', path: '/#why-choose-us' },
-            { label: 'Data Engineering', path: '/#why-choose-us' },
+            { label: 'Enterprise DXP Platform', path: '/partner-success' },
+            { label: 'AI-Powered Solutions', path: '/partner-success' },
+            { label: 'Cloud Infrastructure', path: '/partner-success' },
+            { label: 'Headless CMS', path: '/partner-success' },
+            { label: 'Salesforce CRM', path: '/partner-success' },
+            { label: 'Mobile App Development', path: '/partner-success' },
+            { label: 'E-Commerce Platform', path: '/partner-success' },
+            { label: 'Data Analytics', path: '/partner-success' },
+            { label: 'Legacy Modernization', path: '/partner-success' },
           ],
         },
       ],
@@ -221,12 +233,13 @@ const Header = () => {
             : 'bg-gray-900/80 backdrop-blur-md'
         }`}
     >
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-20">
+      <nav className="container-custom relative">
+        <div className="flex items-center justify-between h-20 relative">
           {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0 }}
             >
               <Link to="/" className="flex items-center space-x-2">
                 <img 
@@ -238,7 +251,7 @@ const Header = () => {
             </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-6 relative z-50">
             <Link
               to="/"
               className={`text-sm font-medium transition-colors ${
@@ -286,65 +299,78 @@ const Header = () => {
                 <AnimatePresence>
                   {activeDropdown === key && item.columns && (
                     <motion.div
-                      initial={{ opacity: 0, y: -20 }}
+                      initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="fixed left-0 right-0 top-20 bg-white text-gray-900 shadow-2xl py-8 z-50 border-t border-primary-200"
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      data-dropdown
+                      className={`absolute top-full mt-2 ${
+                        item.columns.length === 1 
+                          ? (key === 'products' || key === 'partner-success' 
+                              ? 'right-0 w-80' 
+                              : 'left-0 w-80')
+                          : 'left-0 w-[600px] lg:w-[800px] xl:w-[900px]'
+                      } bg-white text-gray-900 shadow-2xl py-6 z-[100] border border-primary-200 rounded-lg`}
                     >
-                    <div className="container-custom">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                      {item.columns.map((column, colIndex) => (
-                        <div key={colIndex}>
-                          <div className="flex items-center mb-4">
-                            <span className="text-primary-600 mr-2 text-lg">{column.icon}</span>
-                            <h3 className="text-lg font-semibold text-gray-900">{column.title}</h3>
-                          </div>
-                          <ul className="space-y-2">
-                            {column.items.map((subItem, itemIndex) => (
-                              <li key={itemIndex}>
-                                <Link
-                                  to={subItem.path}
-                                  onClick={(e) => {
-                                    if (subItem.path.startsWith('/#')) {
-                                      e.preventDefault()
-                                      const hash = subItem.path.substring(1)
-                                      if (location.pathname !== '/') {
-                                        window.location.href = subItem.path
-                                      } else {
-                                        const element = document.querySelector(hash)
-                                        if (element) {
-                                          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      <div className={`${item.columns.length === 1 ? 'px-6' : 'px-4 md:px-6 lg:px-8'}`}>
+                        <div className={`grid ${
+                          item.columns.length === 1 
+                            ? 'grid-cols-1' 
+                            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'
+                        }`}>
+                        {item.columns.map((column, colIndex) => (
+                          <div key={colIndex} className="min-w-0">
+                            <div className="flex items-center mb-4">
+                              <span className="text-primary-600 mr-2 text-lg flex-shrink-0">{column.icon}</span>
+                              <h3 className="text-base md:text-lg font-semibold text-gray-900 truncate">{column.title}</h3>
+                            </div>
+                            <ul className="space-y-2">
+                              {column.items.map((subItem, itemIndex) => (
+                                <li key={itemIndex}>
+                                  <Link
+                                    to={subItem.path}
+                                    onClick={(e) => {
+                                      if (subItem.path.startsWith('/#')) {
+                                        e.preventDefault()
+                                        const hash = subItem.path.substring(1)
+                                        if (location.pathname !== '/') {
+                                          window.location.href = subItem.path
+                                        } else {
+                                          const element = document.querySelector(hash)
+                                          if (element) {
+                                            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                          }
                                         }
                                       }
-                                    }
-                                    setActiveDropdown(null)
-                                  }}
-                                  className="text-gray-700 hover:text-primary-600 transition-colors text-sm block py-1"
-                                >
-                                  {subItem.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
+                                      setActiveDropdown(null)
+                                    }}
+                                    className="text-gray-700 hover:text-primary-600 transition-colors duration-0 text-sm block py-1 break-words"
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
                         </div>
-                      ))}
+                        {item.columns.length > 1 && (
+                          <div className="mt-6 pt-6 border-t border-gray-200">
+                            <Link
+                              to={item.path}
+                              onClick={() => {
+                                setActiveDropdown(null)
+                              }}
+                              className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center"
+                            >
+                              View All {item.label}
+                              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </Link>
+                          </div>
+                        )}
                       </div>
-                      <div className="mt-6 pt-6 border-t border-gray-200">
-                        <Link
-                          to={item.path}
-                          onClick={() => {
-                            setActiveDropdown(null)
-                          }}
-                          className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center"
-                        >
-                          View All {item.label}
-                          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -373,6 +399,7 @@ const Header = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0 }}
             >
               <Link
                 to="/contact"

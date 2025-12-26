@@ -11,27 +11,33 @@ const Footer = () => {
       { label: 'Careers', path: '/careers' },
     ],
     services: [
-      { label: 'AI Chatbots', path: '/services/ai-chatbots' },
-      { label: 'AI Voice Agents', path: '/services/ai-voice-agents' },
-      { label: 'AI Automation', path: '/services/ai-automation' },
-      { label: 'Custom AI', path: '/services/custom-ai' },
-      { label: 'Aaitek DXP', path: '/services/dxp' },
-      { label: 'Hire Onshore/Offshore Resource', path: '/hire-developers' },
+      { label: 'All Services', path: '/services' },
+      { label: 'Product Development', path: '/services/product-development' },
+      { label: 'Software Engineering', path: '/services/software-engineering' },
+      { label: 'Cloud & DevOps', path: '/services/cloud-devops' },
+      { label: 'Data & AI', path: '/services/data-ai' },
+      { label: 'Digital Growth', path: '/services/digital-growth' },
+      { label: 'Managed Services', path: '/services/managed-services' },
+      { label: 'Enterprise Platforms', path: '/services/enterprise-platforms' },
+    ],
+    products: [
+      { label: 'All Products', path: '/products' },
+      { label: 'AI Sales Agent', path: '/products' },
+      { label: 'AI Booking Agent', path: '/products' },
+      { label: 'AI Trade Strategy Agent', path: '/products' },
     ],
     resources: [
       { label: 'Blogs & Insights', path: '/resources/blog' },
       { label: 'Case Studies', path: '/partner-success' },
-      { label: 'Press Releases', path: '/resources/press-releases' },
-      { label: 'Events', path: '/resources/events' },
-      { label: 'Webinars', path: '/resources/webinars' },
-      { label: 'Videos', path: '/resources/videos' },
+      { label: 'Privacy Policy', path: '/privacy-policy' },
+      { label: 'Terms & Conditions', path: '/terms-conditions' },
     ],
   }
 
   return (
     <footer className="bg-gray-50 text-gray-800 border-t border-gray-200">
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Company Info */}
           <div>
             <div className="mb-4">
@@ -42,25 +48,67 @@ const Footer = () => {
               />
             </div>
             <p className="text-sm mb-4 text-gray-400">
-              We're Proudly Australia-owned with Global Delivery Capability. Aaitek delivers enterprise-grade solutions across DXP (Sitecore, Kentico, Umbraco, Optimizely), SAP, Salesforce, ServiceNow, AWS, AI, and Automation — backed by 500+ certified tech professionals. Our AaitekTOD (Talent on demand)™ model provides scalable, on-demand expertise that integrates seamlessly into your teams for faster, smarter delivery.
+              Aaitek is all about digital experiences and digital transformation. Through the power of headless CMS solutions, we deliver smart and unique experiences to clients, people, and the community.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a 
+                href="https://web.facebook.com/aaitek" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary-400 transition-colors duration-0"
+                aria-label="Facebook"
+              >
                 <span className="sr-only">Facebook</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
-                <span className="sr-only">Twitter</span>
+              <a 
+                href="https://x.com/aaitek" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary-400 transition-colors duration-0"
+                aria-label="Twitter/X"
+              >
+                <span className="sr-only">Twitter/X</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
-              <a href="#" className="hover:text-primary-400 transition-colors">
+              <a 
+                href="https://www.linkedin.com/company/aaitek/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary-400 transition-colors duration-0"
+                aria-label="LinkedIn"
+              >
                 <span className="sr-only">LinkedIn</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+              <a 
+                href="https://www.instagram.com/aaitek" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary-400 transition-colors duration-0"
+                aria-label="Instagram"
+              >
+                <span className="sr-only">Instagram</span>
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </a>
+              <a 
+                href="https://www.youtube.com/@aaitek" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-primary-400 transition-colors duration-0"
+                aria-label="YouTube"
+              >
+                <span className="sr-only">YouTube</span>
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </a>
             </div>
@@ -74,7 +122,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-primary-400 transition-colors"
+                    className="text-sm hover:text-primary-400 transition-colors duration-0"
                   >
                     {link.label}
                   </Link>
@@ -91,7 +139,24 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-primary-400 transition-colors"
+                    className="text-sm hover:text-primary-400 transition-colors duration-0"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Products Links */}
+          <div>
+            <h4 className="text-gray-900 font-semibold mb-4">Products</h4>
+            <ul className="space-y-2">
+              {footerLinks.products.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-sm hover:text-primary-400 transition-colors duration-0"
                   >
                     {link.label}
                   </Link>
@@ -108,7 +173,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm hover:text-primary-400 transition-colors"
+                    className="text-sm hover:text-primary-400 transition-colors duration-0"
                   >
                     {link.label}
                   </Link>
@@ -124,12 +189,12 @@ const Footer = () => {
             <div>
               <h4 className="text-white font-semibold mb-3">Contact</h4>
               <p className="text-sm text-gray-600 mb-2">
-                <a href="mailto:info@aaitek.com" className="hover:text-primary-400 transition-colors">
+                <a href="mailto:info@aaitek.com" className="hover:text-primary-400 transition-colors duration-0">
                   info@aaitek.com
                 </a>
               </p>
               <p className="text-sm text-gray-600 mb-2">
-                <a href="tel:+61435987212" className="hover:text-primary-400 transition-colors">
+                <a href="tel:+61435987212" className="hover:text-primary-400 transition-colors duration-0">
                   +61 435 987 212
                 </a>
               </p>
@@ -148,13 +213,61 @@ const Footer = () => {
             <div>
               <h4 className="text-white font-semibold mb-3">Connect With Us</h4>
               <div className="flex space-x-4">
-                <a href="https://linkedin.com/company/aaitek" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors">
+                <a 
+                  href="https://web.facebook.com/aaitek" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary-400 transition-colors duration-0"
+                  aria-label="Facebook"
+                >
+                  <span className="sr-only">Facebook</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://x.com/aaitek" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary-400 transition-colors duration-0"
+                  aria-label="Twitter/X"
+                >
+                  <span className="sr-only">Twitter/X</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.linkedin.com/company/aaitek/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary-400 transition-colors duration-0"
+                  aria-label="LinkedIn"
+                >
                   <span className="sr-only">LinkedIn</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </a>
-                <a href="https://youtube.com/@aaitek" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors">
+                <a 
+                  href="https://www.instagram.com/aaitek" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary-400 transition-colors duration-0"
+                  aria-label="Instagram"
+                >
+                  <span className="sr-only">Instagram</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.youtube.com/@aaitek" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary-400 transition-colors duration-0"
+                  aria-label="YouTube"
+                >
                   <span className="sr-only">YouTube</span>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -171,10 +284,16 @@ const Footer = () => {
               © {currentYear} Aaitek Technology Specialists. All rights reserved. | Designed and Developed by Aaitek Pty Ltd
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/terms-conditions" className="text-sm hover:text-primary-400 transition-colors">
+              <Link 
+                to="/terms-conditions"
+                className="text-sm hover:text-primary-400 transition-colors duration-0"
+              >
                 Terms
               </Link>
-              <Link to="/privacy-policy" className="text-sm hover:text-primary-400 transition-colors">
+              <Link 
+                to="/privacy-policy"
+                className="text-sm hover:text-primary-400 transition-colors duration-0"
+              >
                 Privacy
               </Link>
             </div>

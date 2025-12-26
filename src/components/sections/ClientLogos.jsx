@@ -81,12 +81,12 @@ const ClientLogos = () => {
                   whileHover={{ scale: 1.15, y: -8 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className={`w-24 h-24 bg-gradient-to-br ${logo.color} rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-lg group-hover:shadow-2xl transition-all duration-300 relative overflow-hidden`}>
+                  <div className={`w-24 h-24 bg-gradient-to-br ${logo.color} rounded-2xl flex items-center justify-center text-white font-bold text-base shadow-lg group-hover:shadow-2xl transition-all duration-0 relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                     <span className="relative z-10">{logo.initial}</span>
                   </div>
-                  <span className="text-gray-700 text-sm font-semibold tracking-wide whitespace-nowrap group-hover:text-primary-600 transition-colors duration-300">
+                  <span className="text-gray-700 text-sm font-semibold tracking-wide whitespace-nowrap group-hover:text-primary-600 transition-colors duration-0">
                     {logo.name}
                   </span>
                 </motion.div>

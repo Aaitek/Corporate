@@ -64,10 +64,10 @@ const WhyChoose = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-white p-6 rounded-xl border border-gray-200 hover:border-primary-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-primary-500/10"
+              className="group relative bg-white p-6 rounded-xl border border-gray-200 hover:border-primary-300 transition-all duration-0 shadow-sm hover:shadow-xl hover:shadow-primary-500/10"
             >
               {/* Icon Container */}
-              <div className="w-14 h-14 rounded-lg bg-primary-500/20 group-hover:bg-primary-500/30 flex items-center justify-center mb-4 transition-colors duration-300">
+              <div className="w-14 h-14 rounded-lg bg-primary-500/20 group-hover:bg-primary-500/30 flex items-center justify-center mb-4 transition-colors duration-0">
                 <div className="text-3xl">{feature.icon}</div>
               </div>
               
@@ -80,7 +80,7 @@ const WhyChoose = () => {
               </p>
               
               {/* Hover Effect */}
-              <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl"></div>
+              <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-xl"></div>
             </motion.div>
           ))}
         </div>

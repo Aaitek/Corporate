@@ -2,6 +2,7 @@ import Hero from '../components/sections/Hero'
 import ServicesStacked from '../components/sections/ServicesStacked'
 import ContactMarketing from '../components/sections/ContactMarketing'
 import Features from '../components/sections/Features'
+import ServiceShowcase from '../components/sections/ServiceShowcase'
 import LanguagesFrameworks from '../components/sections/LanguagesFrameworks'
 import Technologies from '../components/sections/Technologies'
 import WhyChoose from '../components/sections/WhyChoose'
@@ -25,6 +26,9 @@ const Home = () => {
       
       {/* Section 4 – Feature section */}
       <Features />
+      
+      {/* Section 4.5 – Service Showcase */}
+      <ServiceShowcase />
       
       {/* Section 5 – Language and framework */}
       <LanguagesFrameworks />

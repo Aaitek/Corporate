@@ -10,6 +10,10 @@ import HireDevelopers from './pages/HireDevelopers'
 import PartnerSuccess from './pages/PartnerSuccess'
 import ManagedServices from './pages/ManagedServices'
 import Resources from './pages/Resources'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsConditions from './pages/TermsConditions'
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
             <Route path="/partner-success" element={<PartnerSuccess />} />
             <Route path="/managed-services" element={<ManagedServices />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>
         </main>
         <Footer />

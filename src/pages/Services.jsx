@@ -146,28 +146,29 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ 
-                  duration: 0.6, 
+                  duration: 0.3, 
                   delay: index * 0.1,
-                  ease: [0.25, 0.1, 0.25, 1]
+                  ease: 'easeIn'
                 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden"
+                transition={{ duration: 0 }}
+                className="relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-0 group overflow-hidden"
               >
                 {/* Left Border on Hover */}
                 <motion.div
-                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-0`}
                   initial={{ scaleY: 0 }}
                   whileHover={{ scaleY: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0 }}
                 />
 
                 {/* Icon */}
-                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-0`}>
                   {service.icon}
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-0">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-6">
@@ -194,11 +195,11 @@ const Services = () => {
                 {/* CTA Button */}
                 <Link
                   to={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm hover:text-primary-700 transition-colors group/btn"
+                  className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm hover:text-primary-700 transition-colors duration-0 group/btn"
                 >
                   Learn More
                   <svg 
-                    className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" 
+                    className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-0" 
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -208,7 +209,7 @@ const Services = () => {
                 </Link>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-accent-50/0 group-hover:from-primary-50/50 group-hover:to-accent-50/50 transition-all duration-300 rounded-2xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-accent-50/0 group-hover:from-primary-50/50 group-hover:to-accent-50/50 transition-all duration-0 rounded-2xl"></div>
               </motion.div>
             ))}
           </div>
@@ -236,7 +237,7 @@ const Services = () => {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-0 hover:scale-105"
             >
               Contact Us
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

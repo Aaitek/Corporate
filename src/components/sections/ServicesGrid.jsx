@@ -104,20 +104,21 @@ const ServicesGrid = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="group relative bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-primary-500 overflow-hidden"
+              transition={{ duration: 0 }}
+              className="group relative bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-0 border-2 border-transparent hover:border-primary-500 overflow-hidden"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               {/* Gradient Background on Hover */}
-              <div className="absolute inset-0 bg-primary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-primary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-0"></div>
               
-              <h3 className="heading-3 mb-3 relative z-10 text-gray-100 group-hover:text-primary-400 transition-colors">
+              <h3 className="heading-3 mb-3 relative z-10 text-gray-100 group-hover:text-primary-400 transition-colors duration-0">
                 {service.title}
               </h3>
               <p className="text-gray-300 mb-4 relative z-10">{service.description}</p>
               <Link
                 to={service.link}
-                className="relative z-10 text-primary-400 font-semibold hover:text-primary-300 transition-colors inline-flex items-center group/link"
+                className="relative z-10 text-primary-400 font-semibold hover:text-primary-300 transition-colors duration-0 inline-flex items-center group/link"
               >
                 Learn More
                 <motion.span
@@ -130,7 +131,7 @@ const ServicesGrid = () => {
               </Link>
               
               {/* Shine Effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white/30"></div>
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-0 bg-white/30"></div>
             </motion.div>
           ))}
         </motion.div>

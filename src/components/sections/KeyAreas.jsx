@@ -94,12 +94,13 @@ const KeyAreas = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="group relative p-6 rounded-2xl bg-gray-800 border-2 border-transparent hover:border-primary-500 transition-all duration-300 shadow-lg hover:shadow-2xl overflow-hidden"
+              transition={{ duration: 0 }}
+              className="group relative p-6 rounded-2xl bg-gray-800 border-2 border-transparent hover:border-primary-500 transition-all duration-0 shadow-lg hover:shadow-2xl overflow-hidden"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               {/* Gradient Background on Hover */}
-              <div className={`absolute inset-0 ${area.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+              <div className={`absolute inset-0 ${area.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-0`}></div>
               
               {/* Animated Icon */}
               <motion.div
@@ -117,7 +118,7 @@ const KeyAreas = () => {
                 {area.icon}
               </motion.div>
               
-              <h3 className="heading-3 mb-2 relative z-10 text-gray-100 group-hover:text-primary-400 transition-colors">
+              <h3 className="heading-3 mb-2 relative z-10 text-gray-100 group-hover:text-primary-400 transition-colors duration-0">
                 {area.title}
               </h3>
               {area.subtitle && (
@@ -128,7 +129,7 @@ const KeyAreas = () => {
               <p className="text-gray-300 relative z-10">{area.description}</p>
               
               {/* Shine Effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white/20"></div>
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-0 bg-white/20"></div>
             </motion.div>
           ))}
         </motion.div>

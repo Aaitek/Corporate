@@ -76,7 +76,7 @@ const Resources = () => {
             <Link
               key={index}
               to={resource.link}
-              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-200 block"
+              className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-0 border border-gray-200 block"
             >
               <div className="text-5xl mb-4">{resource.icon}</div>
               <h2 className="heading-3 mb-4">{resource.title}</h2>
@@ -91,7 +91,7 @@ const Resources = () => {
             {recentArticles.map((article, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-200"
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-0 border border-gray-200"
               >
                 <div className="flex items-center space-x-2 mb-3">
                   <span className="text-sm text-gray-500">{article.date}</span>

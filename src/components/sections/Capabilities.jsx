@@ -108,14 +108,14 @@ const Capabilities = () => {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary-500/20 overflow-hidden"
+              className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-0 shadow-lg hover:shadow-xl hover:shadow-primary-500/20 overflow-hidden"
             >
               {/* Top Accent Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-0"></div>
               
               {/* Icon Container with Background */}
               <div className="relative mb-4">
-                <div className="w-16 h-16 rounded-lg bg-primary-500 opacity-20 group-hover:opacity-30 flex items-center justify-center mb-4 transition-opacity duration-300">
+                <div className="w-16 h-16 rounded-lg bg-primary-500 opacity-20 group-hover:opacity-30 flex items-center justify-center mb-4 transition-opacity duration-0">
                   <div className="text-3xl relative z-10">{capability.icon}</div>
                 </div>
               </div>
@@ -152,10 +152,10 @@ const Capabilities = () => {
               </Link>
 
               {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-0 pointer-events-none"></div>
               
               {/* Corner Accent */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-primary-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-bl-full"></div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary-500 opacity-0 group-hover:opacity-10 transition-opacity duration-0 rounded-bl-full"></div>
             </motion.div>
           ))}
         </motion.div>

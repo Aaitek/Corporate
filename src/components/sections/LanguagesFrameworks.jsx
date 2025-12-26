@@ -72,7 +72,7 @@ const LanguagesFrameworks = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ scale: 1.1, y: -5 }}
-                className={`px-6 py-3 bg-gradient-to-r ${lang.color} rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-default`}
+                className={`px-6 py-3 bg-gradient-to-r ${lang.color} rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-0 cursor-default`}
               >
                 {lang.name}
               </motion.div>
@@ -96,7 +96,7 @@ const LanguagesFrameworks = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ scale: 1.1, y: -5 }}
-                className={`px-6 py-3 bg-gradient-to-r ${framework.color} rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-default`}
+                className={`px-6 py-3 bg-gradient-to-r ${framework.color} rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-0 cursor-default`}
               >
                 {framework.name}
               </motion.div>

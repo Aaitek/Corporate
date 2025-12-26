@@ -20,6 +20,8 @@ const ServicesStacked = () => {
         'Product Design & Discovery',
         'Game & Interactive Experiences',
       ],
+      color: 'from-blue-500 to-cyan-500',
+      bgColor: 'from-blue-50 to-cyan-50',
     },
     {
       category: 'Software Engineering',
@@ -32,6 +34,8 @@ const ServicesStacked = () => {
         'Legacy Modernisation',
         'Bespoke Application Development',
       ],
+      color: 'from-purple-500 to-pink-500',
+      bgColor: 'from-purple-50 to-pink-50',
     },
     {
       category: 'Cloud & DevOps',
@@ -44,6 +48,8 @@ const ServicesStacked = () => {
         'Infrastructure & Server Support',
         'Cloud Security & Governance',
       ],
+      color: 'from-green-500 to-emerald-500',
+      bgColor: 'from-green-50 to-emerald-50',
     },
     {
       category: 'Data & AI',
@@ -55,6 +61,8 @@ const ServicesStacked = () => {
         'Intelligent Automation',
         'Analytics & Business Insights',
       ],
+      color: 'from-orange-500 to-red-500',
+      bgColor: 'from-orange-50 to-red-50',
     },
     {
       category: 'Digital Growth',
@@ -67,6 +75,8 @@ const ServicesStacked = () => {
         'Online Reputation Management',
         'Conversion & Performance Optimisation',
       ],
+      color: 'from-yellow-500 to-amber-500',
+      bgColor: 'from-yellow-50 to-amber-50',
     },
     {
       category: 'Managed Services',
@@ -79,6 +89,8 @@ const ServicesStacked = () => {
         'Digital Fulfilment',
         'IT Support Services',
       ],
+      color: 'from-indigo-500 to-purple-500',
+      bgColor: 'from-indigo-50 to-purple-50',
     },
     {
       category: 'Enterprise Platforms',
@@ -102,6 +114,8 @@ const ServicesStacked = () => {
           items: [],
         },
       ],
+      color: 'from-teal-500 to-cyan-500',
+      bgColor: 'from-teal-50 to-cyan-50',
     },
   ]
 
@@ -145,52 +159,71 @@ const ServicesStacked = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ 
-                  duration: 0.6, 
+                  duration: 0.3, 
                   delay: categoryIndex * 0.1,
-                  ease: [0.25, 0.1, 0.25, 1]
+                  ease: 'easeIn'
                 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-300 group overflow-hidden cursor-pointer h-full"
+                transition={{ duration: 0 }}
+                className={`relative bg-gradient-to-br ${category.bgColor || 'from-white to-gray-50'} rounded-2xl p-6 border-2 border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-0 group overflow-hidden cursor-pointer h-full`}
               >
-              {/* Left Border on Hover */}
+              {/* Left Border - Colorful */}
               <motion.div
-                className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${category.color || 'from-primary-500 to-accent-500'} opacity-0 group-hover:opacity-100 transition-opacity duration-0`}
                 initial={{ scaleY: 0 }}
                 whileHover={{ scaleY: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0 }}
               />
+
+              {/* Top Border Accent */}
+              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${category.color || 'from-primary-500 to-accent-500'} opacity-0 group-hover:opacity-100 transition-opacity duration-0 rounded-t-2xl`}></div>
 
               {/* Animated Background Gradient on Hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-primary-50/0 to-accent-50/0 group-hover:from-primary-50/50 group-hover:to-accent-50/50 transition-all duration-300"
+                className={`absolute inset-0 bg-gradient-to-br ${category.color || 'from-primary-500 to-accent-500'} opacity-0 group-hover:opacity-10 transition-opacity duration-0`}
               />
 
               {/* Shine Effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-0"
               />
 
               {/* Category Title */}
               <div className="relative z-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors flex items-center gap-2">
-                  <motion.span
-                    className="inline-block"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {category.category}
-                  </motion.span>
-                  <motion.svg
-                    className="w-5 h-5 text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    initial={{ x: -10 }}
-                    whileHover={{ x: 0 }}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </motion.svg>
-                </h3>
+                <div className="flex items-start gap-3 mb-3">
+                  {/* Colorful Icon Badge */}
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color || 'from-primary-500 to-accent-500'} flex items-center justify-center text-white text-xl shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-0`}>
+                    {category.category === 'Product Development' && '🚀'}
+                    {category.category === 'Software Engineering' && '⚙️'}
+                    {category.category === 'Cloud & DevOps' && '☁️'}
+                    {category.category === 'Data & AI' && '🤖'}
+                    {category.category === 'Digital Growth' && '📈'}
+                    {category.category === 'Managed Services' && '🛠️'}
+                    {category.category === 'Enterprise Platforms' && '🏢'}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-0 flex items-center gap-2">
+                      <motion.span
+                        className="inline-block"
+                        whileHover={{ x: 5 }}
+                        transition={{ duration: 0 }}
+                      >
+                        {category.category}
+                      </motion.span>
+                      <motion.svg
+                        className="w-5 h-5 text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        initial={{ x: -10 }}
+                        whileHover={{ x: 0 }}
+                        transition={{ duration: 0 }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </motion.svg>
+                    </h3>
+                  </div>
+                </div>
                 
                 {/* Description Paragraph */}
                 {category.description && (
@@ -217,15 +250,15 @@ const ServicesStacked = () => {
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                         transition={{ duration: 0.4, delay: categoryIndex * 0.1 + serviceIndex * 0.05 }}
                         whileHover={{ x: 5 }}
-                        className="flex items-start gap-3 text-gray-700 hover:text-primary-600 transition-colors group/item"
+                        className="flex items-start gap-3 text-gray-700 hover:text-primary-600 transition-colors duration-0 group/item"
                       >
                         <motion.div
                           className="mt-1.5"
                           whileHover={{ scale: 1.2, rotate: 90 }}
-                          transition={{ duration: 0.2 }}
+                          transition={{ duration: 0 }}
                         >
                           <svg
-                            className="w-4 h-4 text-primary-500 flex-shrink-0 group-hover/item:text-primary-600 transition-colors"
+                            className="w-4 h-4 text-primary-500 flex-shrink-0 group-hover/item:text-primary-600 transition-colors duration-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -238,7 +271,7 @@ const ServicesStacked = () => {
                             />
                           </svg>
                         </motion.div>
-                        <span className="text-sm font-medium group-hover/item:font-semibold transition-all">{service}</span>
+                        <span className="text-sm font-medium group-hover/item:font-semibold transition-all duration-0">{service}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -252,7 +285,7 @@ const ServicesStacked = () => {
                         transition={{ duration: 0.4, delay: categoryIndex * 0.1 + subIndex * 0.1 }}
                         className="space-y-2"
                       >
-                        <h4 className="text-sm font-semibold text-gray-800 group-hover:text-primary-600 transition-colors">
+                        <h4 className="text-sm font-semibold text-gray-800 group-hover:text-primary-600 transition-colors duration-0">
                           {subcategory.name}
                         </h4>
                         {subcategory.items && subcategory.items.length > 0 ? (
@@ -264,13 +297,15 @@ const ServicesStacked = () => {
                                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                                 transition={{ duration: 0.4, delay: categoryIndex * 0.1 + subIndex * 0.1 + itemIndex * 0.03 }}
                                 whileHover={{ x: 5 }}
-                                className="flex items-center gap-2 text-gray-600 text-sm hover:text-primary-600 transition-colors group/subitem"
+                                transition={{ duration: 0 }}
+                                className="flex items-center gap-2 text-gray-600 text-sm hover:text-primary-600 transition-colors duration-0 group/subitem"
                               >
                                 <motion.div
-                                  className="w-2 h-2 rounded-full bg-primary-400 group-hover/subitem:bg-primary-600 transition-colors"
+                                  className="w-2 h-2 rounded-full bg-primary-400 group-hover/subitem:bg-primary-600 transition-colors duration-0"
                                   whileHover={{ scale: 1.3 }}
+                                  transition={{ duration: 0 }}
                                 />
-                                <span className="group-hover/subitem:font-semibold transition-all">{item}</span>
+                                <span className="group-hover/subitem:font-semibold transition-all duration-0">{item}</span>
                               </motion.li>
                             ))}
                           </ul>

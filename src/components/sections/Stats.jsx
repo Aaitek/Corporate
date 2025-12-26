@@ -1,122 +1,111 @@
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { CountUp } from '../../hooks/useCountUp'
 
 const Stats = () => {
-  const stats = [
-    {
-      value: 500,
-      suffix: '+',
-      label: 'Certified Tech Professionals',
-      description: 'We\'re Proudly Australia-owned with Global Delivery Capability. Backed by 500+ certified tech professionals.',
-      icon: '👥',
-      gradient: 'bg-primary-500',
-    },
-    {
-      value: 21,
-      suffix: '+',
-      label: 'Years of Experience',
-      description: 'With more than 20 years of agility & engineering expertise, we equip your business functions with customized tech.',
-      icon: '🎯',
-      gradient: 'bg-primary-500',
-    },
-    {
-      value: 500,
-      suffix: '+',
-      label: 'Projects Delivered',
-      description: 'We have empowered businesses with thousands of successful futuristic solutions that have helped them grow and scale.',
-      icon: '🚀',
-      gradient: 'bg-primary-500',
-    },
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+  const partners = [
+    { name: 'Microsoft', initial: 'MS', color: 'from-blue-500 to-blue-600', bg: 'bg-blue-50' },
+    { name: 'Adobe', initial: 'AD', color: 'from-red-500 to-pink-500', bg: 'bg-red-50' },
+    { name: 'Google Partner', initial: 'GP', color: 'from-red-500 to-orange-500', bg: 'bg-orange-50' },
+    { name: 'Commerce', initial: 'CM', color: 'from-blue-500 to-cyan-500', bg: 'bg-cyan-50' },
+    { name: 'KEYFACTOR', initial: 'KF', color: 'from-purple-500 to-purple-600', bg: 'bg-purple-50' },
+    { name: 'Shopify', initial: 'SP', color: 'from-green-500 to-emerald-500', bg: 'bg-green-50' },
+    { name: 'Clutch', initial: 'CL', color: 'from-indigo-500 to-indigo-600', bg: 'bg-indigo-50' },
+    { name: 'HubSpot', initial: 'HS', color: 'from-orange-500 to-red-500', bg: 'bg-orange-50' },
+    { name: 'CRA', initial: 'CRA', color: 'from-blue-600 to-blue-700', bg: 'bg-blue-50' },
+    { name: 'Pantheon', initial: 'PN', color: 'from-gray-600 to-gray-700', bg: 'bg-gray-50' },
+    { name: 'Forbes', initial: 'FB', color: 'from-yellow-500 to-yellow-600', bg: 'bg-yellow-50' },
+    { name: 'Sitecore', initial: 'SC', color: 'from-blue-500 to-blue-600', bg: 'bg-blue-50' },
   ]
 
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section className="section-padding bg-gray-50 relative overflow-hidden">
+    <section className="section-padding bg-white relative overflow-hidden">
       <div className="container-custom" ref={ref}>
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3, ease: 'easeIn' }}
         >
           <div className="text-sm font-semibold text-primary-600 mb-4 uppercase tracking-wider">
-            Your Trusted CMS Partner
+            Trusted Partnerships
           </div>
           <h2 className="heading-2 mb-4 text-gray-900">
-            Achieve Digital Excellence with Precision Engineering and Disruptive Innovations
+            Leading Technology Partners and Achievements
           </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Aaitek is a powerhouse of digital transformation, bringing together top-tier experts with a diverse skillset to craft custom, world-class CMS solutions for businesses of all sizes.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            We're proud to partner with industry leaders and be recognized by top platforms for our excellence in digital transformation.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {stats.map((stat, index) => (
+
+        {/* Partners Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          {partners.map((partner, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.05 }}
-              className="group relative p-8 rounded-2xl bg-white/90 backdrop-blur-sm border-2 border-primary-100 hover:border-primary-500 shadow-lg hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-300 overflow-hidden"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
+              transition={{ 
+                duration: 0.3, 
+                delay: index * 0.05, 
+                ease: 'easeIn' 
+              }}
+              whileHover={{ y: -8, scale: 1.05 }}
+              className="group relative"
             >
-              {/* Animated Background Gradient */}
-              <div className={`absolute inset-0 ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-              
-              {/* Animated Counter - Large */}
-              <motion.div
-                className="text-7xl md:text-8xl font-bold mb-4 relative z-10 text-primary-600"
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : { scale: 0 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 100,
-                  delay: index * 0.2 + 0.3,
-                }}
-              >
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: index * 0.2 + 0.5 }}
-                >
-                  {isInView ? (
-                    <CountUp
-                      start={0}
-                      end={stat.value}
-                      duration={2.5}
-                      suffix={stat.suffix}
-                      separator=","
-                      decimals={0}
-                    />
-                  ) : (
-                    `0${stat.suffix}`
-                  )}
-                </motion.span>
-              </motion.div>
-              
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 relative z-10 group-hover:text-primary-600 transition-colors">
-                {stat.label}
-              </h3>
-              <p className="text-gray-600 relative z-10 leading-relaxed">{stat.description}</p>
-              
-              {/* Decorative Elements */}
-              <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-40 transition-opacity">
-                <div className="text-4xl">{stat.icon}</div>
-              </div>
-              
-              {/* Glow Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className={`absolute inset-0 ${stat.gradient} blur-2xl opacity-20`}></div>
+              <div className={`${partner.bg} rounded-2xl p-6 border-2 border-gray-200 hover:border-primary-300 shadow-sm hover:shadow-xl transition-all duration-0 h-full flex flex-col items-center justify-center aspect-square`}>
+                {/* Logo Circle */}
+                <div className={`w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br ${partner.color} rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg group-hover:scale-110 transition-transform duration-0 mb-4 relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                  <span className="relative z-10">{partner.initial}</span>
+                </div>
+                
+                {/* Partner Name */}
+                <h3 className="text-sm md:text-base font-semibold text-gray-800 text-center group-hover:text-primary-600 transition-colors duration-0">
+                  {partner.name}
+                </h3>
+                
+                {/* Hover Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${partner.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Achievement Badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.4, ease: 'easeIn' }}
+          className="mt-16 flex flex-wrap justify-center gap-6"
+        >
+          {[
+            { label: '500+ Projects', icon: '🚀' },
+            { label: '21+ Years Experience', icon: '⭐' },
+            { label: 'Certified Partners', icon: '🏆' },
+            { label: 'Global Recognition', icon: '🌍' },
+          ].map((badge, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.5 + index * 0.1, ease: 'easeIn' }}
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary-50 to-accent-50 rounded-full border-2 border-primary-200 hover:border-primary-400 shadow-md hover:shadow-lg transition-all duration-0"
+            >
+              <span className="text-2xl">{badge.icon}</span>
+              <span className="font-semibold text-gray-800">{badge.label}</span>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

@@ -13,12 +13,12 @@ const CTA = () => {
             Fill out the form and we will contact you
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-primary-500 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-primary-400 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+            <Link to="/contact" className="bg-primary-500 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-primary-400 transition-all duration-0 shadow-lg hover:shadow-xl transform hover:scale-105">
               Book A Free Consultation
             </Link>
             <a
               href="mailto:office@aaitek.com"
-              className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-200 border-2 border-white shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-0 border-2 border-white shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Or Reach Out To Us At office@aaitek.com
             </a>

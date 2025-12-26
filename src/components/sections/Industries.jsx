@@ -74,7 +74,7 @@ const Industries = () => {
             >
               <Link
                 to={industry.link}
-                className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary-500/20 block h-full"
+                className="group relative bg-gray-900/90 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary-500 transition-all duration-0 shadow-lg hover:shadow-xl hover:shadow-primary-500/20 block h-full"
               >
                 {/* Icon */}
                 <div className="text-5xl mb-4">{industry.icon}</div>
@@ -96,7 +96,7 @@ const Industries = () => {
                 </div>
                 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl"></div>
+                <div className="absolute inset-0 bg-primary-500 opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-xl"></div>
               </Link>
             </motion.div>
           ))}
