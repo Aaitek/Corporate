@@ -100,13 +100,13 @@ const HireRequirement = () => {
             </motion.div>
             <motion.h2
               variants={fadeInUp}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 md:mb-6 leading-tight px-2"
             >
               Get Our Assistance for Your Business Needs
             </motion.h2>
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed px-4"
             >
               At Aaitek, we provide flexible options for accessing our developers' time, allowing you to choose the duration and frequency of their availability based on your specific requirements.
             </motion.p>
@@ -115,20 +115,21 @@ const HireRequirement = () => {
       </div>
 
       {/* Cards Section */}
-      <div className="bg-gradient-to-b from-white to-gray-50 py-24">
+      <div className="bg-gradient-to-b from-white to-gray-50 py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="container-custom">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 max-w-6xl mx-auto"
           >
             {hiringModels.map((model, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -12, scale: 1.02 }}
-                className="relative group"
+                whileTap={{ scale: 0.98 }}
+                className="relative group mobile-card"
               >
                 <div className="relative bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden h-full flex flex-col">
                   {/* Image Section */}

@@ -6,6 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
+  const [expandedMobileItem, setExpandedMobileItem] = useState(null)
   const location = useLocation()
   const dropdownRef = useRef(null)
 
@@ -417,7 +418,12 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             className={`lg:hidden p-2 ${!isScrolled ? 'text-white' : 'text-gray-900'}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen)
+              if (isMenuOpen) {
+                setExpandedMobileItem(null)
+              }
+            }}
             aria-label="Toggle menu"
           >
             <svg
@@ -446,60 +452,185 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className={`lg:hidden py-4 border-t ${!isScrolled ? 'border-gray-700' : 'border-gray-200'}`}>
-            {Object.entries(menuItems).map(([key, item]) => (
-              <div key={key} className="mb-2">
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className={`lg:hidden overflow-hidden border-t ${!isScrolled ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'}`}
+              style={{ isolation: 'isolate', willChange: 'auto' }}
+            >
+              <div className="py-4" style={{ transform: 'translateZ(0)' }}>
+                {/* Main Navigation Links */}
                 <Link
-                  to={item.path}
+                  to="/"
                   onClick={() => {
                     setIsMenuOpen(false)
+                    setExpandedMobileItem(null)
                   }}
-                className={`block py-3 text-base font-medium ${
-                  location.pathname === item.path || location.pathname.startsWith(item.path + '/')
-                    ? 'text-primary-600'
-                    : 'text-gray-700'
-                }`}
+                  className={`block py-3 px-4 text-base font-medium ${
+                    location.pathname === '/'
+                      ? 'text-primary-600'
+                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                  }`}
                 >
-                  {item.label}
+                  Home
                 </Link>
-                {item.columns && (
-                  <div className="pl-4 space-y-1">
-                    {item.columns.map((column, colIndex) => (
-                      <div key={colIndex} className="mb-3">
-                        <div className="text-sm font-semibold text-gray-600 mb-2">
-                          {column.icon} {column.title}
-                        </div>
-                        <ul className="space-y-1">
-                          {column.items.slice(0, 3).map((subItem, itemIndex) => (
-                            <li key={itemIndex}>
-                              <Link
-                                to={subItem.path}
-                                onClick={() => {
-                                  setIsMenuOpen(false)
-                                }}
-                                className="text-sm text-gray-600 hover:text-primary-600 block py-1"
-                              >
-                                {subItem.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                {Object.entries(menuItems).slice(0, 4).map(([key, item]) => (
+                  <div key={key}>
+                    {item.columns ? (
+                      <button
+                        onClick={() => setExpandedMobileItem(expandedMobileItem === key ? null : key)}
+                        className={`w-full flex items-center justify-between py-3 px-4 text-base font-medium ${
+                          location.pathname === item.path || location.pathname.startsWith(item.path + '/')
+                            ? 'text-primary-600'
+                            : !isScrolled ? 'text-white' : 'text-gray-700'
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <svg
+                          className={`w-5 h-5 transition-transform duration-200 ${
+                            expandedMobileItem === key ? 'rotate-180' : ''
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                    ) : (
+                      <Link
+                        to={item.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block py-3 px-4 text-base font-medium ${
+                          location.pathname === item.path || location.pathname.startsWith(item.path + '/')
+                            ? 'text-primary-600'
+                            : !isScrolled ? 'text-white' : 'text-gray-700'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                    {item.columns && (
+                      <AnimatePresence>
+                        {expandedMobileItem === key && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className={`overflow-hidden ${!isScrolled ? 'bg-gray-800' : 'bg-gray-50'}`}
+                          >
+                            <div className="pl-6 pr-4 pb-3 space-y-1">
+                              {item.columns.map((column, colIndex) => (
+                                <div key={colIndex} className="mb-3 pt-2">
+                                  <div className={`text-sm font-semibold mb-2 ${!isScrolled ? 'text-gray-300' : 'text-gray-600'}`}>
+                                    {column.icon} {column.title}
+                                  </div>
+                                  <ul className="space-y-1">
+                                    {column.items.map((subItem, itemIndex) => (
+                                      <li key={itemIndex}>
+                                        <Link
+                                          to={subItem.path}
+                                          onClick={(e) => {
+                                            if (subItem.path.startsWith('/#')) {
+                                              e.preventDefault()
+                                              const hash = subItem.path.substring(1)
+                                              if (location.pathname !== '/') {
+                                                window.location.href = subItem.path
+                                              } else {
+                                                const element = document.querySelector(hash)
+                                                if (element) {
+                                                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                                }
+                                              }
+                                            }
+                                            setIsMenuOpen(false)
+                                            setExpandedMobileItem(null)
+                                          }}
+                                          className={`text-sm block py-1.5 ${!isScrolled ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-primary-600'}`}
+                                        >
+                                          {subItem.label}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
+                              <div className="mt-4 pt-3 border-t border-gray-300">
+                                <Link
+                                  to={item.path}
+                                  onClick={() => {
+                                    setIsMenuOpen(false)
+                                    setExpandedMobileItem(null)
+                                  }}
+                                  className={`text-sm font-semibold flex items-center ${!isScrolled ? 'text-white' : 'text-primary-600'}`}
+                                >
+                                  View All {item.label}
+                                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                  </svg>
+                                </Link>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
                   </div>
-                )}
+                ))}
+                <Link
+                  to="/about"
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    setExpandedMobileItem(null)
+                  }}
+                  className={`block py-3 px-4 text-base font-medium ${
+                    location.pathname === '/about'
+                      ? 'text-primary-600'
+                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                  }`}
+                >
+                  About
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    setExpandedMobileItem(null)
+                  }}
+                  className={`block py-3 px-4 text-base font-medium ${
+                    location.pathname === '/contact'
+                      ? 'text-primary-600'
+                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                  }`}
+                >
+                  Contact
+                </Link>
+                <div className="px-4 mt-4">
+                  <Link
+                    to="/contact"
+                    onClick={() => {
+                      setIsMenuOpen(false)
+                      setExpandedMobileItem(null)
+                    }}
+                    className="btn-primary text-sm px-4 py-2 inline-block w-full text-center"
+                  >
+                    Get a Quote
+                  </Link>
+                </div>
               </div>
-            ))}
-            <Link
-              to="/contact"
-              onClick={() => setIsMenuOpen(false)}
-              className="btn-primary text-sm px-4 py-2 mt-4 inline-block"
-            >
-              Contact us
-            </Link>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   )

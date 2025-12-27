@@ -122,7 +122,7 @@ const ServicesStacked = () => {
   ]
 
   return (
-    <section id="services" ref={ref} className="py-24 bg-white relative overflow-hidden">
+    <section id="services" ref={ref} className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary-400 rounded-full blur-3xl"></div>
@@ -135,21 +135,21 @@ const ServicesStacked = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-200 mb-6">
             <span className="text-xs font-semibold text-primary-600 uppercase tracking-wider">Services</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4 md:mb-6">
             SERVICES
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
             Comprehensive technology solutions designed to transform your business. From product development to enterprise platforms, we deliver end-to-end services that drive innovation and growth.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {serviceCategories.map((category, categoryIndex) => (
             <Link
               key={categoryIndex}
@@ -166,7 +166,8 @@ const ServicesStacked = () => {
                   ease: 'easeIn'
                 }}
                 whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.4 } }}
-                className={`relative bg-gradient-to-br ${category.bgColor || 'from-white to-gray-50'} rounded-2xl p-6 border-2 border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-[0.4s] group overflow-hidden cursor-pointer h-full`}
+                whileTap={{ scale: 0.98 }}
+                className={`relative bg-gradient-to-br ${category.bgColor || 'from-white to-gray-50'} rounded-2xl p-5 sm:p-6 border-2 border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-[0.4s] group overflow-hidden cursor-pointer h-full mobile-card`}
               >
               {/* Left Border - Colorful */}
               <motion.div
@@ -193,7 +194,7 @@ const ServicesStacked = () => {
               <div className="relative z-10">
                 <div className="flex items-start gap-3 mb-3">
                   {/* Colorful Icon Badge */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color || 'from-primary-500 to-accent-500'} flex items-center justify-center text-white text-xl shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-[0.4s]`}>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${category.color || 'from-primary-500 to-accent-500'} flex items-center justify-center text-white text-lg sm:text-xl shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-[0.4s]`}>
                     {category.category === 'Product Development' && '🚀'}
                     {category.category === 'Software Engineering' && '⚙️'}
                     {category.category === 'Cloud & DevOps' && '☁️'}
@@ -204,7 +205,7 @@ const ServicesStacked = () => {
                     {category.category === 'CRM & Business Platforms' && '💼'}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-[0.4s] flex items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-[0.4s] flex items-center gap-2">
                       <motion.span
                         className="inline-block"
                         whileHover={{ x: 5 }}

@@ -226,7 +226,7 @@ const Technologies = () => {
                     ))}
                   </ul>
                 </div>
-              </div>
+          </div>
             </motion.div>
           ))}
         </motion.div>
@@ -268,20 +268,20 @@ const Technologies = () => {
             >
               <div className={`relative bg-gradient-to-br ${stack.bgGradient} rounded-3xl p-6 border-2 border-transparent hover:border-primary-300 transition-all duration-0 overflow-hidden h-full`}>
                 {/* Animated Corner Accent */}
-                <motion.div
+              <motion.div
                   className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stack.color} opacity-0 group-hover:opacity-20 rounded-bl-full transition-opacity duration-0`}
                   initial={{ scale: 0 }}
                   whileHover={{ scale: 1 }}
-                />
+              />
 
                 {/* Icon with Floating Animation */}
-                <motion.div
+              <motion.div
                   initial={{ opacity: 0, scale: 0, rotate: -180 }}
                   animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0, rotate: -180 }}
                   transition={{ duration: 0.6, delay: index * 0.1, type: "spring", stiffness: 200 }}
                   className={`relative z-10 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${stack.color} rounded-2xl text-3xl mb-5 shadow-lg group-hover:shadow-2xl group-hover:rotate-6 transition-all duration-0`}
                 >
-                  {stack.icon}
+                    {stack.icon}
                 </motion.div>
 
                 {/* Domain Title */}
@@ -323,8 +323,8 @@ const Technologies = () => {
                   </div>
                   <div className="flex flex-wrap gap-2 pl-3">
                     {stack.techStack.map((tech, techIndex) => (
-                      <motion.span
-                        key={techIndex}
+                    <motion.span
+                      key={techIndex}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                         transition={{ 
@@ -335,11 +335,11 @@ const Technologies = () => {
                         }}
                         whileHover={{ scale: 1.15, y: -2 }}
                         className={`px-3 py-1.5 bg-white/80 backdrop-blur-sm text-primary-700 rounded-lg text-xs font-semibold border border-primary-200 hover:border-primary-400 hover:bg-white transition-all duration-0 shadow-sm`}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
+                    >
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
                 </motion.div>
 
                 {/* Experts Badge */}

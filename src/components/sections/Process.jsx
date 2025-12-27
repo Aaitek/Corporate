@@ -177,7 +177,7 @@ const Process = () => {
           <h2 className="heading-2 mb-4 text-gray-900">
             Our Agile Development Process
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-2">
             A proven methodology that ensures your project is delivered on time, within budget, and exceeds expectations.
           </p>
         </motion.div>
@@ -197,7 +197,7 @@ const Process = () => {
           </div>
 
           {/* Steps Grid - 6 columns, 1 row */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-3 relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-3 relative">
             {steps.map((step, index) => (
               <motion.div
                 key={index}

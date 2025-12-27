@@ -186,7 +186,7 @@ const PartnerSuccess = () => {
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Discover how we've helped businesses transform their digital presence and achieve remarkable results through innovative technology solutions.
-            </p>
+          </p>
           </motion.div>
         </div>
       </section>
@@ -195,22 +195,22 @@ const PartnerSuccess = () => {
       <section className="py-8 bg-white border-b border-gray-200">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
+          {categories.map((category) => (
               <motion.button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0 }}
                 className={`px-6 py-2 rounded-full font-semibold transition-all duration-0 ${
-                  selectedCategory === category.id
+                selectedCategory === category.id
                     ? 'bg-primary-600 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.label}
+              }`}
+            >
+              {category.label}
               </motion.button>
-            ))}
+          ))}
           </div>
         </div>
       </section>
@@ -218,10 +218,10 @@ const PartnerSuccess = () => {
       {/* Case Studies Grid */}
       <section ref={ref} className="py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCaseStudies.map((caseStudy, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCaseStudies.map((caseStudy, index) => (
               <motion.div
-                key={index}
+              key={index}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -249,9 +249,9 @@ const PartnerSuccess = () => {
                 {/* Industry Badge */}
                 <div className="mb-3">
                   <span className="text-xs font-semibold text-primary-600 uppercase tracking-wider">
-                    {caseStudy.industry}
-                  </span>
-                </div>
+                  {caseStudy.industry}
+                </span>
+              </div>
 
                 {/* Title */}
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-0">
@@ -305,7 +305,7 @@ const PartnerSuccess = () => {
                 <div className={`absolute inset-0 bg-gradient-to-br ${caseStudy.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
               </motion.div>
             ))}
-          </div>
+              </div>
 
           {filteredCaseStudies.length === 0 && (
             <div className="text-center py-16">
@@ -347,7 +347,7 @@ const PartnerSuccess = () => {
               </svg>
             </motion.a>
           </motion.div>
-        </div>
+      </div>
       </section>
     </div>
   )
