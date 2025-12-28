@@ -81,63 +81,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section ref={ref} className="py-24">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ 
-                  duration: 0.3, 
-                  delay: index * 0.1,
-                  ease: 'easeIn'
-                }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-0 group overflow-hidden"
-              >
-                {/* Left Border on Hover */}
-                <motion.div
-                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-0`}
-                  initial={{ scaleY: 0 }}
-                  whileHover={{ scaleY: 1 }}
-                  transition={{ duration: 0 }}
-                />
-
-                {/* Icon */}
-                <div className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-0`}>
-                  {stat.icon}
-                </div>
-
-                {/* Content */}
-                <div className="text-4xl font-bold text-primary-600 mb-2">
-                  {isInView ? (
-                    <CountUp
-                      start={0}
-                      end={stat.value}
-                      duration={2.5}
-                      suffix={stat.suffix}
-                      separator=","
-                      decimals={0}
-                      enabled={isInView}
-                    />
-                  ) : (
-                    `0${stat.suffix}`
-                  )}
-                </div>
-                <p className="text-gray-600 font-medium">{stat.label}</p>
-
-                {/* Hover Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Our Story Section */}
       <section className="py-24 bg-white">
         <div className="container-custom">
@@ -181,7 +124,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-24">
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-sky-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -236,6 +179,63 @@ const About = () => {
 
                 {/* Hover Effect */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section ref={ref} className="py-24 bg-white">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ 
+                  duration: 0.3, 
+                  delay: index * 0.1,
+                  ease: 'easeIn'
+                }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-0 group overflow-hidden"
+              >
+                {/* Left Border on Hover */}
+                <motion.div
+                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-0`}
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0 }}
+                />
+
+                {/* Icon */}
+                <div className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-0`}>
+                  {stat.icon}
+                </div>
+
+                {/* Content */}
+                <div className="text-4xl font-bold text-primary-600 mb-2">
+                  {isInView ? (
+                    <CountUp
+                      start={0}
+                      end={stat.value}
+                      duration={2.5}
+                      suffix={stat.suffix}
+                      separator=","
+                      decimals={0}
+                      enabled={isInView}
+                    />
+                  ) : (
+                    `0${stat.suffix}`
+                  )}
+                </div>
+                <p className="text-gray-600 font-medium">{stat.label}</p>
+
+                {/* Hover Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
               </motion.div>
             ))}
           </div>
