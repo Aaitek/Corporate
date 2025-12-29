@@ -7,8 +7,10 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [expandedMobileItem, setExpandedMobileItem] = useState(null)
+  const [servicesMenuPosition, setServicesMenuPosition] = useState({ left: 0, top: 0 })
   const location = useLocation()
   const dropdownRef = useRef(null)
+  const servicesMenuRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,29 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const updateServicesPosition = () => {
+      if (activeDropdown === 'services' && servicesMenuRef.current) {
+        const rect = servicesMenuRef.current.getBoundingClientRect()
+        const viewportWidth = window.innerWidth
+        const menuWidth = viewportWidth > 1280 ? 900 : viewportWidth > 1024 ? 800 : 600
+        const leftPosition = (viewportWidth - menuWidth) / 2
+        const topPosition = rect.bottom + 8
+        setServicesMenuPosition({ left: leftPosition, top: topPosition })
+      }
+    }
+    
+    const handleResize = () => updateServicesPosition()
+    const handleScroll = () => updateServicesPosition()
+    
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [activeDropdown])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -266,8 +291,19 @@ const Header = () => {
             {Object.entries(menuItems).slice(0, 4).map(([key, item]) => (
               <div
                 key={key}
+                ref={key === 'services' ? servicesMenuRef : null}
                 className="relative"
-                onMouseEnter={() => setActiveDropdown(key)}
+                onMouseEnter={() => {
+                  setActiveDropdown(key)
+                  if (key === 'services' && servicesMenuRef.current) {
+                    const rect = servicesMenuRef.current.getBoundingClientRect()
+                    const viewportWidth = window.innerWidth
+                    const menuWidth = viewportWidth > 1280 ? 900 : viewportWidth > 1024 ? 800 : 600
+                    const leftPosition = (viewportWidth - menuWidth) / 2
+                    const topPosition = rect.bottom + 8 // mt-2 = 8px
+                    setServicesMenuPosition({ left: leftPosition, top: topPosition })
+                  }
+                }}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <Link
@@ -305,13 +341,16 @@ const Header = () => {
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.2 }}
                       data-dropdown
-                      className={`absolute top-full mt-2 ${
+                      style={key === 'services' ? { left: `${servicesMenuPosition.left}px`, top: `${servicesMenuPosition.top}px`, position: 'fixed' } : {}}
+                      className={`${key === 'services' ? '' : 'absolute top-full mt-2'} ${
                         item.columns.length === 1 
                           ? (key === 'products' || key === 'partner-success' 
                               ? 'right-0 w-80' 
                               : 'left-0 w-80')
                           : key === 'hire-developers'
                           ? 'left-0 w-[400px] md:w-[500px]'
+                          : key === 'services'
+                          ? 'w-[90vw] max-w-[600px] lg:max-w-[800px] xl:max-w-[900px]'
                           : 'left-0 w-[600px] lg:w-[800px] xl:w-[900px]'
                       } bg-white text-gray-900 shadow-2xl py-6 z-[100] border border-primary-200 rounded-lg`}
                     >
