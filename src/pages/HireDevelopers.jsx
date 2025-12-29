@@ -179,11 +179,11 @@ const HireDevelopers = () => {
                 to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-all duration-0 shadow-lg hover:shadow-xl"
               >
-                Talk to Our Experts
+              Talk to Our Experts
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </Link>
+            </Link>
             </motion.div>
           </motion.div>
         </div>
@@ -227,7 +227,7 @@ const HireDevelopers = () => {
                 {/* Icon */}
                 <div className={`w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-0`}>
                   {benefit.icon}
-                </div>
+              </div>
 
                 {/* Content */}
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-0">
@@ -394,6 +394,279 @@ const HireDevelopers = () => {
         </div>
       </section>
 
+      {/* Developer Specializations */}
+      <section className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-custom">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Developer Specializations</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Find the perfect developer for your project needs
+            </p>
+          </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {[
+              {
+                title: 'Frontend Developers',
+                description: 'Expert React, Vue, Angular developers for building modern, responsive user interfaces',
+                skills: ['React', 'Vue.js', 'Angular', 'TypeScript', 'Next.js'],
+                color: 'from-blue-500 to-cyan-500',
+                icon: '🎨',
+              },
+              {
+                title: 'Backend Developers',
+                description: 'Node.js, Python, Java experts for robust server-side applications and APIs',
+                skills: ['Node.js', 'Python', 'Java', 'Express', 'Django'],
+                color: 'from-green-500 to-emerald-500',
+                icon: '⚙️',
+              },
+              {
+                title: 'Full-Stack Developers',
+                description: 'End-to-end developers skilled in both frontend and backend technologies',
+                skills: ['MERN Stack', 'MEAN Stack', 'Next.js', 'Full-Stack'],
+                color: 'from-purple-500 to-pink-500',
+                icon: '🚀',
+              },
+              {
+                title: 'Cloud & DevOps Engineers',
+                description: 'AWS, Azure, Docker, Kubernetes specialists for scalable infrastructure',
+                skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'CI/CD'],
+                color: 'from-orange-500 to-yellow-500',
+                icon: '☁️',
+              },
+              {
+                title: 'Mobile App Developers',
+                description: 'iOS and Android experts for native and cross-platform mobile applications',
+                skills: ['React Native', 'Flutter', 'iOS', 'Android', 'Swift'],
+                color: 'from-indigo-500 to-blue-500',
+                icon: '📱',
+              },
+              {
+                title: 'AI/ML Engineers',
+                description: 'Machine learning and AI specialists for intelligent solutions',
+                skills: ['Python', 'TensorFlow', 'PyTorch', 'ML', 'AI'],
+                color: 'from-pink-500 to-rose-500',
+                icon: '🤖',
+              },
+            ].map((specialization, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="relative bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary-300 hover:shadow-2xl transition-all duration-0 group overflow-hidden"
+              >
+                <motion.div
+                  className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${specialization.color} opacity-0 group-hover:opacity-100 transition-opacity duration-0`}
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0 }}
+                />
+                <div className={`w-16 h-16 bg-gradient-to-br ${specialization.color} rounded-xl flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-0`}>
+                  {specialization.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-0">
+                  {specialization.title}
+                </h3>
+                <p className="text-gray-600 mb-4 leading-relaxed">
+                  {specialization.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {specialization.skills.map((skill, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${specialization.color} opacity-0 group-hover:opacity-5 transition-opacity duration-0 rounded-2xl`}></div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Hiring Process */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container-custom">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Our Hiring Process</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              A streamlined process to connect you with the right developers quickly
+            </p>
+          </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {[
+              {
+                step: '01',
+                title: 'Requirements Analysis',
+                description: 'We understand your project needs, technical requirements, and team structure',
+                color: 'from-blue-500 to-cyan-500',
+              },
+              {
+                step: '02',
+                title: 'Developer Matching',
+                description: 'Our team matches you with developers who fit your exact requirements and culture',
+                color: 'from-purple-500 to-pink-500',
+              },
+              {
+                step: '03',
+                title: 'Interview & Selection',
+                description: 'Conduct interviews with pre-screened candidates and select the best fit',
+                color: 'from-green-500 to-emerald-500',
+              },
+              {
+                step: '04',
+                title: 'Onboarding & Start',
+                description: 'Smooth onboarding process to get your developers productive from day one',
+                color: 'from-orange-500 to-red-500',
+              },
+            ].map((process, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -8 }}
+                className="relative text-center"
+              >
+                <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${process.color} rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg`}>
+                  {process.step}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {process.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {process.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 md:py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div className="container-custom relative z-10">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {[
+              { number: '500+', label: 'Expert Developers', color: 'from-blue-400 to-cyan-400' },
+              { number: '98%', label: 'Client Satisfaction', color: 'from-green-400 to-emerald-400' },
+              { number: '24/7', label: 'Support Available', color: 'from-purple-400 to-pink-400' },
+              { number: '50+', label: 'Technologies', color: 'from-orange-400 to-yellow-400' },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="text-center"
+              >
+                <motion.div
+                  className={`text-4xl md:text-5xl font-extrabold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
+                >
+                  {stat.number}
+                </motion.div>
+                <div className="text-white/90 font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container-custom">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Everything you need to know about hiring developers with Aaitek
+            </p>
+          </motion.div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto space-y-6"
+          >
+            {[
+              {
+                question: 'How quickly can I hire developers?',
+                answer: 'Typically, we can match you with qualified developers within 1-2 weeks, depending on your specific requirements and the availability of candidates.',
+              },
+              {
+                question: 'What is the minimum commitment period?',
+                answer: 'We offer flexible engagement models. The minimum commitment varies by model, but we can accommodate short-term projects starting from 1 month.',
+              },
+              {
+                question: 'Can I interview developers before hiring?',
+                answer: 'Absolutely! We encourage you to interview all candidates to ensure they meet your technical and cultural requirements.',
+              },
+              {
+                question: 'What if I need to scale my team?',
+                answer: 'Our flexible models allow you to scale up or down based on your project needs. We can quickly add or remove developers as required.',
+              },
+              {
+                question: 'Do you provide ongoing support?',
+                answer: 'Yes, we provide continuous support throughout the engagement, including regular check-ins, performance monitoring, and team management assistance.',
+              },
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-0"
+              >
+                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                  {faq.question}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 md:py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -434,11 +707,11 @@ const HireDevelopers = () => {
                   to="/contact"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-all duration-0 shadow-lg hover:shadow-xl"
                 >
-                  Talk to Our Experts
+                Talk to Our Experts
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                </Link>
+              </Link>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -449,11 +722,11 @@ const HireDevelopers = () => {
                   to="/contact"
                   className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-0 border-2 border-white shadow-lg hover:shadow-xl"
                 >
-                  Get Started
+                Get Started
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                </Link>
+              </Link>
               </motion.div>
             </motion.div>
           </motion.div>

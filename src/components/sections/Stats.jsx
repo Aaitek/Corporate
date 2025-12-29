@@ -44,7 +44,7 @@ const Stats = () => {
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white to-transparent z-10 pointer-events-none"></div>
           
-          <motion.div
+            <motion.div
             className="flex items-center gap-12 md:gap-16"
             animate={{
               x: [0, -(partners.length * 200)],
@@ -57,7 +57,7 @@ const Stats = () => {
                 ease: 'linear',
               },
             }}
-          >
+            >
             {duplicatedPartners.map((partner, index) => (
               <motion.div
                 key={`${partner.name}-${index}`}
@@ -74,8 +74,8 @@ const Stats = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-
+              </div>
+              
         {/* Achievement Badges */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -140,26 +140,26 @@ const Header = () => {
     },
     'hire-developers': {
       label: 'Hire Developers',
-      path: '/#hire-requirement',
+      path: '/hire-developers',
       columns: [
         {
           title: 'Hiring Models',
           icon: '👥',
           items: [
-            { label: 'Staff Augmentation', path: '/#hire-requirement' },
-            { label: 'Dedicated Team', path: '/#hire-requirement' },
-            { label: 'Time-Based Support', path: '/#hire-requirement' },
+            { label: 'Staff Augmentation', path: '/hire-developers' },
+            { label: 'Dedicated Team', path: '/hire-developers' },
+            { label: 'Time-Based Support', path: '/hire-developers' },
           ],
         },
         {
           title: 'Technologies',
           icon: '💻',
           items: [
-            { label: 'React Developers', path: '/#languages-frameworks' },
-            { label: 'Node.js Developers', path: '/#languages-frameworks' },
-            { label: 'Python Developers', path: '/#languages-frameworks' },
-            { label: 'AWS/Azure Experts', path: '/#technologies' },
-            { label: 'Full-Stack Developers', path: '/#technologies' },
+            { label: 'React Developers', path: '/hire-developers' },
+            { label: 'Node.js Developers', path: '/hire-developers' },
+            { label: 'Python Developers', path: '/hire-developers' },
+            { label: 'AWS/Azure Experts', path: '/hire-developers' },
+            { label: 'Full-Stack Developers', path: '/hire-developers' },
           ],
         },
       ],
@@ -323,59 +323,59 @@ const Header = () => {
                             ? 'grid-cols-1 md:grid-cols-2 gap-6 md:gap-8'
                             : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'
                         }`}>
-                        {item.columns.map((column, colIndex) => (
+                      {item.columns.map((column, colIndex) => (
                           <div key={colIndex} className="min-w-0">
-                            <div className="flex items-center mb-4">
+                          <div className="flex items-center mb-4">
                               <span className="text-primary-600 mr-2 text-lg flex-shrink-0">{column.icon}</span>
                               <h3 className="text-base md:text-lg font-semibold text-gray-900 truncate">{column.title}</h3>
-                            </div>
-                            <ul className="space-y-2">
-                              {column.items.map((subItem, itemIndex) => (
-                                <li key={itemIndex}>
-                                  <Link
-                                    to={subItem.path}
-                                    onClick={(e) => {
-                                      if (subItem.path.startsWith('/#')) {
-                                        e.preventDefault()
-                                        const hash = subItem.path.substring(1)
-                                        if (location.pathname !== '/') {
-                                          window.location.href = subItem.path
-                                        } else {
-                                          const element = document.querySelector(hash)
-                                          if (element) {
-                                            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                                          }
+                          </div>
+                          <ul className="space-y-2">
+                            {column.items.map((subItem, itemIndex) => (
+                              <li key={itemIndex}>
+                                <Link
+                                  to={subItem.path}
+                                  onClick={(e) => {
+                                    if (subItem.path.startsWith('/#')) {
+                                      e.preventDefault()
+                                      const hash = subItem.path.substring(1)
+                                      if (location.pathname !== '/') {
+                                        window.location.href = subItem.path
+                                      } else {
+                                        const element = document.querySelector(hash)
+                                        if (element) {
+                                          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
                                         }
                                       }
-                                      setActiveDropdown(null)
-                                    }}
+                                    }
+                                    setActiveDropdown(null)
+                                  }}
                                     className="text-gray-700 hover:text-primary-600 transition-colors duration-0 text-sm block py-1 break-words"
-                                  >
-                                    {subItem.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        {item.columns.length > 1 && (
-                          <div className="mt-6 pt-6 border-t border-gray-200">
-                            <Link
-                              to={item.path}
-                              onClick={() => {
-                                setActiveDropdown(null)
-                              }}
-                              className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center"
-                            >
-                              View All {item.label}
-                              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          </div>
-                        )}
+                      ))}
                       </div>
+                        {item.columns.length > 1 && (
+                      <div className="mt-6 pt-6 border-t border-gray-200">
+                        <Link
+                          to={item.path}
+                          onClick={() => {
+                            setActiveDropdown(null)
+                          }}
+                          className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center"
+                        >
+                          View All {item.label}
+                          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                        )}
+                    </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -453,7 +453,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <AnimatePresence>
-          {isMenuOpen && (
+        {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -472,9 +472,9 @@ const Header = () => {
                   }}
                   className={`block py-3 px-4 text-base font-medium ${
                     location.pathname === '/'
-                      ? 'text-primary-600'
+                    ? 'text-primary-600'
                       : !isScrolled ? 'text-white' : 'text-gray-700'
-                  }`}
+                }`}
                 >
                   Home
                 </Link>
@@ -519,7 +519,7 @@ const Header = () => {
                         {item.label}
                       </Link>
                     )}
-                    {item.columns && (
+                {item.columns && (
                       <AnimatePresence>
                         {expandedMobileItem === key && (
                           <motion.div
@@ -530,16 +530,16 @@ const Header = () => {
                             className={`overflow-hidden ${!isScrolled ? 'bg-gray-800' : 'bg-gray-50'}`}
                           >
                             <div className="pl-6 pr-4 pb-3 space-y-1">
-                              {item.columns.map((column, colIndex) => (
+                    {item.columns.map((column, colIndex) => (
                                 <div key={colIndex} className="mb-3 pt-2">
                                   <div className={`text-sm font-semibold mb-2 ${!isScrolled ? 'text-gray-300' : 'text-gray-600'}`}>
-                                    {column.icon} {column.title}
-                                  </div>
-                                  <ul className="space-y-1">
+                          {column.icon} {column.title}
+                        </div>
+                        <ul className="space-y-1">
                                     {column.items.map((subItem, itemIndex) => (
-                                      <li key={itemIndex}>
-                                        <Link
-                                          to={subItem.path}
+                            <li key={itemIndex}>
+                              <Link
+                                to={subItem.path}
                                           onClick={(e) => {
                                             if (subItem.path.startsWith('/#')) {
                                               e.preventDefault()
@@ -553,18 +553,18 @@ const Header = () => {
                                                 }
                                               }
                                             }
-                                            setIsMenuOpen(false)
+                                  setIsMenuOpen(false)
                                             setExpandedMobileItem(null)
-                                          }}
+                                }}
                                           className={`text-sm block py-1.5 ${!isScrolled ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-primary-600'}`}
-                                        >
-                                          {subItem.label}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
+                              >
+                                {subItem.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                               <div className="mt-4 pt-3 border-t border-gray-300">
                                 <Link
                                   to={item.path}
@@ -584,9 +584,9 @@ const Header = () => {
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    )}
-                  </div>
-                ))}
+                )}
+              </div>
+            ))}
                 <Link
                   to="/about"
                   onClick={() => {
@@ -616,20 +616,20 @@ const Header = () => {
                   Contact
                 </Link>
                 <div className="px-4 mt-4">
-                  <Link
-                    to="/contact"
+            <Link
+              to="/contact"
                     onClick={() => {
                       setIsMenuOpen(false)
                       setExpandedMobileItem(null)
                     }}
                     className="btn-primary text-sm px-4 py-2 inline-block w-full text-center"
-                  >
+            >
                     Get a Quote
-                  </Link>
-                </div>
+            </Link>
+          </div>
               </div>
             </motion.div>
-          )}
+        )}
         </AnimatePresence>
       </nav>
     </motion.header>
