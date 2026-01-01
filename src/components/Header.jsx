@@ -255,8 +255,8 @@ const Header = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-primary-200' 
-            : 'bg-gray-900/80 backdrop-blur-md'
+            ? 'bg-[#13273D] backdrop-blur-md shadow-lg border-b border-primary-200' 
+            : 'bg-[#13273D] backdrop-blur-md'
         }`}
     >
       <nav className="container-custom relative">
@@ -269,7 +269,7 @@ const Header = () => {
             >
               <Link to="/" className="flex items-center space-x-2">
                 <img 
-                  src="/logo.avif" 
+                  src="/logo.png" 
                   alt="Aaitek Logo" 
                   className="h-10 w-auto"
                 />
@@ -282,8 +282,8 @@ const Header = () => {
               to="/"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/'
-                  ? isScrolled ? 'text-primary-600' : 'text-white'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
+                  ? 'text-primary-400'
+                  : 'text-white hover:text-primary-400'
               }`}
             >
               Home
@@ -310,8 +310,8 @@ const Header = () => {
                   to={item.path}
                   className={`text-sm font-medium transition-colors flex items-center ${
                     location.pathname === item.path
-                      ? isScrolled ? 'text-primary-600' : 'text-white'
-                      : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
+                      ? 'text-primary-400'
+                      : 'text-white hover:text-primary-400'
                   }`}
                 >
                   {item.label}
@@ -424,8 +424,8 @@ const Header = () => {
               to="/about"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/about'
-                  ? isScrolled ? 'text-primary-600' : 'text-white'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
+                  ? 'text-primary-400'
+                  : 'text-white hover:text-primary-400'
               }`}
             >
               About
@@ -434,8 +434,8 @@ const Header = () => {
               to="/contact"
               className={`text-sm font-medium transition-colors ${
                 location.pathname === '/contact'
-                  ? isScrolled ? 'text-primary-600' : 'text-white'
-                  : isScrolled ? 'text-gray-700 hover:text-primary-600' : 'text-white/90 hover:text-primary-400'
+                  ? 'text-primary-400'
+                  : 'text-white hover:text-primary-400'
               }`}
             >
               Contact
@@ -456,7 +456,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2 ${!isScrolled ? 'text-white' : 'text-gray-900'}`}
+            className={`lg:hidden p-2 text-white`}
             onClick={() => {
               setIsMenuOpen(!isMenuOpen)
               if (isMenuOpen) {
@@ -498,7 +498,7 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className={`lg:hidden overflow-hidden border-t ${!isScrolled ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'}`}
+              className={`lg:hidden overflow-hidden border-t bg-[#13273D] border-gray-700`}
               style={{ isolation: 'isolate', willChange: 'auto' }}
             >
               <div className="py-4" style={{ transform: 'translateZ(0)' }}>
@@ -511,8 +511,8 @@ const Header = () => {
                   }}
                   className={`block py-3 px-4 text-base font-medium ${
                     location.pathname === '/'
-                    ? 'text-primary-600'
-                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                    ? 'text-primary-400'
+                      : 'text-white'
                 }`}
                 >
                   Home
@@ -524,8 +524,8 @@ const Header = () => {
                         onClick={() => setExpandedMobileItem(expandedMobileItem === key ? null : key)}
                         className={`w-full flex items-center justify-between py-3 px-4 text-base font-medium ${
                           location.pathname === item.path || location.pathname.startsWith(item.path + '/')
-                            ? 'text-primary-600'
-                            : !isScrolled ? 'text-white' : 'text-gray-700'
+                            ? 'text-primary-400'
+                            : 'text-white'
                         }`}
                       >
                         <span>{item.label}</span>
@@ -551,8 +551,8 @@ const Header = () => {
                         onClick={() => setIsMenuOpen(false)}
                         className={`block py-3 px-4 text-base font-medium ${
                           location.pathname === item.path || location.pathname.startsWith(item.path + '/')
-                            ? 'text-primary-600'
-                            : !isScrolled ? 'text-white' : 'text-gray-700'
+                            ? 'text-primary-400'
+                            : 'text-white'
                         }`}
                       >
                         {item.label}
@@ -566,12 +566,12 @@ const Header = () => {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.2 }}
-                            className={`overflow-hidden ${!isScrolled ? 'bg-gray-800' : 'bg-gray-50'}`}
+                            className={`overflow-hidden bg-[#1a3452]`}
                           >
                             <div className="pl-6 pr-4 pb-3 space-y-1">
                     {item.columns.map((column, colIndex) => (
                                 <div key={colIndex} className="mb-3 pt-2">
-                                  <div className={`text-sm font-semibold mb-2 ${!isScrolled ? 'text-gray-300' : 'text-gray-600'}`}>
+                                  <div className={`text-sm font-semibold mb-2 text-white`}>
                           {column.icon} {column.title}
                         </div>
                         <ul className="space-y-1">
@@ -595,7 +595,7 @@ const Header = () => {
                                   setIsMenuOpen(false)
                                             setExpandedMobileItem(null)
                                 }}
-                                          className={`text-sm block py-1.5 ${!isScrolled ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-primary-600'}`}
+                                          className={`text-sm block py-1.5 text-gray-300 hover:text-white`}
                               >
                                 {subItem.label}
                               </Link>
@@ -611,7 +611,7 @@ const Header = () => {
                                     setIsMenuOpen(false)
                                     setExpandedMobileItem(null)
                                   }}
-                                  className={`text-sm font-semibold flex items-center ${!isScrolled ? 'text-white' : 'text-primary-600'}`}
+                                  className={`text-sm font-semibold flex items-center text-white`}
                                 >
                                   View All {item.label}
                                   <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -634,8 +634,8 @@ const Header = () => {
                   }}
                   className={`block py-3 px-4 text-base font-medium ${
                     location.pathname === '/about'
-                      ? 'text-primary-600'
-                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                      ? 'text-primary-400'
+                      : 'text-white'
                   }`}
                 >
                   About
@@ -648,8 +648,8 @@ const Header = () => {
                   }}
                   className={`block py-3 px-4 text-base font-medium ${
                     location.pathname === '/contact'
-                      ? 'text-primary-600'
-                      : !isScrolled ? 'text-white' : 'text-gray-700'
+                      ? 'text-primary-400'
+                      : 'text-white'
                   }`}
                 >
                   Contact

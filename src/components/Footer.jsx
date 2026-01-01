@@ -42,7 +42,7 @@ const Footer = () => {
           <div>
             <div className="mb-4">
               <img 
-                src="/logo.avif" 
+                src="/footer-logo.png" 
                 alt="Aaitek Logo" 
                 className="h-8 w-auto mb-4"
               />
