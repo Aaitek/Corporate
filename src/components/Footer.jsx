@@ -39,7 +39,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-50 text-gray-800 border-t border-gray-200">
-      <div className="container-custom section-padding">
+      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px] section-padding">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Company Info */}
           <div>
