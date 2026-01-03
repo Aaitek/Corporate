@@ -59,82 +59,172 @@ const ProductDetail = () => {
       </section>
 
       {/* Product Details Section */}
-      <section className="py-12 sm:py-16 lg:py-24">
-        <div className="container-custom">
+      <section className="py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-gray-50 via-white to-sky-50 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <motion.div 
+            className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-400 rounded-full blur-3xl opacity-10"
+            animate={{
+              scale: [1, 1.2, 1],
+              x: [0, 50, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          ></motion.div>
+          <motion.div 
+            className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-400 rounded-full blur-3xl opacity-10"
+            animate={{
+              scale: [1, 1.15, 1],
+              x: [0, -50, 0],
+              y: [0, 30, 0],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          ></motion.div>
+        </div>
+        
+        <div className="container-custom relative z-10">
           <div className="max-w-6xl mx-auto">
             {/* Technology and Key Features Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 mb-16">
               {/* Technology Used */}
               {product.technology && product.technology.length > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: -50, rotateY: -15 }}
+                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm"
+                  transition={{ duration: 0.8 }}
+                  whileHover={{ scale: 1.02, y: -10, rotateY: 5 }}
+                  className="group relative bg-gradient-to-br from-white via-white to-primary-50/40 rounded-3xl p-10 border-2 border-gray-200/60 hover:border-primary-400 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden"
                 >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center`}>
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                      </svg>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Technology Used</h2>
-                  </div>
-                  <ul className="space-y-4">
-                    {product.technology.map((tech, index) => (
-                      <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                        className="flex items-start gap-3"
+                  {/* Animated Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  
+                  {/* Left Border Accent */}
+                  <motion.div 
+                    className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${product.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    initial={{ scaleY: 0 }}
+                    whileHover={{ scaleY: 1 }}
+                    transition={{ duration: 0.3 }}
+                  ></motion.div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-5 mb-8">
+                      <motion.div 
+                        className={`w-20 h-20 bg-gradient-to-br ${product.color} rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}
+                        whileHover={{ rotate: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5 }}
                       >
-                        <svg className="w-6 h-6 text-primary-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                         </svg>
-                        <span className="text-gray-700 text-lg leading-relaxed">{tech}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                      </motion.div>
+                      <div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-300">
+                          Technology Used
+                        </h2>
+                        <div className={`h-1 w-24 bg-gradient-to-r ${product.color} rounded-full`}></div>
+                      </div>
+                    </div>
+                    <ul className="space-y-4">
+                      {product.technology.map((tech, index) => (
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, x: -30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          whileHover={{ x: 10 }}
+                          className="group/item flex items-start gap-4 p-4 rounded-2xl bg-white/70 hover:bg-white transition-all duration-300 shadow-md hover:shadow-lg"
+                        >
+                          <motion.div 
+                            className={`w-10 h-10 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover/item:scale-110 transition-transform duration-300`}
+                            whileHover={{ rotate: [0, -10, 10, 0] }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </motion.div>
+                          <span className="text-gray-800 text-lg font-semibold leading-relaxed pt-1">{tech}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
               )}
 
               {/* Key Features */}
               {product.keyFeatures && product.keyFeatures.length > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: 50, rotateY: 15 }}
+                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm"
+                  transition={{ duration: 0.8 }}
+                  whileHover={{ scale: 1.02, y: -10, rotateY: -5 }}
+                  className="group relative bg-gradient-to-br from-white via-white to-accent-50/40 rounded-3xl p-10 border-2 border-gray-200/60 hover:border-accent-400 shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden"
                 >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center`}>
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Key Features</h2>
-                  </div>
-                  <ul className="space-y-4">
-                    {product.keyFeatures.map((feature, index) => (
-                      <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                        className="flex items-start gap-3"
+                  {/* Animated Gradient Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  
+                  {/* Left Border Accent */}
+                  <motion.div 
+                    className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${product.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                    initial={{ scaleY: 0 }}
+                    whileHover={{ scaleY: 1 }}
+                    transition={{ duration: 0.3 }}
+                  ></motion.div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-5 mb-8">
+                      <motion.div 
+                        className={`w-20 h-20 bg-gradient-to-br ${product.color} rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}
+                        whileHover={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 0.5 }}
                       >
-                        <svg className="w-6 h-6 text-primary-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
-                        <span className="text-gray-700 text-lg leading-relaxed">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                      </motion.div>
+                      <div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 group-hover:text-accent-600 transition-colors duration-300">
+                          Key Features
+                        </h2>
+                        <div className={`h-1 w-20 bg-gradient-to-r ${product.color} rounded-full`}></div>
+                      </div>
+                    </div>
+                    <ul className="space-y-4">
+                      {product.keyFeatures.map((feature, index) => (
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, x: 30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          whileHover={{ x: -10 }}
+                          className="group/item flex items-start gap-4 p-4 rounded-2xl bg-white/70 hover:bg-white transition-all duration-300 shadow-md hover:shadow-lg"
+                        >
+                          <motion.div 
+                            className={`w-10 h-10 bg-gradient-to-br ${product.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover/item:scale-110 transition-transform duration-300`}
+                            whileHover={{ rotate: [0, -10, 10, 0] }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </motion.div>
+                          <span className="text-gray-800 text-lg font-semibold leading-relaxed pt-1">{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
               )}
             </div>
