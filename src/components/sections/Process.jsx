@@ -264,7 +264,7 @@ const Process = () => {
                   </div>
 
                   {/* Step Content Card - Wider, Reduced Height */}
-                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border-2 shadow-md transition-all duration-0 h-[180px] sm:h-[190px] lg:h-[200px] flex flex-col ${
+                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border-2 shadow-md transition-all duration-0 h-[200px] sm:h-[210px] lg:h-[220px] flex flex-col ${
                     activeStep === index
                       ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-white shadow-lg shadow-primary-500/20'
                       : 'border-gray-200 hover:border-primary-300 hover:shadow-lg'
