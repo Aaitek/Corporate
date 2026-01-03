@@ -494,7 +494,7 @@ const Header = () => {
             </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6 relative z-[100] ml-auto -mr-4 xl:-mr-6">
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6 relative z-[100] ml-auto -mr-8 xl:-mr-12">
             {Object.entries(menuItems).map(([key, item]) => (
               <div
                 key={key}
@@ -862,7 +862,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0 }}
-              className="hidden lg:block flex-shrink-0 ml-4 xl:ml-6"
+              className="hidden lg:block flex-shrink-0 ml-[100px]"
             >
               <Link
                 to="/contact"
