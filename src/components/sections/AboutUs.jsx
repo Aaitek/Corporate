@@ -38,9 +38,9 @@ const AboutUs = () => {
         backgroundSize: '50px 50px'
       }}></div>
 
-      <div className="container-custom relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 xl:gap-24 items-start">
+      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[200px] relative z-10">
+        <div className="w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-24 2xl:gap-32 items-start">
             {/* Left Column - Title & Stats - Sticky */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div
@@ -63,10 +63,31 @@ const AboutUs = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent"
               >
                 Australia-Based. Globally Delivered. Enterprise Focused.
               </motion.h2>
+
+              {/* Two Paragraphs */}
+              <div className="space-y-6 pt-6">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="text-lg md:text-xl text-gray-700 leading-relaxed bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 shadow-sm"
+                >
+                  <span className="font-bold text-gray-900 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Aaitek</span> is an Australia-owned digital transformation partner delivering enterprise-grade platforms, intelligent solutions, and scalable technology ecosystems for organizations worldwide.
+                </motion.p>
+                
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="text-lg md:text-xl text-gray-700 leading-relaxed bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 shadow-sm"
+                >
+                  We combine deep engineering expertise, modern platforms, and AI-first thinking to help businesses modernise systems, enhance customer experiences, and achieve sustainable growth.
+                </motion.p>
+              </div>
 
               {/* Enhanced Stats Grid - At a Glance */}
               <motion.div
@@ -139,26 +160,6 @@ const AboutUs = () => {
               transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
               className="space-y-10 flex flex-col"
             >
-              <div className="space-y-6">
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-lg md:text-xl text-gray-700 leading-relaxed bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 shadow-sm"
-                >
-                  <span className="font-bold text-gray-900 text-xl bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Aaitek</span> is an Australia-owned digital transformation partner delivering enterprise-grade platforms, intelligent solutions, and scalable technology ecosystems for organizations worldwide.
-                </motion.p>
-                
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-lg md:text-xl text-gray-700 leading-relaxed bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-200 shadow-sm"
-                >
-                  We combine deep engineering expertise, modern platforms, and AI-first thinking to help businesses modernise systems, enhance customer experiences, and achieve sustainable growth.
-                </motion.p>
-              </div>
-
               {/* Enhanced What We Do Section */}
               <motion.div
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}

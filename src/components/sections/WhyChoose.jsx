@@ -1,11 +1,20 @@
 import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { CountUp } from '../../hooks/useCountUp'
 
 const WhyChoose = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
   const features = [
     {
-      title: '18+ Years of Delivery Experience',
+      title: 'Years of Delivery Experience',
+      titlePrefix: '18+',
       description: 'Over two decades of successfully delivering complex digital transformation initiatives across industries and geographies.',
       icon: '🎯',
+      hasCountUp: true,
+      countValue: 18,
     },
     {
       title: 'Agile, Outcome-Driven Delivery',
@@ -29,13 +38,16 @@ const WhyChoose = () => {
     },
     {
       title: 'Proven Track Record',
-      description: 'Trusted delivery partner with 200+ successful projects and long-standing client relationships worldwide.',
+      titlePrefix: '200+',
+      description: 'Trusted delivery partner with successful projects and long-standing client relationships worldwide.',
       icon: '⭐',
+      hasCountUp: true,
+      countValue: 200,
     },
   ]
 
   return (
-    <section id="why-choose-us" className="section-padding bg-white relative overflow-hidden">
+    <section id="why-choose-us" className="section-padding bg-white relative overflow-hidden" ref={ref}>
       <div className="container-custom">
         <motion.div
           className="text-center mb-16"
@@ -73,7 +85,26 @@ const WhyChoose = () => {
               
               {/* Content */}
               <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">
-                {feature.title}
+                {feature.hasCountUp && feature.titlePrefix ? (
+                  <>
+                    {isInView ? (
+                      <CountUp
+                        start={0}
+                        end={feature.countValue}
+                        duration={2.5}
+                        suffix="+"
+                        separator=","
+                        decimals={0}
+                        enabled={isInView}
+                      />
+                    ) : (
+                      `0+`
+                    )}{' '}
+                    {feature.title}
+                  </>
+                ) : (
+                  feature.title
+                )}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
                 {feature.description}

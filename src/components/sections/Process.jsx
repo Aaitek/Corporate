@@ -167,7 +167,7 @@ const Process = () => {
 
   return (
     <section id="process" className="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
-      <div className="container-custom">
+      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[200px]">
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: -20 }}
@@ -189,7 +189,7 @@ const Process = () => {
         {/* Process Steps Timeline - 1 Row, 6 Steps */}
         <div className="relative mb-20">
           {/* Connecting Line - Desktop */}
-          <div className="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gray-200 z-0">
+          <div className="hidden lg:block absolute top-12 sm:top-14 left-0 right-0 h-0.5 bg-gray-200 z-0">
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -201,7 +201,7 @@ const Process = () => {
           </div>
 
           {/* Steps Grid - 6 columns, 1 row */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-2 relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4 xl:gap-5 relative">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -213,7 +213,7 @@ const Process = () => {
               >
                 {/* Connector Arrow - Between steps */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 z-0">
+                  <div className="hidden lg:block absolute top-12 sm:top-14 left-full w-full h-0.5 z-0">
                     <div className="h-full bg-gray-200 relative">
                       <motion.div
                         initial={{ scaleX: 0 }}
@@ -237,10 +237,10 @@ const Process = () => {
                     activeStep === index ? 'z-20' : 'z-10'
                   }`}
                 >
-                  {/* Step Number Circle - Smaller */}
-                  <div className="relative mb-4 flex justify-center">
+                  {/* Step Number Circle - Medium Size */}
+                  <div className="relative mb-3 flex justify-center">
                     <motion.div
-                      className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+                      className={`relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white font-bold text-lg sm:text-xl lg:text-2xl shadow-lg ${
                         activeStep === index ? 'ring-2 ring-primary-300 ring-offset-2' : ''
                       } transition-all duration-0`}
                       whileHover={{ scale: 1.1 }}
@@ -257,14 +257,14 @@ const Process = () => {
                       )}
                     </motion.div>
                     
-                    {/* Icon Badge - Smaller */}
-                    <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center text-lg shadow-md border-2 border-gray-100 transition-transform duration-0 group-hover:scale-110">
+                    {/* Icon Badge - Medium Size */}
+                    <div className="absolute -bottom-1 -right-1 w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 bg-white rounded-full flex items-center justify-center text-lg sm:text-xl lg:text-2xl shadow-md border-2 border-gray-100 transition-transform duration-0 group-hover:scale-110">
                       {step.icon}
                     </div>
                   </div>
 
-                  {/* Step Content Card - Smaller, Fixed Height */}
-                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 border-2 shadow-md transition-all duration-0 min-h-[160px] sm:min-h-[140px] flex flex-col overflow-hidden ${
+                  {/* Step Content Card - Wider, Reduced Height */}
+                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border-2 shadow-md transition-all duration-0 min-h-[140px] sm:min-h-[150px] lg:min-h-[160px] flex flex-col ${
                     activeStep === index
                       ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-white shadow-lg shadow-primary-500/20'
                       : 'border-gray-200 hover:border-primary-300 hover:shadow-lg'
@@ -279,12 +279,12 @@ const Process = () => {
                       />
                     )}
 
-                    <h3 className={`text-xs sm:text-sm font-bold mb-2 text-center transition-colors duration-0 flex-shrink-0 line-clamp-2 ${
+                    <h3 className={`text-xs sm:text-sm lg:text-base font-bold mb-2 text-center transition-colors duration-0 flex-shrink-0 ${
                       activeStep === index ? 'text-primary-600' : 'text-gray-800 group-hover:text-primary-600'
                     }`}>
                       {step.title}
                     </h3>
-                    <p className="text-[10px] sm:text-xs text-gray-600 text-center leading-relaxed flex-grow line-clamp-4 overflow-hidden">
+                    <p className="text-[10px] sm:text-xs lg:text-sm text-gray-600 text-center leading-relaxed flex-grow">
                       {step.description}
                     </p>
 

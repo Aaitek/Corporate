@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { CountUp } from '../../hooks/useCountUp'
 
 const Stats = () => {
   const ref = useRef(null)
@@ -17,24 +18,30 @@ const Stats = () => {
 
   const achievements = [
     { 
-      value: '10+', 
+      value: 10, 
+      suffix: '+',
       label: 'Projects Delivered',
-      icon: '📊'
+      icon: '📊',
+      hasCountUp: true
     },
     { 
-      value: '18+', 
+      value: 18, 
+      suffix: '+',
       label: 'Years of Industry Experience',
-      icon: '⭐'
+      icon: '⭐',
+      hasCountUp: true
     },
     { 
       value: 'Certified', 
       label: 'Platform Partners',
-      icon: '🏆'
+      icon: '🏆',
+      hasCountUp: false
     },
     { 
       value: 'Global', 
       label: 'Delivery & Recognition',
-      icon: '🌍'
+      icon: '🌍',
+      hasCountUp: false
     },
   ]
 
@@ -130,7 +137,23 @@ const Stats = () => {
                   {achievement.icon}
                 </div>
                 <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                  {achievement.value}
+                  {achievement.hasCountUp ? (
+                    isInView ? (
+                      <CountUp
+                        start={0}
+                        end={achievement.value}
+                        duration={2.5}
+                        suffix={achievement.suffix}
+                        separator=","
+                        decimals={0}
+                        enabled={isInView}
+                      />
+                    ) : (
+                      `0${achievement.suffix}`
+                    )
+                  ) : (
+                    achievement.value
+                  )}
                 </div>
                 <div className="text-sm sm:text-base text-gray-700 font-semibold">
                   {achievement.label}

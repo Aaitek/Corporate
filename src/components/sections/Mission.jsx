@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { CountUp } from '../../hooks/useCountUp'
 
 const Mission = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
-    <section className="section-padding bg-black relative overflow-hidden">
+    <section className="section-padding bg-black relative overflow-hidden" ref={ref}>
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -47,7 +53,22 @@ const Mission = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-100">Technical Excellence</h3>
-                    <p className="text-gray-400">20+ years of proven expertise</p>
+                    <p className="text-gray-400">
+                      {isInView ? (
+                        <CountUp
+                          start={0}
+                          end={20}
+                          duration={2.5}
+                          suffix="+"
+                          separator=","
+                          decimals={0}
+                          enabled={isInView}
+                        />
+                      ) : (
+                        '0+'
+                      )}{' '}
+                      years of proven expertise
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">

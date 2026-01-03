@@ -475,14 +475,14 @@ const Header = () => {
           : 'bg-[#13273D] backdrop-blur-md'
       }`}
     >
-      <nav className="container-custom relative w-full">
+      <nav className="mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[200px] relative w-full">
         <div className="flex items-center justify-between h-20 relative w-full">
           {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0 }}
-              className="flex-shrink-0 z-10 relative"
+              className="flex-shrink-0 z-10 relative -ml-4 xl:-ml-6"
             >
               <Link to="/" className="flex items-center space-x-2">
                 <img 
@@ -494,7 +494,7 @@ const Header = () => {
             </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 relative z-[100] flex-1 ml-4 xl:ml-8">
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4 2xl:space-x-6 relative z-[100] ml-auto -mr-4 xl:-mr-6">
             {Object.entries(menuItems).map(([key, item]) => (
               <div
                 key={key}
@@ -506,7 +506,7 @@ const Header = () => {
                     dropdownRefs.current[key] = el
                   }
                 }}
-                className="relative"
+                className="relative flex-shrink-0"
                 data-menu-item
               >
                 {(item.columns || item.items) ? (
@@ -517,7 +517,7 @@ const Header = () => {
                       const newActiveState = activeDropdown === key ? null : key
                       setActiveDropdown(newActiveState)
                     }}
-                    className={`text-sm font-medium transition-colors flex items-center ${
+                    className={`text-xs xl:text-sm font-medium transition-colors flex items-center whitespace-nowrap ${
                       location.pathname === item.path
                         ? 'text-primary-400'
                         : 'text-white hover:text-primary-400'
@@ -545,7 +545,7 @@ const Header = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`text-sm font-medium transition-colors flex items-center ${
+                    className={`text-xs xl:text-sm font-medium transition-colors flex items-center whitespace-nowrap ${
                       location.pathname === item.path
                         ? 'text-primary-400'
                         : 'text-white hover:text-primary-400'
@@ -862,11 +862,11 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0 }}
-              className="hidden lg:block"
+              className="hidden lg:block flex-shrink-0 ml-4 xl:ml-6"
             >
               <Link
                 to="/contact"
-                className="btn-primary text-sm px-6 py-2"
+                className="btn-primary text-xs xl:text-sm px-3 xl:px-4 2xl:px-6 py-2 whitespace-nowrap"
               >
                 Get a Quote
               </Link>
