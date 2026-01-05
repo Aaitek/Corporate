@@ -246,18 +246,49 @@ const Contact = () => {
                   <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
                     Service Interest
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-0 outline-none"
-                  >
-                    <option value="">Select a service...</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service}>
-                        {service}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative group">
+                    {/* Animated background gradient on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-accent-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Dropdown container */}
+                    <div className="relative bg-white rounded-xl border-2 border-gray-200 group-hover:border-primary-400 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/20 transition-all duration-300 shadow-sm group-hover:shadow-md">
+                      <div className="flex items-center gap-3 px-4 py-3">
+                        {/* Icon */}
+                        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold shadow-md group-hover:scale-110 transition-transform duration-300">
+                          ⚙️
+                        </div>
+                        
+                        {/* Select element */}
+                        <select
+                          id="service"
+                          name="service"
+                          className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-medium text-sm focus:outline-none cursor-pointer pr-8 focus:text-primary-600 transition-colors duration-300"
+                        >
+                          <option value="">Select a service...</option>
+                          {services.map((service, index) => (
+                            <option key={index} value={service}>
+                              {service}
+                            </option>
+                          ))}
+                        </select>
+                        
+                        {/* Custom dropdown arrow */}
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                          <svg 
+                            className="w-5 h-5 text-gray-400 group-hover:text-primary-500 transition-colors duration-300" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      {/* Bottom accent line on focus */}
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 rounded-b-xl"></div>
+                    </div>
+                  </div>
                 </div>
 
                 <div>

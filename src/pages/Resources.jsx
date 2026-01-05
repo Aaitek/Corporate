@@ -278,13 +278,15 @@ const Resources = () => {
               className="group relative w-full sm:w-auto min-w-[140px]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-purple-400 transition-all duration-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">🏢</span>
+              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-purple-400 group-hover:shadow-lg transition-all duration-300 focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-500/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-base shadow-md group-hover:scale-110 transition-transform duration-300">
+                    🏢
+                  </div>
                   <select
                     value={filters.industry}
                     onChange={(e) => handleFilterChange('industry', e.target.value)}
-                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6"
+                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6 group-hover:text-purple-600 transition-colors duration-300"
                   >
                     {filterOptions.industry.map((option, idx) => (
                       <option key={idx} value={idx === 0 ? 'all' : option.toLowerCase()}>
@@ -292,10 +294,19 @@ const Resources = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4 text-gray-400 group-hover:text-purple-500 pointer-events-none transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  </motion.svg>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
               </div>
             </motion.div>
 
@@ -305,13 +316,15 @@ const Resources = () => {
               className="group relative w-full sm:w-auto min-w-[140px]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-green-400 transition-all duration-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">⚙️</span>
+              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-green-400 group-hover:shadow-lg transition-all duration-300 focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-500/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white text-base shadow-md group-hover:scale-110 transition-transform duration-300">
+                    ⚙️
+                  </div>
                   <select
                     value={filters.serviceArea}
                     onChange={(e) => handleFilterChange('serviceArea', e.target.value)}
-                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6"
+                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6 group-hover:text-green-600 transition-colors duration-300"
                   >
                     {filterOptions.serviceArea.map((option, idx) => (
                       <option key={idx} value={idx === 0 ? 'all' : option.toLowerCase()}>
@@ -319,10 +332,19 @@ const Resources = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4 text-gray-400 group-hover:text-green-500 pointer-events-none transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  </motion.svg>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
               </div>
             </motion.div>
 
@@ -332,13 +354,15 @@ const Resources = () => {
               className="group relative w-full sm:w-auto min-w-[140px]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-orange-400 transition-all duration-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">💻</span>
+              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-orange-400 group-hover:shadow-lg transition-all duration-300 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-500/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white text-base shadow-md group-hover:scale-110 transition-transform duration-300">
+                    💻
+                  </div>
                   <select
                     value={filters.technology}
                     onChange={(e) => handleFilterChange('technology', e.target.value)}
-                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6"
+                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6 group-hover:text-orange-600 transition-colors duration-300"
                   >
                     {filterOptions.technology.map((option, idx) => (
                       <option key={idx} value={idx === 0 ? 'all' : option.toLowerCase()}>
@@ -346,10 +370,19 @@ const Resources = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4 text-gray-400 group-hover:text-orange-500 pointer-events-none transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  </motion.svg>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
               </div>
             </motion.div>
 
@@ -359,13 +392,15 @@ const Resources = () => {
               className="group relative w-full sm:w-auto min-w-[140px]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-indigo-400 transition-all duration-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">👥</span>
+              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-indigo-400 group-hover:shadow-lg transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white text-base shadow-md group-hover:scale-110 transition-transform duration-300">
+                    👥
+                  </div>
                   <select
                     value={filters.audience}
                     onChange={(e) => handleFilterChange('audience', e.target.value)}
-                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6"
+                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6 group-hover:text-indigo-600 transition-colors duration-300"
                   >
                     {filterOptions.audience.map((option, idx) => (
                       <option key={idx} value={idx === 0 ? 'all' : option.toLowerCase()}>
@@ -373,10 +408,19 @@ const Resources = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4 text-gray-400 group-hover:text-indigo-500 pointer-events-none transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  </motion.svg>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
               </div>
             </motion.div>
 
@@ -386,13 +430,15 @@ const Resources = () => {
               className="group relative w-full sm:w-auto min-w-[120px]"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-teal-400 transition-all duration-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">📅</span>
+              <div className="relative bg-white rounded-2xl px-3 py-2.5 shadow-md border-2 border-gray-200 group-hover:border-teal-400 group-hover:shadow-lg transition-all duration-300 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-500/20">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white text-base shadow-md group-hover:scale-110 transition-transform duration-300">
+                    📅
+                  </div>
                   <select
                     value={filters.year}
                     onChange={(e) => handleFilterChange('year', e.target.value)}
-                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6"
+                    className="flex-1 appearance-none bg-transparent border-0 text-gray-700 font-semibold text-xs md:text-sm focus:outline-none cursor-pointer pr-6 group-hover:text-teal-600 transition-colors duration-300"
                   >
                     {filterOptions.year.map((option, idx) => (
                       <option key={idx} value={idx === 0 ? 'all' : option}>
@@ -400,10 +446,19 @@ const Resources = () => {
                       </option>
                     ))}
                   </select>
-                  <svg className="w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-4 h-4 text-gray-400 group-hover:text-teal-500 pointer-events-none transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  </motion.svg>
                 </div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
               </div>
             </motion.div>
           </div>
