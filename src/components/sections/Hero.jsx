@@ -323,13 +323,12 @@ const Hero = () => {
               window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
             }
           }}
-          className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2 cursor-pointer group"
+          className="flex flex-col items-center cursor-pointer group"
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <span className="text-[10px] sm:text-xs text-gray-400 font-medium uppercase tracking-wider group-hover:text-primary-400 transition-colors">Scroll</span>
           <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-gray-300 rounded-full flex justify-center p-1.5 sm:p-2 group-hover:border-primary-400 transition-colors">
             <motion.div
               className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-primary-500 rounded-full"
