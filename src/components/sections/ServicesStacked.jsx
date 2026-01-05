@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getServiceSlug } from '../../utils/slugHelper'
 
 const ServicesStacked = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
+  const navigate = useNavigate()
 
   const serviceCategories = [
     {
@@ -235,39 +236,40 @@ const ServicesStacked = () => {
                     {category.services.map((service, serviceIndex) => {
                       const serviceSlug = getServiceSlug(service)
                       return (
-                        <Link
+                        <motion.li
                           key={serviceIndex}
-                          to={`/services/${serviceSlug}`}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                          transition={{ duration: 0.4, delay: categoryIndex * 0.1 + serviceIndex * 0.05 }}
+                          whileHover={{ x: 5 }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            navigate(`/services/${serviceSlug}`)
+                          }}
+                          className="flex items-start gap-3 text-gray-700 hover:text-primary-600 transition-colors duration-0 group/item cursor-pointer"
                         >
-                          <motion.li
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                            transition={{ duration: 0.4, delay: categoryIndex * 0.1 + serviceIndex * 0.05 }}
-                            whileHover={{ x: 5 }}
-                            className="flex items-start gap-3 text-gray-700 hover:text-primary-600 transition-colors duration-0 group/item cursor-pointer"
+                          <motion.div
+                            className="mt-1.5"
+                            whileHover={{ scale: 1.2, rotate: 90 }}
+                            transition={{ duration: 0 }}
                           >
-                            <motion.div
-                              className="mt-1.5"
-                              whileHover={{ scale: 1.2, rotate: 90 }}
-                              transition={{ duration: 0 }}
+                            <svg
+                              className="w-4 h-4 text-primary-500 flex-shrink-0 group-hover/item:text-primary-600 transition-colors duration-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
                             >
-                              <svg
-                                className="w-4 h-4 text-primary-500 flex-shrink-0 group-hover/item:text-primary-600 transition-colors duration-0"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2.5}
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </motion.div>
-                            <span className="text-sm font-medium group-hover/item:font-semibold transition-all duration-0">{service}</span>
-                          </motion.li>
-                        </Link>
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </motion.div>
+                          <span className="text-sm font-medium group-hover/item:font-semibold transition-all duration-0">{service}</span>
+                        </motion.li>
                       )
                     })}
                   </ul>
