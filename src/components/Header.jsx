@@ -482,7 +482,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0 }}
-              className="flex-shrink-0 z-10 relative"
+              className="flex-shrink-0 z-10 relative -ml-2 sm:-ml-3 xl:-ml-4"
             >
               <Link to="/" className="flex items-center space-x-1 sm:space-x-2">
                 <img 
@@ -494,7 +494,7 @@ const Header = () => {
             </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4 relative z-[100] ml-4 xl:ml-6 2xl:ml-8 -mr-4 xl:-mr-6 2xl:-mr-8">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4 relative z-[100] ml-4 xl:ml-6 2xl:ml-8">
             {Object.entries(menuItems).map(([key, item]) => (
               <div
                 key={key}
@@ -862,7 +862,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0 }}
-              className="hidden lg:block flex-shrink-0 ml-4 xl:ml-8 2xl:ml-[100px]"
+              className="hidden lg:block flex-shrink-0 ml-4 xl:ml-6 2xl:ml-8"
             >
               <Link
                 to="/contact"
