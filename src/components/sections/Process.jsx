@@ -200,8 +200,8 @@ const Process = () => {
             />
           </div>
 
-          {/* Steps Grid - 6 columns, 1 row */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4 xl:gap-5 relative">
+          {/* Steps Grid - 6 columns, 1 row - Responsive */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-4 xl:gap-5 relative">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -263,8 +263,8 @@ const Process = () => {
                     </div>
                   </div>
 
-                  {/* Step Content Card - Wider, Reduced Height */}
-                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border-2 shadow-md transition-all duration-0 h-[220px] sm:h-[230px] lg:h-[240px] flex flex-col ${
+                  {/* Step Content Card - Responsive with proper text wrapping */}
+                  <div className={`relative bg-white rounded-xl p-3 sm:p-4 lg:p-5 border-2 shadow-md transition-all duration-0 min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] flex flex-col overflow-hidden ${
                     activeStep === index
                       ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-white shadow-lg shadow-primary-500/20'
                       : 'border-gray-200 hover:border-primary-300 hover:shadow-lg'
@@ -279,12 +279,12 @@ const Process = () => {
                       />
                     )}
 
-                    <h3 className={`text-xs sm:text-sm lg:text-base font-bold mb-2 text-center transition-colors duration-0 flex-shrink-0 ${
+                    <h3 className={`text-xs sm:text-sm md:text-base font-bold mb-2 sm:mb-3 text-center transition-colors duration-0 flex-shrink-0 line-clamp-2 ${
                       activeStep === index ? 'text-primary-600' : 'text-gray-800 group-hover:text-primary-600'
                     }`}>
                       {step.title}
                     </h3>
-                    <p className="text-[10px] sm:text-xs lg:text-sm text-gray-600 text-center leading-relaxed flex-grow">
+                    <p className="text-[10px] sm:text-xs md:text-sm lg:text-sm text-gray-600 text-center leading-relaxed flex-grow overflow-hidden line-clamp-4 sm:line-clamp-5 md:line-clamp-6">
                       {step.description}
                     </p>
 
