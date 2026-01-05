@@ -227,33 +227,35 @@ const Hero = () => {
 
               {/* Main Heading with TypeIt */}
               <motion.h1
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-tight px-2"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-tight px-2 sm:px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
                 <motion.span
                   ref={typeItRef}
-                  className="block text-white min-h-[1.2em] break-words"
+                  className="block text-white min-h-[1.2em] break-words hyphens-auto"
                   style={{
                     x: useTransform(x, (val) => val * 0.3),
                     y: useTransform(yMouse, (val) => val * 0.3),
                     opacity: showText ? 1 : 0,
+                    wordBreak: 'break-word',
+                    overflowWrap: 'break-word',
                   }}
                 />
               </motion.h1>
               
               {/* Description */}
               <motion.p
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-4 sm:mb-6 md:mb-8 leading-relaxed px-2 sm:px-4"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-4 sm:mb-6 md:mb-8 leading-relaxed px-2 sm:px-4 max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
                 We design, build, and scale intelligent digital platforms by combining{' '}
-                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm md:text-base lg:text-lg">AI</span>,{' '}
-                <span className="font-semibold text-accent-400 bg-accent-400/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm md:text-base lg:text-lg">cloud</span>, and{' '}
-                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-sm md:text-base lg:text-lg">enterprise-grade engineering</span> — enabling organizations to innovate faster, operate smarter, and grow with confidence.
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">AI</span>,{' '}
+                <span className="font-semibold text-accent-400 bg-accent-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">cloud</span>, and{' '}
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg">enterprise-grade engineering</span> — enabling organizations to innovate faster, operate smarter, and grow with confidence.
               </motion.p>
               
               {/* CTA Buttons */}
@@ -307,7 +309,7 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
+        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-30"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -321,17 +323,17 @@ const Hero = () => {
               window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })
             }
           }}
-          className="flex flex-col items-center gap-2 cursor-pointer group"
-          animate={{ y: [0, 8, 0] }}
+          className="flex flex-col items-center gap-1 sm:gap-1.5 md:gap-2 cursor-pointer group"
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <span className="text-xs text-gray-400 font-medium uppercase tracking-wider group-hover:text-primary-400 transition-colors">Scroll</span>
-          <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center p-2 group-hover:border-primary-400 transition-colors">
+          <span className="text-[10px] sm:text-xs text-gray-400 font-medium uppercase tracking-wider group-hover:text-primary-400 transition-colors">Scroll</span>
+          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-gray-300 rounded-full flex justify-center p-1.5 sm:p-2 group-hover:border-primary-400 transition-colors">
             <motion.div
-              className="w-1.5 h-1.5 bg-primary-500 rounded-full"
-              animate={{ y: [0, 12, 0] }}
+              className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-primary-500 rounded-full"
+              animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             />
           </div>
