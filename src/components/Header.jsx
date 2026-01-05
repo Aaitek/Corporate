@@ -942,10 +942,20 @@ const Header = () => {
               >
               {/* Drawer Header */}
               <div className="flex items-center justify-between p-3.5 border-b border-white/20 bg-[#0f1621]">
-                <div className="flex items-center gap-2.5 font-black text-white">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#2f8edc]"></span>
-                  <span>Aaitek</span>
-                </div>
+                <Link 
+                  to="/" 
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    setExpandedMobileItem(null)
+                  }}
+                  className="flex items-center gap-2"
+                >
+                  <img 
+                    src="/logo.png" 
+                    alt="Aaitek Logo" 
+                    className="h-8 w-auto block"
+                  />
+                </Link>
                 <button
                   onClick={() => {
                     setIsMenuOpen(false)
