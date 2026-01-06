@@ -270,7 +270,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
             >
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
                 <span className="text-blue-400">📧</span>
@@ -303,7 +303,7 @@ const Footer = () => {
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-purple-500/50 transition-all duration-300"
+              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-purple-500/50 transition-all duration-300"
             >
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
                 <span className="text-purple-400">🏆</span>
@@ -326,7 +326,7 @@ const Footer = () => {
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-cyan-500/50 transition-all duration-300"
+              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-cyan-500/50 transition-all duration-300"
             >
               <h4 className="text-white font-bold mb-4 flex items-center gap-2">
                 <span className="text-cyan-400">🌐</span>
