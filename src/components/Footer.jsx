@@ -43,32 +43,32 @@ const Footer = () => {
   }
 
   return (
-    <footer ref={footerRef} className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 border-t border-gray-700 overflow-hidden">
+    <footer ref={footerRef} className="relative bg-gradient-to-br from-white via-gray-50 to-blue-50 text-gray-800 border-t border-gray-200 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl"
+          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/40 to-cyan-100/40 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.4, 0.6, 0.4],
             x: [0, 50, 0],
             y: [0, -50, 0],
           }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-100/40 to-pink-100/40 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.4, 0.6, 0.4],
             x: [0, -50, 0],
             y: [0, 50, 0],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
         {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)',
           backgroundSize: '50px 50px'
         }}></div>
       </div>
@@ -90,7 +90,7 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               />
             </div>
-            <p className="text-sm mb-6 text-gray-400 leading-relaxed">
+            <p className="text-sm mb-6 text-gray-600 leading-relaxed">
               Aaitek is all about digital experiences and digital transformation. Through the power of headless CMS solutions, we deliver smart and unique experiences to clients, people, and the community.
             </p>
             <div className="flex space-x-3">
@@ -114,13 +114,13 @@ const Footer = () => {
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${social.color} p-2 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${social.color} p-2 flex items-center justify-center shadow-md group-hover:shadow-xl transition-all duration-300`}>
                     <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d={social.icon} />
                     </svg>
                   </div>
                   <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <span className="text-xs text-gray-400 whitespace-nowrap bg-gray-800 px-2 py-1 rounded">{social.label}</span>
+                    <span className="text-xs text-white whitespace-nowrap bg-gray-800 px-2 py-1 rounded shadow-lg">{social.label}</span>
                   </div>
                 </motion.a>
               ))}
@@ -137,7 +137,7 @@ const Footer = () => {
             {/* Company Links */}
             <div>
               <motion.h4
-                className="text-white font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
+                className="text-gray-900 font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, delay: 0.3 }}
@@ -155,7 +155,7 @@ const Footer = () => {
                   >
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
+                      className="text-sm text-gray-600 hover:text-blue-600 group flex items-center gap-2 transition-all duration-300"
                     >
                       <span className="w-0 group-hover:w-1.5 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300"></span>
                       {link.label}
@@ -168,7 +168,7 @@ const Footer = () => {
             {/* Services Links */}
             <div>
               <motion.h4
-                className="text-white font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
+                className="text-gray-900 font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, delay: 0.35 }}
@@ -186,7 +186,7 @@ const Footer = () => {
                   >
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
+                      className="text-sm text-gray-600 hover:text-purple-600 group flex items-center gap-2 transition-all duration-300"
                     >
                       <span className="w-0 group-hover:w-1.5 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300"></span>
                       {link.label}
@@ -199,7 +199,7 @@ const Footer = () => {
             {/* Products Links */}
             <div>
               <motion.h4
-                className="text-white font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
+                className="text-gray-900 font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, delay: 0.4 }}
@@ -217,7 +217,7 @@ const Footer = () => {
                   >
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
+                      className="text-sm text-gray-600 hover:text-green-600 group flex items-center gap-2 transition-all duration-300"
                     >
                       <span className="w-0 group-hover:w-1.5 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-300"></span>
                       {link.label}
@@ -230,7 +230,7 @@ const Footer = () => {
             {/* Resources Links */}
             <div>
               <motion.h4
-                className="text-white font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
+                className="text-gray-900 font-bold mb-4 text-sm uppercase tracking-wider flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, delay: 0.45 }}
@@ -248,7 +248,7 @@ const Footer = () => {
                   >
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-400 hover:text-white group flex items-center gap-2 transition-all duration-300"
+                      className="text-sm text-gray-600 hover:text-orange-600 group flex items-center gap-2 transition-all duration-300"
                     >
                       <span className="w-0 group-hover:w-1.5 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-300"></span>
                       {link.label}
@@ -265,33 +265,33 @@ const Footer = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-          className="border-t border-gray-700 pt-8 mb-8"
+          className="border-t border-gray-200 pt-8 mb-8"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-white shadow-md border-2 border-gray-100 hover:border-blue-400 hover:shadow-xl transition-all duration-300"
             >
-              <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                <span className="text-blue-400">📧</span>
+              <h4 className="text-gray-900 font-bold mb-4 flex items-center gap-2">
+                <span className="text-2xl">📧</span>
                 Contact
               </h4>
               <div className="space-y-2">
                 <motion.p
                   whileHover={{ x: 5 }}
-                  className="text-sm text-gray-400"
+                  className="text-sm text-gray-600"
                 >
-                  <a href="mailto:info@aaitek.com" className="hover:text-blue-400 transition-colors duration-300 flex items-center gap-2">
-                    <span className="w-1 h-1 bg-blue-500 rounded-full"></span>
+                  <a href="mailto:info@aaitek.com" className="hover:text-blue-600 transition-colors duration-300 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
                     info@aaitek.com
                   </a>
                 </motion.p>
                 <motion.p
                   whileHover={{ x: 5 }}
-                  className="text-sm text-gray-400"
+                  className="text-sm text-gray-600"
                 >
-                  <a href="tel:+61435987212" className="hover:text-blue-400 transition-colors duration-300 flex items-center gap-2">
-                    <span className="w-1 h-1 bg-blue-500 rounded-full"></span>
+                  <a href="tel:+61435987212" className="hover:text-blue-600 transition-colors duration-300 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
                     +61 435 987 212
                   </a>
                 </motion.p>
@@ -302,11 +302,11 @@ const Footer = () => {
               </div>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-purple-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-white shadow-md border-2 border-gray-100 hover:border-purple-400 hover:shadow-xl transition-all duration-300"
             >
-              <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                <span className="text-purple-400">🏆</span>
+              <h4 className="text-gray-900 font-bold mb-4 flex items-center gap-2">
+                <span className="text-2xl">🏆</span>
                 Certifications
               </h4>
               <div className="flex flex-wrap gap-2">
@@ -317,7 +317,7 @@ const Footer = () => {
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
-                    className="text-xs px-3 py-1.5 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg text-gray-300 border border-gray-600 hover:border-purple-500/50 transition-all duration-300"
+                    className="text-xs px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg text-gray-700 border border-gray-200 hover:border-purple-400 hover:bg-purple-50 transition-all duration-300 font-medium"
                   >
                     {cert}
                   </motion.span>
@@ -325,11 +325,11 @@ const Footer = () => {
               </div>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="p-4 rounded-xl bg-black backdrop-blur-sm border border-gray-700 hover:border-cyan-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              className="p-5 rounded-xl bg-white shadow-md border-2 border-gray-100 hover:border-cyan-400 hover:shadow-xl transition-all duration-300"
             >
-              <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                <span className="text-cyan-400">🌐</span>
+              <h4 className="text-gray-900 font-bold mb-4 flex items-center gap-2">
+                <span className="text-2xl">🌐</span>
                 Connect With Us
               </h4>
               <p className="text-xs text-gray-500 mb-3">Follow us on social media</p>
@@ -339,7 +339,7 @@ const Footer = () => {
                     key={platform}
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-8 h-8 rounded-lg bg-gray-700 hover:bg-gradient-to-br hover:from-blue-500 hover:to-cyan-500 flex items-center justify-center cursor-pointer transition-all duration-300"
+                    className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gradient-to-br hover:from-blue-500 hover:to-cyan-500 flex items-center justify-center cursor-pointer transition-all duration-300 border border-gray-200"
                   >
                     <span className="text-xs text-gray-400 hover:text-white">•</span>
                   </motion.div>
@@ -353,23 +353,23 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="border-t border-gray-700 pt-8"
+          className="border-t border-gray-200 pt-8"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-500 text-center md:text-left">
-              © {currentYear} <span className="text-white font-semibold">Aaitek Technology Specialists</span>. All rights reserved. | Designed and Developed by <span className="text-blue-400">Aaitek Pty Ltd</span>
+            <p className="text-sm text-gray-600 text-center md:text-left">
+              © {currentYear} <span className="text-gray-900 font-semibold">Aaitek Technology Specialists</span>. All rights reserved. | Designed and Developed by <span className="text-blue-600 font-semibold">Aaitek Pty Ltd</span>
             </p>
             <div className="flex space-x-6">
               <Link 
                 to="/terms-conditions"
-                className="text-sm text-gray-500 hover:text-white transition-colors duration-300 relative group"
+                className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-300 relative group"
               >
                 Terms
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
               </Link>
               <Link 
                 to="/privacy-policy"
-                className="text-sm text-gray-500 hover:text-white transition-colors duration-300 relative group"
+                className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-300 relative group"
               >
                 Privacy
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
