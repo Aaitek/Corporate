@@ -38,7 +38,7 @@ const AboutUs = () => {
         backgroundSize: '50px 50px'
       }}></div>
 
-      <div className="mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px] relative z-10">
+      <div className="mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-[250px] max-w-[1920px] relative z-10">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-24 2xl:gap-32 items-start">
             {/* Left Column - Title & Stats - Sticky */}
