@@ -125,7 +125,7 @@ const Footer = () => {
                 </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Navigation Links - Right Side */}
           <motion.div
