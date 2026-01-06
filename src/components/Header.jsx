@@ -494,7 +494,7 @@ const Header = () => {
             </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4 relative z-[100] ml-auto mr-8 xl:mr-12 2xl:mr-16">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 2xl:space-x-4 absolute left-1/2 transform -translate-x-1/2 z-[100]">
             {Object.entries(menuItems).map(([key, item]) => (
               <div
                 key={key}
