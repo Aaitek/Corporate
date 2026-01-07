@@ -17,6 +17,8 @@ import HireDevelopers from './pages/HireDevelopers'
 import HireTalent from './pages/HireTalent'
 import PartnerSuccess from './pages/PartnerSuccess'
 import CaseStudyDetail from './pages/CaseStudyDetail'
+import CaseStudies from './pages/CaseStudies'
+import PressReleases from './pages/PressReleases'
 import Resources from './pages/Resources'
 import About from './pages/About'
 import Company from './pages/Company'
@@ -56,7 +58,9 @@ function App() {
             <Route path="/hire-developers" element={<HireDevelopers />} />
             <Route path="/hire-talent" element={<HireTalent />} />
             <Route path="/partner-success" element={<PartnerSuccess />} />
+            <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-study/:slug" element={<CaseStudyDetail />} />
+            <Route path="/press-releases" element={<PressReleases />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/about" element={<About />} />
             <Route path="/company" element={<Company />} />
