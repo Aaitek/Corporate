@@ -28,27 +28,33 @@ const PartnerSuccess = () => {
   const caseStudies = [
     {
       title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
+      slug: 'enterprise-dxp-modernisation-public-sector',
       status: 'Coming Soon',
       color: 'from-blue-500 to-cyan-500',
       icon: '🏛️',
       industry: 'Government',
       tech: 'DXP',
+      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
     },
     {
       title: 'AI-Driven Platform for Customer Engagement in Financial Services',
+      slug: 'ai-driven-platform-financial-services',
       status: 'Coming Soon',
       color: 'from-purple-500 to-pink-500',
       icon: '🤖',
       industry: 'Finance',
       tech: 'AI',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
     },
     {
       title: 'Cloud Migration for a High-Traffic Media Platform',
+      slug: 'cloud-migration-high-traffic-media',
       status: 'Coming Soon',
       color: 'from-green-500 to-emerald-500',
       icon: '☁️',
       industry: 'Media',
       tech: 'Cloud',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
     },
   ]
 
@@ -504,39 +510,58 @@ const PartnerSuccess = () => {
           </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study, index) => (
-              <motion.div
-              key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              <Link
+                key={index}
+                to={`/case-study/${study.slug}`}
+                className="block"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${study.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${study.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {study.icon}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
+                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl overflow-hidden border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                >
+                  {/* Image */}
+                  {study.image && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={study.image} 
+                        alt={study.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
                     </div>
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {study.status}
-                    </span>
+                  )}
+                  
+                  <div className="p-8">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+                    <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${study.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-16 h-16 bg-gradient-to-br ${study.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                          {study.icon}
+                        </div>
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
+                          {study.status}
+                        </span>
+                      </div>
+                      <div className="mb-3">
+                        <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-lg mb-2">
+                          {study.industry}
+                        </span>
+                        <span className="inline-block ml-2 px-3 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-lg">
+                          {study.tech}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
+                        {study.title}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-lg mb-2">
-                      {study.industry}
-                    </span>
-                    <span className="inline-block ml-2 px-3 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-lg">
-                      {study.tech}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {study.title}
-                  </h3>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>

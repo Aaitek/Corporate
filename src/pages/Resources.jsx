@@ -56,30 +56,6 @@ const Resources = () => {
     },
   ]
 
-  const caseStudies = [
-    {
-      title: 'Enterprise CMS Modernisation for a Public Sector Organisation',
-      status: 'Coming Soon',
-      color: 'from-blue-500 to-cyan-500',
-      icon: '🏛️',
-      type: 'Case Study',
-    },
-    {
-      title: 'AI-Driven Automation for Operational Efficiency',
-      status: 'Coming Soon',
-      color: 'from-purple-500 to-pink-500',
-      icon: '⚡',
-      type: 'Case Study',
-    },
-    {
-      title: 'Cloud Migration for a High-Traffic Platform',
-      status: 'Coming Soon',
-      color: 'from-green-500 to-emerald-500',
-      icon: '☁️',
-      type: 'Case Study',
-    },
-  ]
-
   const pressReleases = [
     {
       title: 'Aaitek Announces Launch of AI Agent Portfolio',
@@ -545,80 +521,6 @@ const Resources = () => {
                   </div>
                   <h3 className="text-base font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
                     {article.title}
-                  </h3>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-purple-50/30 to-white">
-        <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                📊
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Case Studies</h2>
-                <p className="text-lg font-semibold text-purple-600">Real Delivery Stories and Measurable Outcomes</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              In-depth accounts of how Aaitek partnered with organisations to solve complex challenges. This section may overlap with Partner Success but focuses on deeper delivery detail.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">📋</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                    • Clear problem → approach → outcome structure • Honest about complexity and trade-offs • Focus on decisions, not just tools
-                  </p>
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Filters:</strong> Industry • Platform / Technology • Engagement Type • Region
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${study.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${study.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {study.icon}
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {study.status}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg">
-                      {study.type}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {study.title}
                   </h3>
                 </div>
               </motion.div>
