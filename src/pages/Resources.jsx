@@ -212,7 +212,7 @@ const Resources = () => {
       </section>
 
       {/* Global Filters */}
-      <section className="py-4 md:py-5 bg-gradient-to-br from-white via-primary-50/30 to-white border-b-2 border-gray-200 sticky top-[80px] z-40 shadow-lg backdrop-blur-md">
+      <section className="py-4 md:py-5 bg-gradient-to-br from-white via-primary-50/30 to-white border-b-2 border-gray-200 md:sticky md:top-[80px] z-40 shadow-lg backdrop-blur-md">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2 justify-center">
             {/* Filter Label */}
