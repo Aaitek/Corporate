@@ -40,10 +40,18 @@ const Home = () => {
   return (
     <>
       <SEO
-        title="Aaitek - Empowering Businesses With AI, Data Analytics & Cloud"
-        description="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services. Australia-based, globally delivered."
-        keywords="AI solutions, cloud services, digital transformation, enterprise software, data analytics, Australia, technology consulting, software development"
+        seoTitle="Aaitek | Enterprise Digital Platforms & Composable DXP"
+        seoDescription="Aaitek delivers enterprise-grade digital platforms across Sitecore XM Cloud, composable DXP, cloud engineering, and performance-led modernisation."
+        canonicalUrl="https://aaitek.com.au/"
+        robots="index,follow"
+        ogTitle="Aaitek | Enterprise Digital Platform Specialists"
+        ogDescription="We design, build, and optimise enterprise digital platforms using Sitecore XM Cloud, headless architectures, and cloud-native engineering."
+        ogImage="https://aaitek.com.au/og/home.png"
+        ogType="website"
+        twitterCard="summary_large_image"
+        schemaType="Organization"
         structuredData={structuredData}
+        indexable={true}
       />
       <div>
       {/* Section 1 – Hero Image */}

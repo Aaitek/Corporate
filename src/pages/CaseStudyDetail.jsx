@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
+import SEO from '../components/SEO'
 
 const CaseStudyDetail = () => {
   const { slug } = useParams()
@@ -31,6 +32,31 @@ const CaseStudyDetail = () => {
     technologies: []
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": caseStudy.title,
+    "description": caseStudy.description,
+    "image": caseStudy.image || "https://aaitek.com.au/logo.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Aaitek Technology Specialists"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aaitek Technology Specialists",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aaitek.com.au/logo.png"
+      }
+    },
+    "url": `https://aaitek.com.au/case-study/${slug}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://aaitek.com.au/case-study/${slug}`
+    }
+  }
+
   const categoryColors = {
     cloud: 'from-blue-500 to-cyan-500',
     ai: 'from-purple-500 to-pink-500',
@@ -43,7 +69,25 @@ const CaseStudyDetail = () => {
   const color = categoryColors[caseStudy.category] || 'from-gray-500 to-gray-700'
 
   return (
-    <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle={`${caseStudy.title} - Case Study | Aaitek`}
+        seoDescription={caseStudy.description}
+        canonicalUrl={`https://aaitek.com.au/case-study/${slug}`}
+        robots="index,follow"
+        ogTitle={caseStudy.title}
+        ogDescription={caseStudy.description}
+        ogImage={caseStudy.image || "https://aaitek.com.au/og/case-study.png"}
+        ogType="article"
+        twitterCard="summary_large_image"
+        schemaType="Article"
+        structuredData={structuredData}
+        indexable={true}
+        pageTitle={caseStudy.title}
+        pageDescription={caseStudy.description}
+        pageImage={caseStudy.image}
+      />
+      <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -231,6 +275,7 @@ const CaseStudyDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

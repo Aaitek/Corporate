@@ -118,10 +118,18 @@ const Services = () => {
   return (
     <>
       <SEO
-        title="Services - Aaitek Technology Specialists"
-        description="Comprehensive technology services including AI solutions, cloud services, software engineering, digital transformation, and enterprise platforms."
-        keywords="technology services, AI solutions, cloud services, software development, digital transformation, enterprise platforms"
+        seoTitle="Services - Aaitek Technology Specialists"
+        seoDescription="Comprehensive technology services including AI solutions, cloud services, software engineering, digital transformation, and enterprise platforms."
+        canonicalUrl="https://aaitek.com.au/services"
+        robots="index,follow"
+        ogTitle="Services - Aaitek Technology Specialists"
+        ogDescription="Explore Aaitek's comprehensive technology services: Product & Experience, Software Engineering, Cloud & DevOps, Data & AI, Digital Growth, Managed Services, and Enterprise Platforms."
+        ogImage="https://aaitek.com.au/og/services.png"
+        ogType="website"
+        twitterCard="summary_large_image"
+        schemaType="Service"
         structuredData={structuredData}
+        indexable={true}
       />
       <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}

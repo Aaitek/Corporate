@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import SEO from '../components/SEO'
 
 const Career = () => {
   const ref = useRef(null)
@@ -34,8 +35,39 @@ const Career = () => {
     },
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Careers at Aaitek",
+    "description": "Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering.",
+    "url": "https://aaitek.com.au/career",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aaitek Technology Specialists",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aaitek.com.au/logo.png"
+      }
+    }
+  }
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Careers - Join the Aaitek Team"
+        seoDescription="Explore career opportunities at Aaitek. Build the future of digital transformation with us, working on enterprise-grade AI, cloud, and engineering projects."
+        canonicalUrl="https://aaitek.com.au/career"
+        robots="index,follow"
+        ogTitle="Careers - Join the Aaitek Team"
+        ogDescription="Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering."
+        ogImage="https://aaitek.com.au/og/career.png"
+        ogType="website"
+        twitterCard="summary_large_image"
+        schemaType="WebPage"
+        structuredData={structuredData}
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -190,6 +222,7 @@ const Career = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 
