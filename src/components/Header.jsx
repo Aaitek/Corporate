@@ -596,7 +596,7 @@ const Header = () => {
                         // Special 4-column layout for Services with dark theme
                         <div className="p-3.5">
                           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-                            {/* First Column - By Business Stage */}
+                            {/* First Column - Stages */}
                             <div className="p-3.5 rounded-2xl border-2 border-primary-300 bg-primary-50 shadow-sm">
                               {item.tagline && (
                                 <p className="text-xs font-semibold text-primary-700 mb-3 leading-relaxed">
@@ -609,7 +609,7 @@ const Header = () => {
                                     <rect x="3.5" y="3.5" width="17" height="17" rx="3.5" />
                                     <path d="M9 3.5v17M15 3.5v17M3.5 9h17M3.5 15h17" />
                                   </svg>
-                                  By Business Stage
+                                  Stages
                                 </h3>
                                 <span className="text-xs text-primary-700 px-2.5 py-1.5 rounded-full border border-primary-300 bg-primary-100">
                                   Outcome-led

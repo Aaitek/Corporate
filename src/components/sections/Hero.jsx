@@ -255,7 +255,7 @@ const Hero = () => {
                 We design, build, and scale intelligent digital platforms by combining{' '}
                 <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">AI</span>,{' '}
                 <span className="font-semibold text-accent-400 bg-accent-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">cloud</span>, and{' '}
-                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">enterprise-grade engineering</span> — enabling organizations to innovate faster, operate smarter, and grow with confidence.
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">enterprise-grade engineering</span> enabling organizations to innovate faster, operate smarter, and grow with confidence.
               </motion.p>
               
               {/* CTA Buttons */}
