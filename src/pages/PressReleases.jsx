@@ -308,17 +308,6 @@ const PressReleases = () => {
                   </motion.div>
                 )}
               </div>
-
-              {/* Filter Sidebar */}
-              <FilterSidebar
-                filters={filters}
-                filterOptions={filterOptions}
-                onFilterChange={handleFilterChange}
-                searchQuery={searchQuery}
-                onSearchChange={setSearchQuery}
-                onClearFilters={handleClearFilters}
-                title="Filter Press Releases"
-              />
             </div>
           </div>
         </section>

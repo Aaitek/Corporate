@@ -538,17 +538,6 @@ const Resources = () => {
         </div>
               </section>
             </div>
-
-            {/* Filter Sidebar */}
-            <FilterSidebar
-              filters={filters}
-              filterOptions={filterOptions}
-              onFilterChange={handleFilterChange}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onClearFilters={handleClearFilters}
-              title="Filter Resources"
-            />
           </div>
         </div>
       </section>
