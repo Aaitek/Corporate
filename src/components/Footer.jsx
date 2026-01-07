@@ -377,7 +377,7 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600 text-center md:text-left">
-              © {currentYear} <span className="text-gray-900 font-semibold">Aaitek Technology Specialists</span>. All rights reserved. | Designed and Developed by <a href="https://digitalisglobal.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:text-blue-700 hover:underline transition-colors duration-300">Digitalis Global</a>
+              © {currentYear} <span className="text-gray-900 font-semibold">Aaitek Technology Specialists</span>. All rights reserved. | Designed and developed by Aaitek
             </p>
             <div className="flex space-x-6">
               <Link 
