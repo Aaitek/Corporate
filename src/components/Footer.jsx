@@ -143,7 +143,7 @@ const Footer = () => {
                 transition={{ duration: 0.4, delay: 0.3 }}
               >
                 <span className="w-1 h-4 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></span>
-                Our Company
+                Company
               </motion.h4>
               <ul className="space-y-2.5">
                 {footerLinks.company.map((link, index) => (

@@ -148,7 +148,7 @@ const Header = () => {
       label: 'Services',
       path: '/services',
       icon: '▦',
-      tagline: 'Outcome-driven, capability-led, enterprise-safe',
+      tagline: 'Outcome-driven and enterprise-safe',
       businessStages: [
         {
           title: 'Enterprise',

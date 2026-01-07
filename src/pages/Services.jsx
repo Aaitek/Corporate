@@ -145,7 +145,7 @@ const Services = () => {
               All Services
             </h2>
             <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto">
-              Outcome-driven, capability-led, enterprise-safe solutions for your business
+              Outcome-driven and enterprise-safe solutions for your business
             </p>
           </motion.div>
 
