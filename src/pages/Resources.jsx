@@ -288,42 +288,7 @@ const Resources = () => {
                   </div>
                 </div>
               </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {insightsArticles.map((article, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-6 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${article.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${article.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${article.color} rounded-xl flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {article.icon}
-                    </div>
-                    <span className="inline-flex items-center px-2 py-1 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {article.status}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-lg">
-                      {article.type}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {article.title}
-                  </h3>
-                </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-              </section>
 
               {/* Press Releases Section */}
               <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-indigo-50/30 to-white">
@@ -362,42 +327,7 @@ const Resources = () => {
               </div>
             </div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pressReleases.map((press, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${press.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${press.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${press.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {press.icon}
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {press.status}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg">
-                      {press.type}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {press.title}
-                  </h3>
-                </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-              </section>
 
               {/* Webinars & Events Section */}
               <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-green-50/30 to-white">
@@ -436,42 +366,7 @@ const Resources = () => {
               </div>
             </div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {webinarsEvents.map((webinar, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: -1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${webinar.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${webinar.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${webinar.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {webinar.icon}
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {webinar.status}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-lg">
-                      {webinar.type}
-                  </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {webinar.title}
-                  </h3>
-                </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-              </section>
 
               {/* Videos & Media Section */}
               <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-orange-50/30 to-white">
@@ -510,42 +405,7 @@ const Resources = () => {
               </div>
             </div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {videosMedia.map((video, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${video.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${video.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${video.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                      {video.icon}
-                    </div>
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                      {video.status}
-                    </span>
-                  </div>
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-lg">
-                      {video.type}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                    {video.title}
-                  </h3>
-                </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-              </section>
             </div>
           </div>
         </div>
