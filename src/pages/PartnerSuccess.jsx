@@ -279,86 +279,41 @@ const PartnerSuccess = () => {
                 variants={fadeInUp}
                 className="mb-12"
               >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                📚
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Case Studies</h2>
-                <p className="text-lg font-semibold text-primary-600">End-to-End Delivery Stories</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              Deep dives into how Aaitek partnered with organisations to solve complex challenges — from discovery to delivery.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">💡</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">What Each Case Study Includes:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Client context (industry & challenge) • What was at risk / what needed to change • Aaitek's approach and solution • Technology and architecture overview • Outcomes and measurable impact • Lessons learned
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCaseStudies.map((study, index) => (
-              <Link
-                key={index}
-                to={`/case-study/${study.slug}`}
-                className="block"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.03, rotate: 1 }}
-                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-3xl overflow-hidden border-2 border-gray-200 hover:border-primary-400 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                >
-                  {/* Image */}
-                  {study.image && (
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={study.image} 
-                        alt={study.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                      📚
                     </div>
-                  )}
-                  
-                  <div className="p-8">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                    <div className={`absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b ${study.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`w-16 h-16 bg-gradient-to-br ${study.color} rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                          {study.icon}
-                        </div>
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 text-xs font-bold shadow-md border border-amber-200">
-                          {study.status}
-                        </span>
-                      </div>
-                      <div className="mb-3">
-                        <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-semibold rounded-lg mb-2">
-                          {study.industry}
-                        </span>
-                        <span className="inline-block ml-2 px-3 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-lg">
-                          {study.tech}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 leading-tight">
-                        {study.title}
-                      </h3>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Case Studies</h2>
+                      <p className="text-lg font-semibold text-primary-600">End-to-End Delivery Stories</p>
                     </div>
                   </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
+                  <Link
+                    to="/case-studies"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    View All Case Studies
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+                <p className="text-lg text-gray-700 max-w-3xl mb-6 leading-relaxed">
+                  Deep dives into how Aaitek partnered with organisations to solve complex challenges — from discovery to delivery.
+                </p>
+                <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">💡</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 mb-2">What Each Case Study Includes:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        Client context (industry & challenge) • What was at risk / what needed to change • Aaitek's approach and solution • Technology and architecture overview • Outcomes and measurable impact • Lessons learned
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

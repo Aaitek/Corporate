@@ -243,42 +243,51 @@ const Resources = () => {
             {/* Main Content */}
             <div className="flex-1">
               {/* Insights & Articles Section */}
-              <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-blue-50/30 to-white">
-        <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                📝
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Insights & Articles</h2>
-                <p className="text-lg font-semibold text-blue-600">Expert Perspectives on Technology, Delivery, and Industry Trends</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              Long-form and short-form articles written by Aaitek practitioners, architects, and consultants.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">💡</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                    • Practical and experience-driven • Balanced, not hype-heavy • Opinion-backed with reasoning • Written for decision-makers and senior practitioners
-                  </p>
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Filters:</strong> Industry • Technology • Service Area • Audience Level
-                  </p>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="mb-12"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                      📝
+                    </div>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Insights & Articles</h2>
+                      <p className="text-lg font-semibold text-blue-600">Expert Perspectives on Technology, Delivery, and Industry Trends</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/articles"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    View All Articles
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+                <p className="text-lg text-gray-700 max-w-3xl mb-6 leading-relaxed">
+                  Long-form and short-form articles written by Aaitek practitioners, architects, and consultants.
+                </p>
+                <div className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-2xl shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">💡</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                        • Practical and experience-driven • Balanced, not hype-heavy • Opinion-backed with reasoning • Written for decision-makers and senior practitioners
+                      </p>
+                      <p className="text-xs text-gray-600 mt-2">
+                        <strong>Filters:</strong> Industry • Technology • Service Area • Audience Level
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {insightsArticles.map((article, index) => (
               <motion.div
