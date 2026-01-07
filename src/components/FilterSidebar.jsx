@@ -19,10 +19,17 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
     if (currentValue === 'all') {
       return options[0] // Return "All Industries", "All Services", etc.
     }
-    // Find the matching option
+    // Find the matching option - handle different formats
     const matchingOption = options.find((opt, idx) => {
-      const optionValue = idx === 0 ? 'all' : opt.toLowerCase().replace(/\s+/g, '-')
-      return optionValue === currentValue
+      if (idx === 0) return false // Skip "All" option
+      const optionValue = opt.toLowerCase().replace(/\s+/g, '-')
+      // Try exact match first
+      if (optionValue === currentValue) return true
+      // Try without dashes
+      if (optionValue.replace(/-/g, '') === currentValue.replace(/-/g, '')) return true
+      // Try matching the option text directly (case-insensitive)
+      if (opt.toLowerCase() === currentValue) return true
+      return false
     })
     return matchingOption || options[0]
   }
