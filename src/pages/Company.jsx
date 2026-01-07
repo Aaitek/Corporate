@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useRef, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Company = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.1 })
+  const location = useLocation()
+  const careersRef = useRef(null)
+
+  // Scroll to careers section if hash is present
+  useEffect(() => {
+    if (location.hash === '#careers' && careersRef.current) {
+      setTimeout(() => {
+        careersRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+    }
+  }, [location.hash])
 
   const whatDefinesAaitek = [
     {
@@ -347,7 +358,7 @@ const Company = () => {
       </section>
 
       {/* Careers Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-green-50/30 to-white">
+      <section id="careers" ref={careersRef} className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-green-50/30 to-white">
         <div className="container-custom">
             <motion.div
             initial="hidden"
