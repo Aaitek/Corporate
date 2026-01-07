@@ -219,12 +219,12 @@ const CaseStudies = () => {
       />
       <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
         {/* Hero Section */}
-        <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
+        <section className="py-10 sm:py-14 md:py-20 lg:py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-400 rounded-full blur-3xl"></div>
           </div>
-          <div className="container-custom relative z-10">
+          <div className="container-custom relative z-10 px-4 sm:px-6">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -233,20 +233,20 @@ const CaseStudies = () => {
             >
               <motion.div
                 variants={fadeInUp}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 mb-8 shadow-xl"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 mb-6 sm:mb-8 shadow-xl"
               >
-                <span className="text-2xl">📚</span>
-                <span className="text-sm font-bold text-white uppercase tracking-wider">Case Studies</span>
+                <span className="text-xl sm:text-2xl">📚</span>
+                <span className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Case Studies</span>
               </motion.div>
               <motion.h1
                 variants={fadeInUp}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-tight px-4"
               >
                 Real-World Success Stories
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto leading-relaxed font-medium"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 max-w-3xl mx-auto leading-relaxed font-medium px-4"
               >
                 Explore how we've helped organizations transform their digital capabilities and achieve measurable outcomes.
               </motion.p>
@@ -255,9 +255,9 @@ const CaseStudies = () => {
         </section>
 
         {/* Main Content with Sidebar */}
-        <section className="py-8 sm:py-12 lg:py-16">
-          <div className="container-custom">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <section className="py-6 sm:py-8 md:py-12 lg:py-16">
+          <div className="container-custom px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
               {/* Filter Sidebar - appears first on mobile, last on desktop */}
               <FilterSidebar
                 filters={filters}
@@ -272,14 +272,14 @@ const CaseStudies = () => {
               {/* Main Content */}
               <div className="flex-1">
                 {/* Results Count */}
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-4 sm:mb-6 flex items-center justify-between">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="text-gray-700"
                   >
-                    <span className="font-bold text-lg">{filteredCaseStudies.length}</span>
-                    <span className="text-gray-600 ml-2">
+                    <span className="font-bold text-base sm:text-lg">{filteredCaseStudies.length}</span>
+                    <span className="text-gray-600 ml-2 text-sm sm:text-base">
                       {filteredCaseStudies.length === 1 ? 'Case Study' : 'Case Studies'} Found
                     </span>
                   </motion.div>
@@ -287,7 +287,7 @@ const CaseStudies = () => {
 
                 {/* Case Studies Grid */}
                 {filteredCaseStudies.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                     {filteredCaseStudies.map((study, index) => (
                       <motion.div
                         key={study.slug}

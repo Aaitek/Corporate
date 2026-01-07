@@ -168,12 +168,12 @@ const PressReleases = () => {
       />
       <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
         {/* Hero Section */}
-        <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 relative overflow-hidden">
+        <section className="py-10 sm:py-14 md:py-20 lg:py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
           </div>
-          <div className="container-custom relative z-10">
+          <div className="container-custom relative z-10 px-4 sm:px-6">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -182,20 +182,20 @@ const PressReleases = () => {
             >
               <motion.div
                 variants={fadeInUp}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 mb-8 shadow-xl"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 mb-6 sm:mb-8 shadow-xl"
               >
-                <span className="text-2xl">📢</span>
-                <span className="text-sm font-bold text-white uppercase tracking-wider">Press Releases</span>
+                <span className="text-xl sm:text-2xl">📢</span>
+                <span className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Press Releases</span>
               </motion.div>
               <motion.h1
                 variants={fadeInUp}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-tight px-4"
               >
                 Company News & Announcements
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto leading-relaxed font-medium"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 max-w-3xl mx-auto leading-relaxed font-medium px-4"
               >
                 Stay updated with the latest news, partnerships, product launches, and company milestones from Aaitek.
               </motion.p>
@@ -204,9 +204,9 @@ const PressReleases = () => {
         </section>
 
         {/* Main Content with Sidebar */}
-        <section className="py-8 sm:py-12 lg:py-16">
-          <div className="container-custom">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <section className="py-6 sm:py-8 md:py-12 lg:py-16">
+          <div className="container-custom px-4 sm:px-6">
+            <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
               {/* Filter Sidebar - appears first on mobile, last on desktop */}
               <FilterSidebar
                 filters={filters}
@@ -221,14 +221,14 @@ const PressReleases = () => {
               {/* Main Content */}
               <div className="flex-1">
                 {/* Results Count */}
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-4 sm:mb-6 flex items-center justify-between">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="text-gray-700"
                   >
-                    <span className="font-bold text-lg">{filteredPressReleases.length}</span>
-                    <span className="text-gray-600 ml-2">
+                    <span className="font-bold text-base sm:text-lg">{filteredPressReleases.length}</span>
+                    <span className="text-gray-600 ml-2 text-sm sm:text-base">
                       {filteredPressReleases.length === 1 ? 'Press Release' : 'Press Releases'} Found
                     </span>
                   </motion.div>
@@ -261,24 +261,24 @@ const PressReleases = () => {
                                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20"></div>
                               </div>
                             )}
-                            <div className="flex-1 p-6">
+                            <div className="flex-1 p-5 sm:p-6">
                               <div className="flex items-start justify-between mb-3">
                                 <div className="flex-1">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <span className="px-3 py-1 bg-gradient-to-r from-indigo-500 to-blue-500 text-white text-xs font-bold rounded-full">
+                                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                    <span className="px-2.5 sm:px-3 py-1 bg-gradient-to-r from-indigo-500 to-blue-500 text-white text-xs font-bold rounded-full">
                                       {release.type}
                                     </span>
                                     <span className="text-xs text-gray-500">{formatDate(release.date)}</span>
                                   </div>
-                                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors leading-tight">
                                     {release.title}
                                   </h3>
-                                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+                                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2">
                                     {release.description}
                                   </p>
                                 </div>
                               </div>
-                              <div className="flex items-center gap-2 text-indigo-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                              <div className="flex items-center gap-2 text-indigo-600 font-semibold text-xs sm:text-sm group-hover:gap-3 transition-all">
                                 Read More
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

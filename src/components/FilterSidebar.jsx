@@ -41,20 +41,23 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
       transition={{ duration: 0.3 }}
       className="w-full lg:w-80 flex-shrink-0 order-first lg:order-last"
     >
-      <div className="lg:sticky lg:top-[100px] bg-white rounded-2xl shadow-xl border-2 border-gray-200 overflow-hidden">
+      <div className="lg:sticky lg:top-[100px] bg-white rounded-2xl lg:rounded-2xl rounded-t-3xl lg:rounded-t-2xl shadow-xl lg:shadow-xl shadow-2xl border-2 border-gray-200 overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary-600 to-accent-600 p-4">
+        <div className="bg-gradient-to-r from-primary-600 to-accent-600 p-4 lg:p-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <span>🔍</span>
-              {title}
+            <h3 className="text-base lg:text-lg font-bold text-white flex items-center gap-2">
+              <svg className="w-5 h-5 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              <span className="hidden sm:inline">{title}</span>
+              <span className="sm:hidden">Filters</span>
             </h3>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-white hover:text-gray-200 transition-colors lg:hidden"
+              className="text-white hover:text-gray-200 transition-colors lg:hidden p-1 rounded-lg hover:bg-white/20"
               aria-label="Toggle filters"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isExpanded ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
               </svg>
             </button>
@@ -62,7 +65,7 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
         </div>
 
         {/* Content */}
-        <div className={`${isExpanded ? 'block' : 'hidden lg:block'} p-4 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto`}>
+        <div className={`${isExpanded ? 'block' : 'hidden lg:block'} p-4 pb-6 lg:pb-4 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto`}>
           {/* Search */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -75,7 +78,7 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search..."
-              className="w-full pl-10 pr-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 text-sm"
+              className="w-full pl-10 pr-4 py-3 lg:py-2.5 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 text-sm lg:text-sm"
             />
           </div>
 
@@ -117,16 +120,16 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => toggleFilter(key)}
-                  className="w-full group relative bg-white rounded-xl px-4 py-3 shadow-md border-2 border-gray-200 hover:border-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+                  className="w-full group relative bg-gradient-to-r from-gray-50 to-white lg:from-white rounded-xl px-4 py-3.5 lg:py-3 shadow-md lg:shadow-md shadow-lg lg:shadow-md border-2 border-gray-200 hover:border-primary-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/20"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-gray-700 group-hover:text-primary-600 transition-colors">
+                    <span className="text-sm lg:text-sm font-semibold text-gray-700 group-hover:text-primary-600 transition-colors truncate pr-2">
                       {displayValue}
                     </span>
                     <motion.svg
                       animate={{ rotate: isFilterExpanded ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className="w-5 h-5 text-gray-400 group-hover:text-primary-500 transition-colors"
+                      className="w-5 h-5 lg:w-5 lg:h-5 text-gray-400 group-hover:text-primary-500 transition-colors flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -146,7 +149,7 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="pt-2 space-y-1 bg-gray-50 rounded-lg p-2 border border-gray-200">
+                  <div className="pt-2 space-y-1.5 lg:space-y-1 bg-gray-50 lg:bg-gray-50 rounded-lg p-2.5 lg:p-2 border border-gray-200">
                     {options.map((option, idx) => {
                       const value = idx === 0 ? 'all' : option.toLowerCase().replace(/\s+/g, '-')
                       const isSelected = currentValue === value || (idx === 0 && currentValue === 'all')
@@ -154,24 +157,24 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
                       return (
                         <motion.button
                           key={idx}
-                          whileHover={{ scale: 1.02, x: 4 }}
+                          whileHover={{ scale: 1.02, x: 2 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => {
                             onFilterChange(key, value)
                             setExpandedFilters(prev => ({ ...prev, [key]: false }))
                           }}
-                          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                          className={`w-full text-left px-3.5 lg:px-3 py-2.5 lg:py-2 rounded-lg text-sm lg:text-sm font-medium transition-all duration-300 ${
                             isSelected
-                              ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-md'
+                              ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-md lg:shadow-md'
                               : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200'
                           }`}
                         >
-                          <span className="flex items-center gap-2">
+                          <span className="flex items-center gap-2.5 lg:gap-2">
                             {isSelected && (
                               <motion.svg
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="w-4 h-4"
+                                className="w-4.5 h-4.5 lg:w-4 lg:h-4 flex-shrink-0"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -179,7 +182,7 @@ const FilterSidebar = ({ filters, filterOptions, onFilterChange, searchQuery, on
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </motion.svg>
                             )}
-                            {option}
+                            <span className="truncate">{option}</span>
                           </span>
                         </motion.button>
                       )
