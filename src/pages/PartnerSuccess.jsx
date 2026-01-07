@@ -258,6 +258,17 @@ const PartnerSuccess = () => {
       <section ref={ref} className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-white via-blue-50/30 to-white">
         <div className="container-custom">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Filter Sidebar - appears first on mobile, last on desktop */}
+            <FilterSidebar
+              filters={filters}
+              filterOptions={filterOptions}
+              onFilterChange={handleFilterChange}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onClearFilters={handleClearFilters}
+              title="Filter Content"
+            />
+            
             {/* Main Content */}
             <div className="flex-1">
               {/* Case Studies Section */}
@@ -349,17 +360,6 @@ const PartnerSuccess = () => {
             ))}
           </div>
             </div>
-
-            {/* Filter Sidebar */}
-            <FilterSidebar
-              filters={filters}
-              filterOptions={filterOptions}
-              onFilterChange={handleFilterChange}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-              onClearFilters={handleClearFilters}
-              title="Filter Content"
-            />
           </div>
         </div>
       </section>

@@ -207,6 +207,17 @@ const PressReleases = () => {
         <section className="py-8 sm:py-12 lg:py-16">
           <div className="container-custom">
             <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+              {/* Filter Sidebar - appears first on mobile, last on desktop */}
+              <FilterSidebar
+                filters={filters}
+                filterOptions={filterOptions}
+                onFilterChange={handleFilterChange}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+                onClearFilters={handleClearFilters}
+                title="Filter Press Releases"
+              />
+              
               {/* Main Content */}
               <div className="flex-1">
                 {/* Results Count */}
