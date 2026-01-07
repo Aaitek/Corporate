@@ -61,6 +61,7 @@ function App() {
             <Route path="/company" element={<Company />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/career" element={<Career />} />
+            <Route path="/careers" element={<Career />} />
             <Route path="/brand-guidelines" element={<BrandGuidelines />} />
             <Route path="/BrandGuidelines" element={<BrandGuidelines />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
