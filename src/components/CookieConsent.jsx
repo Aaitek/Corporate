@@ -16,8 +16,8 @@ const CookieConsent = () => {
     // Check if user has already made a choice
     const cookieConsent = localStorage.getItem('cookieConsent')
     if (!cookieConsent) {
-      // Show after a small delay for better UX
-      setTimeout(() => setIsVisible(true), 1000)
+      // Show immediately
+      setIsVisible(true)
     } else {
       // Load saved preferences
       const savedPreferences = JSON.parse(cookieConsent)
