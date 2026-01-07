@@ -254,10 +254,14 @@ const PartnerSuccess = () => {
         </div>
       </section>
 
-      {/* Global Filters */}
-      <section className="py-4 md:py-5 bg-gradient-to-br from-white via-primary-50/30 to-white border-b-2 border-gray-200 md:sticky md:top-[80px] z-40 shadow-lg backdrop-blur-md">
+      {/* Main Content with Sidebar */}
+      <section ref={ref} className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-white via-blue-50/30 to-white">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2 justify-center">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* Main Content */}
+            <div className="flex-1">
+              {/* Case Studies Section */}
+              <div className="mb-12">
             {/* Filter Label */}
             <div className="flex items-center gap-2 mb-2 md:mb-0 md:mr-2">
               <span className="text-2xl">🔍</span>
@@ -550,7 +554,7 @@ const PartnerSuccess = () => {
             </div>
           </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
+            {filteredCaseStudies.map((study, index) => (
               <Link
                 key={index}
                 to={`/case-study/${study.slug}`}
@@ -604,6 +608,19 @@ const PartnerSuccess = () => {
                 </motion.div>
               </Link>
             ))}
+          </div>
+            </div>
+
+            {/* Filter Sidebar */}
+            <FilterSidebar
+              filters={filters}
+              filterOptions={filterOptions}
+              onFilterChange={handleFilterChange}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onClearFilters={handleClearFilters}
+              title="Filter Content"
+            />
           </div>
         </div>
       </section>
