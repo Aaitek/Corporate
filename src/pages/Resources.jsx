@@ -324,84 +324,99 @@ const Resources = () => {
               </div>
             </div>
           </motion.div>
-              </motion.div>
 
               {/* Webinars & Events Section */}
-              <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-green-50/30 to-white">
-        <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                🎥
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Webinars & Events</h2>
-                <p className="text-lg font-semibold text-green-600">Live and On-Demand Sessions with Industry Experts</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              Educational webinars, panel discussions, and event recordings hosted or sponsored by Aaitek.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">🎓</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                    • Educational, not sales-led • Focus on real-world problems and solutions • Include speakers and key takeaways
-                  </p>
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Filters:</strong> Live / On-Demand • Topic • Industry • Speaker
-                  </p>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="mb-12"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                      🎥
+                    </div>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Webinars & Events</h2>
+                      <p className="text-lg font-semibold text-green-600">Live and On-Demand Sessions with Industry Experts</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/webinars"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    View All Webinars
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+                <p className="text-lg text-gray-700 max-w-3xl mb-6 leading-relaxed">
+                  Educational webinars, panel discussions, and event recordings hosted or sponsored by Aaitek.
+                </p>
+                <div className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🎓</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                        • Educational, not sales-led • Focus on real-world problems and solutions • Include speakers and key takeaways
+                      </p>
+                      <p className="text-xs text-gray-600 mt-2">
+                        <strong>Filters:</strong> Topic • Industry • Year • Type
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
               {/* Videos & Media Section */}
-              <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-white via-orange-50/30 to-white">
-        <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                🎬
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Videos & Media</h2>
-                <p className="text-lg font-semibold text-orange-600">Visual Content, Demos, and Thought Leadership</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              Short and long-form video content showcasing insights, product overviews, demos, and expert commentary.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-orange-50 to-red-50 border-2 border-orange-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">🎯</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">Content Types:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                    • Expert explainers • Product walkthroughs • Architecture overviews • Event highlights
-                  </p>
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Filters:</strong> Video Type • Topic • Duration • Audience
-                  </p>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="mb-12"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                      🎬
+                    </div>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Videos & Media</h2>
+                      <p className="text-lg font-semibold text-orange-600">Visual Content, Demos, and Thought Leadership</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/videos"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    View All Videos
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+                <p className="text-lg text-gray-700 max-w-3xl mb-6 leading-relaxed">
+                  Short and long-form video content showcasing insights, product overviews, demos, and expert commentary.
+                </p>
+                <div className="p-6 bg-gradient-to-br from-orange-50 to-red-50 border-2 border-orange-200 rounded-2xl shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">🎯</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 mb-2">Content Types:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                        • Expert explainers • Product walkthroughs • Architecture overviews • Event highlights
+                      </p>
+                      <p className="text-xs text-gray-600 mt-2">
+                        <strong>Filters:</strong> Topic • Type • Year
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
