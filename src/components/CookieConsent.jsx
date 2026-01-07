@@ -97,24 +97,17 @@ const CookieConsent = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-0 left-0 right-0 z-[10000] p-4 sm:p-6"
+          className="fixed bottom-0 left-0 right-0 z-[10000] p-3 sm:p-4"
         >
-          {/* Animated Background Blur */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm -z-10"
-          />
-          
-          <div className="max-w-6xl mx-auto relative">
+          <div className="max-w-4xl mx-auto relative">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-white via-blue-50/50 to-cyan-50/50 rounded-3xl shadow-2xl border-2 border-primary-200/50 overflow-hidden backdrop-blur-xl"
+              className="bg-gradient-to-br from-white via-blue-50/50 to-cyan-50/50 rounded-2xl shadow-2xl border-2 border-primary-200/50 overflow-hidden backdrop-blur-xl"
             >
               {/* Animated Header with Gradient Background */}
-              <div className="relative bg-gradient-to-r from-primary-600 via-primary-500 to-accent-600 p-4 sm:p-6 overflow-hidden">
+              <div className="relative bg-gradient-to-r from-primary-600 via-primary-500 to-accent-600 p-3 sm:p-4 overflow-hidden">
                 {/* Animated Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <motion.div
@@ -150,12 +143,12 @@ const CookieConsent = () => {
                     initial="initial"
                     animate="animate"
                     whileHover="hover"
-                    className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border-2 border-white/30"
+                    className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center shadow-xl border-2 border-white/30"
                   >
                     <motion.div
                       animate={{ rotate: [0, 10, -10, 0] }}
                       transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                      className="text-3xl sm:text-4xl"
+                      className="text-2xl sm:text-3xl"
                     >
                       🍪
                     </motion.div>
@@ -166,13 +159,13 @@ const CookieConsent = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="text-xl sm:text-2xl font-extrabold text-white mb-2 flex items-center gap-2"
+                      className="text-lg sm:text-xl font-extrabold text-white mb-1.5 flex items-center gap-2"
                     >
                       We Value Your Privacy
                       <motion.span
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="text-2xl"
+                        className="text-xl"
                       >
                         🔒
                       </motion.span>
@@ -181,7 +174,7 @@ const CookieConsent = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="text-sm sm:text-base text-white/95 leading-relaxed"
+                      className="text-xs sm:text-sm text-white/95 leading-relaxed"
                     >
                       We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies.
                     </motion.p>
@@ -190,7 +183,7 @@ const CookieConsent = () => {
               </div>
 
               {/* Content */}
-              <div className="p-4 sm:p-6 bg-gradient-to-b from-white to-gray-50/50">
+              <div className="p-3 sm:p-4 bg-gradient-to-b from-white to-gray-50/50">
                 {!showDetails ? (
                   // Simple View
                   <motion.div
@@ -199,15 +192,15 @@ const CookieConsent = () => {
                     transition={{ delay: 0.2 }}
                     className="space-y-5"
                   >
-                    <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200/50">
+                    <div className="flex items-start gap-2.5 p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200/50">
                       <motion.div
                         animate={{ rotate: [0, 360] }}
                         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        className="text-2xl flex-shrink-0"
+                        className="text-xl flex-shrink-0"
                       >
                         ℹ️
                       </motion.div>
-                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                         We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you've provided to them or that they've collected from your use of their services.
                       </p>
                     </div>
@@ -247,12 +240,12 @@ const CookieConsent = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                    <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
                       <motion.button
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={handleAcceptAll}
-                        className="group relative flex-1 px-6 py-3.5 bg-gradient-to-r from-primary-600 via-primary-500 to-accent-600 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                        className="group relative flex-1 px-4 py-2.5 bg-gradient-to-r from-primary-600 via-primary-500 to-accent-600 text-white font-bold text-sm rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
                       >
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -280,13 +273,13 @@ const CookieConsent = () => {
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setShowDetails(true)}
-                        className="flex-1 px-6 py-3.5 bg-white border-2 border-primary-600 text-primary-600 font-bold rounded-xl hover:bg-gradient-to-r hover:from-primary-50 hover:to-cyan-50 transition-all duration-300 shadow-md hover:shadow-lg group"
+                        className="flex-1 px-4 py-2.5 bg-white border-2 border-primary-600 text-primary-600 font-bold text-sm rounded-lg hover:bg-gradient-to-r hover:from-primary-50 hover:to-cyan-50 transition-all duration-300 shadow-md hover:shadow-lg group"
                       >
-                        <span className="flex items-center justify-center gap-2">
+                        <span className="flex items-center justify-center gap-1.5">
                           <motion.svg
                             animate={{ rotate: [0, 360] }}
                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            className="w-5 h-5"
+                            className="w-4 h-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -301,7 +294,7 @@ const CookieConsent = () => {
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={handleDeny}
-                        className="flex-1 px-6 py-3.5 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 font-bold rounded-xl hover:from-gray-200 hover:to-gray-300 transition-all duration-300 shadow-md hover:shadow-lg"
+                        className="flex-1 px-4 py-2.5 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 font-bold text-sm rounded-lg hover:from-gray-200 hover:to-gray-300 transition-all duration-300 shadow-md hover:shadow-lg"
                       >
                         Deny All
                       </motion.button>
