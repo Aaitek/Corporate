@@ -249,7 +249,7 @@ const Articles = () => {
 
                 {/* Articles Grid */}
                 {filteredArticles.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     {filteredArticles.map((article, index) => (
                       <motion.div
                         key={article.slug}
@@ -261,10 +261,10 @@ const Articles = () => {
                       >
                         <Link
                           to={`/article/${article.slug}`}
-                          className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-blue-400"
+                          className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-blue-400 h-full"
                         >
                           {article.image && (
-                            <div className="relative h-48 overflow-hidden">
+                            <div className="relative h-56 overflow-hidden">
                               <img
                                 src={article.image}
                                 alt={article.title}
@@ -278,22 +278,22 @@ const Articles = () => {
                               </div>
                             </div>
                           )}
-                          <div className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${article.color} flex items-center justify-center text-2xl shadow-lg`}>
+                          <div className="p-6 lg:p-8">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-xl bg-gradient-to-br ${article.color} flex items-center justify-center text-2xl lg:text-3xl shadow-lg`}>
                                 {article.icon}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
-                                  <span className="px-2 py-0.5 bg-gray-100 rounded-full">{article.industry}</span>
-                                  <span className="px-2 py-0.5 bg-gray-100 rounded-full">{article.serviceArea}</span>
+                                <div className="flex flex-wrap gap-2 text-xs lg:text-sm text-gray-600 mb-2">
+                                  <span className="px-2.5 py-1 bg-gray-100 rounded-full font-medium">{article.industry}</span>
+                                  <span className="px-2.5 py-1 bg-gray-100 rounded-full font-medium">{article.serviceArea}</span>
                                 </div>
                               </div>
                             </div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                            <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
                               {article.title}
                             </h3>
-                            <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-4">
+                            <p className="text-sm lg:text-base text-gray-600 leading-relaxed line-clamp-3 mb-4">
                               {article.description}
                             </p>
                             <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all">

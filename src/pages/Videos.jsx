@@ -210,7 +210,7 @@ const Videos = () => {
 
                 {/* Videos Grid */}
                 {filteredVideos.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     {filteredVideos.map((video, index) => (
                       <motion.div
                         key={video.slug}
@@ -222,10 +222,10 @@ const Videos = () => {
                       >
                         <Link
                           to={`/video/${video.slug}`}
-                          className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-orange-400"
+                          className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-200 hover:border-orange-400 h-full"
                         >
                           {video.image && (
-                            <div className="relative h-48 overflow-hidden">
+                            <div className="relative h-56 overflow-hidden">
                               <img
                                 src={video.image}
                                 alt={video.title}
@@ -246,22 +246,22 @@ const Videos = () => {
                               </div>
                             </div>
                           )}
-                          <div className="p-6">
-                            <div className="flex items-center gap-3 mb-3">
-                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${video.color} flex items-center justify-center text-2xl shadow-lg`}>
+                          <div className="p-6 lg:p-8">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-xl bg-gradient-to-br ${video.color} flex items-center justify-center text-2xl lg:text-3xl shadow-lg`}>
                                 {video.icon}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
-                                  <span className="px-2 py-0.5 bg-gray-100 rounded-full">{video.topic}</span>
-                                  <span className="px-2 py-0.5 bg-gray-100 rounded-full">{video.videoType}</span>
+                                <div className="flex flex-wrap gap-2 text-xs lg:text-sm text-gray-600 mb-2">
+                                  <span className="px-2.5 py-1 bg-gray-100 rounded-full font-medium">{video.topic}</span>
+                                  <span className="px-2.5 py-1 bg-gray-100 rounded-full font-medium">{video.videoType}</span>
                                 </div>
                               </div>
                             </div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                            <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-orange-600 transition-colors">
                               {video.title}
                             </h3>
-                            <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-4">
+                            <p className="text-sm lg:text-base text-gray-600 leading-relaxed line-clamp-3 mb-4">
                               {video.description}
                             </p>
                             <div className="flex items-center gap-2 text-orange-600 font-semibold text-sm group-hover:gap-3 transition-all">
