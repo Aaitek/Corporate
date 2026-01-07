@@ -84,7 +84,8 @@ const Home = () => {
       
       {/* Section 12 – FAQ */}
       <FAQ />
-    </div>
+      </div>
+    </>
   )
 }
 
