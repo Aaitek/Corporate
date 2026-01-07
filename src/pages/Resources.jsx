@@ -297,33 +297,44 @@ const Resources = () => {
                 variants={fadeInUp}
                 className="mb-12"
               >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
-                📢
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Press Releases</h2>
-                <p className="text-lg font-semibold text-indigo-600">Company News, Announcements, and Official Updates</p>
-              </div>
-            </div>
-            <p className="text-lg text-gray-700 max-w-3xl mb-4 leading-relaxed">
-              Formal announcements related to Aaitek milestones, partnerships, launches, and initiatives.
-            </p>
-            <div className="mt-6 p-6 bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-200 rounded-2xl shadow-md">
-              <div className="flex items-start gap-3">
-                <span className="text-2xl">📰</span>
-                <div>
-                  <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                    • Clear, concise, factual • No marketing language • Written for media, partners, and stakeholders
-                  </p>
-                  <p className="text-xs text-gray-600 mt-2">
-                    <strong>Filters:</strong> Announcement Type • Year • Region
-                  </p>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                      📢
+                    </div>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2">Press Releases</h2>
+                      <p className="text-lg font-semibold text-indigo-600">Company News, Announcements, and Official Updates</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/press-releases"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    View All Press Releases
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+                <p className="text-lg text-gray-700 max-w-3xl mb-6 leading-relaxed">
+                  Formal announcements related to Aaitek milestones, partnerships, launches, and initiatives.
+                </p>
+                <div className="p-6 bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-200 rounded-2xl shadow-md">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">📰</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900 mb-2">Content Guidelines:</p>
+                      <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                        • Clear, concise, factual • No marketing language • Written for media, partners, and stakeholders
+                      </p>
+                      <p className="text-xs text-gray-600 mt-2">
+                        <strong>Filters:</strong> Type • Year • Region
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* Webinars & Events Section */}
               <motion.div
