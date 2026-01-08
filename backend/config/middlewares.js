@@ -31,7 +31,14 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['http://localhost:3000', 'http://localhost:5173'],
+      origin: [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://a-aitech.vercel.app',
+        'https://aaitek.com.au',
+        /^https:\/\/.*\.vercel\.app$/,
+      ],
+      credentials: true,
     },
   },
   'strapi::poweredBy',
