@@ -1045,16 +1045,34 @@ const Header = () => {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden block"
                             >
-                              <div className="pt-2 pl-3 pr-3 pb-2 space-y-2 flex flex-col">
+                              <div className="pt-3 pl-3 pr-3 pb-3 space-y-3 flex flex-col max-h-[calc(100vh-200px)] overflow-y-auto">
+                                {/* Description and Pill */}
+                                {item.description && (
+                                  <div className="mb-3 pb-3 border-b border-white/10">
+                                    <div className="flex items-center gap-2 mb-2">
+                                      {item.pill && (
+                                        <span className="px-2.5 py-1 bg-gradient-to-r from-[#2f8edc]/30 to-[#2f8edc]/20 border border-[#2f8edc]/50 rounded-full text-[#2f8edc] text-[10px] font-bold uppercase tracking-wider">
+                                          {item.pill}
+                                        </span>
+                                      )}
+                                      <span className="text-2xl">{item.icon}</span>
+                                    </div>
+                                    <p className="text-xs text-white/70 leading-relaxed">{item.description}</p>
+                                  </div>
+                                )}
+                                
                                 {item.columns ? (
                                   <>
                                     {item.columns.map((column, colIndex) => (
-                                      <div key={colIndex} className="mb-3 block">
-                                        <div className="text-xs font-bold text-white/90 uppercase tracking-wider mb-2 px-3 py-1.5 bg-[#151c28] border border-white/25 rounded-lg inline-block">
-                                          {column.title}
+                                      <div key={colIndex} className="mb-4 block">
+                                        <div className="flex items-center gap-2 mb-2.5">
+                                          <span className="text-lg">{column.icon}</span>
+                                          <div className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                                            {column.title}
+                                          </div>
                                         </div>
                                         <div className="space-y-1.5 flex flex-col">
-                                          {column.items.slice(0, 3).map((subItem, itemIndex) => (
+                                          {column.items.map((subItem, itemIndex) => (
                                             <Link
                                               key={itemIndex}
                                               to={subItem.path}
@@ -1074,11 +1092,13 @@ const Header = () => {
                                                 setIsMenuOpen(false)
                                                 setExpandedMobileItem(null)
                                               }}
-                                              className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg border border-white/20 bg-[#151c28] text-white hover:bg-[#1e2836] hover:border-white/35 hover:text-white text-xs transition-all font-medium shadow-sm"
+                                              className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg border border-white/20 bg-[#151c28] text-white hover:bg-[#1e2836] hover:border-white/35 hover:text-white text-sm transition-all font-medium shadow-sm"
                                               style={{ display: 'flex' }}
                                             >
-                                              <span className="text-sm flex-shrink-0">{column.icon}</span>
                                               <span className="flex-1">{subItem.label}</span>
+                                              <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                              </svg>
                                             </Link>
                                           ))}
                                         </div>
@@ -1091,7 +1111,7 @@ const Header = () => {
                                         setIsMenuOpen(false)
                                         setExpandedMobileItem(null)
                                       }}
-                                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-[#2f8edc]/50 bg-[#2f8edc]/20 hover:bg-[#2f8edc]/30 text-white font-semibold text-sm transition-all mt-3"
+                                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-[#2f8edc]/50 bg-[#2f8edc]/20 hover:bg-[#2f8edc]/30 text-white font-semibold text-sm transition-all mt-2"
                                     >
                                       <span>View All {item.label}</span>
                                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -1102,7 +1122,7 @@ const Header = () => {
                                 ) : item.items ? (
                                   <>
                                     <div className="space-y-1.5 flex flex-col">
-                                      {item.items.slice(0, 4).map((subItem, itemIndex) => (
+                                      {item.items.map((subItem, itemIndex) => (
                                         <Link
                                           key={itemIndex}
                                           to={subItem.path}
@@ -1126,6 +1146,9 @@ const Header = () => {
                                           style={{ display: 'flex' }}
                                         >
                                           <span className="flex-1">{subItem.label}</span>
+                                          <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                          </svg>
                                         </Link>
                                       ))}
                                     </div>
@@ -1136,7 +1159,7 @@ const Header = () => {
                                         setIsMenuOpen(false)
                                         setExpandedMobileItem(null)
                                       }}
-                                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-[#2f8edc]/50 bg-[#2f8edc]/20 hover:bg-[#2f8edc]/30 text-white font-semibold text-sm transition-all mt-3"
+                                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-[#2f8edc]/50 bg-[#2f8edc]/20 hover:bg-[#2f8edc]/30 text-white font-semibold text-sm transition-all mt-2"
                                     >
                                       <span>View All {item.label}</span>
                                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
