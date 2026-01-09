@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const SEO = ({ 
   seoTitle,
@@ -56,17 +57,86 @@ const SEO = ({
     })
   }
 
+  // Manually update meta tags to ensure they're replaced (fallback for react-helmet-async)
+  useEffect(() => {
+    // Update description meta tag
+    let descMeta = document.querySelector('meta[name="description"]')
+    if (!descMeta) {
+      descMeta = document.createElement('meta')
+      descMeta.setAttribute('name', 'description')
+      document.head.appendChild(descMeta)
+    }
+    descMeta.setAttribute('content', description)
+
+    // Update og:description
+    let ogDescMeta = document.querySelector('meta[property="og:description"]')
+    if (!ogDescMeta) {
+      ogDescMeta = document.createElement('meta')
+      ogDescMeta.setAttribute('property', 'og:description')
+      document.head.appendChild(ogDescMeta)
+    }
+    ogDescMeta.setAttribute('content', ogDescText)
+
+    // Update og:title
+    let ogTitleMeta = document.querySelector('meta[property="og:title"]')
+    if (!ogTitleMeta) {
+      ogTitleMeta = document.createElement('meta')
+      ogTitleMeta.setAttribute('property', 'og:title')
+      document.head.appendChild(ogTitleMeta)
+    }
+    ogTitleMeta.setAttribute('content', ogTitleText)
+
+    // Update og:url
+    let ogUrlMeta = document.querySelector('meta[property="og:url"]')
+    if (!ogUrlMeta) {
+      ogUrlMeta = document.createElement('meta')
+      ogUrlMeta.setAttribute('property', 'og:url')
+      document.head.appendChild(ogUrlMeta)
+    }
+    ogUrlMeta.setAttribute('content', canonical)
+
+    // Update twitter:description
+    let twitterDescMeta = document.querySelector('meta[name="twitter:description"]')
+    if (!twitterDescMeta) {
+      twitterDescMeta = document.createElement('meta')
+      twitterDescMeta.setAttribute('name', 'twitter:description')
+      document.head.appendChild(twitterDescMeta)
+    }
+    twitterDescMeta.setAttribute('content', twitterDescText)
+
+    // Update twitter:title
+    let twitterTitleMeta = document.querySelector('meta[name="twitter:title"]')
+    if (!twitterTitleMeta) {
+      twitterTitleMeta = document.createElement('meta')
+      twitterTitleMeta.setAttribute('name', 'twitter:title')
+      document.head.appendChild(twitterTitleMeta)
+    }
+    twitterTitleMeta.setAttribute('content', twitterTitleText)
+
+    // Update canonical link
+    let canonicalLink = document.querySelector('link[rel="canonical"]')
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link')
+      canonicalLink.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonicalLink)
+    }
+    canonicalLink.setAttribute('href', canonical)
+  }, [description, ogDescText, ogTitleText, canonical, twitterDescText, twitterTitleText, location.pathname])
+
   return (
-    <Helmet>
+    <Helmet 
+      key={`seo-${location.pathname}`}
+      prioritizeSeoTags={true}
+    >
       {/* Document Title */}
       <title>{title}</title>
       
-      {/* Core Meta Tags */}
+      {/* Core Meta Tags - react-helmet-async will replace existing tags with same name */}
       <meta name="description" content={description} />
       <meta name="robots" content={indexable ? `${robots},max-image-preview:large` : 'noindex,nofollow'} />
       <meta name="theme-color" content="#0B0F17" />
       
-      {/* Open Graph Tags */}
+      {/* Open Graph Tags - react-helmet-async will replace existing tags with same property */}
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:url" content={canonical} />
@@ -76,13 +146,13 @@ const SEO = ({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       
-      {/* Twitter Card Tags */}
+      {/* Twitter Card Tags - react-helmet-async will replace existing tags with same name */}
       <meta name="twitter:card" content={twitterCard} />
       {twitterTitleText && <meta name="twitter:title" content={twitterTitleText} />}
       {twitterDescText && <meta name="twitter:description" content={twitterDescText} />}
       {twitterImg && <meta name="twitter:image" content={twitterImg} />}
       
-      {/* Canonical URL */}
+      {/* Canonical URL - react-helmet-async will replace existing canonical link */}
       <link rel="canonical" href={canonical} />
       
       {/* Structured Data */}

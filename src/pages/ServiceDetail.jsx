@@ -4,6 +4,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { servicesData } from '../data/servicesData'
 import { fetchServiceBySlug } from '../utils/api'
+import SEO from '../components/SEO'
 
 const ServiceDetail = () => {
   const { slug } = useParams()
