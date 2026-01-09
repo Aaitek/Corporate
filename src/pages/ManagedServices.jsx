@@ -63,7 +63,7 @@ const ManagedServices = () => {
   ]
 
   return (
-    <div className="pt-32 pb-20">
+    <div className="pt-32">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h1 className="heading-1 mb-4">Managed Services</h1>

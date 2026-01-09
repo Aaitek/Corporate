@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 
 const SEO = ({ 
@@ -42,143 +42,79 @@ const SEO = ({
   const twitterDescText = twitterDescription || ogDescText || description
   const twitterImg = twitterImage || ogImg
 
-  useEffect(() => {
-    // Update document title
-    document.title = title
-
-    // Helper function to update or create meta tags
-    const updateMetaTag = (name, content, isProperty = false) => {
-      if (!content) return
-      
-      const attribute = isProperty ? 'property' : 'name'
-      let element = document.querySelector(`meta[${attribute}="${name}"]`)
-      
-      if (!element) {
-        element = document.createElement('meta')
-        element.setAttribute(attribute, name)
-        document.head.appendChild(element)
-      }
-      
-      element.setAttribute('content', content)
-    }
-
-    // Core Meta Tags
-    updateMetaTag('description', description)
-    updateMetaTag('robots', indexable ? `${robots},max-image-preview:large` : 'noindex,nofollow')
-    updateMetaTag('theme-color', '#0B0F17')
-
-    // Open Graph Tags
-    updateMetaTag('og:type', ogType, true)
-    updateMetaTag('og:site_name', siteName, true)
-    updateMetaTag('og:url', canonical, true)
-    updateMetaTag('og:title', ogTitleText, true)
-    updateMetaTag('og:description', ogDescText, true)
-    updateMetaTag('og:image', ogImg, true)
-    updateMetaTag('og:image:width', '1200', true)
-    updateMetaTag('og:image:height', '630', true)
-
-    // Twitter Card Tags
-    updateMetaTag('twitter:card', twitterCard)
-    if (twitterTitleText) updateMetaTag('twitter:title', twitterTitleText)
-    if (twitterDescText) updateMetaTag('twitter:description', twitterDescText)
-    if (twitterImg) updateMetaTag('twitter:image', twitterImg)
-
-    // Canonical URL
-    let canonicalLink = document.querySelector('link[rel="canonical"]')
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link')
-      canonicalLink.setAttribute('rel', 'canonical')
-      document.head.appendChild(canonicalLink)
-    }
-    canonicalLink.setAttribute('href', canonical)
-
-    // Structured Data
-    if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"][data-seo-schema]')
-      if (!script) {
-        script = document.createElement('script')
-        script.setAttribute('type', 'application/ld+json')
-        script.setAttribute('data-seo-schema', 'true')
-        document.head.appendChild(script)
-      }
-      script.textContent = JSON.stringify(structuredData)
-    } else {
-      // Default structured data if none provided
-      const defaultStructuredData = {
-        "@context": "https://schema.org",
-        "@type": schemaType,
-        "name": siteName,
-        "url": canonical,
-        ...(schemaType === 'Organization' && {
-          "logo": `${siteUrl}/logo.png`,
-          "sameAs": [
-            "https://www.linkedin.com/company/aaitek"
-          ]
-        })
-      }
-      
-      let script = document.querySelector('script[type="application/ld+json"][data-seo-schema]')
-      if (!script) {
-        script = document.createElement('script')
-        script.setAttribute('type', 'application/ld+json')
-        script.setAttribute('data-seo-schema', 'true')
-        document.head.appendChild(script)
-      }
-      script.textContent = JSON.stringify(defaultStructuredData)
-    }
-
-    // Always add Organization and WebSite structured data for better SEO
-    const addAdditionalSchema = (schema, id) => {
-      let script = document.querySelector(`script[type="application/ld+json"][data-seo-schema="${id}"]`)
-      if (!script) {
-        script = document.createElement('script')
-        script.setAttribute('type', 'application/ld+json')
-        script.setAttribute('data-seo-schema', id)
-        document.head.appendChild(script)
-      }
-      script.textContent = JSON.stringify(schema)
-    }
-
-    // Add Organization schema (always present)
-    addAdditionalSchema({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": siteName,
-      "url": siteUrl,
+  // Default structured data if none provided
+  const defaultStructuredData = structuredData || {
+    "@context": "https://schema.org",
+    "@type": schemaType,
+    "name": siteName,
+    "url": canonical,
+    ...(schemaType === 'Organization' && {
       "logo": `${siteUrl}/logo.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
-    }, 'organization')
+    })
+  }
 
-    // Add WebSite schema (always present)
-    addAdditionalSchema({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": siteName,
-      "url": siteUrl
-    }, 'website')
-  }, [
-    title, 
-    description, 
-    canonical, 
-    robots,
-    ogTitleText,
-    ogDescText,
-    ogImg,
-    ogType,
-    twitterTitleText,
-    twitterDescText,
-    twitterImg,
-    twitterCard,
-    structuredData,
-    schemaType,
-    indexable,
-    siteName,
-    siteUrl
-  ])
-
-  return null
+  return (
+    <Helmet>
+      {/* Document Title */}
+      <title>{title}</title>
+      
+      {/* Core Meta Tags */}
+      <meta name="description" content={description} />
+      <meta name="robots" content={indexable ? `${robots},max-image-preview:large` : 'noindex,nofollow'} />
+      <meta name="theme-color" content="#0B0F17" />
+      
+      {/* Open Graph Tags */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:title" content={ogTitleText} />
+      <meta property="og:description" content={ogDescText} />
+      <meta property="og:image" content={ogImg} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content={twitterCard} />
+      {twitterTitleText && <meta name="twitter:title" content={twitterTitleText} />}
+      {twitterDescText && <meta name="twitter:description" content={twitterDescText} />}
+      {twitterImg && <meta name="twitter:image" content={twitterImg} />}
+      
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonical} />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(defaultStructuredData)}
+      </script>
+      
+      {/* Additional Organization Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": siteName,
+          "url": siteUrl,
+          "logo": `${siteUrl}/logo.png`,
+          "sameAs": [
+            "https://www.linkedin.com/company/aaitek"
+          ]
+        })}
+      </script>
+      
+      {/* WebSite Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": siteName,
+          "url": siteUrl
+        })}
+      </script>
+    </Helmet>
+  )
 }
 
 export default SEO

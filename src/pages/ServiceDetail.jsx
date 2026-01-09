@@ -175,7 +175,7 @@ const ServiceDetail = () => {
   // Loading state
   if (loading) {
     return (
-      <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
           <p className="text-gray-600">Loading service...</p>
@@ -187,7 +187,7 @@ const ServiceDetail = () => {
   // Error state (only if service is truly not found)
   if (error && !service) {
     return (
-      <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Service Not Found</h1>
           <p className="text-gray-600 mb-8">{error}</p>
@@ -209,7 +209,7 @@ const ServiceDetail = () => {
 
 
   return (
-    <div className="pt-0 pb-24 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section with Image */}
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
