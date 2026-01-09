@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { getServiceSlug } from '../utils/slugHelper'
+import SEO from '../components/SEO'
 
 const ServiceCategoryDetail = () => {
   const { slug } = useParams()
@@ -403,8 +404,38 @@ const ServiceCategoryDetail = () => {
     return categoryImages[slug] || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80'
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+  const canonicalUrl = `${siteUrl}/services/category/${slug}`
+  const seoTitle = category ? `${category.title} - Service Category | Aaitek` : 'Service Category - Aaitek'
+  // Create a comprehensive description
+  let seoDescription = category?.longDescription || category?.description || ''
+  if (!seoDescription && category?.title) {
+    seoDescription = `${category.title} services by Aaitek. ${category.description || 'Enterprise-grade digital transformation solutions designed for scale, security, and measurable business outcomes.'}`
+  }
+  if (!seoDescription) {
+    seoDescription = 'Enterprise-grade digital transformation services by Aaitek. Built for scale, security, and measurable business outcomes.'
+  }
+  // Ensure description is optimal length
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157) + '...'
+  }
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle={seoTitle}
+        seoDescription={seoDescription}
+        canonicalUrl={canonicalUrl}
+        ogTitle={category?.title || 'Service Category'}
+        ogDescription={seoDescription}
+        ogImage={getImage()}
+        ogType="website"
+        twitterTitle={category?.title || 'Service Category'}
+        twitterDescription={seoDescription}
+        schemaType="Service"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section with Image */}
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -704,6 +735,7 @@ const ServiceCategoryDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

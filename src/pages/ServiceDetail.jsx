@@ -207,8 +207,37 @@ const ServiceDetail = () => {
     return null
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+  const canonicalUrl = `${siteUrl}/services/${slug}`
+  const seoTitle = service ? `${service.title} - Service | Aaitek` : 'Service - Aaitek'
+  // Create a comprehensive description
+  let seoDescription = service?.description || service?.shortDescription || ''
+  if (!seoDescription && service?.title) {
+    seoDescription = `${service.title} by Aaitek. Enterprise-grade ${service.category || 'digital transformation'} solutions designed for scale, security, and measurable business outcomes.`
+  }
+  if (!seoDescription) {
+    seoDescription = 'Enterprise-grade digital transformation services by Aaitek. Built for scale, security, and measurable business outcomes.'
+  }
+  // Ensure description is optimal length
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157) + '...'
+  }
 
   return (
+    <>
+      <SEO
+        seoTitle={seoTitle}
+        seoDescription={seoDescription}
+        canonicalUrl={canonicalUrl}
+        ogTitle={service?.title || 'Service'}
+        ogDescription={seoDescription}
+        ogImage={service?.image || `${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle={service?.title || 'Service'}
+        twitterDescription={seoDescription}
+        schemaType="Service"
+        indexable={true}
+      />
     <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section with Image */}
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
@@ -612,6 +641,7 @@ const ServiceDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

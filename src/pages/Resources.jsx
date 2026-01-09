@@ -4,6 +4,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
+import SEO from '../components/SEO'
 
 const Resources = () => {
   const [filters, setFilters] = useState({
@@ -161,7 +162,23 @@ const Resources = () => {
     setSearchQuery('')
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
+    <>
+      <SEO
+        seoTitle="Resources - Insights, Articles & Knowledge | Aaitek"
+        seoDescription="Practical insights, AI trends, platform engineering insights, and real delivery learnings. Articles, Press Releases, Webinars, Videos, and Case Studies."
+        canonicalUrl={`${siteUrl}/resources`}
+        ogTitle="Resources - Insights, Articles & Knowledge"
+        ogDescription="Practical insights, AI trends, platform engineering insights, and real delivery learnings from Aaitek."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Resources - Insights, Articles & Knowledge"
+        twitterDescription="Practical insights, AI trends, and real delivery learnings from Aaitek."
+        schemaType="CollectionPage"
+        indexable={true}
+      />
     <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
@@ -466,6 +483,7 @@ const Resources = () => {
       </div>
       </section>
     </div>
+    </>
   )
 }
 

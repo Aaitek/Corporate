@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { CountUp } from '../hooks/useCountUp'
+import SEO from '../components/SEO'
 
 const About = () => {
   const ref = useRef(null)
@@ -53,8 +54,24 @@ const About = () => {
     'Enterprise Platforms',
   ]
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="About Us - Who We Are | Aaitek"
+        seoDescription="Learn about Aaitek, a premium technology partner focused on modern platforms, AI-first solutions, and enterprise-grade delivery. Australia-based, globally delivered."
+        canonicalUrl={`${siteUrl}/about`}
+        ogTitle="About Us - Who We Are"
+        ogDescription="Learn about Aaitek, a premium technology partner focused on modern platforms, AI-first solutions, and enterprise-grade delivery."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="About Us - Who We Are"
+        twitterDescription="Learn about Aaitek, a premium technology partner."
+        schemaType="AboutPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -310,6 +327,7 @@ const About = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

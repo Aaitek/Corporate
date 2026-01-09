@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import SEO from '../components/SEO'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -73,8 +74,24 @@ const Contact = () => {
     })
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Contact Us - Get in Touch | Aaitek"
+        seoDescription="Get in touch with Aaitek. Contact us via email, phone, or fill out our contact form. We're here to help transform your digital vision into reality."
+        canonicalUrl={`${siteUrl}/contact`}
+        ogTitle="Contact Us - Get in Touch"
+        ogDescription="Get in touch with Aaitek. We're here to help transform your digital vision into reality."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Contact Us - Get in Touch"
+        twitterDescription="Get in touch with Aaitek to transform your digital vision."
+        schemaType="ContactPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -363,6 +380,7 @@ const Contact = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

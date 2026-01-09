@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import industriesData from '../data/industriesData'
+import SEO from '../components/SEO'
 
 const IndustryDetail = () => {
   const { slug } = useParams()
@@ -18,8 +19,48 @@ const IndustryDetail = () => {
     howAIMakesDifference: [],
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+  const canonicalUrl = `${siteUrl}/industries/${slug}`
+  const seoTitle = `${industry.title} - Industry Solutions | Aaitek`
+  // Create a comprehensive, SEO-optimized description
+  let seoDescription = ''
+  if (industry.description) {
+    // Use the description and enhance it if it's too short
+    seoDescription = industry.description
+    if (seoDescription.length < 100 && industry.whatWeDo) {
+      seoDescription = `${seoDescription} ${industry.whatWeDo}`
+    }
+  } else if (industry.whatWeDo) {
+    seoDescription = industry.whatWeDo
+  } else if (industry.subtitle) {
+    seoDescription = `${industry.subtitle}. Enterprise-grade digital transformation solutions tailored for ${industry.title.toLowerCase()} industry.`
+  } else {
+    seoDescription = `Enterprise-grade digital transformation solutions for ${industry.title}. Modern platforms, AI-first solutions, and intelligent automation tailored to your industry needs.`
+  }
+  // Ensure description is optimal length (150-160 characters for best SEO)
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157) + '...'
+  } else if (seoDescription.length < 120 && industry.whatWeDo && !industry.description) {
+    // If description is too short, add more context
+    seoDescription = `${seoDescription} Built for scale, security, and measurable business outcomes.`
+  }
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle={seoTitle}
+        seoDescription={seoDescription}
+        canonicalUrl={canonicalUrl}
+        ogTitle={`${industry.title} - Industry Solutions`}
+        ogDescription={seoDescription}
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle={`${industry.title} - Industry Solutions`}
+        twitterDescription={seoDescription}
+        schemaType="WebPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-90`}></div>
@@ -468,6 +509,7 @@ const IndustryDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import productsData from '../data/productsData'
+import SEO from '../components/SEO'
 
 const Products = () => {
   const ref = useRef(null)
@@ -14,8 +15,24 @@ const Products = () => {
     slug,
   }))
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Products - AI Agents & Platforms | Aaitek"
+        seoDescription="Modular AI solutions built on Aaitek delivery standards. AI Sales Agent, AI Booking Agent, AI Trade Strategy Agent, and more enterprise-ready products."
+        canonicalUrl={`${siteUrl}/products`}
+        ogTitle="Products - AI Agents & Platforms"
+        ogDescription="Modular AI solutions built on Aaitek delivery standards—designed for scale, security, and measurable ROI."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Products - AI Agents & Platforms"
+        twitterDescription="Modular AI solutions built on Aaitek delivery standards."
+        schemaType="CollectionPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -177,6 +194,7 @@ const Products = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

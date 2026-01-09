@@ -4,6 +4,7 @@ import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
+import SEO from '../components/SEO'
 
 const PartnerSuccess = () => {
   const [filters, setFilters] = useState({
@@ -190,8 +191,24 @@ const PartnerSuccess = () => {
     })
   }, [filters, searchQuery, caseStudies])
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Partner Success - Case Studies & Client Stories | Aaitek"
+        seoDescription="Enterprise-grade outcomes, measurable impact, delivery reliability. Case studies, client success stories, platform migrations, and AI & automation outcomes."
+        canonicalUrl={`${siteUrl}/partner-success`}
+        ogTitle="Partner Success - Case Studies & Client Stories"
+        ogDescription="Enterprise-grade outcomes, measurable impact, delivery reliability. Built for stakeholders and audits."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Partner Success - Case Studies & Client Stories"
+        twitterDescription="Enterprise-grade outcomes, measurable impact, delivery reliability."
+        schemaType="CollectionPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -619,9 +636,10 @@ const PartnerSuccess = () => {
               </svg>
             </Link>
           </motion.div>
-      </div>
+        </div>
       </section>
     </div>
+    </>
   )
 }
 

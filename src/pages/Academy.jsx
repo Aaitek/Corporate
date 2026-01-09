@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import academyData from '../data/academyData'
+import SEO from '../components/SEO'
 
 const Academy = () => {
   const categories = [
@@ -81,8 +82,24 @@ const Academy = () => {
     'Suitable for individuals, teams, and organisations',
   ]
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Academy - Premium Training Programs | Aaitek"
+        seoDescription="Premium training pathways for engineers and enterprise teams. Full-Stack Engineering, Cloud Engineering, Data & AI Engineering, DevOps, and Enterprise Technologies training."
+        canonicalUrl={`${siteUrl}/academy`}
+        ogTitle="Academy - Premium Training Programs"
+        ogDescription="Premium training pathways for engineers and enterprise teams—designed for delivery readiness, not theory."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Academy - Premium Training Programs"
+        twitterDescription="Premium training pathways for engineers and enterprise teams."
+        schemaType="EducationalOrganization"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -349,6 +366,7 @@ const Academy = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

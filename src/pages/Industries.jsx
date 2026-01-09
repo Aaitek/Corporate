@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import industriesData from '../data/industriesData'
+import SEO from '../components/SEO'
 
 const Industries = () => {
   const industries = [
@@ -56,8 +57,24 @@ const Industries = () => {
     'Scalable, enterprise-ready architectures',
   ]
 
+  const siteUrl = 'https://aaitek.com.au'
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle="Industries - Industry-Specific Solutions | Aaitek"
+        seoDescription="Industry-specific digital transformation solutions for Sports & Media, Financial Services, Real Estate, Healthcare, Retail, Education, Energy, and Government sectors."
+        canonicalUrl={`${siteUrl}/industries`}
+        ogTitle="Industries - Industry-Specific Solutions"
+        ogDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs and challenges."
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle="Industries - Industry-Specific Solutions"
+        twitterDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs."
+        schemaType="WebPage"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -358,6 +375,7 @@ const Industries = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

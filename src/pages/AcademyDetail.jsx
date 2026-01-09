@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import academyData from '../data/academyData'
+import SEO from '../components/SEO'
 
 const AcademyDetail = () => {
   const { slug } = useParams()
@@ -22,8 +23,35 @@ const AcademyDetail = () => {
     setOpenFaq(openFaq === index ? null : index)
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+  const canonicalUrl = `${siteUrl}/academy/${slug}`
+  const seoTitle = `${course.title} - Academy Course | Aaitek`
+  // Create a comprehensive description
+  let seoDescription = course.description || ''
+  if (!seoDescription) {
+    seoDescription = `${course.subtitle || course.title} training course by Aaitek. Premium training pathway designed for delivery readiness, not theory. Enterprise-ready outcomes.`
+  }
+  // Ensure description is optimal length
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157) + '...'
+  }
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle={seoTitle}
+        seoDescription={seoDescription}
+        canonicalUrl={canonicalUrl}
+        ogTitle={course.title}
+        ogDescription={seoDescription}
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle={course.title}
+        twitterDescription={seoDescription}
+        schemaType="Course"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-90`}></div>
@@ -403,6 +431,7 @@ const AcademyDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 

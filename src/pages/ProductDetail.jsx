@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import productsData from '../data/productsData'
+import SEO from '../components/SEO'
 
 const ProductDetail = () => {
   const { slug } = useParams()
@@ -16,8 +17,35 @@ const ProductDetail = () => {
     keyFeatures: [],
   }
 
+  const siteUrl = 'https://aaitek.com.au'
+  const canonicalUrl = `${siteUrl}/products/${slug}`
+  const seoTitle = `${product.title} - Product | Aaitek`
+  // Create a comprehensive description
+  let seoDescription = product.description || product.longDescription || ''
+  if (!seoDescription) {
+    seoDescription = `${product.subtitle || product.title} by Aaitek. ${product.title} is a modular AI solution built on enterprise-grade delivery standards, designed for scale, security, and measurable ROI.`
+  }
+  // Ensure description is optimal length (150-160 characters)
+  if (seoDescription.length > 160) {
+    seoDescription = seoDescription.substring(0, 157) + '...'
+  }
+
   return (
-    <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
+    <>
+      <SEO
+        seoTitle={seoTitle}
+        seoDescription={seoDescription}
+        canonicalUrl={canonicalUrl}
+        ogTitle={product.title}
+        ogDescription={seoDescription}
+        ogImage={`${siteUrl}/logo.png`}
+        ogType="website"
+        twitterTitle={product.title}
+        twitterDescription={seoDescription}
+        schemaType="Product"
+        indexable={true}
+      />
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-90`}></div>
@@ -279,6 +307,7 @@ const ProductDetail = () => {
         </div>
       </section>
     </div>
+    </>
   )
 }
 
