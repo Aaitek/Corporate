@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
 import SEO from '../components/SEO'
+import { fetchCaseStudies } from '../utils/api'
 
 const CaseStudies = () => {
   const [filters, setFilters] = useState({
@@ -14,6 +15,58 @@ const CaseStudies = () => {
     region: 'all',
   })
   const [searchQuery, setSearchQuery] = useState('')
+  const [caseStudies, setCaseStudies] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadCaseStudies = async () => {
+      try {
+        setLoading(true)
+        const response = await fetchCaseStudies()
+        if (response?.data) {
+          // Map Strapi data to component format
+          const mapped = response.data.map(item => ({
+            id: item.id,
+            title: item.attributes?.title || '',
+            slug: item.attributes?.slug || '',
+            client: item.attributes?.client || '',
+            industry: item.attributes?.industry || '',
+            category: item.attributes?.category || '',
+            description: item.attributes?.description || '',
+            fullContent: item.attributes?.fullContent || '',
+            image: item.attributes?.image?.data?.attributes?.url 
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+              : item.attributes?.image?.data?.attributes?.formats?.medium?.url
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.medium.url}`
+              : 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
+            results: item.attributes?.results || {},
+            technologies: item.attributes?.technologies || [],
+            // Map for filters (using category as service, technologies for tech)
+            service: item.attributes?.category || 'Engineering',
+            tech: Array.isArray(item.attributes?.technologies) 
+              ? item.attributes.technologies[0] || 'React'
+              : 'React',
+            engagementType: 'Delivery',
+            year: item.attributes?.publishedAt 
+              ? new Date(item.attributes.publishedAt).getFullYear().toString()
+              : '2024',
+            region: 'Australia',
+            status: 'Published',
+            color: 'from-blue-500 to-cyan-500',
+            icon: '📚',
+          }))
+          setCaseStudies(mapped)
+        }
+      } catch (error) {
+        console.error('Error fetching case studies:', error)
+        // Fallback to empty array or show error
+        setCaseStudies([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadCaseStudies()
+  }, [])
 
   const filterOptions = {
     industry: ['All Industries', 'Finance', 'Sports', 'Healthcare', 'Government', 'Retail', 'Real Estate', 'Education', 'Energy'],
@@ -24,7 +77,8 @@ const CaseStudies = () => {
     region: ['All Regions', 'Australia', 'APAC', 'Global'],
   }
 
-  const caseStudies = [
+  // Fallback data (only used if API fails)
+  const fallbackCaseStudies = [
     {
       title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
       slug: 'enterprise-dxp-modernisation-public-sector',
@@ -271,22 +325,30 @@ const CaseStudies = () => {
               
               {/* Main Content */}
               <div className="flex-1">
-                {/* Results Count */}
-                <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-gray-700"
-                  >
-                    <span className="font-bold text-base sm:text-lg">{filteredCaseStudies.length}</span>
-                    <span className="text-gray-600 ml-2 text-sm sm:text-base">
-                      {filteredCaseStudies.length === 1 ? 'Case Study' : 'Case Studies'} Found
-                    </span>
-                  </motion.div>
-                </div>
+                {/* Loading State */}
+                {loading ? (
+                  <div className="text-center py-16">
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+                    <p className="mt-4 text-gray-600">Loading case studies...</p>
+                  </div>
+                ) : (
+                  <>
+                    {/* Results Count */}
+                    <div className="mb-4 sm:mb-6 flex items-center justify-between">
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="text-gray-700"
+                      >
+                        <span className="font-bold text-base sm:text-lg">{filteredCaseStudies.length}</span>
+                        <span className="text-gray-600 ml-2 text-sm sm:text-base">
+                          {filteredCaseStudies.length === 1 ? 'Case Study' : 'Case Studies'} Found
+                        </span>
+                      </motion.div>
+                    </div>
 
-                {/* Case Studies Grid */}
-                {filteredCaseStudies.length > 0 ? (
+                    {/* Case Studies Grid */}
+                    {filteredCaseStudies.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                     {filteredCaseStudies.map((study, index) => (
                       <motion.div
@@ -361,7 +423,9 @@ const CaseStudies = () => {
                     >
                       Clear All Filters
                     </button>
-                  </motion.div>
+                    </motion.div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
