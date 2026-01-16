@@ -201,10 +201,11 @@ const PartnerSuccess = () => {
         canonicalUrl={`${siteUrl}/partner-success`}
         ogTitle="Partner Success - Case Studies & Client Stories"
         ogDescription="Enterprise-grade outcomes, measurable impact, delivery reliability. Built for stakeholders and audits."
-        ogImage={`${siteUrl}/logo.png`}
+        ogImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
         ogType="website"
         twitterTitle="Partner Success - Case Studies & Client Stories"
         twitterDescription="Enterprise-grade outcomes, measurable impact, delivery reliability."
+        twitterImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
         schemaType="CollectionPage"
         indexable={true}
       />

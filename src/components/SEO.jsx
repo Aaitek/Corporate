@@ -59,6 +59,9 @@ const SEO = ({
 
   // Manually update meta tags to ensure they're replaced (fallback for react-helmet-async)
   useEffect(() => {
+    // Update document title
+    document.title = title
+
     // Update description meta tag
     let descMeta = document.querySelector('meta[name="description"]')
     if (!descMeta) {
@@ -113,6 +116,42 @@ const SEO = ({
     }
     twitterTitleMeta.setAttribute('content', twitterTitleText)
 
+    // Update og:image
+    let ogImageMeta = document.querySelector('meta[property="og:image"]')
+    if (!ogImageMeta) {
+      ogImageMeta = document.createElement('meta')
+      ogImageMeta.setAttribute('property', 'og:image')
+      document.head.appendChild(ogImageMeta)
+    }
+    ogImageMeta.setAttribute('content', ogImg)
+
+    // Update og:image:width
+    let ogImageWidthMeta = document.querySelector('meta[property="og:image:width"]')
+    if (!ogImageWidthMeta) {
+      ogImageWidthMeta = document.createElement('meta')
+      ogImageWidthMeta.setAttribute('property', 'og:image:width')
+      document.head.appendChild(ogImageWidthMeta)
+    }
+    ogImageWidthMeta.setAttribute('content', '1200')
+
+    // Update og:image:height
+    let ogImageHeightMeta = document.querySelector('meta[property="og:image:height"]')
+    if (!ogImageHeightMeta) {
+      ogImageHeightMeta = document.createElement('meta')
+      ogImageHeightMeta.setAttribute('property', 'og:image:height')
+      document.head.appendChild(ogImageHeightMeta)
+    }
+    ogImageHeightMeta.setAttribute('content', '630')
+
+    // Update twitter:image
+    let twitterImageMeta = document.querySelector('meta[name="twitter:image"]')
+    if (!twitterImageMeta) {
+      twitterImageMeta = document.createElement('meta')
+      twitterImageMeta.setAttribute('name', 'twitter:image')
+      document.head.appendChild(twitterImageMeta)
+    }
+    twitterImageMeta.setAttribute('content', twitterImg)
+
     // Update canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]')
     if (!canonicalLink) {
@@ -121,7 +160,7 @@ const SEO = ({
       document.head.appendChild(canonicalLink)
     }
     canonicalLink.setAttribute('href', canonical)
-  }, [description, ogDescText, ogTitleText, canonical, twitterDescText, twitterTitleText, location.pathname])
+  }, [title, description, ogDescText, ogTitleText, canonical, twitterDescText, twitterTitleText, ogImg, twitterImg, location.pathname])
 
   return (
     <Helmet 

@@ -10,7 +10,17 @@ const ServiceDetail = () => {
   const { slug } = useParams()
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
-  const [service, setService] = useState(null)
+  // Initialize with static data immediately so SEO has data from the start
+  const [service, setService] = useState(() => {
+    const staticService = servicesData[slug]
+    if (staticService) {
+      return {
+        ...staticService,
+        category: staticService.category || 'Service',
+      }
+    }
+    return null
+  })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [openFAQIndex, setOpenFAQIndex] = useState(null)
@@ -173,18 +183,6 @@ const ServiceDetail = () => {
     }
   }, [slug])
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
-          <p className="text-gray-600">Loading service...</p>
-        </div>
-      </div>
-    )
-  }
-
   // Error state (only if service is truly not found)
   if (error && !service) {
     return (
@@ -203,39 +201,83 @@ const ServiceDetail = () => {
     )
   }
 
-  // Default service data if still null
+  // If no service data at all, show loading
   if (!service) {
-    return null
+    return (
+      <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <p className="text-gray-600">Loading service...</p>
+        </div>
+      </div>
+    )
   }
 
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/services/${slug}`
   const seoTitle = service ? `${service.title} - Service | Aaitek` : 'Service - Aaitek'
-  // Create a comprehensive description
-  let seoDescription = service?.description || service?.shortDescription || ''
+  
+  // Create a comprehensive, SEO-optimized description
+  // Priority: description > longDescription > subtitle > generated
+  let seoDescription = service?.description || service?.longDescription || service?.subtitle || ''
+  
+  // If we have a subtitle but no description, combine them
+  if (!seoDescription && service?.subtitle && service?.title) {
+    seoDescription = `${service.subtitle}. Enterprise-grade ${service.category || 'digital transformation'} solutions by Aaitek.`
+  }
+  
+  // If still no description, create one from available data
   if (!seoDescription && service?.title) {
     seoDescription = `${service.title} by Aaitek. Enterprise-grade ${service.category || 'digital transformation'} solutions designed for scale, security, and measurable business outcomes.`
   }
+  
+  // Final fallback
   if (!seoDescription) {
     seoDescription = 'Enterprise-grade digital transformation services by Aaitek. Built for scale, security, and measurable business outcomes.'
   }
-  // Ensure description is optimal length
+  
+  // Ensure description is optimal length (120-160 characters for best SEO)
   if (seoDescription.length > 160) {
-    seoDescription = seoDescription.substring(0, 157) + '...'
+    // Try to cut at a sentence boundary
+    const truncated = seoDescription.substring(0, 157)
+    const lastPeriod = truncated.lastIndexOf('.')
+    const lastSpace = truncated.lastIndexOf(' ')
+    if (lastPeriod > 100) {
+      seoDescription = truncated.substring(0, lastPeriod + 1)
+    } else if (lastSpace > 100) {
+      seoDescription = truncated.substring(0, lastSpace) + '...'
+    } else {
+      seoDescription = truncated + '...'
+    }
+  } else if (seoDescription.length < 120 && service?.subtitle && !service?.description) {
+    // If description is too short, enhance it
+    seoDescription = `${seoDescription} Enterprise-grade solutions designed for scale, security, and measurable business outcomes.`
+    // Trim again if too long
+    if (seoDescription.length > 160) {
+      seoDescription = seoDescription.substring(0, 157) + '...'
+    }
   }
+
+  // Get image URL - ensure it's always absolute
+  const imageUrl = getImage()
+  const absoluteImageUrl = imageUrl.startsWith('http://') || imageUrl.startsWith('https://') 
+    ? imageUrl 
+    : `${siteUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
 
   return (
     <>
       <SEO
+        key={`service-${slug}-${service?.title || 'default'}`}
         seoTitle={seoTitle}
         seoDescription={seoDescription}
         canonicalUrl={canonicalUrl}
         ogTitle={service?.title || 'Service'}
         ogDescription={seoDescription}
-        ogImage={service?.image || `${siteUrl}/logo.png`}
+        ogImage={absoluteImageUrl}
         ogType="website"
         twitterTitle={service?.title || 'Service'}
         twitterDescription={seoDescription}
+        twitterImage={absoluteImageUrl}
         schemaType="Service"
         indexable={true}
       />

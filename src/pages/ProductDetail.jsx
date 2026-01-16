@@ -20,14 +20,51 @@ const ProductDetail = () => {
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/products/${slug}`
   const seoTitle = `${product.title} - Product | Aaitek`
-  // Create a comprehensive description
-  let seoDescription = product.description || product.longDescription || ''
+  // Create a comprehensive, SEO-optimized description
+  // Combine description and longDescription for a complete description
+  let seoDescription = ''
+  if (product.description && product.longDescription) {
+    seoDescription = `${product.description} ${product.longDescription}`
+  } else {
+    seoDescription = product.description || product.longDescription || ''
+  }
+  
+  // If still no description, create one from available data
   if (!seoDescription) {
     seoDescription = `${product.subtitle || product.title} by Aaitek. ${product.title} is a modular AI solution built on enterprise-grade delivery standards, designed for scale, security, and measurable ROI.`
   }
-  // Ensure description is optimal length (150-160 characters)
+  
+  // Ensure description is optimal length (150-160 characters for best SEO)
+  // But keep it meaningful - don't cut off mid-sentence
   if (seoDescription.length > 160) {
-    seoDescription = seoDescription.substring(0, 157) + '...'
+    // Try to cut at a sentence boundary
+    const truncated = seoDescription.substring(0, 157)
+    const lastPeriod = truncated.lastIndexOf('.')
+    const lastSpace = truncated.lastIndexOf(' ')
+    if (lastPeriod > 120) {
+      seoDescription = truncated.substring(0, lastPeriod + 1)
+    } else if (lastSpace > 120) {
+      seoDescription = truncated.substring(0, lastSpace) + '...'
+    } else {
+      seoDescription = truncated + '...'
+    }
+  }
+
+  // Get product-specific image for social sharing
+  const getProductImage = () => {
+    const productImages = {
+      'ai-sales-agent': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      'ai-booking-agent': 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80',
+      'ai-trade-strategy-agent': 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80',
+      'ai-restaurant-agent': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80',
+      'ai-real-estate-agent': 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
+      'ai-dental-assistant': 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&q=80',
+      'ai-field-service-agent': 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&q=80',
+      'ai-automation-platform': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
+      'enterprise-integration-hub': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
+      'industry-ai-accelerators': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
+    }
+    return productImages[slug] || `${siteUrl}/logo.png`
   }
 
   return (
@@ -38,10 +75,11 @@ const ProductDetail = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={product.title}
         ogDescription={seoDescription}
-        ogImage={`${siteUrl}/logo.png`}
+        ogImage={getProductImage()}
         ogType="website"
         twitterTitle={product.title}
         twitterDescription={seoDescription}
+        twitterImage={getProductImage()}
         schemaType="Product"
         indexable={true}
       />

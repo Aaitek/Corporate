@@ -21,14 +21,15 @@ const Products = () => {
     <>
       <SEO
         seoTitle="Products - AI Agents & Platforms | Aaitek"
-        seoDescription="Modular AI solutions built on Aaitek delivery standards. AI Sales Agent, AI Booking Agent, AI Trade Strategy Agent, and more enterprise-ready products."
+        seoDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
         canonicalUrl={`${siteUrl}/products`}
         ogTitle="Products - AI Agents & Platforms"
-        ogDescription="Modular AI solutions built on Aaitek delivery standards—designed for scale, security, and measurable ROI."
-        ogImage={`${siteUrl}/logo.png`}
+        ogDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
+        ogImage="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80"
         ogType="website"
         twitterTitle="Products - AI Agents & Platforms"
-        twitterDescription="Modular AI solutions built on Aaitek delivery standards."
+        twitterDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
+        twitterImage="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80"
         schemaType="CollectionPage"
         indexable={true}
       />

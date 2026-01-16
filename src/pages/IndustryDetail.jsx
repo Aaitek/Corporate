@@ -45,6 +45,21 @@ const IndustryDetail = () => {
     seoDescription = `${seoDescription} Built for scale, security, and measurable business outcomes.`
   }
 
+  // Get industry-specific image for social sharing
+  const getIndustryImage = () => {
+    const industryImages = {
+      'sports-media': 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80',
+      'financial-services-insurance': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      'real-estate': 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
+      'retail-ecommerce': 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80',
+      'healthcare-life-sciences': 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&q=80',
+      'education-edtech': 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80',
+      'energy-utilities': 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&q=80',
+      'government-public-sector': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
+    }
+    return industryImages[slug] || `${siteUrl}/logo.png`
+  }
+
   return (
     <>
       <SEO
@@ -53,10 +68,11 @@ const IndustryDetail = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={`${industry.title} - Industry Solutions`}
         ogDescription={seoDescription}
-        ogImage={`${siteUrl}/logo.png`}
+        ogImage={getIndustryImage()}
         ogType="website"
         twitterTitle={`${industry.title} - Industry Solutions`}
         twitterDescription={seoDescription}
+        twitterImage={getIndustryImage()}
         schemaType="WebPage"
         indexable={true}
       />

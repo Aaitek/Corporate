@@ -172,10 +172,11 @@ const Resources = () => {
         canonicalUrl={`${siteUrl}/resources`}
         ogTitle="Resources - Insights, Articles & Knowledge"
         ogDescription="Practical insights, AI trends, platform engineering insights, and real delivery learnings from Aaitek."
-        ogImage={`${siteUrl}/logo.png`}
+        ogImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80"
         ogType="website"
         twitterTitle="Resources - Insights, Articles & Knowledge"
         twitterDescription="Practical insights, AI trends, and real delivery learnings from Aaitek."
+        twitterImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80"
         schemaType="CollectionPage"
         indexable={true}
       />

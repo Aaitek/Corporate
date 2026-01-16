@@ -26,15 +26,31 @@ const AcademyDetail = () => {
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/academy/${slug}`
   const seoTitle = `${course.title} - Academy Course | Aaitek`
-  // Create a comprehensive description
+  // Create a comprehensive, SEO-optimized description
   let seoDescription = course.description || ''
-  if (!seoDescription) {
-    seoDescription = `${course.subtitle || course.title} training course by Aaitek. Premium training pathway designed for delivery readiness, not theory. Enterprise-ready outcomes.`
+  if (!seoDescription && course.subtitle) {
+    seoDescription = `${course.subtitle}. Premium training course by Aaitek designed for delivery readiness and enterprise-ready outcomes.`
+  } else if (!seoDescription) {
+    seoDescription = `${course.title} training course by Aaitek. Premium training pathway designed for delivery readiness, not theory. Enterprise-ready outcomes.`
   }
-  // Ensure description is optimal length
+  // Enhance description if it's too short
+  if (seoDescription.length < 120 && course.subtitle && !course.description) {
+    seoDescription = `${course.subtitle}. ${seoDescription}`
+  }
+  // Ensure description is optimal length (150-160 characters for best SEO)
   if (seoDescription.length > 160) {
-    seoDescription = seoDescription.substring(0, 157) + '...'
+    // Try to cut at a sentence boundary
+    const truncated = seoDescription.substring(0, 157)
+    const lastPeriod = truncated.lastIndexOf('.')
+    if (lastPeriod > 120) {
+      seoDescription = truncated.substring(0, lastPeriod + 1)
+    } else {
+      seoDescription = truncated + '...'
+    }
   }
+
+  // Use education/training themed image for academy courses
+  const academyImage = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80'
 
   return (
     <>
@@ -44,10 +60,11 @@ const AcademyDetail = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={course.title}
         ogDescription={seoDescription}
-        ogImage={`${siteUrl}/logo.png`}
+        ogImage={academyImage}
         ogType="website"
         twitterTitle={course.title}
         twitterDescription={seoDescription}
+        twitterImage={academyImage}
         schemaType="Course"
         indexable={true}
       />
