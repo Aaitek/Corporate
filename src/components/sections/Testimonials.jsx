@@ -1,10 +1,50 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { fetchTestimonials } from '../utils/api'
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [testimonials, setTestimonials] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const testimonials = [
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      try {
+        setLoading(true)
+        const response = await fetchTestimonials()
+        if (response?.data) {
+          // Map Strapi data to component format
+          const mapped = response.data.map(item => ({
+            id: item.id,
+            name: item.attributes?.name || '',
+            role: item.attributes?.role || '',
+            company: item.attributes?.company || '',
+            review: item.attributes?.content || '',
+            rating: item.attributes?.rating || 5,
+            image: item.attributes?.image?.data?.attributes?.url 
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+              : null,
+            // Default values for UI
+            project: 'Project',
+            projectDescription: `Client testimonial from ${item.attributes?.company || 'our client'}.`,
+          }))
+          setTestimonials(mapped)
+          if (mapped.length > 0) {
+            setCurrentIndex(0)
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching testimonials:', error)
+        setTestimonials([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadTestimonials()
+  }, [])
+
+  // Fallback data (only used if API fails)
+  const fallbackTestimonials = [
     {
       name: 'John Smith',
       role: 'CEO, TechCorp',
@@ -61,27 +101,42 @@ const Testimonials = () => {
         </motion.div>
         
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Project Details */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                transition={{ duration: 0.5 }}
-                className="bg-gray-900/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-800"
-              >
-                <div className="text-sm font-semibold text-primary-400 mb-4 uppercase">
-                  {testimonials[currentIndex].project}
-                </div>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  {testimonials[currentIndex].projectDescription}
-                </p>
-                <div className="flex items-center space-x-4 pt-6 border-t border-gray-700">
-                  <div className="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-2xl font-bold text-gray-900">
-                    {testimonials[currentIndex].name.charAt(0)}
-                  </div>
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-400"></div>
+              <p className="mt-4 text-gray-400">Loading testimonials...</p>
+            </div>
+          ) : testimonials.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Project Details */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 50 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-gray-900/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-800"
+                  >
+                    <div className="text-sm font-semibold text-primary-400 mb-4 uppercase">
+                      {testimonials[currentIndex].project}
+                    </div>
+                    <p className="text-gray-300 mb-6 leading-relaxed">
+                      {testimonials[currentIndex].projectDescription}
+                    </p>
+                    <div className="flex items-center space-x-4 pt-6 border-t border-gray-700">
+                      {testimonials[currentIndex].image ? (
+                        <img
+                          src={testimonials[currentIndex].image}
+                          alt={testimonials[currentIndex].name}
+                          className="w-16 h-16 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-2xl font-bold text-gray-900">
+                          {testimonials[currentIndex].name.charAt(0)}
+                        </div>
+                      )}
                   <div>
                     <div className="font-semibold text-gray-100 text-lg">
                       {testimonials[currentIndex].name}
@@ -164,6 +219,12 @@ const Testimonials = () => {
               </svg>
             </button>
           </div>
+            </>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-400">No testimonials available at the moment.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
