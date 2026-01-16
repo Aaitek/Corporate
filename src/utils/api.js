@@ -21,8 +21,8 @@ export const fetchProducts = async () => {
 
 export const fetchCaseStudies = async (category = null) => {
   const url = category
-    ? `/case-studies?filters[category][$eq]=${category}&populate=*`
-    : '/case-studies?populate=*'
+    ? `/case-studies?filters[category][$eq]=${category}&populate=*&publicationState=live`
+    : '/case-studies?populate=*&publicationState=live'
   const response = await api.get(url)
   return response.data
 }

@@ -23,9 +23,13 @@ const CaseStudies = () => {
       try {
         setLoading(true)
         const response = await fetchCaseStudies()
+        console.log('Case Studies API Response:', response) // Debug log
         if (response?.data) {
+          console.log('Case Studies Data:', response.data) // Debug log
           // Map Strapi data to component format
-          const mapped = response.data.map(item => ({
+          const mapped = response.data.map(item => {
+            console.log('Mapping item:', item) // Debug log
+            return {
             id: item.id,
             title: item.attributes?.title || '',
             slug: item.attributes?.slug || '',
@@ -54,11 +58,22 @@ const CaseStudies = () => {
             status: 'Published',
             color: 'from-blue-500 to-cyan-500',
             icon: '📚',
-          }))
+          }
+          })
+          console.log('Mapped Case Studies:', mapped) // Debug log
           setCaseStudies(mapped)
+        } else {
+          console.warn('No data in response:', response)
+          // If API returns empty but we have fallback, use it temporarily
+          if (response && !response.error) {
+            setCaseStudies([])
+          } else {
+            setCaseStudies([])
+          }
         }
       } catch (error) {
         console.error('Error fetching case studies:', error)
+        console.error('Error details:', error.response?.data || error.message)
         // Fallback to empty array or show error
         setCaseStudies([])
       } finally {
