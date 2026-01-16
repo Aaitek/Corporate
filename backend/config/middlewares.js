@@ -30,15 +30,35 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: [
-        'http://localhost:3000',
-        'http://localhost:5173',
-        'https://a-aitech.vercel.app',
-        'https://aaitek.com.au',
-        /^https:\/\/.*\.vercel\.app$/,
-        /^https:\/\/a-aitech-.*\.vercel\.app$/,
-        /^https:\/\/.*-alis-projects-.*\.vercel\.app$/,
-      ],
+      origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc)
+        if (!origin) return callback(null, true);
+        
+        const allowedOrigins = [
+          'http://localhost:3000',
+          'http://localhost:5173',
+          'https://a-aitech.vercel.app',
+          'https://aaitek.com.au',
+        ];
+        
+        // Check if origin is in allowed list
+        if (allowedOrigins.includes(origin)) {
+          return callback(null, true);
+        }
+        
+        // Allow all Vercel preview deployments
+        if (origin.includes('.vercel.app')) {
+          return callback(null, true);
+        }
+        
+        // Allow all Railway preview deployments
+        if (origin.includes('.railway.app')) {
+          return callback(null, true);
+        }
+        
+        // Default: deny
+        callback(new Error('Not allowed by CORS'));
+      },
       credentials: true,
     },
   },
