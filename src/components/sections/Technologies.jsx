@@ -160,7 +160,7 @@ const Technologies = () => {
             variants={fadeInUp}
             className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            End-to-end solutions for web, mobile, and cloud built for performance, scalability, and enterprise reliability.
+            End-to-end solutions for web, mobile, and cloud   built for performance, scalability, and enterprise reliability.
           </motion.p>
         </motion.div>
 

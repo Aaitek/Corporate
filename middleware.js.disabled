@@ -1,4 +1,6 @@
 // Vercel Edge Middleware - intercepts requests before they reach the SPA
+// Note: This only works on Vercel, not in local development
+
 export const config = {
   matcher: [
     /*
@@ -8,8 +10,9 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public files (images, etc.)
+     * - static assets
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|avif)).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|avif|js|css|woff|woff2|ttf|eot)).*)',
   ],
 }
 
@@ -26,7 +29,13 @@ export default async function middleware(request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Only intercept for social crawlers
+  // Only intercept for social crawlers - for regular users, let request pass through
+  if (!isSocialCrawler) {
+    // Return undefined to let the request pass through normally
+    return
+  }
+  
+  // Handle social crawlers
   if (isSocialCrawler) {
     const url = new URL(request.url)
     const pathname = url.pathname
@@ -172,8 +181,7 @@ export default async function middleware(request) {
     })
   }
   
-  // For regular users, continue normally
-  return new Response(null, {
-    status: 200,
-  })
+  // For regular users, let the request pass through to the SPA
+  // Don't intercept - let Vercel handle the routing normally
+  return
 }
