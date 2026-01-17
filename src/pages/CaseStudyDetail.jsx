@@ -54,32 +54,6 @@ const CaseStudyDetail = () => {
     }
   }, [slug])
 
-  // Fallback case study
-  const fallbackCaseStudy = {
-    title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
-    client: 'Public Sector Organisation',
-    industry: 'Government',
-    description: 'A comprehensive case study detailing the digital transformation journey of a public sector organisation.',
-    fullContent: '<p>Full content would be loaded from Strapi CMS...</p>',
-    category: 'cloud',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
-    video: null, // Optional: YouTube/Vimeo URL or embed code
-    results: {
-      outcome: 'Successful migration',
-      impact: 'Improved efficiency by 40%'
-    },
-    technologies: ['Sitecore', 'AWS', 'React', 'Node.js']
-  } || {
-    title: 'Case Study Not Found',
-    description: 'The requested case study could not be found',
-    client: 'Unknown',
-    industry: 'Unknown',
-    category: 'cloud',
-    image: null,
-    results: {},
-    technologies: []
-  }
-
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",

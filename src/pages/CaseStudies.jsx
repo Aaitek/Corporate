@@ -25,12 +25,9 @@ const CaseStudies = () => {
       try {
         setLoading(true)
         const response = await fetchCaseStudies()
-        console.log('Case Studies API Response:', response) // Debug log
         if (response?.data) {
-          console.log('Case Studies Data:', response.data) // Debug log
           // Map Strapi data to component format
           const mapped = response.data.map(item => {
-            console.log('Mapping item:', item) // Debug log
             return {
             id: item.id,
             title: item.attributes?.title || '',
@@ -62,21 +59,12 @@ const CaseStudies = () => {
             icon: '📚',
           }
           })
-          console.log('Mapped Case Studies:', mapped) // Debug log
           setCaseStudies(mapped)
         } else {
-          console.warn('No data in response:', response)
-          // If API returns empty but we have fallback, use it temporarily
-          if (response && !response.error) {
-            setCaseStudies([])
-          } else {
-            setCaseStudies([])
-          }
+          setCaseStudies([])
         }
       } catch (error) {
         console.error('Error fetching case studies:', error)
-        console.error('Error details:', error.response?.data || error.message)
-        // Fallback to empty array or show error
         setCaseStudies([])
       } finally {
         setLoading(false)
@@ -93,100 +81,6 @@ const CaseStudies = () => {
     year: ['All Years', '2024', '2023', '2022', '2021'],
     region: ['All Regions', 'Australia', 'APAC', 'Global'],
   }
-
-  // Fallback data (only used if API fails)
-  const fallbackCaseStudies = [
-    {
-      title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
-      slug: 'enterprise-dxp-modernisation-public-sector',
-      status: 'Coming Soon',
-      color: 'from-blue-500 to-cyan-500',
-      icon: '🏛️',
-      industry: 'Government',
-      service: 'Platforms',
-      tech: 'DXP',
-      engagementType: 'Migration',
-      year: '2024',
-      region: 'Australia',
-      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
-      description: 'A comprehensive overhaul of a legacy DXP system, migrating to a modern headless architecture.',
-    },
-    {
-      title: 'AI-Driven Platform for Customer Engagement in Financial Services',
-      slug: 'ai-driven-platform-financial-services',
-      status: 'Coming Soon',
-      color: 'from-purple-500 to-pink-500',
-      icon: '🤖',
-      industry: 'Finance',
-      service: 'AI',
-      tech: 'AI',
-      engagementType: 'Delivery',
-      year: '2024',
-      region: 'APAC',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-      description: 'Building an intelligent customer engagement platform using AI and machine learning.',
-    },
-    {
-      title: 'Cloud Migration for a High-Traffic Media Platform',
-      slug: 'cloud-migration-high-traffic-media',
-      status: 'Coming Soon',
-      color: 'from-green-500 to-emerald-500',
-      icon: '☁️',
-      industry: 'Media',
-      service: 'Cloud',
-      tech: 'AWS',
-      engagementType: 'Migration',
-      year: '2023',
-      region: 'Global',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
-      description: 'Migrating a high-traffic media platform to AWS with zero downtime.',
-    },
-    {
-      title: 'Legacy System Modernisation for Healthcare Provider',
-      slug: 'legacy-system-modernisation-healthcare',
-      status: 'Coming Soon',
-      color: 'from-orange-500 to-red-500',
-      icon: '🏥',
-      industry: 'Healthcare',
-      service: 'Engineering',
-      tech: 'React',
-      engagementType: 'Advisory',
-      year: '2023',
-      region: 'Australia',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&q=80',
-      description: 'Modernising legacy healthcare systems with modern web technologies.',
-    },
-    {
-      title: 'E-commerce Platform Scaling for Retail Giant',
-      slug: 'ecommerce-platform-scaling-retail',
-      status: 'Coming Soon',
-      color: 'from-indigo-500 to-blue-500',
-      icon: '🛒',
-      industry: 'Retail',
-      service: 'Platforms',
-      tech: 'Node.js',
-      engagementType: 'Support',
-      year: '2024',
-      region: 'APAC',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
-      description: 'Scaling an e-commerce platform to handle peak traffic during sales events.',
-    },
-    {
-      title: 'Data Analytics Platform for Energy Sector',
-      slug: 'data-analytics-platform-energy',
-      status: 'Coming Soon',
-      color: 'from-teal-500 to-cyan-500',
-      icon: '⚡',
-      industry: 'Energy',
-      service: 'Data',
-      tech: 'Azure',
-      engagementType: 'Delivery',
-      year: '2023',
-      region: 'Global',
-      image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80',
-      description: 'Building a comprehensive data analytics platform for energy management.',
-    },
-  ]
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }))

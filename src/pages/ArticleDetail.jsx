@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
 import api from '../utils/api'
 
 const ArticleDetail = () => {
   const { slug } = useParams()
-  const navigate = useNavigate()
   const [article, setArticle] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)

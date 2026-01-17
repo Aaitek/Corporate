@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchProducts } from '../utils/api'
 import SEO from '../components/SEO'
 
 const Products = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -95,7 +92,7 @@ const Products = () => {
       </section>
 
       {/* Products List */}
-      <section ref={ref} className="py-12 sm:py-16 lg:py-24">
+      <section className="py-12 sm:py-16 lg:py-24">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

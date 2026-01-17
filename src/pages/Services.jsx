@@ -1,6 +1,4 @@
 import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { getServiceSlug } from '../utils/slugHelper'
 import SEO from '../components/SEO'
@@ -17,8 +15,6 @@ const Services = () => {
     "areaServed": "Worldwide",
     "description": "Comprehensive technology solutions including AI, cloud services, software engineering, and digital transformation."
   }
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   // All services grouped by category - matching Header structure
   const services = [
@@ -159,7 +155,7 @@ const Services = () => {
       </section>
 
       {/* All Services List */}
-      <section ref={ref} className="py-12 sm:py-16 lg:py-24">
+      <section className="py-12 sm:py-16 lg:py-24">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
