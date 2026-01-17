@@ -157,17 +157,6 @@ const Articles = () => {
     setCurrentPage(1) // Reset to first page when clearing filters
   }
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const paginatedArticles = filteredArticles.slice(startIndex, endIndex)
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filters, searchQuery])
-
   // Filter and search logic
   const filteredArticles = useMemo(() => {
     return articles.filter(article => {
@@ -211,6 +200,17 @@ const Articles = () => {
       return true
     })
   }, [filters, searchQuery, articles])
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedArticles = filteredArticles.slice(startIndex, endIndex)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
