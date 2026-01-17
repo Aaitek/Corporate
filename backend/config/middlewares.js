@@ -30,8 +30,15 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: '*', // Allow all origins - you can restrict this later
-      credentials: false, // Must be false when origin is '*'
+      enabled: true,
+      origin: [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://a-aitech.vercel.app',
+        'https://aaitek.com.au',
+        /^https:\/\/.*\.vercel\.app$/,
+      ],
+      headers: '*',
     },
   },
   'strapi::poweredBy',
