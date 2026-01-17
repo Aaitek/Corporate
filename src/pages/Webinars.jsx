@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
@@ -12,6 +12,8 @@ const Webinars = () => {
     type: 'all',
   })
   const [searchQuery, setSearchQuery] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
 
   const filterOptions = {
     topic: ['All Topics', 'AI & Automation', 'Cloud Migration', 'Platform Strategy', 'Digital Transformation', 'Architecture'],
@@ -77,7 +79,19 @@ const Webinars = () => {
       type: 'all',
     })
     setSearchQuery('')
+    setCurrentPage(1)
   }
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredWebinars.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedWebinars = filteredWebinars.slice(startIndex, endIndex)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
 
   // Filter and search logic
   const filteredWebinars = useMemo(() => {
@@ -221,8 +235,9 @@ const Webinars = () => {
 
                 {/* Webinars Grid */}
                 {filteredWebinars.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                    {filteredWebinars.map((webinar, index) => (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                      {paginatedWebinars.map((webinar, index) => (
                       <motion.div
                         key={webinar.slug}
                         initial={{ opacity: 0, y: 30 }}
@@ -282,8 +297,53 @@ const Webinars = () => {
                           </div>
                         </Link>
                       </motion.div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination Controls */}
+                    {totalPages > 1 && (
+                      <div className="mt-8 flex items-center justify-center gap-2">
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                          disabled={currentPage === 1}
+                          className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Previous
+                        </button>
+                        
+                        <div className="flex gap-2">
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                            <button
+                              key={page}
+                              onClick={() => setCurrentPage(page)}
+                              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                                currentPage === page
+                                  ? 'bg-green-600 text-white'
+                                  : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          ))}
+                        </div>
+
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                          disabled={currentPage === totalPages}
+                          className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Page Info */}
+                    {totalPages > 1 && (
+                      <div className="mt-4 text-center text-sm text-gray-600">
+                        Showing {startIndex + 1}-{Math.min(endIndex, filteredWebinars.length)} of {filteredWebinars.length} webinars
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <motion.div
                     initial={{ opacity: 0 }}

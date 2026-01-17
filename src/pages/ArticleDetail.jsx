@@ -1,56 +1,95 @@
 import { motion } from 'framer-motion'
-import { useParams, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
+import api from '../utils/api'
 
 const ArticleDetail = () => {
   const { slug } = useParams()
-  
-  // This would typically come from an API or data file
-  const article = {
-    title: 'Designing Enterprise-Ready AI Solutions',
-    slug: 'designing-enterprise-ready-ai-solutions',
-    author: 'Aaitek Team',
-    date: '2024-01-15',
-    industry: 'Finance',
-    serviceArea: 'AI',
-    technology: 'AI',
-    audience: 'CTO',
-    description: 'Practical insights on building AI solutions that meet enterprise requirements for security, scalability, and governance.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
-    video: null, // Optional: YouTube/Vimeo URL or embed code
-    fullContent: `
-      <p class="text-lg text-gray-700 mb-6">
-        Building AI solutions for enterprise environments requires careful consideration of security, scalability, and governance. This article explores practical approaches to designing AI systems that meet these critical requirements.
-      </p>
-      <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Security First</h3>
-      <p class="text-lg text-gray-700 mb-6">
-        Enterprise AI solutions must prioritize security from the ground up. This includes data encryption, access controls, and compliance with industry regulations.
-      </p>
-      <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Scalability Considerations</h3>
-      <p class="text-lg text-gray-700 mb-6">
-        As AI workloads grow, systems must be designed to scale efficiently. This involves choosing the right infrastructure and architecture patterns.
-      </p>
-      <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Governance and Compliance</h3>
-      <p class="text-lg text-gray-700 mb-6">
-        Effective governance ensures AI systems operate within defined boundaries and maintain accountability throughout their lifecycle.
-      </p>
-    `,
-    tags: ['AI', 'Enterprise', 'Security', 'Governance'],
-  } || {
-    title: 'Article Not Found',
-    description: 'The requested article could not be found',
-    author: 'Unknown',
-    date: new Date().toISOString(),
-    image: null,
-    video: null,
-    fullContent: '<p>Article not found.</p>',
-    tags: [],
-  }
+  const navigate = useNavigate()
+  const [article, setArticle] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const response = await api.get(`/articles?filters[slug][$eq]=${slug}&populate=*`)
+        
+        if (response?.data?.data && response.data.data.length > 0) {
+          const item = response.data.data[0]
+          const mapped = {
+            id: item.id,
+            title: item.attributes?.title || '',
+            slug: item.attributes?.slug || '',
+            excerpt: item.attributes?.excerpt || '',
+            content: item.attributes?.content || '',
+            category: item.attributes?.category || '',
+            author: item.attributes?.author || 'Aaitek Team',
+            publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
+            tags: item.attributes?.tags || [],
+            image: item.attributes?.image?.data?.attributes?.url 
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+              : item.attributes?.image?.data?.attributes?.formats?.large?.url
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
+              : 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+            fullContent: item.attributes?.content || '',
+            description: item.attributes?.excerpt || item.attributes?.description || '',
+          }
+          setArticle(mapped)
+        } else {
+          setError('Article not found')
+        }
+      } catch (err) {
+        console.error('Error fetching article:', err)
+        setError('Failed to load article')
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    if (slug) {
+      loadArticle()
+    }
+  }, [slug])
 
   const formatDate = (dateString) => {
+    if (!dateString) return ''
     const date = new Date(dateString)
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-gray-600">Loading article...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Article Not Found</h1>
+          <p className="text-gray-600 mb-6">{error || 'The requested article could not be found.'}</p>
+          <Link
+            to="/articles"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+          >
+            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Articles
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   const structuredData = {
@@ -124,11 +163,15 @@ const ArticleDetail = () => {
               </h1>
               <div className="flex flex-wrap items-center gap-4 text-white/90 text-sm mb-6">
                 <span>By {article.author}</span>
-                <span>•</span>
-                <span>{formatDate(article.date)}</span>
+                {article.publishedAt && (
+                  <>
+                    <span>•</span>
+                    <span>{formatDate(article.publishedAt)}</span>
+                  </>
+                )}
               </div>
               <p className="text-lg text-white/90 max-w-3xl">
-                {article.description}
+                {article.description || article.excerpt}
               </p>
             </motion.div>
           </div>
@@ -174,7 +217,7 @@ const ArticleDetail = () => {
             )}
 
             {/* Full Content */}
-            {article.fullContent && (
+            {(article.fullContent || article.content) && (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -183,8 +226,8 @@ const ArticleDetail = () => {
                 className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl mb-8"
               >
                 <div 
-                  className="prose prose-lg max-w-none text-gray-700"
-                  dangerouslySetInnerHTML={{ __html: article.fullContent }}
+                  className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-900 prose-a:text-blue-600 prose-strong:text-gray-900"
+                  dangerouslySetInnerHTML={{ __html: article.fullContent || article.content }}
                 />
               </motion.div>
             )}

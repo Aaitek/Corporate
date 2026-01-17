@@ -17,6 +17,8 @@ const CaseStudies = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [caseStudies, setCaseStudies] = useState([])
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
 
   useEffect(() => {
     const loadCaseStudies = async () => {
@@ -200,7 +202,19 @@ const CaseStudies = () => {
       region: 'all',
     })
     setSearchQuery('')
+    setCurrentPage(1) // Reset to first page when clearing filters
   }
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedCaseStudies = filteredCaseStudies.slice(startIndex, endIndex)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
 
   // Filter and search logic
   const filteredCaseStudies = useMemo(() => {
@@ -364,8 +378,9 @@ const CaseStudies = () => {
 
                     {/* Case Studies Grid */}
                     {filteredCaseStudies.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-                    {filteredCaseStudies.map((study, index) => (
+                      <>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                          {paginatedCaseStudies.map((study, index) => (
                       <motion.div
                         key={study.slug}
                         initial={{ opacity: 0, y: 30 }}
@@ -421,24 +436,69 @@ const CaseStudies = () => {
                           </div>
                         </Link>
                       </motion.div>
-                    ))}
-                  </div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-center py-16 bg-white rounded-2xl border-2 border-gray-200"
-                  >
-                    <div className="text-6xl mb-4">🔍</div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">No Case Studies Found</h3>
-                    <p className="text-gray-600 mb-6">Try adjusting your filters or search query.</p>
-                    <button
-                      onClick={handleClearFilters}
-                      className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
-                    >
-                      Clear All Filters
-                    </button>
-                    </motion.div>
+                          ))}
+                        </div>
+
+                        {/* Pagination Controls */}
+                        {totalPages > 1 && (
+                          <div className="mt-8 flex items-center justify-center gap-2">
+                            <button
+                              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                              disabled={currentPage === 1}
+                              className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                              Previous
+                            </button>
+                            
+                            <div className="flex gap-2">
+                              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                                    currentPage === page
+                                      ? 'bg-primary-600 text-white'
+                                      : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+                                  }`}
+                                >
+                                  {page}
+                                </button>
+                              ))}
+                            </div>
+
+                            <button
+                              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                              disabled={currentPage === totalPages}
+                              className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            >
+                              Next
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Page Info */}
+                        {totalPages > 1 && (
+                          <div className="mt-4 text-center text-sm text-gray-600">
+                            Showing {startIndex + 1}-{Math.min(endIndex, filteredCaseStudies.length)} of {filteredCaseStudies.length} case studies
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center py-16 bg-white rounded-2xl border-2 border-gray-200"
+                      >
+                        <div className="text-6xl mb-4">🔍</div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">No Case Studies Found</h3>
+                        <p className="text-gray-600 mb-6">Try adjusting your filters or search query.</p>
+                        <button
+                          onClick={handleClearFilters}
+                          className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+                        >
+                          Clear All Filters
+                        </button>
+                      </motion.div>
                     )}
                   </>
                 )}

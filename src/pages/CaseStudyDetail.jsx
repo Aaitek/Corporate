@@ -1,14 +1,61 @@
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
+import api from '../utils/api'
 
 const CaseStudyDetail = () => {
   const { slug } = useParams()
-  
-  // This would typically come from an API or data file
-  // For now, using sample data structure that matches the backend schema
-  const caseStudy = {
+  const [caseStudy, setCaseStudy] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const loadCaseStudy = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const response = await api.get(`/case-studies?filters[slug][$eq]=${slug}&populate=*`)
+        
+        if (response?.data?.data && response.data.data.length > 0) {
+          const item = response.data.data[0]
+          const mapped = {
+            id: item.id,
+            title: item.attributes?.title || '',
+            slug: item.attributes?.slug || '',
+            client: item.attributes?.client || '',
+            industry: item.attributes?.industry || '',
+            description: item.attributes?.description || '',
+            fullContent: item.attributes?.fullContent || '',
+            category: item.attributes?.category || 'cloud',
+            image: item.attributes?.image?.data?.attributes?.url 
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+              : item.attributes?.image?.data?.attributes?.formats?.large?.url
+              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
+              : 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
+            results: item.attributes?.results || {},
+            technologies: item.attributes?.technologies || [],
+            video: null,
+          }
+          setCaseStudy(mapped)
+        } else {
+          setError('Case study not found')
+        }
+      } catch (err) {
+        console.error('Error fetching case study:', err)
+        setError('Failed to load case study')
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    if (slug) {
+      loadCaseStudy()
+    }
+  }, [slug])
+
+  // Fallback case study
+  const fallbackCaseStudy = {
     title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
     client: 'Public Sector Organisation',
     industry: 'Government',
@@ -65,6 +112,37 @@ const CaseStudyDetail = () => {
     mobile: 'from-orange-500 to-red-500',
     data: 'from-indigo-500 to-blue-500',
     software: 'from-teal-500 to-cyan-500',
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <p className="text-gray-600">Loading case study...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !caseStudy) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
+          <p className="text-gray-600 mb-6">{error || 'The requested case study could not be found.'}</p>
+          <Link
+            to="/case-studies"
+            className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+          >
+            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Case Studies
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   const color = categoryColors[caseStudy.category] || 'from-gray-500 to-gray-700'
