@@ -388,7 +388,7 @@ const ServiceCategoryDetail = () => {
     technologies: [],
   }
 
-  // Get image based on category
+  // Get image for display (can use category images)
   const getImage = () => {
     const categoryImages = {
       'product-experience': 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
@@ -403,6 +403,9 @@ const ServiceCategoryDetail = () => {
     }
     return categoryImages[slug] || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80'
   }
+
+  // Use logo for social sharing (consistent across all pages)
+  const socialImage = `${siteUrl}/logo.png`
 
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/services/category/${slug}`
@@ -428,7 +431,7 @@ const ServiceCategoryDetail = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={category?.title || 'Service Category'}
         ogDescription={seoDescription}
-        ogImage={getImage()}
+        ogImage={socialImage}
         ogType="website"
         twitterTitle={category?.title || 'Service Category'}
         twitterDescription={seoDescription}

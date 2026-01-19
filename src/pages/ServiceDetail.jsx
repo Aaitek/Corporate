@@ -258,11 +258,14 @@ const ServiceDetail = () => {
     }
   }
 
-  // Get image URL - ensure it's always absolute
+  // Get image URL for display (can use category images)
   const imageUrl = getImage()
   const absoluteImageUrl = imageUrl.startsWith('http://') || imageUrl.startsWith('https://') 
     ? imageUrl 
     : `${siteUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  
+  // Use logo for social sharing (consistent across all pages)
+  const socialImage = `${siteUrl}/logo.png`
 
   return (
     <>
@@ -273,7 +276,7 @@ const ServiceDetail = () => {
         canonicalUrl={canonicalUrl}
         ogTitle={service?.title || 'Service'}
         ogDescription={seoDescription}
-        ogImage={absoluteImageUrl}
+        ogImage={socialImage}
         ogType="website"
         twitterTitle={service?.title || 'Service'}
         twitterDescription={seoDescription}
