@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
 import SEO from '../components/SEO'
 import HeroSection from '../components/HeroSection'
-import HeroSection from '../components/HeroSection'
 
 const Resources = () => {
   const [filters, setFilters] = useState({
