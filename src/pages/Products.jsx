@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchProducts } from '../utils/api'
+import { fetchProducts, getImageUrl } from '../utils/api'
 import SEO from '../components/SEO'
+import productsData from '../data/productsData'
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -13,9 +14,11 @@ const Products = () => {
       try {
         setLoading(true)
         const response = await fetchProducts()
-        if (response?.data) {
+        let mapped = []
+        
+        if (response?.data && response.data.length > 0) {
           // Map Strapi data to component format
-          const mapped = response.data.map(item => ({
+          mapped = response.data.map(item => ({
             id: item.id,
             title: item.attributes?.title || '',
             slug: item.attributes?.slug || '',
@@ -23,22 +26,52 @@ const Products = () => {
             category: item.attributes?.category || '',
             features: item.attributes?.features || [],
             pricing: item.attributes?.pricing || {},
-            image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
-              : item.attributes?.image?.data?.attributes?.formats?.medium?.url
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.medium.url}`
-              : 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+            image: getImageUrl(item.attributes?.image, 'medium') || 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
             // Default values for UI
             subtitle: item.attributes?.category || 'AI Agent',
             color: 'from-blue-500 to-cyan-500',
             icon: '🤖',
             comingSoon: false,
           }))
-          setProducts(mapped)
         }
+        
+        // If no Strapi data, use fallback from productsData
+        if (mapped.length === 0) {
+          mapped = Object.entries(productsData).map(([slug, product]) => ({
+            id: slug,
+            title: product.title,
+            slug: slug,
+            description: product.description,
+            category: product.subtitle,
+            features: product.keyFeatures || [],
+            pricing: {},
+            image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+            subtitle: product.subtitle,
+            color: product.color,
+            icon: product.icon,
+            comingSoon: product.comingSoon || false,
+          }))
+        }
+        
+        setProducts(mapped)
       } catch (error) {
         console.error('Error fetching products:', error)
-        setProducts([])
+        // On error, use fallback data
+        const fallbackProducts = Object.entries(productsData).map(([slug, product]) => ({
+          id: slug,
+          title: product.title,
+          slug: slug,
+          description: product.description,
+          category: product.subtitle,
+          features: product.keyFeatures || [],
+          pricing: {},
+          image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+          subtitle: product.subtitle,
+          color: product.color,
+          icon: product.icon,
+          comingSoon: product.comingSoon || false,
+        }))
+        setProducts(fallbackProducts)
       } finally {
         setLoading(false)
       }
