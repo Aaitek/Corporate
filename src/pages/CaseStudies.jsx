@@ -153,11 +153,19 @@ const CaseStudies = () => {
     setCurrentPage(1)
   }, [filters, searchQuery])
 
-  // Pagination logic
+  // Pagination logic - use useMemo to ensure it's always defined
+  const paginatedCaseStudies = useMemo(() => {
+    if (!filteredCaseStudies || filteredCaseStudies.length === 0) {
+      return []
+    }
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return filteredCaseStudies.slice(startIndex, endIndex)
+  }, [filteredCaseStudies, currentPage, itemsPerPage])
+
   const totalPages = Math.ceil((filteredCaseStudies?.length || 0) / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const paginatedCaseStudies = (filteredCaseStudies || []).slice(startIndex, endIndex)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
