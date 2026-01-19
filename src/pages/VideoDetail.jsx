@@ -67,7 +67,7 @@ const VideoDetail = () => {
         robots="index,follow"
         ogTitle={video.title}
         ogDescription={video.description}
-        ogImage={video.image || "https://aaitek.com.au/og/video.png"}
+        ogImage={video.image || "https://aaitek.com.au/logo.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"

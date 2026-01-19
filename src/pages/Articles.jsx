@@ -173,7 +173,7 @@ const Articles = () => {
         robots="index,follow"
         ogTitle="Articles - Aaitek Insights"
         ogDescription="Expert perspectives on technology, delivery, and industry trends."
-        ogImage="https://aaitek.com.au/og/articles.png"
+        ogImage="https://aaitek.com.au/logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

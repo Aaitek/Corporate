@@ -60,7 +60,7 @@ const Career = () => {
         robots="index,follow"
         ogTitle="Careers - Join the Aaitek Team"
         ogDescription="Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering."
-        ogImage="https://aaitek.com.au/og/career.png"
+        ogImage="https://aaitek.com.au/logo.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="WebPage"

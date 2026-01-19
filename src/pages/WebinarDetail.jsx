@@ -74,7 +74,7 @@ const WebinarDetail = () => {
         robots="index,follow"
         ogTitle={webinar.title}
         ogDescription={webinar.description}
-        ogImage={webinar.image || "https://aaitek.com.au/og/webinar.png"}
+        ogImage={webinar.image || "https://aaitek.com.au/logo.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"
