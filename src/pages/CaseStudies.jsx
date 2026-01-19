@@ -154,10 +154,10 @@ const CaseStudies = () => {
   }, [filters, searchQuery])
 
   // Pagination logic
-  const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage)
+  const totalPages = Math.ceil((filteredCaseStudies?.length || 0) / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
-  const paginatedCaseStudies = filteredCaseStudies.slice(startIndex, endIndex)
+  const paginatedCaseStudies = (filteredCaseStudies || []).slice(startIndex, endIndex)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
