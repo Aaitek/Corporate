@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
 import SEO from '../components/SEO'
-import { fetchArticles } from '../utils/api'
+import { fetchArticles, getImageUrl } from '../utils/api'
 
 const Articles = () => {
   const [filters, setFilters] = useState({
@@ -36,11 +36,7 @@ const Articles = () => {
             author: item.attributes?.author || '',
             publishedAt: item.attributes?.publishedAt || '',
             tags: item.attributes?.tags || [],
-            image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
-              : item.attributes?.image?.data?.attributes?.formats?.medium?.url
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.medium.url}`
-              : 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+            image: getImageUrl(item.attributes?.image, 'medium') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
             // Map for filters
             industry: 'Finance', // Default or from tags
             serviceArea: item.attributes?.category || 'Engineering',

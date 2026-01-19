@@ -48,35 +48,49 @@ export const fetchServiceBySlug = async (slug) => {
 }
 
 // Helper function to get image URL from Strapi response
+// This ensures images always have absolute URLs that persist
 export const getImageUrl = (imageData, format = 'url') => {
   if (!imageData) return null
   
   let imageUrl = null
   
-  // Handle different Strapi response formats
-  if (imageData.url) {
-    imageUrl = imageData.url
+  // Handle different Strapi response formats - check all possible paths
+  // Priority: formats (large/medium/small) > original url > fallback
+  if (imageData.data?.attributes?.formats?.[format]?.url) {
+    imageUrl = imageData.data.attributes.formats[format].url
   } else if (imageData.data?.attributes?.url) {
     imageUrl = imageData.data.attributes.url
-  } else if (imageData.data?.attributes?.formats?.[format]?.url) {
-    imageUrl = imageData.data.attributes.formats[format].url
-  } else if (imageData.attributes?.url) {
-    imageUrl = imageData.attributes.url
   } else if (imageData.attributes?.formats?.[format]?.url) {
     imageUrl = imageData.attributes.formats[format].url
+  } else if (imageData.attributes?.url) {
+    imageUrl = imageData.attributes.url
+  } else if (imageData.url) {
+    imageUrl = imageData.url
+  } else if (imageData.formats?.[format]?.url) {
+    imageUrl = imageData.formats[format].url
   }
   
   if (!imageUrl) return null
   
-  // If URL is already absolute, return as is
+  // If URL is already absolute, return as is (ensure it's a valid URL)
   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
     return imageUrl
   }
   
-  // Otherwise, prepend the API base URL (without /api)
+  // Ensure the URL starts with /
+  if (!imageUrl.startsWith('/')) {
+    imageUrl = '/' + imageUrl
+  }
+  
+  // Get the API base URL and construct absolute URL
   const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:1337/api'
-  const apiBase = baseUrl.replace('/api', '')
-  return `${apiBase}${imageUrl}`
+  // Remove /api from the end if present
+  const apiBase = baseUrl.replace(/\/api$/, '')
+  
+  // Construct absolute URL
+  const absoluteUrl = `${apiBase}${imageUrl}`
+  
+  return absoluteUrl
 }
 
 export default api
