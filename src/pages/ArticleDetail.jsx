@@ -30,9 +30,9 @@ const ArticleDetail = () => {
             publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
             tags: item.attributes?.tags || [],
             image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.url}`
               : item.attributes?.image?.data?.attributes?.formats?.large?.url
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
+              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
               : 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
             fullContent: item.attributes?.content || '',
             description: item.attributes?.excerpt || item.attributes?.description || '',

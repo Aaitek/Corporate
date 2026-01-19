@@ -54,31 +54,6 @@ const CaseStudyDetail = () => {
     }
   }, [slug])
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": caseStudy.title,
-    "description": caseStudy.description,
-    "image": caseStudy.image || "https://aaitek.com.au/logo.png",
-    "author": {
-      "@type": "Organization",
-      "name": "Aaitek Technology Specialists"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Aaitek Technology Specialists",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://aaitek.com.au/logo.png"
-      }
-    },
-    "url": `https://aaitek.com.au/case-study/${slug}`,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://aaitek.com.au/case-study/${slug}`
-    }
-  }
-
   const categoryColors = {
     cloud: 'from-blue-500 to-cyan-500',
     ai: 'from-purple-500 to-pink-500',
@@ -120,6 +95,31 @@ const CaseStudyDetail = () => {
   }
 
   const color = categoryColors[caseStudy.category] || 'from-gray-500 to-gray-700'
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": caseStudy.title,
+    "description": caseStudy.description,
+    "image": caseStudy.image || "https://aaitek.com.au/logo.png",
+    "author": {
+      "@type": "Organization",
+      "name": "Aaitek Technology Specialists"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aaitek Technology Specialists",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aaitek.com.au/logo.png"
+      }
+    },
+    "url": `https://aaitek.com.au/case-study/${slug}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://aaitek.com.au/case-study/${slug}`
+    }
+  }
 
   return (
     <>
