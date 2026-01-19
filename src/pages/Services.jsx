@@ -131,11 +131,12 @@ const Services = () => {
       <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
       {/* TODO: Connect to Strapi Global Settings or Page Settings to fetch heroImage */}
+      {/* TODO: Connect to Strapi Global Settings or Page Settings to fetch heroImage */}
       <HeroSection
         badge="Our Services"
         title="End-to-End Digital & AI Services"
         description="We deliver comprehensive technology solutions across the full digital lifecycle from product strategy and engineering to cloud platforms, AI, and enterprise systems helping organizations transform, scale, and stay competitive."
-        image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.servicesHeroImage)
+        image={null}
         gradient="from-primary-600 via-primary-700 to-accent-600"
         className="py-12 sm:py-16"
       />

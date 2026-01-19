@@ -217,7 +217,7 @@ const PartnerSuccess = () => {
         badge="Partner Success"
         title="Partner Success"
         description="Partner Success is where Aaitek demonstrates how we deliver value in the real world — across industries, platforms, and technologies. This section focuses on outcomes, decisions, and lessons learned."
-        image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.partnerSuccessHeroImage)
+        image={null}
         gradient="from-primary-600 via-primary-700 to-accent-600"
         className="py-8 sm:py-12"
       />

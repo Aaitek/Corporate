@@ -189,7 +189,7 @@ const Resources = () => {
         badge="Resources"
         title="Resources"
         description="The Resources section is where Aaitek shares practical insights, delivery experience, and industry perspectives — drawn from real projects, evolving technology trends, and enterprise delivery learnings."
-        image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.resourcesHeroImage)
+        image={null}
         gradient="from-primary-600 via-primary-700 to-accent-600"
         className="py-8 sm:py-12"
       />
