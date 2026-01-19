@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
 import SEO from '../components/SEO'
 import HeroSection from '../components/HeroSection'
+import HeroSection from '../components/HeroSection'
 
 const Resources = () => {
   const [filters, setFilters] = useState({
@@ -189,6 +190,7 @@ const Resources = () => {
         title="Resources"
         description="The Resources section is where Aaitek shares practical insights, delivery experience, and industry perspectives — drawn from real projects, evolving technology trends, and enterprise delivery learnings."
         image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.resourcesHeroImage)
+        gradient="from-primary-600 via-primary-700 to-accent-600"
         className="py-8 sm:py-12"
       />
 

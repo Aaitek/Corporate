@@ -3,6 +3,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import SEO from '../components/SEO'
+import HeroSection from '../components/HeroSection'
 
 const Company = () => {
   const ref = useRef(null)
