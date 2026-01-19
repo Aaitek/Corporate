@@ -148,6 +148,17 @@ const CaseStudies = () => {
     })
   }, [filters, searchQuery, caseStudies])
 
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedCaseStudies = filteredCaseStudies.slice(startIndex, endIndex)
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
     visible: {
