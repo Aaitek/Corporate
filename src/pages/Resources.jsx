@@ -182,30 +182,14 @@ const Resources = () => {
       />
     <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
-      <section className="py-8 sm:py-12 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-6">
-              <span className="text-xs font-semibold text-white uppercase tracking-wider">Resources</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
-              Resources
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-              The Resources section is where Aaitek shares practical insights, delivery experience, and industry perspectives — drawn from real projects, evolving technology trends, and enterprise delivery learnings.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* TODO: Connect to Strapi Global Settings or Page Settings to fetch heroImage */}
+      <HeroSection
+        badge="Resources"
+        title="Resources"
+        description="The Resources section is where Aaitek shares practical insights, delivery experience, and industry perspectives — drawn from real projects, evolving technology trends, and enterprise delivery learnings."
+        image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.resourcesHeroImage)
+        className="py-8 sm:py-12"
+      />
 
       {/* Main Content with Sidebar */}
       <section ref={ref} className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-white via-blue-50/30 to-white">

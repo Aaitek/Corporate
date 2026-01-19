@@ -211,30 +211,14 @@ const PartnerSuccess = () => {
       />
       <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
-      <section className="py-8 sm:py-12 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-6">
-              <span className="text-xs font-semibold text-white uppercase tracking-wider">Partner Success</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
-              Partner Success
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
-              Partner Success is where Aaitek demonstrates how we deliver value in the real world — across industries, platforms, and technologies. This section focuses on outcomes, decisions, and lessons learned.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* TODO: Connect to Strapi Global Settings or Page Settings to fetch heroImage */}
+      <HeroSection
+        badge="Partner Success"
+        title="Partner Success"
+        description="Partner Success is where Aaitek demonstrates how we deliver value in the real world — across industries, platforms, and technologies. This section focuses on outcomes, decisions, and lessons learned."
+        image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.partnerSuccessHeroImage)
+        className="py-8 sm:py-12"
+      />
 
       {/* Main Content with Sidebar */}
       <section ref={ref} className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-white via-blue-50/30 to-white">
