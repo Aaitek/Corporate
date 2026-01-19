@@ -64,7 +64,8 @@ const ProductDetail = () => {
       'enterprise-integration-hub': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
       'industry-ai-accelerators': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
     }
-    return productImages[slug] || `${siteUrl}/logo.png`
+    // Use logo for all product pages for consistent social sharing
+    return `${siteUrl}/logo.png`
   }
 
   return (

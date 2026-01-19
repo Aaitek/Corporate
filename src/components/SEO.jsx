@@ -30,8 +30,8 @@ const SEO = ({
   const location = useLocation()
   const siteUrl = 'https://aaitek.com.au'
   const siteName = 'Aaitek'
-  // Use actual logo file that exists in public folder
-  const defaultImage = `${siteUrl}/Aaitek logo in Black.png`
+  // Use logo.png for social sharing (exists in public folder)
+  const defaultImage = `${siteUrl}/logo.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -69,7 +69,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/Aaitek logo in Black.png`,
+      "logo": `${siteUrl}/logo.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
@@ -225,7 +225,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/Aaitek logo in Black.png`,
+          "logo": `${siteUrl}/logo.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]

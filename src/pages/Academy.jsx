@@ -92,7 +92,7 @@ const Academy = () => {
         canonicalUrl={`${siteUrl}/academy`}
         ogTitle="Academy - Premium Training Programs"
         ogDescription="Premium training pathways for engineers and enterprise teams—designed for delivery readiness, not theory."
-        ogImage="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80"
+        ogImage="https://aaitek.com.au/logo.png"
         ogType="website"
         twitterTitle="Academy - Premium Training Programs"
         twitterDescription="Premium training pathways for engineers and enterprise teams."

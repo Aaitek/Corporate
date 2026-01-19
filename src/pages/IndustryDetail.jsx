@@ -57,7 +57,8 @@ const IndustryDetail = () => {
       'energy-utilities': 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&q=80',
       'government-public-sector': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
     }
-    return industryImages[slug] || `${siteUrl}/logo.png`
+    // Use logo for all industry pages for consistent social sharing
+    return `${siteUrl}/logo.png`
   }
 
   return (

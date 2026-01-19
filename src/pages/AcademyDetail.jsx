@@ -49,8 +49,8 @@ const AcademyDetail = () => {
     }
   }
 
-  // Use education/training themed image for academy courses
-  const academyImage = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&q=80'
+  // Use logo for academy courses for consistent social sharing
+  const academyImage = 'https://aaitek.com.au/logo.png'
 
   return (
     <>
