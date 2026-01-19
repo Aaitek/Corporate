@@ -49,48 +49,79 @@ export const fetchServiceBySlug = async (slug) => {
 
 // Helper function to get image URL from Strapi response
 // This ensures images always have absolute URLs that persist
+// Handles all Strapi image response formats and prevents disappearing images
 export const getImageUrl = (imageData, format = 'url') => {
   if (!imageData) return null
   
   let imageUrl = null
   
-  // Handle different Strapi response formats - check all possible paths
-  // Priority: formats (large/medium/small) > original url > fallback
-  if (imageData.data?.attributes?.formats?.[format]?.url) {
-    imageUrl = imageData.data.attributes.formats[format].url
-  } else if (imageData.data?.attributes?.url) {
-    imageUrl = imageData.data.attributes.url
-  } else if (imageData.attributes?.formats?.[format]?.url) {
-    imageUrl = imageData.attributes.formats[format].url
-  } else if (imageData.attributes?.url) {
-    imageUrl = imageData.attributes.url
-  } else if (imageData.url) {
-    imageUrl = imageData.url
-  } else if (imageData.formats?.[format]?.url) {
-    imageUrl = imageData.formats[format].url
+  try {
+    // Handle different Strapi response formats - check all possible paths
+    // Priority: formats (large/medium/small/thumbnail) > original url > fallback
+    // Check nested data.attributes first (most common in Strapi v4)
+    if (imageData.data?.attributes) {
+      if (imageData.data.attributes.formats?.[format]?.url) {
+        imageUrl = imageData.data.attributes.formats[format].url
+      } else if (imageData.data.attributes.url) {
+        imageUrl = imageData.data.attributes.url
+      }
+    }
+    
+    // Check direct attributes (alternative format)
+    if (!imageUrl && imageData.attributes) {
+      if (imageData.attributes.formats?.[format]?.url) {
+        imageUrl = imageData.attributes.formats[format].url
+      } else if (imageData.attributes.url) {
+        imageUrl = imageData.attributes.url
+      }
+    }
+    
+    // Check direct properties (fallback)
+    if (!imageUrl) {
+      if (imageData.formats?.[format]?.url) {
+        imageUrl = imageData.formats[format].url
+      } else if (imageData.url) {
+        imageUrl = imageData.url
+      }
+    }
+    
+    if (!imageUrl) return null
+    
+    // If URL is already absolute, validate and return as is
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      // Validate the URL is complete
+      try {
+        new URL(imageUrl)
+        return imageUrl
+      } catch (e) {
+        // Invalid absolute URL, treat as relative
+      }
+    }
+    
+    // Ensure the URL starts with /
+    if (!imageUrl.startsWith('/')) {
+      imageUrl = '/' + imageUrl
+    }
+    
+    // Get the API base URL and construct absolute URL
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:1337/api'
+    // Remove /api from the end if present, and any trailing slashes
+    let apiBase = baseUrl.replace(/\/api$/, '').replace(/\/$/, '')
+    
+    // If apiBase is empty or just whitespace, use default
+    if (!apiBase || apiBase.trim() === '') {
+      apiBase = 'http://localhost:1337'
+    }
+    
+    // Construct absolute URL - ensure no double slashes
+    const cleanImageUrl = imageUrl.replace(/^\/+/, '/')
+    const absoluteUrl = `${apiBase}${cleanImageUrl}`
+    
+    return absoluteUrl
+  } catch (error) {
+    console.error('Error constructing image URL:', error, imageData)
+    return null
   }
-  
-  if (!imageUrl) return null
-  
-  // If URL is already absolute, return as is (ensure it's a valid URL)
-  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-    return imageUrl
-  }
-  
-  // Ensure the URL starts with /
-  if (!imageUrl.startsWith('/')) {
-    imageUrl = '/' + imageUrl
-  }
-  
-  // Get the API base URL and construct absolute URL
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:1337/api'
-  // Remove /api from the end if present
-  const apiBase = baseUrl.replace(/\/api$/, '')
-  
-  // Construct absolute URL
-  const absoluteUrl = `${apiBase}${imageUrl}`
-  
-  return absoluteUrl
 }
 
 export default api
