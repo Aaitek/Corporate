@@ -44,13 +44,13 @@ const SEO = ({
       return imageUrl
     }
     
-    // If relative, make it absolute
+    // If relative, make it absolute using current origin (so it works on Vercel deployments)
     if (imageUrl.startsWith('/')) {
-      return `${siteUrl}${imageUrl}`
+      return `${currentOrigin}${imageUrl}`
     }
     
     // If no leading slash, add it
-    return `${siteUrl}/${imageUrl}`
+    return `${currentOrigin}/${imageUrl}`
   }
 
   // Use provided values or fallback to defaults
