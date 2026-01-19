@@ -99,17 +99,6 @@ const CaseStudies = () => {
     setCurrentPage(1) // Reset to first page when clearing filters
   }
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredCaseStudies.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const paginatedCaseStudies = filteredCaseStudies.slice(startIndex, endIndex)
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filters, searchQuery])
-
   // Filter and search logic
   const filteredCaseStudies = useMemo(() => {
     return caseStudies.filter(study => {
