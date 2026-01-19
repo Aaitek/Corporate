@@ -196,21 +196,29 @@ const SEO = ({
       <meta name="robots" content={indexable ? `${robots},max-image-preview:large` : 'noindex,nofollow'} />
       <meta name="theme-color" content="#0B0F17" />
       
-      {/* Open Graph Tags - react-helmet-async will replace existing tags with same property */}
+      {/* Open Graph Tags - For Facebook, LinkedIn, WhatsApp, and other platforms */}
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:url" content={canonical} />
       <meta property="og:title" content={ogTitleText} />
       <meta property="og:description" content={ogDescText} />
       <meta property="og:image" content={ogImg} />
+      <meta property="og:image:secure_url" content={ogImg} />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={ogTitleText} />
       
-      {/* Twitter Card Tags - react-helmet-async will replace existing tags with same name */}
+      {/* Twitter Card Tags - For Twitter/X */}
       <meta name="twitter:card" content={twitterCard} />
+      <meta name="twitter:site" content="@aaitek" />
       {twitterTitleText && <meta name="twitter:title" content={twitterTitleText} />}
       {twitterDescText && <meta name="twitter:description" content={twitterDescText} />}
       {twitterImg && <meta name="twitter:image" content={twitterImg} />}
+      {twitterImg && <meta name="twitter:image:alt" content={twitterTitleText || ogTitleText} />}
+      
+      {/* LinkedIn specific - uses Open Graph but ensures compatibility */}
+      <meta property="linkedin:owner" content="aaitek" />
       
       {/* Canonical URL - react-helmet-async will replace existing canonical link */}
       <link rel="canonical" href={canonical} />
