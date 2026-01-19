@@ -133,6 +133,7 @@ const Company = () => {
         title="About Aaitek"
         description="Aaitek is an Australia-owned technology and digital transformation company helping organisations design, build, and scale modern digital platforms. We operate at the intersection of engineering excellence, enterprise platforms, and AI-first thinking."
         image={null} // Future: Fetch from Strapi (e.g., globalSettings.heroImage or pageSettings.companyHeroImage)
+        gradient="from-primary-600 via-primary-700 to-accent-600"
         className="py-8 sm:py-12"
       />
 
