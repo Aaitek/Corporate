@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import SEO from '../components/SEO'
+import api from '../utils/api'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -14,6 +15,8 @@ const Contact = () => {
     message: '',
     service: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState({ type: null, message: '' })
 
   const contactMethods = [
     {
@@ -53,18 +56,44 @@ const Contact = () => {
     'Hire Developers',
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission
-    // TODO: Integrate with backend API
-    alert('Thank you for your message! We\'ll get back to you soon.')
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      message: '',
-    })
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
+
+    try {
+      const response = await api.post('/contact-submissions', {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company || null,
+        phone: formData.phone || null,
+        service: formData.service || null,
+        message: formData.message,
+      })
+
+      if (response.data) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you for your message! We\'ll get back to you soon.'
+        })
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          message: '',
+          service: '',
+        })
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: error.response?.data?.error?.message || 'Failed to send message. Please try again or email us directly.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e) => {
@@ -88,7 +117,7 @@ const Contact = () => {
         ogType="website"
         twitterTitle="Contact Us - Get in Touch"
         twitterDescription="Get in touch with Aaitek to transform your digital vision."
-        twitterImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&q=80"
+        twitterImage="https://aaitek.com.au/logo.png"
         schemaType="ContactPage"
         indexable={true}
       />
@@ -334,14 +363,29 @@ const Contact = () => {
                   />
                 </div>
 
+                {submitStatus.message && (
+                  <div
+                    className={`p-4 rounded-xl ${
+                      submitStatus.type === 'success'
+                        ? 'bg-green-50 border border-green-200 text-green-800'
+                        : 'bg-red-50 border border-red-200 text-red-800'
+                    }`}
+                  >
+                    {submitStatus.message}
+                  </div>
+                )}
+
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   transition={{ duration: 0 }}
-                  className="w-full px-8 py-4 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-all duration-0 shadow-lg hover:shadow-xl"
+                  className={`w-full px-8 py-4 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-all duration-0 shadow-lg hover:shadow-xl ${
+                    isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </motion.button>
               </form>
             </motion.div>
