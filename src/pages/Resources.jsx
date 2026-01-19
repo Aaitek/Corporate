@@ -182,63 +182,27 @@ const Resources = () => {
       />
     <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-400 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-400 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        </div>
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
-          <div className="absolute bottom-20 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
-          <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-white/10 rounded-full blur-xl"></div>
+      <section className="py-8 sm:py-12 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
         <div className="container-custom relative z-10">
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.div
-              variants={fadeInUp}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/30 mb-8 shadow-xl"
-            >
-              <span className="text-2xl">📚</span>
-              <span className="text-sm font-bold text-white uppercase tracking-wider">Resources</span>
-            </motion.div>
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-6">
+              <span className="text-xs font-semibold text-white uppercase tracking-wider">Resources</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
               Resources
-            </motion.h1>
-            <motion.div
-              variants={fadeInUp}
-              className="flex items-center justify-center gap-3 mb-8"
-            >
-              <div className="h-1 w-16 bg-gradient-to-r from-transparent to-white/50"></div>
-              <span className="text-3xl">✨</span>
-              <div className="h-1 w-16 bg-gradient-to-l from-transparent to-white/50"></div>
-            </motion.div>
-            <motion.p
-              variants={fadeInUp}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 max-w-3xl mx-auto leading-tight"
-            >
-              Insights, Knowledge, and Perspectives from the Field
-            </motion.p>
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 max-w-3xl mx-auto leading-relaxed font-medium"
-            >
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
               The Resources section is where Aaitek shares practical insights, delivery experience, and industry perspectives — drawn from real projects, evolving technology trends, and enterprise delivery learnings.
-            </motion.p>
-            <motion.p
-              variants={fadeInUp}
-              className="text-base sm:text-lg text-white/85 max-w-3xl mx-auto leading-relaxed"
-            >
-              This is not promotional content. It is designed to educate, inform, and build trust.
-            </motion.p>
+            </p>
           </motion.div>
         </div>
       </section>
