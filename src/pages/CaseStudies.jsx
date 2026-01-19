@@ -92,11 +92,11 @@ const CaseStudies = () => {
       try {
         setLoading(true)
         const response = await fetchCaseStudies()
-        let mapped = []
+        let strapiCaseStudies = []
         
         if (response?.data && response.data.length > 0) {
           // Map Strapi data to component format
-          mapped = response.data.map(item => ({
+          strapiCaseStudies = response.data.map(item => ({
             id: item.id,
             title: item.attributes?.title || '',
             slug: item.attributes?.slug || '',
@@ -124,12 +124,15 @@ const CaseStudies = () => {
           }))
         }
         
-        // If no Strapi data, use fallback
-        if (mapped.length === 0) {
-          mapped = fallbackCaseStudies
-        }
+        // Combine Strapi data with fallback data (show both)
+        // Filter out fallback items that might already exist in Strapi by slug
+        const existingSlugs = new Set(strapiCaseStudies.map(cs => cs.slug))
+        const uniqueFallbacks = fallbackCaseStudies.filter(fb => !existingSlugs.has(fb.slug))
         
-        setCaseStudies(mapped)
+        // Merge: Strapi data first, then fallback data
+        const allCaseStudies = [...strapiCaseStudies, ...uniqueFallbacks]
+        
+        setCaseStudies(allCaseStudies)
       } catch (error) {
         console.error('Error fetching case studies:', error)
         // On error, use fallback data

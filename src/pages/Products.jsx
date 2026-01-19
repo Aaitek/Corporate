@@ -14,11 +14,11 @@ const Products = () => {
       try {
         setLoading(true)
         const response = await fetchProducts()
-        let mapped = []
+        let strapiProducts = []
         
         if (response?.data && response.data.length > 0) {
           // Map Strapi data to component format
-          mapped = response.data.map(item => ({
+          strapiProducts = response.data.map(item => ({
             id: item.id,
             title: item.attributes?.title || '',
             slug: item.attributes?.slug || '',
@@ -35,25 +35,31 @@ const Products = () => {
           }))
         }
         
-        // If no Strapi data, use fallback from productsData
-        if (mapped.length === 0) {
-          mapped = Object.entries(productsData).map(([slug, product]) => ({
-            id: slug,
-            title: product.title,
-            slug: slug,
-            description: product.description,
-            category: product.subtitle,
-            features: product.keyFeatures || [],
-            pricing: {},
-            image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
-            subtitle: product.subtitle,
-            color: product.color,
-            icon: product.icon,
-            comingSoon: product.comingSoon || false,
-          }))
-        }
+        // Convert productsData to array format
+        const fallbackProducts = Object.entries(productsData).map(([slug, product]) => ({
+          id: slug,
+          title: product.title,
+          slug: slug,
+          description: product.description,
+          category: product.subtitle,
+          features: product.keyFeatures || [],
+          pricing: {},
+          image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+          subtitle: product.subtitle,
+          color: product.color,
+          icon: product.icon,
+          comingSoon: product.comingSoon || false,
+        }))
         
-        setProducts(mapped)
+        // Combine Strapi data with fallback data (show both)
+        // Filter out fallback items that might already exist in Strapi by slug
+        const existingSlugs = new Set(strapiProducts.map(p => p.slug))
+        const uniqueFallbacks = fallbackProducts.filter(fb => !existingSlugs.has(fb.slug))
+        
+        // Merge: Strapi data first, then fallback data
+        const allProducts = [...strapiProducts, ...uniqueFallbacks]
+        
+        setProducts(allProducts)
       } catch (error) {
         console.error('Error fetching products:', error)
         // On error, use fallback data
