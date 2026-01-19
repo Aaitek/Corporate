@@ -17,8 +17,6 @@ const CaseStudyDetail = () => {
         setError(null)
         const response = await api.get(`/case-studies?filters[slug][$eq]=${slug}&populate=*&publicationState=live`)
         
-        console.log('Case Study API Response:', response?.data)
-        
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
           const mapped = {
