@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
-import api from '../utils/api'
+import api, { getImageUrl } from '../utils/api'
 
 const CaseStudyDetail = () => {
   const { slug } = useParams()
@@ -15,7 +15,9 @@ const CaseStudyDetail = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await api.get(`/case-studies?filters[slug][$eq]=${slug}&populate=*`)
+        const response = await api.get(`/case-studies?filters[slug][$eq]=${slug}&populate=*&publicationState=live`)
+        
+        console.log('Case Study API Response:', response?.data)
         
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
@@ -28,11 +30,7 @@ const CaseStudyDetail = () => {
             description: item.attributes?.description || '',
             fullContent: item.attributes?.fullContent || '',
             category: item.attributes?.category || 'cloud',
-            image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.url}`
-              : item.attributes?.image?.data?.attributes?.formats?.large?.url
-              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
-              : 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
+            image: getImageUrl(item.attributes?.image, 'large') || 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
             results: item.attributes?.results || {},
             technologies: item.attributes?.technologies || [],
             video: null,
@@ -326,21 +324,27 @@ const CaseStudyDetail = () => {
             )}
 
             {/* Full Content */}
-            {caseStudy.fullContent && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
-              >
-                <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
+            >
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
+              {caseStudy.fullContent ? (
                 <div 
                   className="prose prose-lg max-w-none text-gray-700"
                   dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
                 />
-              </motion.div>
-            )}
+              ) : caseStudy.description ? (
+                <div className="prose prose-lg max-w-none text-gray-700">
+                  <p className="text-lg leading-relaxed">{caseStudy.description}</p>
+                </div>
+              ) : (
+                <p className="text-gray-600 text-lg">Content coming soon...</p>
+              )}
+            </motion.div>
 
             {/* Back to Case Studies Link */}
             <motion.div

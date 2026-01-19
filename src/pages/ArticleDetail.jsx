@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
-import api from '../utils/api'
+import api, { getImageUrl } from '../utils/api'
 
 const ArticleDetail = () => {
   const { slug } = useParams()
@@ -15,7 +15,9 @@ const ArticleDetail = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await api.get(`/articles?filters[slug][$eq]=${slug}&populate=*`)
+        const response = await api.get(`/articles?filters[slug][$eq]=${slug}&populate=*&publicationState=live`)
+        
+        console.log('Article API Response:', response?.data)
         
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
@@ -29,11 +31,7 @@ const ArticleDetail = () => {
             author: item.attributes?.author || 'Aaitek Team',
             publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
             tags: item.attributes?.tags || [],
-            image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.url}`
-              : item.attributes?.image?.data?.attributes?.formats?.large?.url
-              ? `https://aaitek-production.up.railway.app${item.attributes.image.data.attributes.formats.large.url}`
-              : 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+            image: getImageUrl(item.attributes?.image, 'large') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
             fullContent: item.attributes?.content || '',
             description: item.attributes?.excerpt || item.attributes?.description || '',
           }
