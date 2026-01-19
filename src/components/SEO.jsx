@@ -28,10 +28,12 @@ const SEO = ({
   pageImage,
 }) => {
   const location = useLocation()
+  // Get the current origin (works for both Vercel deployment and production domain)
+  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com.au'
   const siteUrl = 'https://aaitek.com.au'
   const siteName = 'Aaitek'
-  // Use logo.png for social sharing (exists in public folder)
-  const defaultImage = `${siteUrl}/logo.png`
+  // Use logo.png for social sharing - use current origin so image is accessible from deployment URL
+  const defaultImage = `${currentOrigin}/logo.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
