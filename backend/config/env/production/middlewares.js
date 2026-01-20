@@ -18,6 +18,8 @@ module.exports = [
       keepHeaderOnError: true,
     },
   },
+  // Custom CORS middleware as backup - ensures CORS headers are always set
+  'global::cors',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
