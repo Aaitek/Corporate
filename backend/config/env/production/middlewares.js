@@ -4,14 +4,23 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: [
-        'https://www.aaitek.com',
-        'https://aaitek.com',
-        'https://aaitek.com.au',
-        'http://localhost:3000',
-        'http://localhost:5173',
-        /^https:\/\/.*\.vercel\.app$/,
-      ],
+      origin: (origin) => {
+        // Function-based origin check - more reliable
+        if (!origin) return false;
+        
+        const allowedOrigins = [
+          'https://www.aaitek.com',
+          'https://aaitek.com',
+          'https://aaitek.com.au',
+          'http://localhost:3000',
+          'http://localhost:5173',
+        ];
+        
+        if (allowedOrigins.includes(origin)) return true;
+        if (/^https:\/\/.*\.vercel\.app$/.test(origin)) return true;
+        
+        return false;
+      },
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
       credentials: true,
