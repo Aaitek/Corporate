@@ -4,15 +4,17 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
       origin: [
         'https://www.aaitek.com',
         'https://aaitek.com',
+        'https://aaitek.com.au',
         'http://localhost:3000',
         'http://localhost:5173',
+        /^https:\/\/.*\.vercel\.app$/,
       ],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
+      credentials: true,
       keepHeaderOnError: true,
     },
   },
