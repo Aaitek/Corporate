@@ -4,7 +4,6 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      enabled: true,
       origin: [
         'https://www.aaitek.com',
         'https://aaitek.com',
