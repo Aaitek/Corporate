@@ -2,6 +2,10 @@
 
 module.exports = (config, { strapi }) => {
   return async (ctx, next) => {
+    // DIAGNOSTIC HEADER - proves this middleware is running
+    ctx.set('x-strapi-runtime', 'BACKEND_ACTIVE');
+    ctx.set('x-cors-middleware', 'LOADED');
+    
     const origin = ctx.request.header.origin;
     
     // Allowed origins
