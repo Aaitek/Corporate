@@ -36,6 +36,8 @@ module.exports = [
         'http://localhost:5173',
         'https://a-aitech.vercel.app',
         'https://aaitek.com.au',
+        'https://aaitek.com',
+        'https://www.aaitek.com',
         /^https:\/\/.*\.vercel\.app$/,
       ],
       headers: '*',
