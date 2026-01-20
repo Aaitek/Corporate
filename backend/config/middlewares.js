@@ -1,6 +1,16 @@
 module.exports = [
   'strapi::logger',
   'strapi::errors',
+  // CORS must be early in the middleware chain
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: '*', // Allow all origins
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
+      credentials: false, // Must be false when origin is '*'
+    },
+  },
   {
     name: 'strapi::security',
     config: {
@@ -25,15 +35,6 @@ module.exports = [
           upgradeInsecureRequests: null,
         },
       },
-    },
-  },
-  {
-    name: 'strapi::cors',
-    config: {
-      origin: '*', // Allow all origins
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
-      credentials: false, // Must be false when origin is '*'
     },
   },
   'strapi::poweredBy',
