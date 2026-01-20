@@ -19,17 +19,14 @@ module.exports = (config, { strapi }) => {
     // Check if origin is allowed
     const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
     
+    // Always set CORS headers for allowed origins
     if (isAllowed) {
       ctx.set('Access-Control-Allow-Origin', origin);
       ctx.set('Access-Control-Allow-Credentials', 'true');
-    } else if (origin) {
-      // For other origins, don't set CORS headers (browser will block)
-      // But we still allow the request to proceed server-side
+      ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+      ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
+      ctx.set('Access-Control-Max-Age', '86400');
     }
-    
-    ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
-    ctx.set('Access-Control-Max-Age', '86400');
     
     // Handle preflight requests
     if (ctx.method === 'OPTIONS') {
