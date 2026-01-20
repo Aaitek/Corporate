@@ -1,16 +1,6 @@
 module.exports = [
   'strapi::logger',
   'strapi::errors',
-  // CORS must be early in the middleware chain
-  {
-    name: 'strapi::cors',
-    config: {
-      origin: '*', // Allow all origins
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH', 'HEAD'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
-      credentials: false, // Must be false when origin is '*'
-    },
-  },
   {
     name: 'strapi::security',
     config: {
@@ -35,6 +25,23 @@ module.exports = [
           upgradeInsecureRequests: null,
         },
       },
+    },
+  },
+  // CORS middleware - must be after security but before other middleware
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: [
+        'https://www.aaitek.com',
+        'https://aaitek.com',
+        'https://aaitek.com.au',
+        'http://localhost:3000',
+        'http://localhost:5173',
+        /^https:\/\/.*\.vercel\.app$/,
+      ],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+      headers: '*',
+      credentials: true,
     },
   },
   'strapi::poweredBy',
