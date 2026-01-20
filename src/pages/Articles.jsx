@@ -23,40 +23,76 @@ const Articles = () => {
     const loadArticles = async () => {
       try {
         setLoading(true)
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:1337/api'
+        console.log('🔍 Fetching articles from:', apiUrl)
+        
         const response = await fetchArticles()
-        if (response?.data) {
+        console.log('✅ Articles API Response:', response)
+        console.log('📊 Response data:', response?.data)
+        console.log('📊 Response data length:', response?.data?.length)
+        
+        if (response?.data && Array.isArray(response.data) && response.data.length > 0) {
           // Map Strapi data to component format
-          const mapped = response.data.map(item => ({
-            id: item.id,
-            title: item.attributes?.title || '',
-            slug: item.attributes?.slug || '',
-            excerpt: item.attributes?.excerpt || '',
-            content: item.attributes?.content || '',
-            category: item.attributes?.category || '',
-            author: item.attributes?.author || '',
-            publishedAt: item.attributes?.publishedAt || '',
-            tags: item.attributes?.tags || [],
-            image: getImageUrl(item.attributes?.image, 'medium') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
-            // Map for filters
-            industry: 'Finance', // Default or from tags
-            serviceArea: item.attributes?.category || 'Engineering',
-            technology: Array.isArray(item.attributes?.tags) 
-              ? item.attributes.tags[0] || 'AI'
-              : 'AI',
-            audience: 'CTO',
-            year: item.attributes?.publishedAt 
-              ? new Date(item.attributes.publishedAt).getFullYear().toString()
-              : '2024',
-            status: 'Published',
-            color: 'from-blue-500 to-cyan-500',
-            icon: '📝',
-            type: 'Article',
-            description: item.attributes?.excerpt || item.attributes?.description || '',
-          }))
+          const mapped = response.data.map(item => {
+            // Generate slug from title if missing
+            let slug = item.attributes?.slug || ''
+            if (!slug && item.attributes?.title) {
+              slug = item.attributes.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '')
+            }
+            
+            return {
+              id: item.id,
+              title: item.attributes?.title || '',
+              slug: slug || `article-${item.id}`,
+              excerpt: item.attributes?.excerpt || '',
+              content: item.attributes?.content || '',
+              category: item.attributes?.category || '',
+              author: item.attributes?.author || '',
+              publishedAt: item.attributes?.publishedAt || '',
+              tags: item.attributes?.tags || [],
+              image: getImageUrl(item.attributes?.image, 'medium') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+              // Map for filters
+              industry: 'Finance', // Default or from tags
+              serviceArea: item.attributes?.category || 'Engineering',
+              technology: Array.isArray(item.attributes?.tags) 
+                ? item.attributes.tags[0] || 'AI'
+                : 'AI',
+              audience: 'CTO',
+              year: item.attributes?.publishedAt 
+                ? new Date(item.attributes.publishedAt).getFullYear().toString()
+                : '2024',
+              status: 'Published',
+              color: 'from-blue-500 to-cyan-500',
+              icon: '📝',
+              type: 'Article',
+              description: item.attributes?.excerpt || item.attributes?.description || '',
+            }
+          })
+          console.log('✅ Mapped articles:', mapped)
+          console.log('✅ Setting articles count:', mapped.length)
           setArticles(mapped)
+        } else {
+          console.warn('⚠️ No articles found in API response')
+          console.warn('Response structure:', JSON.stringify(response, null, 2))
+          setArticles([])
         }
       } catch (error) {
-        console.error('Error fetching articles:', error)
+        console.error('❌ Error fetching articles:', error)
+        console.error('❌ Error message:', error.message)
+        console.error('❌ Error code:', error.code)
+        console.error('❌ Error response:', error.response)
+        console.error('❌ API URL:', import.meta.env.VITE_API_URL || 'Not set - using default')
+        
+        // Check if it's a network/CORS error
+        if (error.code === 'ERR_NETWORK' || error.message?.includes('CORS') || error.message?.includes('Failed to fetch')) {
+          console.error('🚫 Network/CORS error detected!')
+          console.error('🚫 Check if Railway backend is running and CORS is configured')
+          console.error('🚫 Expected API URL:', import.meta.env.VITE_API_URL)
+        }
+        
         setArticles([])
       } finally {
         setLoading(false)
