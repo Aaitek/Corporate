@@ -23,14 +23,16 @@ module.exports = (config, { strapi }) => {
     // Check if origin is allowed
     const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
     
-    // ALWAYS set CORS headers - override Strapi's empty header
-    if (isAllowed) {
-      ctx.set('Access-Control-Allow-Origin', origin);
-      ctx.set('Access-Control-Allow-Credentials', 'true');
-    } else if (origin) {
-      // For other origins, still set the header but with the origin value
-      // This ensures CORS works even if origin check fails
-      ctx.set('Access-Control-Allow-Origin', origin);
+    // ALWAYS set CORS headers FIRST - this runs before strapi::cors
+    // If origin is present, always set it (browser will validate)
+    if (origin) {
+      if (isAllowed) {
+        ctx.set('Access-Control-Allow-Origin', origin);
+        ctx.set('Access-Control-Allow-Credentials', 'true');
+      } else {
+        // Still set the header for debugging - browser will reject if not allowed
+        ctx.set('Access-Control-Allow-Origin', origin);
+      }
     }
     
     // Always set these headers

@@ -26,10 +26,15 @@ module.exports = {
       // Check if origin is allowed
       const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
       
-      // ALWAYS set CORS headers if origin is present and allowed
-      if (isAllowed) {
-        ctx.set('Access-Control-Allow-Origin', origin);
-        ctx.set('Access-Control-Allow-Credentials', 'true');
+      // ALWAYS set CORS headers if origin is present
+      if (origin) {
+        if (isAllowed) {
+          ctx.set('Access-Control-Allow-Origin', origin);
+          ctx.set('Access-Control-Allow-Credentials', 'true');
+        } else {
+          // Still set for debugging - browser will validate
+          ctx.set('Access-Control-Allow-Origin', origin);
+        }
         ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
         ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
         ctx.set('Access-Control-Max-Age', '86400');
@@ -58,9 +63,13 @@ module.exports = {
       const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
       const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
       
-      if (isAllowed) {
-        ctx.set('Access-Control-Allow-Origin', origin);
-        ctx.set('Access-Control-Allow-Credentials', 'true');
+      if (origin) {
+        if (isAllowed) {
+          ctx.set('Access-Control-Allow-Origin', origin);
+          ctx.set('Access-Control-Allow-Credentials', 'true');
+        } else {
+          ctx.set('Access-Control-Allow-Origin', origin);
+        }
         ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
         ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
       }
