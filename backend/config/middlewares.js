@@ -1,50 +1,23 @@
 module.exports = [
-  'strapi::logger',
   'strapi::errors',
-  {
-    name: 'strapi::security',
-    config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'dl.airtable.com',
-            'res.cloudinary.com',
-          ],
-          'media-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'dl.airtable.com',
-            'res.cloudinary.com',
-          ],
-          upgradeInsecureRequests: null,
-        },
-      },
-    },
-  },
-  // CORS middleware - must be after security but before other middleware
+  'strapi::security',
   {
     name: 'strapi::cors',
     config: {
+      enabled: true,
       origin: [
         'https://www.aaitek.com',
         'https://aaitek.com',
-        'https://aaitek.com.au',
         'http://localhost:3000',
         'http://localhost:5173',
-        /^https:\/\/.*\.vercel\.app$/,
       ],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
-      headers: '*',
-      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',
+  'strapi::logger',
   'strapi::query',
   'strapi::body',
   'strapi::session',
