@@ -2,10 +2,14 @@
 
 module.exports = {
   register({ strapi }) {
+    // Log to confirm this hook is being loaded
+    console.log('🚀 Aaitek server hook: REGISTER function called');
+    
     // Server-level middleware - runs for ALL requests
     strapi.server.app.use(async (ctx, next) => {
       // PROOF HEADER - if you see this, your code is running on Railway
       ctx.set('x-aaitek-backend', 'LIVE');
+      ctx.set('x-aaitek-register', 'LOADED');
       
       await next();
 
@@ -48,6 +52,35 @@ module.exports = {
         } else {
           // No origin header (direct browser access) - log for debugging
           console.log('⚠️ CORS: No origin header in request');
+        }
+      }
+    });
+  },
+  
+  bootstrap({ strapi }) {
+    // Log to confirm bootstrap is called
+    console.log('🚀 Aaitek server hook: BOOTSTRAP function called');
+    
+    // Also add middleware in bootstrap as backup
+    strapi.server.app.use(async (ctx, next) => {
+      ctx.set('x-aaitek-bootstrap', 'LOADED');
+      await next();
+      
+      // Ensure CORS headers are set
+      if (ctx.request.path.startsWith('/api')) {
+        const origin = ctx.request.header.origin;
+        const allowed = [
+          'https://www.aaitek.com',
+          'https://aaitek.com',
+          'https://aaitek.com.au',
+          'http://localhost:3000',
+          'http://localhost:5173',
+        ];
+        const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        
+        if (origin && (allowed.includes(origin) || isVercelDomain)) {
+          ctx.set('Access-Control-Allow-Origin', origin);
+          ctx.set('Access-Control-Allow-Credentials', 'true');
         }
       }
     });
