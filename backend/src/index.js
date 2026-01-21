@@ -6,10 +6,39 @@ module.exports = {
     console.log('🚀 Aaitek server hook: REGISTER function called');
     
     // Server-level middleware - runs for ALL requests
+    // Set headers BEFORE processing request to ensure they're not stripped
     strapi.server.app.use(async (ctx, next) => {
       // PROOF HEADER - if you see this, your code is running on Railway
       ctx.set('x-aaitek-backend', 'LIVE');
       ctx.set('x-aaitek-register', 'LOADED');
+      
+      // Set CORS headers EARLY (before next()) to prevent Railway Edge from stripping them
+      if (ctx.request.path.startsWith('/api')) {
+        const origin = ctx.request.header.origin;
+        const allowed = [
+          'https://www.aaitek.com',
+          'https://aaitek.com',
+          'https://aaitek.com.au',
+          'http://localhost:3000',
+          'http://localhost:5173',
+        ];
+        const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        
+        if (origin && (allowed.includes(origin) || isVercelDomain)) {
+          ctx.set('Access-Control-Allow-Origin', origin);
+          ctx.set('Access-Control-Allow-Credentials', 'true');
+          ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+          ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
+          ctx.set('Vary', 'Origin');
+          console.log('✅ CORS: Set header EARLY for origin:', origin);
+        }
+        
+        // Handle preflight OPTIONS requests
+        if (ctx.method === 'OPTIONS') {
+          ctx.status = 204;
+          return;
+        }
+      }
       
       await next();
 
@@ -20,8 +49,8 @@ module.exports = {
         ctx.set('Expires', '0');
       }
 
-      // Fix 2: Hard-set CORS header for API responses (guarantees header exists)
-      // This runs AFTER the request, so it overrides any previous CORS settings
+      // Fix 2: Ensure CORS headers are still set AFTER request (backup)
+      // This ensures headers persist even if something tries to remove them
       if (ctx.request.path.startsWith('/api')) {
         const origin = ctx.request.header.origin;
         const allowed = [
@@ -31,26 +60,19 @@ module.exports = {
           'http://localhost:3000',
           'http://localhost:5173',
         ];
-        
-        // Check if origin matches Vercel pattern
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
         
-        // CRITICAL: Always set CORS headers for allowed origins
+        // CRITICAL: Re-set CORS headers after request to ensure they persist
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
           ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
           ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.set('Vary', 'Origin');
-          // Debug log to Railway logs
-          console.log('✅ CORS: Set header for origin:', origin);
+          console.log('✅ CORS: Re-set header AFTER request for origin:', origin);
         } else if (origin) {
-          // For debugging: log if origin is not in allowed list
           console.log('⚠️ CORS: Origin not allowed:', origin);
-          // Still set header for debugging (browser will reject, but we can see it)
-          ctx.set('Access-Control-Allow-Origin', origin);
         } else {
-          // No origin header (direct browser access) - log for debugging
           console.log('⚠️ CORS: No origin header in request');
         }
       }
