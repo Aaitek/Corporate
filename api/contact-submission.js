@@ -9,12 +9,17 @@ export default async function handler(req, res) {
   try {
     const url = `${RAILWAY_API_URL}/contact-submissions`
     
+    // Strapi v4 requires data wrapper for POST requests
+    const requestBody = {
+      data: req.body
+    }
+    
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(requestBody),
     })
 
     if (!response.ok) {
