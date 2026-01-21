@@ -6,13 +6,16 @@ module.exports = {
     console.log('🚀 Aaitek server hook: REGISTER function called');
     
     // Server-level middleware - runs for ALL requests
-    // Set headers BEFORE processing request to ensure they're not stripped
+    // CRITICAL: This runs AFTER Strapi's built-in CORS, so we can override it
     strapi.server.app.use(async (ctx, next) => {
       // PROOF HEADER - if you see this, your code is running on Railway
       ctx.set('x-aaitek-backend', 'LIVE');
       ctx.set('x-aaitek-register', 'LOADED');
       
-      // Set CORS headers EARLY (before next()) to prevent Railway Edge from stripping them
+      await next();
+      
+      // CRITICAL: Set CORS headers AFTER Strapi processes the request
+      // This ensures we override any wildcard (*) that Strapi might set
       if (ctx.request.path.startsWith('/api')) {
         const origin = ctx.request.header.origin;
         const allowed = [
@@ -26,78 +29,40 @@ module.exports = {
         
         // Log for debugging
         console.log('🔍 CORS Check - Origin:', origin, 'Path:', ctx.request.path);
-        console.log('🔍 CORS Check - Allowed:', allowed);
-        console.log('🔍 CORS Check - Is Vercel:', isVercelDomain);
-        console.log('🔍 CORS Check - Is Allowed:', origin && (allowed.includes(origin) || isVercelDomain));
+        console.log('🔍 CORS Check - Current header:', ctx.response.get('Access-Control-Allow-Origin'));
         
+        // CRITICAL: Override ANY existing CORS header (including wildcard *)
+        // This ensures we always set the specific origin when present
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
+          // Force override - remove any existing wildcard
+          ctx.remove('Access-Control-Allow-Origin');
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
           ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
           ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.set('Vary', 'Origin');
-          console.log('✅ CORS: Set header EARLY for origin:', origin);
+          console.log('✅ CORS: OVERRIDE header to specific origin:', origin);
+        } else if (origin) {
+          // Origin present but not allowed - don't set wildcard, just log
+          console.log('❌ CORS: Origin NOT allowed:', origin);
+          // Remove any wildcard that might have been set
+          ctx.remove('Access-Control-Allow-Origin');
+          ctx.remove('Access-Control-Allow-Credentials');
         } else {
-          console.log('❌ CORS: Origin NOT allowed or missing. Origin:', origin);
-        }
-        
-        // Handle preflight OPTIONS requests - CRITICAL for CORS
-        if (ctx.method === 'OPTIONS') {
-          // For OPTIONS, we MUST respond with CORS headers even if origin check fails
-          // This allows the browser to proceed with the actual request
-          if (origin && (allowed.includes(origin) || isVercelDomain)) {
-            ctx.set('Access-Control-Allow-Origin', origin);
-            ctx.set('Access-Control-Allow-Credentials', 'true');
-            ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-            ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
-            ctx.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
-            ctx.status = 204;
-            console.log('✅ OPTIONS preflight: Allowed for origin:', origin);
-            return;
-          } else {
-            // Even if origin doesn't match, respond to OPTIONS (browser requirement)
-            console.log('⚠️ OPTIONS preflight: Origin not in allowed list:', origin);
-            ctx.status = 204;
-            return;
-          }
+          // No origin (direct browser access) - don't set CORS headers
+          console.log('⚠️ CORS: No origin header (direct access)');
+          // Remove any wildcard that might have been set
+          ctx.remove('Access-Control-Allow-Origin');
+          ctx.remove('Access-Control-Allow-Credentials');
         }
       }
-      
-      await next();
 
       // Fix 1: Disable caching for API routes (prevents Railway Edge from caching wrong variant)
       if (ctx.request.path.startsWith('/api')) {
-        ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
         ctx.set('Pragma', 'no-cache');
         ctx.set('Expires', '0');
-      }
-
-      // Fix 2: Ensure CORS headers are still set AFTER request (backup)
-      // This ensures headers persist even if something tries to remove them
-      if (ctx.request.path.startsWith('/api')) {
-        const origin = ctx.request.header.origin;
-        const allowed = [
-          'https://www.aaitek.com',
-          'https://aaitek.com',
-          'https://aaitek.com.au',
-          'http://localhost:3000',
-          'http://localhost:5173',
-        ];
-        const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
-        
-        // CRITICAL: Re-set CORS headers after request to ensure they persist
-        if (origin && (allowed.includes(origin) || isVercelDomain)) {
-          ctx.set('Access-Control-Allow-Origin', origin);
-          ctx.set('Access-Control-Allow-Credentials', 'true');
-          ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-          ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
-          ctx.set('Vary', 'Origin');
-          console.log('✅ CORS: Re-set header AFTER request for origin:', origin);
-        } else if (origin) {
-          console.log('⚠️ CORS: Origin not allowed:', origin);
-        } else {
-          console.log('⚠️ CORS: No origin header in request');
-        }
+        ctx.set('X-Accel-Expires', '0'); // Nginx/Railway Edge cache control
       }
     });
   },
@@ -106,12 +71,13 @@ module.exports = {
     // Log to confirm bootstrap is called
     console.log('🚀 Aaitek server hook: BOOTSTRAP function called');
     
-    // Also add middleware in bootstrap as backup
+    // Final override - runs last to ensure CORS is correct
     strapi.server.app.use(async (ctx, next) => {
-      ctx.set('x-aaitek-bootstrap', 'LOADED');
       await next();
       
-      // Ensure CORS headers are set
+      ctx.set('x-aaitek-bootstrap', 'LOADED');
+      
+      // Final CORS override - ensure no wildcard remains
       if (ctx.request.path.startsWith('/api')) {
         const origin = ctx.request.header.origin;
         const allowed = [
@@ -123,9 +89,16 @@ module.exports = {
         ];
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
         
+        // Final check: if origin is allowed, force set it (override any wildcard)
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
+          ctx.remove('Access-Control-Allow-Origin');
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
+          console.log('✅ BOOTSTRAP: Final CORS override for origin:', origin);
+        } else if (origin) {
+          // Remove wildcard if origin not allowed
+          ctx.remove('Access-Control-Allow-Origin');
+          ctx.remove('Access-Control-Allow-Credentials');
         }
       }
     });
