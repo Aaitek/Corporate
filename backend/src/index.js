@@ -17,6 +17,7 @@ module.exports = {
       }
 
       // Fix 2: Hard-set CORS header for API responses (guarantees header exists)
+      // This runs AFTER the request, so it overrides any previous CORS settings
       if (ctx.request.path.startsWith('/api')) {
         const origin = ctx.request.header.origin;
         const allowed = [
@@ -30,10 +31,16 @@ module.exports = {
         // Check if origin matches Vercel pattern
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
         
+        // ALWAYS set CORS headers if origin is present and allowed
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
+          ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+          ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.set('Vary', 'Origin');
+        } else if (origin) {
+          // For debugging: log if origin is not in allowed list
+          console.log('⚠️ CORS: Origin not allowed:', origin);
         }
       }
     });

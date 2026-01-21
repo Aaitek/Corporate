@@ -1,6 +1,7 @@
 module.exports = [
   'strapi::errors',
-  // CORS MUST come BEFORE security middleware
+
+  // ✅ CORS MUST be before security
   {
     name: 'strapi::cors',
     config: {
@@ -13,10 +14,18 @@ module.exports = [
         /^https:\/\/.*\.vercel\.app$/,
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      headers: '*', // Allow all headers - prevents preflight issues
+      headers: [
+        'Content-Type',
+        'Authorization',
+        'Origin',
+        'Accept',
+        'X-Requested-With',
+      ],
       keepHeaderOnError: true,
+      credentials: true,
     },
   },
+
   'strapi::security',
   'strapi::poweredBy',
   'strapi::logger',
@@ -26,4 +35,3 @@ module.exports = [
   'strapi::favicon',
   'strapi::public',
 ];
-
