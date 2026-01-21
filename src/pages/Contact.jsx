@@ -62,11 +62,8 @@ const Contact = () => {
     setSubmitStatus({ type: null, message: '' })
 
     try {
-      const API_BASE = import.meta.env.VITE_API_URL
-      if (!API_BASE) {
-        throw new Error('VITE_API_URL is missing')
-      }
-      const response = await api.post(`${API_BASE}/contact-submissions`, {
+      // Use Vercel API proxy to avoid Railway Edge CORS issues
+      const response = await api.post('/api/contact-submissions', {
         name: formData.name,
         email: formData.email,
         company: formData.company || null,
