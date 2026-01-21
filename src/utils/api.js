@@ -1,74 +1,60 @@
 import axios from 'axios'
 
-// Use Vercel API proxy routes (same-origin, no CORS issues)
-// In production, always use /api proxy routes (they proxy to Railway)
-// In development, use direct API URL if VITE_API_URL is set, otherwise localhost
-const API_URL = import.meta.env.MODE === 'production' || import.meta.env.PROD
-  ? '/api'  // Always use proxy in production
-  : (import.meta.env.VITE_API_URL || 'http://localhost:1337/api')
+// Always use absolute URL from VITE_API_URL
+// In Vercel, set: VITE_API_URL = https://aaitech-production.up.railway.app/api
+// This ensures no relative paths and proper API calls
+const API_BASE = import.meta.env.VITE_API_URL
+
+// Safety check
+if (!API_BASE) {
+  console.error('⚠️ VITE_API_URL is missing! API calls will fail.')
+  console.error('Set VITE_API_URL in Vercel environment variables:')
+  console.error('VITE_API_URL = https://aaitech-production.up.railway.app/api')
+}
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE || 'http://localhost:1337/api', // Fallback for local dev
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
 export const fetchServices = async () => {
-  // Use proxy route in production, direct API in development
-  const url = API_URL.startsWith('/api') ? '/api/services' : '/services?populate=*'
-  const response = await api.get(url)
+  const response = await api.get('/services?populate=*')
   return response.data
 }
 
 export const fetchProducts = async () => {
-  const url = API_URL.startsWith('/api') ? '/api/products' : '/products?populate=*'
-  const response = await api.get(url)
+  const response = await api.get('/products?populate=*')
   return response.data
 }
 
 export const fetchCaseStudies = async (category = null) => {
-  if (API_URL.startsWith('/api')) {
-    // Use proxy route
-    const url = category ? `/api/case-studies?category=${category}` : '/api/case-studies'
-    const response = await api.get(url)
-    return response.data
-  } else {
-    // Direct API call (development)
-    const url = category
-      ? `/case-studies?filters[category][$eq]=${category}&populate=*&publicationState=live`
-      : '/case-studies?populate=*&publicationState=live'
-    const response = await api.get(url)
-    return response.data
-  }
+  const url = category
+    ? `/case-studies?filters[category][$eq]=${category}&populate=*&publicationState=live`
+    : '/case-studies?populate=*&publicationState=live'
+  const response = await api.get(url)
+  return response.data
 }
 
 export const fetchTestimonials = async () => {
-  const url = API_URL.startsWith('/api') ? '/api/testimonials' : '/testimonials?populate=*'
-  const response = await api.get(url)
+  const response = await api.get('/testimonials?populate=*')
   return response.data
 }
 
 export const fetchArticles = async () => {
-  const url = API_URL.startsWith('/api') ? '/api/articles' : '/articles?populate=*&sort=publishedAt:desc&publicationState=live'
-  const response = await api.get(url)
+  const response = await api.get('/articles?populate=*&sort=publishedAt:desc&publicationState=live')
   return response.data
 }
 
 export const fetchManagedServices = async () => {
-  const url = API_URL.startsWith('/api') ? '/api/managed-services' : '/managed-services?populate=*'
-  const response = await api.get(url)
+  const response = await api.get('/managed-services?populate=*')
   return response.data
 }
 
 export const fetchServiceBySlug = async (slug) => {
-  if (API_URL.startsWith('/api')) {
-    const response = await api.get(`/api/services?slug=${slug}`)
-    return response.data
-  } else {
-    const response = await api.get(`/services?filters[slug][$eq]=${slug}&populate=*`)
-    return response.data
-  }
+  const response = await api.get(`/services?filters[slug][$eq]=${slug}&populate=*`)
+  return response.data
 }
 
 // Helper function to get image URL from Strapi response
