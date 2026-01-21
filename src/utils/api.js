@@ -16,7 +16,8 @@ const api = axios.create({
 })
 
 export const fetchServices = async () => {
-  const response = await api.get(`${API_BASE}/services`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/services', {
     params: {
       populate: '*',
     },
@@ -25,7 +26,8 @@ export const fetchServices = async () => {
 }
 
 export const fetchProducts = async () => {
-  const response = await api.get(`${API_BASE}/products`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/products', {
     params: {
       populate: '*',
     },
@@ -49,7 +51,8 @@ export const fetchCaseStudies = async (category = null) => {
 }
 
 export const fetchTestimonials = async () => {
-  const response = await api.get(`${API_BASE}/testimonials`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/testimonials', {
     params: {
       populate: '*',
     },
@@ -71,7 +74,8 @@ export const fetchArticles = async () => {
 }
 
 export const fetchManagedServices = async () => {
-  const response = await api.get(`${API_BASE}/managed-services`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/managed-services', {
     params: {
       populate: '*',
     },
@@ -80,9 +84,21 @@ export const fetchManagedServices = async () => {
 }
 
 export const fetchServiceBySlug = async (slug) => {
-  const response = await api.get(`${API_BASE}/services`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/services', {
     params: {
-      'filters[slug][$eq]': slug,
+      slug: slug, // Proxy converts this to filters[slug][$eq]
+      populate: '*',
+    },
+  })
+  return response.data
+}
+
+export const fetchProductBySlug = async (slug) => {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  const response = await api.get('/api/products', {
+    params: {
+      slug: slug, // Proxy converts this to filters[slug][$eq]
       populate: '*',
     },
   })

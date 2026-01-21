@@ -15,9 +15,10 @@ export default async function handler(req, res) {
       queryParams.append('filters[slug][$eq]', req.query.slug)
     }
     
-    // Add any other query params
+    // Add any other query params (including nested filters)
     Object.keys(req.query).forEach(key => {
-      if (key !== 'slug' && !queryParams.has(key)) {
+      if (key !== 'slug' && key !== 'populate') {
+        // Handle nested filter params like filters[slug][$eq]
         queryParams.append(key, req.query[key])
       }
     })

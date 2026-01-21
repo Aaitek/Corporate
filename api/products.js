@@ -7,8 +7,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    const queryParams = new URLSearchParams(req.query).toString()
-    const url = `${RAILWAY_API_URL}/products?populate=*${queryParams ? `&${queryParams}` : ''}`
+    // Build query string from request query params
+    const queryParams = new URLSearchParams()
+    queryParams.append('populate', '*')
+    
+    // Handle slug filter for product detail pages
+    if (req.query.slug) {
+      queryParams.append('filters[slug][$eq]', req.query.slug)
+    }
+    
+    // Add any other query params (including nested filters)
+    Object.keys(req.query).forEach(key => {
+      if (key !== 'slug' && key !== 'populate') {
+        // Handle nested filter params like filters[slug][$eq]
+        queryParams.append(key, req.query[key])
+      }
+    })
+    
+    const url = `${RAILWAY_API_URL}/products?${queryParams.toString()}`
     
     const response = await fetch(url, {
       method: 'GET',
