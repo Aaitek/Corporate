@@ -1,14 +1,10 @@
 import axios from 'axios'
 
-// HARD-FIX: Always use absolute URL from VITE_API_URL
-// NO relative URLs, NO fallbacks, NO proxies
 const API_BASE = import.meta.env.VITE_API_URL
 
 if (!API_BASE) {
   throw new Error('VITE_API_URL is missing. Set it in Vercel environment variables.')
 }
-
-// NO baseURL - always use absolute URLs
 const api = axios.create({
   headers: {
     'Content-Type': 'application/json',

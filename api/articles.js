@@ -39,9 +39,6 @@ export default async function handler(req, res) {
     
     const url = `${RAILWAY_API_URL}/articles?${queryParams.toString()}`
     
-    console.log('Proxy request - Query params:', req.query) // Debug log
-    console.log('Proxy request URL:', url) // Debug log
-    
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -57,7 +54,6 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json()
-    console.log('Proxy response - Data length:', data?.data?.length || 0) // Debug log
     
     // Set CORS headers (though not needed for same-origin, good practice)
     res.setHeader('Access-Control-Allow-Origin', '*')

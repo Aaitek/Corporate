@@ -128,7 +128,6 @@ const Company = () => {
       />
       <div className="pt-0 bg-gradient-to-br from-gray-50 via-white to-sky-50 min-h-screen">
       {/* Hero Section */}
-      {/* TODO: Connect to Strapi Global Settings or Page Settings to fetch heroImage */}
       <HeroSection
         badge="About Aaitek"
         title="About Aaitek"

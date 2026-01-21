@@ -26,8 +26,6 @@ export default async function handler(req, res) {
     
     const url = `${RAILWAY_API_URL}/services?${queryParams.toString()}`
     
-    console.log('Proxy request URL:', url) // Debug log
-    
     const response = await fetch(url, {
       method: 'GET',
       headers: {
