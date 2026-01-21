@@ -2,85 +2,40 @@
 
 module.exports = {
   register({ strapi }) {
-    // Server-level CORS middleware - runs for ALL requests
-    // This runs BEFORE all other middleware
+    // Server-level middleware - runs for ALL requests
     strapi.server.app.use(async (ctx, next) => {
       // PROOF HEADER - if you see this, your code is running on Railway
       ctx.set('x-aaitek-backend', 'LIVE');
-      ctx.set('x-strapi-runtime', 'BACKEND_ACTIVE');
-      ctx.set('x-cors-fix', 'APPLIED');
-      
-      const origin = ctx.request.header.origin;
-      
-      // Allowed origins
-      const allowedOrigins = [
-        'https://www.aaitek.com',
-        'https://aaitek.com',
-        'https://aaitek.com.au',
-        'http://localhost:3000',
-        'http://localhost:5173',
-      ];
-      
-      // Check if origin matches Vercel pattern
-      const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
-      
-      // Check if origin is allowed
-      const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
-      
-      // ALWAYS set CORS headers if origin is present
-      if (origin) {
-        if (isAllowed) {
-          ctx.set('Access-Control-Allow-Origin', origin);
-          ctx.set('Access-Control-Allow-Credentials', 'true');
-        } else {
-          // Still set for debugging - browser will validate
-          ctx.set('Access-Control-Allow-Origin', origin);
-        }
-        ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-        ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
-        ctx.set('Access-Control-Max-Age', '86400');
-      }
-      
-      // Handle preflight requests
-      if (ctx.method === 'OPTIONS') {
-        ctx.status = 204;
-        return;
-      }
       
       await next();
-    });
-  },
-  bootstrap({ strapi }) {
-    // Also add in bootstrap to ensure it runs
-    strapi.server.app.use(async (ctx, next) => {
-      const origin = ctx.request.header.origin;
-      const allowedOrigins = [
-        'https://www.aaitek.com',
-        'https://aaitek.com',
-        'https://aaitek.com.au',
-        'http://localhost:3000',
-        'http://localhost:5173',
-      ];
-      const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
-      const isAllowed = origin && (allowedOrigins.includes(origin) || isVercelDomain);
-      
-      if (origin) {
-        if (isAllowed) {
+
+      // Fix 1: Disable caching for API routes (prevents Railway Edge from caching wrong variant)
+      if (ctx.request.path.startsWith('/api')) {
+        ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        ctx.set('Pragma', 'no-cache');
+        ctx.set('Expires', '0');
+      }
+
+      // Fix 2: Hard-set CORS header for API responses (guarantees header exists)
+      if (ctx.request.path.startsWith('/api')) {
+        const origin = ctx.request.header.origin;
+        const allowed = [
+          'https://www.aaitek.com',
+          'https://aaitek.com',
+          'https://aaitek.com.au',
+          'http://localhost:3000',
+          'http://localhost:5173',
+        ];
+        
+        // Check if origin matches Vercel pattern
+        const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        
+        if (origin && (allowed.includes(origin) || isVercelDomain)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
-        } else {
-          ctx.set('Access-Control-Allow-Origin', origin);
+          ctx.set('Vary', 'Origin');
         }
-        ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-        ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
       }
-      
-      if (ctx.method === 'OPTIONS') {
-        ctx.status = 204;
-        return;
-      }
-      
-      await next();
     });
   },
 };
