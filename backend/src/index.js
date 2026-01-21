@@ -5,7 +5,8 @@ module.exports = {
     // Server-level CORS middleware - runs for ALL requests
     // This runs BEFORE all other middleware
     strapi.server.app.use(async (ctx, next) => {
-      // DIAGNOSTIC HEADER - proves this code is running
+      // PROOF HEADER - if you see this, your code is running on Railway
+      ctx.set('x-aaitek-backend', 'LIVE');
       ctx.set('x-strapi-runtime', 'BACKEND_ACTIVE');
       ctx.set('x-cors-fix', 'APPLIED');
       

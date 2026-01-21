@@ -1,8 +1,6 @@
 module.exports = [
   'strapi::errors',
-  'strapi::security',
-  // Custom CORS middleware FIRST - ensures headers are always set correctly
-  'global::cors',
+  // CORS MUST come BEFORE security middleware
   {
     name: 'strapi::cors',
     config: {
@@ -14,12 +12,12 @@ module.exports = [
         'http://localhost:5173',
         /^https:\/\/.*\.vercel\.app$/,
       ],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
-      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
-      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      headers: '*', // Allow all headers - prevents preflight issues
       keepHeaderOnError: true,
     },
   },
+  'strapi::security',
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
