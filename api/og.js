@@ -1,8 +1,107 @@
 // This is a Vercel Edge Function that serves HTML with proper meta tags for social crawlers
-// It should be deployed as an edge function
+// It fetches real data from Strapi for dynamic pages
 
 export const config = {
   runtime: 'edge',
+}
+
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
+
+// Helper to get image URL from Strapi response
+const getImageUrl = (imageData, baseUrl) => {
+  if (!imageData) return null
+  
+  let imageUrl = null
+  
+  // Check nested data.attributes first (most common in Strapi v4)
+  if (imageData.data?.attributes) {
+    if (imageData.data.attributes.formats?.large?.url) {
+      imageUrl = imageData.data.attributes.formats.large.url
+    } else if (imageData.data.attributes.url) {
+      imageUrl = imageData.data.attributes.url
+    }
+  }
+  
+  if (!imageUrl && imageData.attributes) {
+    if (imageData.attributes.formats?.large?.url) {
+      imageUrl = imageData.attributes.formats.large.url
+    } else if (imageData.attributes.url) {
+      imageUrl = imageData.attributes.url
+    }
+  }
+  
+  if (!imageUrl) return null
+  
+  // If already absolute, return as is
+  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    return imageUrl
+  }
+  
+  // Make absolute URL
+  if (!imageUrl.startsWith('/')) {
+    imageUrl = '/' + imageUrl
+  }
+  
+  const apiBase = baseUrl.replace(/\/api$/, '').replace(/\/$/, '')
+  return `${apiBase}${imageUrl}`
+}
+
+// Fetch article from Strapi
+async function fetchArticle(slug) {
+  try {
+    const url = `${RAILWAY_API_URL}/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*&publicationState=live`
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    if (!response.ok) return null
+    
+    const data = await response.json()
+    if (data?.data && data.data.length > 0) {
+      const item = data.data[0]
+      const imageUrl = getImageUrl(item.attributes?.image, RAILWAY_API_URL)
+      return {
+        title: item.attributes?.title || 'Article | Aaitek',
+        description: item.attributes?.excerpt || item.attributes?.description || 'Read expert insights from Aaitek.',
+        image: imageUrl || 'https://aaitek.com.au/logo-black.png',
+        type: 'article',
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching article:', error)
+  }
+  return null
+}
+
+// Fetch case study from Strapi
+async function fetchCaseStudy(slug) {
+  try {
+    const url = `${RAILWAY_API_URL}/case-studies?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*&publicationState=live`
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    
+    if (!response.ok) return null
+    
+    const data = await response.json()
+    if (data?.data && data.data.length > 0) {
+      const item = data.data[0]
+      const imageUrl = getImageUrl(item.attributes?.image, RAILWAY_API_URL)
+      return {
+        title: item.attributes?.title || 'Case Study | Aaitek',
+        description: item.attributes?.excerpt || item.attributes?.description || 'Explore our case studies.',
+        image: imageUrl || 'https://aaitek.com.au/logo-black.png',
+        type: 'article',
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching case study:', error)
+  }
+  return null
 }
 
 export default async function handler(req) {
@@ -18,22 +117,47 @@ export default async function handler(req) {
     userAgent.includes('WhatsApp') ||
     userAgent.includes('Slackbot') ||
     userAgent.includes('SkypeUriPreview') ||
-    userAgent.includes('Discordbot')
+    userAgent.includes('Discordbot') ||
+    userAgent.includes('Googlebot') ||
+    userAgent.includes('bingbot')
   
   // Get page-specific meta data based on route
-  const getPageMeta = (path) => {
+  const getPageMeta = async (path) => {
     const siteUrl = 'https://aaitek.com.au'
     const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
     const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
-    const defaultImage = `${siteUrl}/logo.png`
+    const defaultImage = `${siteUrl}/logo-black.png`
     
-    // Article pages
+    // Article pages - fetch from Strapi
     if (path.startsWith('/article/')) {
-      const slug = path.split('/article/')[1]
+      const slug = path.split('/article/')[1]?.split('?')[0] || ''
+      if (slug) {
+        const article = await fetchArticle(slug)
+        if (article) {
+          return article
+        }
+      }
       return {
-        title: `Designing Enterprise-Ready AI Solutions - Article | Aaitek`,
-        description: 'Practical insights on building AI solutions that meet enterprise requirements for security, scalability, and governance.',
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+        title: `${defaultTitle} - Article`,
+        description: defaultDescription,
+        image: defaultImage,
+        type: 'article'
+      }
+    }
+    
+    // Case study pages - fetch from Strapi
+    if (path.startsWith('/case-study/')) {
+      const slug = path.split('/case-study/')[1]?.split('?')[0] || ''
+      if (slug) {
+        const caseStudy = await fetchCaseStudy(slug)
+        if (caseStudy) {
+          return caseStudy
+        }
+      }
+      return {
+        title: `${defaultTitle} - Case Study`,
+        description: defaultDescription,
+        image: defaultImage,
         type: 'article'
       }
     }
@@ -167,7 +291,7 @@ export default async function handler(req) {
     }
   }
   
-  const meta = getPageMeta(pathname)
+  const meta = await getPageMeta(pathname)
   const fullUrl = `https://aaitek.com.au${pathname}`
   
   // For social crawlers, return HTML with meta tags
@@ -203,7 +327,7 @@ export default async function handler(req) {
   <link rel="canonical" href="${fullUrl}" />
   
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="/Aaitek logo in Black.png" />
+  <link rel="icon" type="image/png" href="/logo-black.png" />
   
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
