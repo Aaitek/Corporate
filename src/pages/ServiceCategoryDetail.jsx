@@ -405,7 +405,7 @@ const ServiceCategoryDetail = () => {
   }
 
   // Use logo for social sharing (consistent across all pages)
-  const socialImage = `${siteUrl}/Aaitek logo in Black.png`
+  const socialImage = `${siteUrl}/logo-black.png`
 
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/services/category/${slug}`

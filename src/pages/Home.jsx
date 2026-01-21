@@ -19,7 +19,7 @@ const Home = () => {
     "@type": "Organization",
     "name": "Aaitek Technology Specialists",
     "url": "https://aaitek.com.au",
-    "logo": "https://aaitek.com.au/Aaitek logo in Black.png",
+    "logo": "https://aaitek.com.au/logo-black.png",
     "description": "Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.",
     "address": {
       "@type": "PostalAddress",
@@ -46,7 +46,7 @@ const Home = () => {
         robots="index,follow"
         ogTitle="Aaitek | Enterprise Digital Platform Specialists"
         ogDescription="We design, build, and optimise enterprise digital platforms using Sitecore XM Cloud, headless architectures, and cloud-native engineering."
-        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com.au/logo-black.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Organization"

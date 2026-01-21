@@ -265,7 +265,7 @@ const ServiceDetail = () => {
     : `${siteUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
   
   // Use logo for social sharing (consistent across all pages)
-  const socialImage = `${siteUrl}/Aaitek logo in Black.png`
+  const socialImage = `${siteUrl}/logo-black.png`
 
   return (
     <>

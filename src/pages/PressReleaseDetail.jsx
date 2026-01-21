@@ -57,14 +57,14 @@ const PressReleaseDetail = () => {
     "@type": "NewsArticle",
     "headline": pressRelease.title,
     "description": pressRelease.description,
-    "image": pressRelease.image || "https://aaitek.com.au/Aaitek logo in Black.png",
+    "image": pressRelease.image || "https://aaitek.com.au/logo-black.png",
     "datePublished": pressRelease.date,
     "publisher": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/Aaitek logo in Black.png"
+        "url": "https://aaitek.com.au/logo-black.png"
       }
     },
     "url": `https://aaitek.com.au/press-release/${slug}`,
@@ -79,7 +79,7 @@ const PressReleaseDetail = () => {
         robots="index,follow"
         ogTitle={pressRelease.title}
         ogDescription={pressRelease.description}
-        ogImage={pressRelease.image || "https://aaitek.com.au/Aaitek logo in Black.png"}
+        ogImage={pressRelease.image || "https://aaitek.com.au/logo-black.png"}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="NewsArticle"

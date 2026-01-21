@@ -159,7 +159,7 @@ const Webinars = () => {
         robots="index,follow"
         ogTitle="Webinars & Events - Aaitek"
         ogDescription="Educational webinars and events with industry experts."
-        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com.au/logo-black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

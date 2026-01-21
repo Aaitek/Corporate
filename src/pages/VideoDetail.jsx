@@ -52,7 +52,7 @@ const VideoDetail = () => {
     "@type": "VideoObject",
     "name": video.title,
     "description": video.description,
-    "thumbnailUrl": video.image || "https://aaitek.com.au/Aaitek logo in Black.png",
+    "thumbnailUrl": video.image || "https://aaitek.com.au/logo-black.png",
     "uploadDate": video.date,
     "duration": video.duration,
     "url": `https://aaitek.com.au/video/${slug}`,
@@ -67,7 +67,7 @@ const VideoDetail = () => {
         robots="index,follow"
         ogTitle={video.title}
         ogDescription={video.description}
-        ogImage={video.image || "https://aaitek.com.au/Aaitek logo in Black.png"}
+        ogImage={video.image || "https://aaitek.com.au/logo-black.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"

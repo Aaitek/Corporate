@@ -117,11 +117,11 @@ const Contact = () => {
         canonicalUrl={`${siteUrl}/contact`}
         ogTitle="Contact Us - Get in Touch"
         ogDescription="Get in touch with Aaitek. We're here to help transform your digital vision into reality."
-        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com.au/logo-black.png"
         ogType="website"
         twitterTitle="Contact Us - Get in Touch"
         twitterDescription="Get in touch with Aaitek to transform your digital vision."
-        twitterImage="https://aaitek.com.au/Aaitek logo in Black.png"
+        twitterImage="https://aaitek.com.au/logo-black.png"
         schemaType="ContactPage"
         indexable={true}
       />
