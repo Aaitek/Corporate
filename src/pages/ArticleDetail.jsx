@@ -15,11 +15,8 @@ const ArticleDetail = () => {
       try {
         setLoading(true)
         setError(null)
-        const API_BASE = import.meta.env.VITE_API_URL
-        if (!API_BASE) {
-          throw new Error('VITE_API_URL is missing')
-        }
-        const response = await api.get(`${API_BASE}/articles`, {
+        // Use Vercel API proxy to avoid Railway Edge CORS issues
+        const response = await api.get('/api/articles', {
           params: {
             'filters[slug][$eq]': slug,
             populate: '*',

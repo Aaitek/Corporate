@@ -16,9 +16,10 @@ export default async function handler(req, res) {
     queryParams.set('sort', 'publishedAt:desc')
     queryParams.set('publicationState', 'live')
     
-    // Add any additional query params from request
+    // Add any additional query params from request (including filters for single article)
     Object.keys(req.query).forEach(key => {
       if (key !== 'populate' && key !== 'sort' && key !== 'publicationState') {
+        // Handle nested filter params like filters[slug][$eq]
         queryParams.append(key, req.query[key])
       }
     })

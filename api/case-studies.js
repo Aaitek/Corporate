@@ -19,9 +19,10 @@ export default async function handler(req, res) {
       queryParams.append('filters[category][$eq]', req.query.category)
     }
     
-    // Add any other query params
+    // Add any other query params (including filters for single case study by slug)
     Object.keys(req.query).forEach(key => {
-      if (key !== 'category' && !queryParams.has(key)) {
+      if (key !== 'category' && key !== 'populate' && key !== 'publicationState') {
+        // Handle nested filter params like filters[slug][$eq]
         queryParams.append(key, req.query[key])
       }
     })
