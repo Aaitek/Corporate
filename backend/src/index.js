@@ -24,6 +24,12 @@ module.exports = {
         ];
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
         
+        // Log for debugging
+        console.log('🔍 CORS Check - Origin:', origin, 'Path:', ctx.request.path);
+        console.log('🔍 CORS Check - Allowed:', allowed);
+        console.log('🔍 CORS Check - Is Vercel:', isVercelDomain);
+        console.log('🔍 CORS Check - Is Allowed:', origin && (allowed.includes(origin) || isVercelDomain));
+        
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
@@ -31,10 +37,16 @@ module.exports = {
           ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.set('Vary', 'Origin');
           console.log('✅ CORS: Set header EARLY for origin:', origin);
+        } else {
+          console.log('❌ CORS: Origin NOT allowed or missing. Origin:', origin);
         }
         
         // Handle preflight OPTIONS requests
         if (ctx.method === 'OPTIONS') {
+          ctx.set('Access-Control-Allow-Origin', origin || '*');
+          ctx.set('Access-Control-Allow-Credentials', 'true');
+          ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+          ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.status = 204;
           return;
         }
