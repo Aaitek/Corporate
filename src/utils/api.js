@@ -1,59 +1,88 @@
 import axios from 'axios'
 
-// Always use absolute URL from VITE_API_URL
-// In Vercel, set: VITE_API_URL = https://aaitech-production.up.railway.app/api
-// This ensures no relative paths and proper API calls
+// HARD-FIX: Always use absolute URL from VITE_API_URL
+// NO relative URLs, NO fallbacks, NO proxies
 const API_BASE = import.meta.env.VITE_API_URL
 
-// Safety check
 if (!API_BASE) {
-  console.error('⚠️ VITE_API_URL is missing! API calls will fail.')
-  console.error('Set VITE_API_URL in Vercel environment variables:')
-  console.error('VITE_API_URL = https://aaitech-production.up.railway.app/api')
+  throw new Error('VITE_API_URL is missing. Set it in Vercel environment variables.')
 }
 
+// NO baseURL - always use absolute URLs
 const api = axios.create({
-  baseURL: API_BASE || 'http://localhost:1337/api', // Fallback for local dev
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
 export const fetchServices = async () => {
-  const response = await api.get('/services?populate=*')
+  const response = await api.get(`${API_BASE}/services`, {
+    params: {
+      populate: '*',
+    },
+  })
   return response.data
 }
 
 export const fetchProducts = async () => {
-  const response = await api.get('/products?populate=*')
+  const response = await api.get(`${API_BASE}/products`, {
+    params: {
+      populate: '*',
+    },
+  })
   return response.data
 }
 
 export const fetchCaseStudies = async (category = null) => {
-  const url = category
-    ? `/case-studies?filters[category][$eq]=${category}&populate=*&publicationState=live`
-    : '/case-studies?populate=*&publicationState=live'
-  const response = await api.get(url)
+  const params = {
+    populate: '*',
+    publicationState: 'live',
+  }
+  
+  if (category) {
+    params['filters[category][$eq]'] = category
+  }
+  
+  const response = await api.get(`${API_BASE}/case-studies`, { params })
   return response.data
 }
 
 export const fetchTestimonials = async () => {
-  const response = await api.get('/testimonials?populate=*')
+  const response = await api.get(`${API_BASE}/testimonials`, {
+    params: {
+      populate: '*',
+    },
+  })
   return response.data
 }
 
 export const fetchArticles = async () => {
-  const response = await api.get('/articles?populate=*&sort=publishedAt:desc&publicationState=live')
+  const response = await api.get(`${API_BASE}/articles`, {
+    params: {
+      populate: '*',
+      sort: 'publishedAt:desc',
+      publicationState: 'live',
+    },
+  })
   return response.data
 }
 
 export const fetchManagedServices = async () => {
-  const response = await api.get('/managed-services?populate=*')
+  const response = await api.get(`${API_BASE}/managed-services`, {
+    params: {
+      populate: '*',
+    },
+  })
   return response.data
 }
 
 export const fetchServiceBySlug = async (slug) => {
-  const response = await api.get(`/services?filters[slug][$eq]=${slug}&populate=*`)
+  const response = await api.get(`${API_BASE}/services`, {
+    params: {
+      'filters[slug][$eq]': slug,
+      populate: '*',
+    },
+  })
   return response.data
 }
 

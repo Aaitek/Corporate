@@ -62,7 +62,11 @@ const Contact = () => {
     setSubmitStatus({ type: null, message: '' })
 
     try {
-      const response = await api.post('/contact-submissions', {
+      const API_BASE = import.meta.env.VITE_API_URL
+      if (!API_BASE) {
+        throw new Error('VITE_API_URL is missing')
+      }
+      const response = await api.post(`${API_BASE}/contact-submissions`, {
         name: formData.name,
         email: formData.email,
         company: formData.company || null,
@@ -76,12 +80,12 @@ const Contact = () => {
           type: 'success',
           message: 'Thank you for your message! We\'ll get back to you soon.'
         })
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          message: '',
+    setFormData({
+      name: '',
+      email: '',
+      company: '',
+      phone: '',
+      message: '',
           service: '',
         })
       }

@@ -15,7 +15,17 @@ const CaseStudyDetail = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await api.get(`/case-studies?filters[slug][$eq]=${slug}&populate=*&publicationState=live`)
+        const API_BASE = import.meta.env.VITE_API_URL
+        if (!API_BASE) {
+          throw new Error('VITE_API_URL is missing')
+        }
+        const response = await api.get(`${API_BASE}/case-studies`, {
+          params: {
+            'filters[slug][$eq]': slug,
+            populate: '*',
+            publicationState: 'live',
+          },
+        })
         
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
@@ -322,14 +332,14 @@ const CaseStudyDetail = () => {
             )}
 
             {/* Full Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
-            >
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
+              >
+                <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
               {caseStudy.fullContent ? (
                 <div 
                   className="prose prose-lg max-w-none text-gray-700"
@@ -342,7 +352,7 @@ const CaseStudyDetail = () => {
               ) : (
                 <p className="text-gray-600 text-lg">Content coming soon...</p>
               )}
-            </motion.div>
+              </motion.div>
 
             {/* Back to Case Studies Link */}
             <motion.div

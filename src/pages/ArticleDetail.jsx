@@ -15,7 +15,17 @@ const ArticleDetail = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await api.get(`/articles?filters[slug][$eq]=${slug}&populate=*&publicationState=live`)
+        const API_BASE = import.meta.env.VITE_API_URL
+        if (!API_BASE) {
+          throw new Error('VITE_API_URL is missing')
+        }
+        const response = await api.get(`${API_BASE}/articles`, {
+          params: {
+            'filters[slug][$eq]': slug,
+            populate: '*',
+            publicationState: 'live',
+          },
+        })
         
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
@@ -160,7 +170,7 @@ const ArticleDetail = () => {
                 <span>By {article.author}</span>
                 {article.publishedAt && (
                   <>
-                    <span>•</span>
+                <span>•</span>
                     <span>{formatDate(article.publishedAt)}</span>
                   </>
                 )}
