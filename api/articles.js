@@ -11,20 +11,35 @@ export default async function handler(req, res) {
     // Build query string from request query params
     const queryParams = new URLSearchParams()
     
-    // Add default params
-    queryParams.set('populate', '*')
-    queryParams.set('sort', 'publishedAt:desc')
-    queryParams.set('publicationState', 'live')
+    // Check if this is a detail page request (has slug filter)
+    const isDetailPage = req.query['filters[slug][$eq]'] || req.query.slug
     
-    // Add any additional query params from request (including filters for single article)
+    // Add populate (always needed)
+    queryParams.set('populate', '*')
+    
+    // Add default params only for list requests (not detail pages)
+    if (!isDetailPage) {
+      queryParams.set('sort', 'publishedAt:desc')
+    }
+    
+    // Add publicationState if not already in query
+    if (!req.query.publicationState) {
+      queryParams.set('publicationState', 'live')
+    }
+    
+    // Add all query params from request (including nested filters)
     Object.keys(req.query).forEach(key => {
+      // Skip params we've already set
       if (key !== 'populate' && key !== 'sort' && key !== 'publicationState') {
         // Handle nested filter params like filters[slug][$eq]
+        // URLSearchParams will properly encode brackets
         queryParams.append(key, req.query[key])
       }
     })
     
     const url = `${RAILWAY_API_URL}/articles?${queryParams.toString()}`
+    
+    console.log('Proxy request URL:', url) // Debug log
     
     const response = await fetch(url, {
       method: 'GET',

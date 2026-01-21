@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     // Build query string from request query params
     const queryParams = new URLSearchParams()
-    queryParams.append('populate', '*')
+    queryParams.set('populate', '*')
     
     // Handle slug filter for product detail pages
     if (req.query.slug) {
@@ -25,6 +25,8 @@ export default async function handler(req, res) {
     })
     
     const url = `${RAILWAY_API_URL}/products?${queryParams.toString()}`
+    
+    console.log('Proxy request URL:', url) // Debug log
     
     const response = await fetch(url, {
       method: 'GET',
