@@ -34,7 +34,7 @@ const Products = () => {
             comingSoon: false,
           }))
         }
-        
+
         // Convert productsData to array format
         const fallbackProducts = Object.entries(productsData).map(([slug, product]) => ({
           id: slug,
@@ -76,7 +76,7 @@ const Products = () => {
           color: product.color,
           icon: product.icon,
           comingSoon: product.comingSoon || false,
-        }))
+  }))
         setProducts(fallbackProducts)
       } finally {
         setLoading(false)
@@ -95,7 +95,7 @@ const Products = () => {
         canonicalUrl={`${siteUrl}/products`}
         ogTitle="Products - AI Agents & Platforms"
         ogDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         twitterTitle="Products - AI Agents & Platforms"
         twitterDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
@@ -155,8 +155,8 @@ const Products = () => {
               <p className="mt-4 text-gray-600">Loading products...</p>
             </div>
           ) : products.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.map((product, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product, index) => (
               <motion.div
                 key={product.slug}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -219,8 +219,8 @@ const Products = () => {
                 </Link>
                 )}
               </motion.div>
-              ))}
-            </div>
+            ))}
+          </div>
           ) : (
             <div className="text-center py-16">
               <p className="text-gray-600">No products available at the moment.</p>

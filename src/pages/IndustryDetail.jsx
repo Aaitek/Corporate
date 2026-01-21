@@ -58,7 +58,7 @@ const IndustryDetail = () => {
       'government-public-sector': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
     }
     // Use logo for all industry pages for consistent social sharing
-    return `${siteUrl}/logo.png`
+    return `${siteUrl}/Aaitek logo in Black.png`
   }
 
   return (

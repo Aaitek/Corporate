@@ -108,24 +108,24 @@ const Testimonials = () => {
             </div>
           ) : testimonials.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Project Details */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentIndex}
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-gray-900/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-800"
-                  >
-                    <div className="text-sm font-semibold text-primary-400 mb-4 uppercase">
-                      {testimonials[currentIndex].project}
-                    </div>
-                    <p className="text-gray-300 mb-6 leading-relaxed">
-                      {testimonials[currentIndex].projectDescription}
-                    </p>
-                    <div className="flex items-center space-x-4 pt-6 border-t border-gray-700">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Project Details */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.5 }}
+                className="bg-gray-900/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-gray-800"
+              >
+                <div className="text-sm font-semibold text-primary-400 mb-4 uppercase">
+                  {testimonials[currentIndex].project}
+                </div>
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  {testimonials[currentIndex].projectDescription}
+                </p>
+                <div className="flex items-center space-x-4 pt-6 border-t border-gray-700">
                       {testimonials[currentIndex].image ? (
                         <img
                           src={testimonials[currentIndex].image}
@@ -133,9 +133,9 @@ const Testimonials = () => {
                           className="w-16 h-16 rounded-full object-cover"
                         />
                       ) : (
-                        <div className="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-2xl font-bold text-gray-900">
-                          {testimonials[currentIndex].name.charAt(0)}
-                        </div>
+                  <div className="w-16 h-16 rounded-full bg-primary-500 flex items-center justify-center text-2xl font-bold text-gray-900">
+                    {testimonials[currentIndex].name.charAt(0)}
+                  </div>
                       )}
                   <div>
                     <div className="font-semibold text-gray-100 text-lg">

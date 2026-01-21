@@ -267,7 +267,7 @@ const CaseStudies = () => {
         robots="index,follow"
         ogTitle="Case Studies - Aaitek"
         ogDescription="Real-world case studies demonstrating successful digital transformation projects."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}
@@ -335,24 +335,24 @@ const CaseStudies = () => {
                   </div>
                 ) : (
                   <>
-                    {/* Results Count */}
-                    <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="text-gray-700"
-                      >
-                        <span className="font-bold text-base sm:text-lg">{filteredCaseStudies.length}</span>
-                        <span className="text-gray-600 ml-2 text-sm sm:text-base">
-                          {filteredCaseStudies.length === 1 ? 'Case Study' : 'Case Studies'} Found
-                        </span>
-                      </motion.div>
-                    </div>
+                {/* Results Count */}
+                <div className="mb-4 sm:mb-6 flex items-center justify-between">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="text-gray-700"
+                  >
+                    <span className="font-bold text-base sm:text-lg">{filteredCaseStudies.length}</span>
+                    <span className="text-gray-600 ml-2 text-sm sm:text-base">
+                      {filteredCaseStudies.length === 1 ? 'Case Study' : 'Case Studies'} Found
+                    </span>
+                  </motion.div>
+                </div>
 
-                    {/* Case Studies Grid */}
-                    {filteredCaseStudies.length > 0 ? (
+                {/* Case Studies Grid */}
+                {filteredCaseStudies.length > 0 ? (
                       <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                           {paginatedCaseStudies.map((study, index) => (
                       <motion.div
                         key={study.slug}
@@ -409,8 +409,8 @@ const CaseStudies = () => {
                           </div>
                         </Link>
                       </motion.div>
-                          ))}
-                        </div>
+                    ))}
+                  </div>
 
                         {/* Pagination Controls */}
                         {totalPages > 1 && (
@@ -456,22 +456,22 @@ const CaseStudies = () => {
                           </div>
                         )}
                       </>
-                    ) : (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-center py-16 bg-white rounded-2xl border-2 border-gray-200"
-                      >
-                        <div className="text-6xl mb-4">🔍</div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">No Case Studies Found</h3>
-                        <p className="text-gray-600 mb-6">Try adjusting your filters or search query.</p>
-                        <button
-                          onClick={handleClearFilters}
-                          className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
-                        >
-                          Clear All Filters
-                        </button>
-                      </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-center py-16 bg-white rounded-2xl border-2 border-gray-200"
+                  >
+                    <div className="text-6xl mb-4">🔍</div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">No Case Studies Found</h3>
+                    <p className="text-gray-600 mb-6">Try adjusting your filters or search query.</p>
+                    <button
+                      onClick={handleClearFilters}
+                      className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+                    >
+                      Clear All Filters
+                    </button>
+                  </motion.div>
                     )}
                   </>
                 )}

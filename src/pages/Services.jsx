@@ -121,7 +121,7 @@ const Services = () => {
         robots="index,follow"
         ogTitle="Services - Aaitek Technology Specialists"
         ogDescription="Explore Aaitek's comprehensive technology services: Product & Experience, Software Engineering, Cloud & DevOps, Data & AI, Digital Growth, Managed Services, and Enterprise Platforms."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Service"

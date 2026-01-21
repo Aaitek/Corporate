@@ -99,7 +99,7 @@ const ArticleDetail = () => {
     "@type": "Article",
     "headline": article.title,
     "description": article.description || article.excerpt,
-    "image": article.image || "https://aaitek.com.au/logo.png",
+    "image": article.image || "https://aaitek.com.au/Aaitek logo in Black.png",
     "author": {
       "@type": "Organization",
       "name": article.author || "Aaitek Technology Specialists"
@@ -109,7 +109,7 @@ const ArticleDetail = () => {
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/logo.png"
+        "url": "https://aaitek.com.au/Aaitek logo in Black.png"
       }
     },
     "datePublished": article.publishedAt || new Date().toISOString(),
@@ -125,7 +125,7 @@ const ArticleDetail = () => {
         robots="index,follow"
         ogTitle={article.title}
         ogDescription={article.description}
-        ogImage={article.image || "https://aaitek.com.au/logo.png"}
+        ogImage={article.image || "https://aaitek.com.au/Aaitek logo in Black.png"}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="Article"

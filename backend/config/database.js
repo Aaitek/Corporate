@@ -11,9 +11,9 @@ module.exports = ({ env }) => {
   const isSSL = env('DATABASE_SSL', 'true') === 'true' || env.bool('DATABASE_SSL', true);
   
   return {
+  connection: {
+    client: 'postgres',
     connection: {
-      client: 'postgres',
-      connection: {
         host,
         port,
         database,
@@ -22,8 +22,8 @@ module.exports = ({ env }) => {
         ssl: isSSL ? {
           rejectUnauthorized: false
         } : false,
-      },
     },
+  },
   };
 };
 

@@ -209,7 +209,7 @@ const Articles = () => {
         robots="index,follow"
         ogTitle="Articles - Aaitek Insights"
         ogDescription="Expert perspectives on technology, delivery, and industry trends."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}
@@ -277,24 +277,24 @@ const Articles = () => {
                   </div>
                 ) : (
                   <>
-                    {/* Results Count */}
-                    <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="text-gray-700"
-                      >
-                        <span className="font-bold text-base sm:text-lg">{filteredArticles.length}</span>
-                        <span className="text-gray-600 ml-2 text-sm sm:text-base">
-                          {filteredArticles.length === 1 ? 'Article' : 'Articles'} Found
-                        </span>
-                      </motion.div>
-                    </div>
+                {/* Results Count */}
+                <div className="mb-4 sm:mb-6 flex items-center justify-between">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="text-gray-700"
+                  >
+                    <span className="font-bold text-base sm:text-lg">{filteredArticles.length}</span>
+                    <span className="text-gray-600 ml-2 text-sm sm:text-base">
+                      {filteredArticles.length === 1 ? 'Article' : 'Articles'} Found
+                    </span>
+                  </motion.div>
+                </div>
 
-                    {/* Articles Grid */}
-                    {filteredArticles.length > 0 ? (
+                {/* Articles Grid */}
+                {filteredArticles.length > 0 ? (
                       <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                           {paginatedArticles.map((article, index) => (
                       <motion.div
                         key={article.slug}
@@ -350,8 +350,8 @@ const Articles = () => {
                           </div>
                         </Link>
                       </motion.div>
-                          ))}
-                        </div>
+                    ))}
+                  </div>
 
                         {/* Pagination Controls */}
                         {totalPages > 1 && (
@@ -397,7 +397,7 @@ const Articles = () => {
                           </div>
                         )}
                       </>
-                    ) : (
+                ) : (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -412,7 +412,7 @@ const Articles = () => {
                     >
                       Clear All Filters
                     </button>
-                    </motion.div>
+                  </motion.div>
                     )}
                   </>
                 )}

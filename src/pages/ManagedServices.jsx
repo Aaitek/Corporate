@@ -48,8 +48,8 @@ const ManagedServices = () => {
             <p className="mt-4 text-gray-600">Loading managed services...</p>
           </div>
         ) : services.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {services.map((service, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.map((service, index) => (
             <div
               key={index}
               className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-0 border border-gray-200"
@@ -67,8 +67,8 @@ const ManagedServices = () => {
                 ))}
               </ul>
             </div>
-            ))}
-          </div>
+          ))}
+        </div>
         ) : (
           <div className="text-center py-16 mb-16">
             <p className="text-gray-600">No managed services available at the moment.</p>

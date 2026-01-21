@@ -159,7 +159,7 @@ const Webinars = () => {
         robots="index,follow"
         ogTitle="Webinars & Events - Aaitek"
         ogDescription="Educational webinars and events with industry experts."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}
@@ -236,7 +236,7 @@ const Webinars = () => {
                 {/* Webinars Grid */}
                 {filteredWebinars.length > 0 ? (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                       {paginatedWebinars.map((webinar, index) => (
                       <motion.div
                         key={webinar.slug}
@@ -297,8 +297,8 @@ const Webinars = () => {
                           </div>
                         </Link>
                       </motion.div>
-                      ))}
-                    </div>
+                    ))}
+                  </div>
 
                     {/* Pagination Controls */}
                     {totalPages > 1 && (

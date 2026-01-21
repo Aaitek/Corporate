@@ -32,8 +32,8 @@ const SEO = ({
   const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com.au'
   const siteUrl = 'https://aaitek.com.au'
   const siteName = 'Aaitek'
-  // Use logo.png for social sharing - use current origin so image is accessible from deployment URL
-  const defaultImage = `${currentOrigin}/logo.png`
+  // Use black logo for social sharing - use current origin so image is accessible from deployment URL
+  const defaultImage = `${currentOrigin}/Aaitek logo in Black.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -52,7 +52,7 @@ const SEO = ({
     // If no leading slash, add it
     return `${currentOrigin}/${imageUrl}`
   }
-
+  
   // Use provided values or fallback to defaults
   const title = seoTitle || pageTitle || `${siteName} - Empowering Businesses With AI, Data Analytics & Cloud`
   const description = seoDescription || pageDescription || 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
@@ -71,7 +71,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/logo.png`,
+      "logo": `${siteUrl}/Aaitek logo in Black.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
@@ -235,7 +235,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/logo.png`,
+          "logo": `${siteUrl}/Aaitek logo in Black.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]

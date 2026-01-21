@@ -148,7 +148,7 @@ const Videos = () => {
         robots="index,follow"
         ogTitle="Videos & Media - Aaitek"
         ogDescription="Visual content, demos, and thought leadership videos."
-        ogImage="https://aaitek.com.au/logo.png"
+        ogImage="https://aaitek.com.au/Aaitek logo in Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}
@@ -225,7 +225,7 @@ const Videos = () => {
                 {/* Videos Grid */}
                 {filteredVideos.length > 0 ? (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                       {paginatedVideos.map((video, index) => (
                       <motion.div
                         key={video.slug}
@@ -288,8 +288,8 @@ const Videos = () => {
                           </div>
                         </Link>
                       </motion.div>
-                      ))}
-                    </div>
+                    ))}
+                  </div>
 
                     {/* Pagination Controls */}
                     {totalPages > 1 && (
