@@ -34,6 +34,7 @@ export const fetchProducts = async () => {
 }
 
 export const fetchCaseStudies = async (category = null) => {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
   const params = {
     populate: '*',
     publicationState: 'live',
@@ -43,7 +44,7 @@ export const fetchCaseStudies = async (category = null) => {
     params['filters[category][$eq]'] = category
   }
   
-  const response = await api.get(`${API_BASE}/case-studies`, { params })
+  const response = await api.get('/api/case-studies', { params })
   return response.data
 }
 
