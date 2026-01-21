@@ -264,8 +264,8 @@ const ServiceDetail = () => {
     ? imageUrl 
     : `${siteUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
   
-  // Use logo for social sharing (consistent across all pages)
-  const socialImage = `${siteUrl}/logo-black.png`
+  // Use service image for social sharing, or fallback to relevant image
+  const socialImage = absoluteImageUrl || getImage() || `${siteUrl}/logo-black.png`
 
   return (
     <>

@@ -118,7 +118,7 @@ const Company = () => {
         canonicalUrl={`${siteUrl}/company`}
         ogTitle="Company - About Aaitek"
         ogDescription="A premium technology partner focused on modern platforms, AI-first solutions, and enterprise-grade delivery."
-        ogImage="https://aaitek.com.au/logo-black.png"
+        ogImage="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80"
         ogType="website"
         twitterTitle="Company - About Aaitek"
         twitterDescription="A premium technology partner focused on modern platforms and AI-first solutions."

@@ -404,8 +404,17 @@ const ServiceCategoryDetail = () => {
     return categoryImages[slug] || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80'
   }
 
-  // Use logo for social sharing (consistent across all pages)
-  const socialImage = `${siteUrl}/logo-black.png`
+  // Use category-specific image for social sharing
+  const categoryImages = {
+    'product-experience': 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
+    'software-engineering': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80',
+    'cloud-devops': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
+    'data-ai': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
+    'digital-growth': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
+    'managed-services': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80',
+    'enterprise-platforms': 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
+  }
+  const socialImage = categoryImages[slug] || `${siteUrl}/logo-black.png`
 
   const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/services/category/${slug}`

@@ -187,7 +187,7 @@ const Articles = () => {
         robots="index,follow"
         ogTitle="Articles - Aaitek Insights"
         ogDescription="Expert perspectives on technology, delivery, and industry trends."
-        ogImage="https://aaitek.com.au/logo-black.png"
+        ogImage="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}
