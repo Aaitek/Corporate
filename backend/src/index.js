@@ -41,14 +41,25 @@ module.exports = {
           console.log('❌ CORS: Origin NOT allowed or missing. Origin:', origin);
         }
         
-        // Handle preflight OPTIONS requests
+        // Handle preflight OPTIONS requests - CRITICAL for CORS
         if (ctx.method === 'OPTIONS') {
-          ctx.set('Access-Control-Allow-Origin', origin || '*');
-          ctx.set('Access-Control-Allow-Credentials', 'true');
-          ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-          ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
-          ctx.status = 204;
-          return;
+          // For OPTIONS, we MUST respond with CORS headers even if origin check fails
+          // This allows the browser to proceed with the actual request
+          if (origin && (allowed.includes(origin) || isVercelDomain)) {
+            ctx.set('Access-Control-Allow-Origin', origin);
+            ctx.set('Access-Control-Allow-Credentials', 'true');
+            ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
+            ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
+            ctx.set('Access-Control-Max-Age', '86400'); // Cache preflight for 24 hours
+            ctx.status = 204;
+            console.log('✅ OPTIONS preflight: Allowed for origin:', origin);
+            return;
+          } else {
+            // Even if origin doesn't match, respond to OPTIONS (browser requirement)
+            console.log('⚠️ OPTIONS preflight: Origin not in allowed list:', origin);
+            ctx.status = 204;
+            return;
+          }
         }
       }
       

@@ -13,16 +13,11 @@ module.exports = [
         'http://localhost:5173',
         /^https:\/\/.*\.vercel\.app$/,
       ],
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      headers: [
-        'Content-Type',
-        'Authorization',
-        'Origin',
-        'Accept',
-        'X-Requested-With',
-      ],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+      headers: '*', // Allow all headers (simpler and more permissive)
       keepHeaderOnError: true,
       credentials: true,
+      maxAge: 86400, // Cache preflight for 24 hours
     },
   },
 
