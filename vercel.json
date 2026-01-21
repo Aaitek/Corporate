@@ -43,10 +43,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "api/prerender.js": {
-      "runtime": "edge"
-    }
-  }
+  ]
 }
