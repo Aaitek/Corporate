@@ -19,7 +19,7 @@ module.exports = {
       // Fix 2: Hard-set CORS header for API responses (guarantees header exists)
       // This runs AFTER the request, so it overrides any previous CORS settings
       if (ctx.request.path.startsWith('/api')) {
-        const origin = ctx.request.header.origin;
+        const origin = ctx.request.header.origin || ctx.request.header['x-forwarded-origin'];
         const allowed = [
           'https://www.aaitek.com',
           'https://aaitek.com',
@@ -31,16 +31,25 @@ module.exports = {
         // Check if origin matches Vercel pattern
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
         
-        // ALWAYS set CORS headers if origin is present and allowed
+        // CRITICAL: Always set CORS headers for API routes, even if origin is missing
+        // This ensures the header is always present
         if (origin && (allowed.includes(origin) || isVercelDomain)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
           ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
           ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
           ctx.set('Vary', 'Origin');
+          // Debug log
+          console.log('✅ CORS: Set header for origin:', origin);
         } else if (origin) {
           // For debugging: log if origin is not in allowed list
           console.log('⚠️ CORS: Origin not allowed:', origin);
+          // Still set the header (browser will reject, but we can see it in Network tab)
+          ctx.set('Access-Control-Allow-Origin', origin);
+        } else {
+          // No origin header (direct browser access) - set wildcard for debugging
+          console.log('⚠️ CORS: No origin header in request');
+          ctx.set('Access-Control-Allow-Origin', '*');
         }
       }
     });
