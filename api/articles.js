@@ -39,6 +39,7 @@ export default async function handler(req, res) {
     
     const url = `${RAILWAY_API_URL}/articles?${queryParams.toString()}`
     
+    console.log('Proxy request - Query params:', req.query) // Debug log
     console.log('Proxy request URL:', url) // Debug log
     
     const response = await fetch(url, {
@@ -50,10 +51,13 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error('Railway API error:', response.status, response.statusText)
+      const errorText = await response.text()
+      console.error('Railway API error body:', errorText)
       return res.status(response.status).json({ error: 'Failed to fetch articles' })
     }
 
     const data = await response.json()
+    console.log('Proxy response - Data length:', data?.data?.length || 0) // Debug log
     
     // Set CORS headers (though not needed for same-origin, good practice)
     res.setHeader('Access-Control-Allow-Origin', '*')
