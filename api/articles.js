@@ -8,9 +8,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Get query parameters from request
-    const queryParams = new URLSearchParams(req.query).toString()
-    const url = `${RAILWAY_API_URL}/articles?populate=*&sort=publishedAt:desc&publicationState=live${queryParams ? `&${queryParams}` : ''}`
+    // Build query string from request query params
+    const queryParams = new URLSearchParams()
+    
+    // Add default params
+    queryParams.set('populate', '*')
+    queryParams.set('sort', 'publishedAt:desc')
+    queryParams.set('publicationState', 'live')
+    
+    // Add any additional query params from request
+    Object.keys(req.query).forEach(key => {
+      if (key !== 'populate' && key !== 'sort' && key !== 'publicationState') {
+        queryParams.append(key, req.query[key])
+      }
+    })
+    
+    const url = `${RAILWAY_API_URL}/articles?${queryParams.toString()}`
     
     const response = await fetch(url, {
       method: 'GET',
@@ -20,6 +33,7 @@ export default async function handler(req, res) {
     })
 
     if (!response.ok) {
+      console.error('Railway API error:', response.status, response.statusText)
       return res.status(response.status).json({ error: 'Failed to fetch articles' })
     }
 
@@ -27,7 +41,7 @@ export default async function handler(req, res) {
     
     // Set CORS headers (though not needed for same-origin, good practice)
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300')
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')
     
     return res.status(200).json(data)
   } catch (error) {

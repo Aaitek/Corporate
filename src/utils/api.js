@@ -57,7 +57,9 @@ export const fetchTestimonials = async () => {
 }
 
 export const fetchArticles = async () => {
-  const response = await api.get(`${API_BASE}/articles`, {
+  // Use Vercel API proxy to avoid Railway Edge CORS issues
+  // The proxy makes it same-origin, eliminating CORS entirely
+  const response = await api.get('/api/articles', {
     params: {
       populate: '*',
       sort: 'publishedAt:desc',
