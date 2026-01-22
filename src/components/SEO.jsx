@@ -89,20 +89,34 @@ const SEO = ({
   const description = seoDescription || pageDescription || 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
   const canonical = canonicalUrl || `${siteUrl}${location.pathname}`
   
-  // Prioritize ogImage prop (article images), then pageImage, then default
-  // IMPORTANT: ogImage prop takes highest priority for article images
-  const finalOgImage = ogImage || pageImage || defaultImage
+  // CRITICAL: ogImage prop MUST take highest priority - this is the article image
+  // Only fallback to default if ogImage is truly not provided
+  let finalOgImage
+  if (ogImage && ogImage !== null && ogImage !== undefined && ogImage !== '' && ogImage !== 'null' && ogImage !== 'undefined') {
+    // ogImage is provided and valid - use it (this is the article image)
+    finalOgImage = ogImage
+    console.log('✅ SEO - Using ogImage prop (article image):', ogImage)
+  } else if (pageImage && pageImage !== null && pageImage !== undefined && pageImage !== '') {
+    // Fallback to pageImage if ogImage not provided
+    finalOgImage = pageImage
+    console.log('⚠️ SEO - Using pageImage fallback:', pageImage)
+  } else {
+    // Last resort: use default image
+    finalOgImage = defaultImage
+    console.log('⚠️ SEO - Using default image (footer-logo.png):', defaultImage)
+  }
+  
   const ogImg = ensureAbsoluteImageUrl(finalOgImage)
   
   // Debug: Log what image is being used
-  console.log('SEO - Image Selection:', {
+  console.log('SEO - Final Image Selection:', {
     ogImageProp: ogImage,
     pageImage: pageImage,
     defaultImage: defaultImage,
     finalOgImage: finalOgImage,
     finalImage: ogImg,
-    isArticleImage: !!ogImage && ogImage !== defaultImage,
-    willUseArticleImage: !!ogImage
+    isArticleImage: !!ogImage && ogImage !== null && ogImage !== undefined && ogImage !== '',
+    willUseArticleImage: !!ogImage && ogImage !== null && ogImage !== undefined && ogImage !== ''
   })
   const ogTitleText = ogTitle || title
   const ogDescText = ogDescription || description
