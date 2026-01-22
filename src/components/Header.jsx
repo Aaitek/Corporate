@@ -439,10 +439,10 @@ const Header = () => {
       icon: '📄',
       columns: null, // Only category, no subcategories
       items: [
-        { label: 'Insights & Articles', path: '/resources' },
-        { label: 'Press Releases', path: '/resources' },
-        { label: 'Webinars & Events', path: '/resources' },
-        { label: 'Videos & Media', path: '/resources' },
+        { label: 'Insights & Articles', path: '/articles' },
+        { label: 'Press Releases', path: '/press-releases' },
+        { label: 'Webinars & Events', path: '/webinars' },
+        { label: 'Videos & Media', path: '/videos' },
       ],
     },
     company: {
@@ -453,7 +453,7 @@ const Header = () => {
       icon: '🏢',
       columns: null, // Only category, no subcategories
       items: [
-        { label: 'About Aaitek', path: '/company' },
+        { label: 'About Aaitek', path: '/about' },
         { label: 'Why Aaitek', path: '/company' },
         { label: 'Careers', path: '/careers' },
         { label: 'Brand Guidelines', path: '/brand-guidelines' },
