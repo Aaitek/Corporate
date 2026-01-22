@@ -220,14 +220,14 @@ const Hero = () => {
                   animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-primary-300 uppercase tracking-wider whitespace-nowrap">
+                <span className="text-xs sm:text-[10px] md:text-xs font-medium text-primary-300 uppercase tracking-wider whitespace-nowrap">
                   AI-Powered Solutions
                 </span>
               </motion.div>
 
               {/* Main Heading with TypeIt */}
               <motion.h1
-                className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-white mb-2 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
+                className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-white mb-2 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -247,15 +247,15 @@ const Hero = () => {
               
               {/* Description */}
               <motion.p
-                className="text-sm sm:text-sm md:text-base lg:text-lg text-gray-300 mb-2 sm:mb-4 md:mb-6 leading-relaxed px-2 sm:px-4 max-w-3xl mx-auto"
+                className="text-base sm:text-sm md:text-base lg:text-lg text-gray-300 mb-2 sm:mb-4 md:mb-6 leading-relaxed px-2 sm:px-4 max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
                 We design, build, and scale intelligent digital platforms by combining{' '}
-                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">AI</span>,{' '}
-                <span className="font-semibold text-accent-400 bg-accent-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">cloud</span>, and{' '}
-                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base">enterprise-grade engineering</span> enabling organizations to innovate faster, operate smarter, and grow with confidence.
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-[10px] md:text-xs lg:text-sm xl:text-base">AI</span>,{' '}
+                <span className="font-semibold text-accent-400 bg-accent-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-[10px] md:text-xs lg:text-sm xl:text-base">cloud</span>, and{' '}
+                <span className="font-semibold text-primary-400 bg-primary-400/10 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 rounded text-xs sm:text-[10px] md:text-xs lg:text-sm xl:text-base">enterprise-grade engineering</span> enabling organizations to innovate faster, operate smarter, and grow with confidence.
               </motion.p>
               
               {/* CTA Buttons */}
@@ -268,7 +268,7 @@ const Hero = () => {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0 }}>
                   <Link
                     to="/contact"
-                    className="group relative inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 bg-primary-500 text-white font-semibold rounded-xl overflow-hidden shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all duration-0 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
+                    className="group relative inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 bg-primary-500 text-white font-semibold rounded-xl overflow-hidden shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 transition-all duration-0 text-sm sm:text-xs md:text-sm whitespace-nowrap"
                   >
                     <span className="relative z-10">Start a Project</span>
                     <motion.div
@@ -293,7 +293,7 @@ const Hero = () => {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0 }}>
                   <Link
                     to="/partner-success"
-                    className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all duration-0 text-[10px] sm:text-xs md:text-sm whitespace-nowrap"
+                    className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all duration-0 text-sm sm:text-xs md:text-sm whitespace-nowrap"
                   >
                     View Our Work
                     <svg className="ml-1 sm:ml-1.5 w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
