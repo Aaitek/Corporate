@@ -13,14 +13,25 @@ export default async function handler(req, res) {
     }
 
     // Decode the URL if it's encoded
-    const imageUrl = decodeURIComponent(url)
+    let imageUrl
+    try {
+      imageUrl = decodeURIComponent(url)
+    } catch (e) {
+      // If decoding fails, try using the URL as-is
+      imageUrl = url
+    }
 
     // Validate that it's a Railway URL (for security)
-    if (!imageUrl.includes('aaitech-production.up.railway.app') && 
-        !imageUrl.includes('railway.app') &&
-        !imageUrl.startsWith('http://localhost:1337')) {
+    const isValidRailwayUrl = imageUrl.includes('aaitech-production.up.railway.app') || 
+                               imageUrl.includes('railway.app') ||
+                               imageUrl.startsWith('http://localhost:1337')
+    
+    if (!isValidRailwayUrl) {
+      console.error('Image Proxy - Invalid image source:', imageUrl)
       return res.status(400).json({ error: 'Invalid image source' })
     }
+    
+    console.log('Image Proxy - Fetching image from Railway:', imageUrl)
 
     // Log the image URL for debugging
     console.log('Image Proxy - Fetching image:', imageUrl)

@@ -183,23 +183,30 @@ const SEO = ({
     }
     twitterTitleMeta.setAttribute('content', twitterTitleText)
 
-    // Update og:image - ensure it's set correctly
-    let ogImageMeta = document.querySelector('meta[property="og:image"]')
-    if (!ogImageMeta) {
-      ogImageMeta = document.createElement('meta')
-      ogImageMeta.setAttribute('property', 'og:image')
-      document.head.appendChild(ogImageMeta)
-    }
-    ogImageMeta.setAttribute('content', ogImg)
+    // Update og:image - remove all existing and add new one
+    // This ensures the article image replaces the default image
+    const existingOgImages = document.querySelectorAll('meta[property="og:image"]')
+    existingOgImages.forEach(meta => {
+      console.log('Removing old og:image:', meta.getAttribute('content'))
+      meta.remove()
+    })
     
-    // Also update og:image:secure_url
-    let ogImageSecureMeta = document.querySelector('meta[property="og:image:secure_url"]')
-    if (!ogImageSecureMeta) {
-      ogImageSecureMeta = document.createElement('meta')
-      ogImageSecureMeta.setAttribute('property', 'og:image:secure_url')
-      document.head.appendChild(ogImageSecureMeta)
-    }
+    // Create new og:image meta tag with article image
+    const ogImageMeta = document.createElement('meta')
+    ogImageMeta.setAttribute('property', 'og:image')
+    ogImageMeta.setAttribute('content', ogImg)
+    document.head.appendChild(ogImageMeta)
+    console.log('✅ Added new og:image:', ogImg)
+    
+    // Also update og:image:secure_url - remove all existing first
+    const existingSecureUrls = document.querySelectorAll('meta[property="og:image:secure_url"]')
+    existingSecureUrls.forEach(meta => meta.remove())
+    
+    const ogImageSecureMeta = document.createElement('meta')
+    ogImageSecureMeta.setAttribute('property', 'og:image:secure_url')
     ogImageSecureMeta.setAttribute('content', ogImg)
+    document.head.appendChild(ogImageSecureMeta)
+    console.log('✅ Added new og:image:secure_url:', ogImg)
     
     // Debug log for image URL
     console.log('SEO Component - Image URL:', {
