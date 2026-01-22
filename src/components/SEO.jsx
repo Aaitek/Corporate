@@ -140,16 +140,27 @@ const SEO = ({
     : description
   
   // Debug: Log what title/description is being used
-  console.log('SEO - Title/Description Selection:', {
+  console.log('🔍 SEO - Title/Description Selection:', {
     ogTitleProp: ogTitle,
     ogDescriptionProp: ogDescription,
     seoTitle: seoTitle,
     seoDescription: seoDescription,
+    pageTitle: pageTitle,
+    pageDescription: pageDescription,
     finalOgTitle: ogTitleText,
     finalOgDescription: ogDescText,
     willUseOgTitle: !!(ogTitle && ogTitle !== null && ogTitle !== undefined && ogTitle !== ''),
-    willUseOgDescription: !!(ogDescription && ogDescription !== null && ogDescription !== undefined && ogDescription !== '')
+    willUseOgDescription: !!(ogDescription && ogDescription !== null && ogDescription !== undefined && ogDescription !== ''),
+    location: location.pathname
   })
+  
+  // CRITICAL: If ogTitle or ogDescription are empty/undefined, log a warning
+  if (!ogTitle || ogTitle === null || ogTitle === undefined || ogTitle === '') {
+    console.warn('⚠️ SEO WARNING: ogTitle is not provided for', location.pathname, '- will use fallback:', title)
+  }
+  if (!ogDescription || ogDescription === null || ogDescription === undefined || ogDescription === '') {
+    console.warn('⚠️ SEO WARNING: ogDescription is not provided for', location.pathname, '- will use fallback:', description)
+  }
   const twitterTitleText = twitterTitle || ogTitleText || title
   const twitterDescText = twitterDescription || ogDescText || description
   const twitterImg = ensureAbsoluteImageUrl(twitterImage || ogImg)
