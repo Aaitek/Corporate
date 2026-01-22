@@ -33,7 +33,8 @@ const SEO = ({
   const siteUrl = 'https://aaitek.com'
   const siteName = 'Aaitek'
   // Use black logo for social sharing previews - use current origin so image is accessible from deployment URL
-  const defaultImage = `${currentOrigin}/Aaitek logo in Black.png`
+  // URL encode the filename to handle spaces properly
+  const defaultImage = `${currentOrigin}/Aaitek%20logo%20in%20Black.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {

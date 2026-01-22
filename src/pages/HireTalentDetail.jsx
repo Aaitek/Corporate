@@ -47,7 +47,7 @@ const HireTalentDetail = () => {
     }
   }
 
-  const socialImage = `${siteUrl}/Aaitek logo in Black.png`
+  const socialImage = `${siteUrl}/Aaitek%20logo%20in%20Black.png`
 
   // Get hero image based on type
   const getHeroImage = () => {

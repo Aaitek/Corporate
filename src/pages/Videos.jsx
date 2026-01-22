@@ -148,7 +148,7 @@ const Videos = () => {
         robots="index,follow"
         ogTitle="Videos & Media - Aaitek"
         ogDescription="Visual content, demos, and thought leadership videos."
-        ogImage="https://aaitek.com/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com/Aaitek%20logo%20in%20Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

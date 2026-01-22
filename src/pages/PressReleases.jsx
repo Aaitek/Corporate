@@ -160,7 +160,7 @@ const PressReleases = () => {
         robots="index,follow"
         ogTitle="Press Releases - Aaitek"
         ogDescription="Latest press releases, company news, and announcements."
-        ogImage="https://aaitek.com/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com/Aaitek%20logo%20in%20Black.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

@@ -46,7 +46,7 @@ const Career = () => {
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com/Aaitek logo in Black.png"
+        "url": "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
       }
     }
   }
@@ -60,7 +60,7 @@ const Career = () => {
         robots="index,follow"
         ogTitle="Careers - Join the Aaitek Team"
         ogDescription="Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering."
-        ogImage="https://aaitek.com/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com/Aaitek%20logo%20in%20Black.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="WebPage"

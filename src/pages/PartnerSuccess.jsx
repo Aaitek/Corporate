@@ -202,7 +202,7 @@ const PartnerSuccess = () => {
         canonicalUrl={`${siteUrl}/partner-success`}
         ogTitle="Partner Success - Case Studies & Client Stories"
         ogDescription="Enterprise-grade outcomes, measurable impact, delivery reliability. Built for stakeholders and audits."
-        ogImage="https://aaitek.com/Aaitek logo in Black.png"
+        ogImage="https://aaitek.com/Aaitek%20logo%20in%20Black.png"
         ogType="website"
         twitterTitle="Partner Success - Case Studies & Client Stories"
         twitterDescription="Enterprise-grade outcomes, measurable impact, delivery reliability."
