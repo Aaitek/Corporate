@@ -105,10 +105,9 @@ export default async function handler(req: Request) {
   // Only intercept social crawlers - let regular users pass through to React app
   // Regular users will get meta tags updated client-side by react-helmet-async
   if (!isSocialCrawler) {
-    // Let the request pass through normally to the React app
-    return new Response(null, {
-      status: 200,
-    })
+    // Don't intercept - let the request continue to the React app
+    // In Vercel Edge Middleware, returning nothing or undefined lets the request pass through
+    return undefined as any
   }
   
   const siteUrl = 'https://aaitek.com'
