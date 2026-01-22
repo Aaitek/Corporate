@@ -102,13 +102,9 @@ export default async function handler(req: Request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Only intercept social crawlers - let regular users pass through to React app
-  // Regular users will get meta tags updated client-side by react-helmet-async
-  if (!isSocialCrawler) {
-    // Don't intercept - let the request continue to the React app
-    // In Vercel Edge Middleware, returning nothing or undefined lets the request pass through
-    return undefined as any
-  }
+  // Intercept ALL requests to inject proper meta tags
+  // This ensures both social crawlers AND regular users see correct meta tags in page source
+  // The middleware will serve HTML with correct meta tags, then React will hydrate
   
   const siteUrl = 'https://aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
