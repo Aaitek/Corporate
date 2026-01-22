@@ -102,11 +102,10 @@ export default async function handler(req: Request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Only intercept for social crawlers
+  // Only intercept for social crawlers - let others pass through
   if (!isSocialCrawler) {
-    return new Response(null, {
-      status: 200,
-    })
+    // Return undefined to let the request continue normally
+    return undefined as any
   }
   
   const siteUrl = 'https://aaitek.com'
