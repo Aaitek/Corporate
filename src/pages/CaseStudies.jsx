@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import FilterSidebar from '../components/FilterSidebar'
 import SEO from '../components/SEO'
 import { fetchCaseStudies, getImageUrl } from '../utils/api'
+import caseStudiesData from '../data/caseStudiesData'
 
 const CaseStudies = () => {
   const [filters, setFilters] = useState({
@@ -20,72 +21,8 @@ const CaseStudies = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
 
-  // Fallback case studies data
-  const fallbackCaseStudies = [
-    {
-      id: 'enterprise-dxp-modernisation',
-      title: 'Enterprise DXP Modernisation for a Public Sector Organisation',
-      slug: 'enterprise-dxp-modernisation-public-sector',
-      client: 'Public Sector Organisation',
-      industry: 'Government',
-      category: 'cloud',
-      description: 'A comprehensive digital experience platform modernisation project that transformed legacy systems into a modern, scalable architecture.',
-      fullContent: '<p>This case study demonstrates how we helped a public sector organisation modernise their digital experience platform.</p>',
-      image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80',
-      results: { 'Performance Improvement': '300%', 'Cost Reduction': '40%', 'User Satisfaction': '95%' },
-      technologies: ['DXP', 'Cloud', 'AWS'],
-      service: 'Cloud',
-      tech: 'DXP',
-      engagementType: 'Delivery',
-      year: '2024',
-      region: 'Australia',
-      status: 'Published',
-      color: 'from-blue-500 to-cyan-500',
-      icon: '🏛️',
-    },
-    {
-      id: 'ai-driven-platform-financial',
-      title: 'AI-Driven Platform for Customer Engagement in Financial Services',
-      slug: 'ai-driven-platform-financial-services',
-      client: 'Financial Services Company',
-      industry: 'Finance',
-      category: 'ai',
-      description: 'An AI-powered customer engagement platform that revolutionised how a financial services company interacts with customers.',
-      fullContent: '<p>This case study showcases the implementation of an AI-driven customer engagement platform.</p>',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-      results: { 'Engagement Rate': '250%', 'Response Time': '90% faster', 'Customer Satisfaction': '98%' },
-      technologies: ['AI', 'Machine Learning', 'Cloud'],
-      service: 'AI',
-      tech: 'AI',
-      engagementType: 'Delivery',
-      year: '2024',
-      region: 'Australia',
-      status: 'Published',
-      color: 'from-purple-500 to-pink-500',
-      icon: '🤖',
-    },
-    {
-      id: 'cloud-migration-media',
-      title: 'Cloud Migration for a High-Traffic Media Platform',
-      slug: 'cloud-migration-high-traffic-media',
-      client: 'Media Company',
-      industry: 'Media',
-      category: 'cloud',
-      description: 'A successful cloud migration that enabled a media platform to handle millions of users with improved performance and scalability.',
-      fullContent: '<p>This case study details the cloud migration journey of a high-traffic media platform.</p>',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
-      results: { 'Uptime': '99.9%', 'Performance': '200% improvement', 'Cost Savings': '35%' },
-      technologies: ['Cloud', 'AWS', 'DevOps'],
-      service: 'Cloud',
-      tech: 'Cloud',
-      engagementType: 'Migration',
-      year: '2023',
-      region: 'Australia',
-      status: 'Published',
-      color: 'from-green-500 to-emerald-500',
-      icon: '☁️',
-    },
-  ]
+  // Fallback case studies data - convert object to array
+  const fallbackCaseStudies = Object.values(caseStudiesData)
 
   useEffect(() => {
     const loadCaseStudies = async () => {

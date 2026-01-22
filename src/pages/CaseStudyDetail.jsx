@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import SEO from '../components/SEO'
 import api, { getImageUrl } from '../utils/api'
+import caseStudiesData from '../data/caseStudiesData'
 
 const CaseStudyDetail = () => {
   const { slug } = useParams()
@@ -42,7 +43,13 @@ const CaseStudyDetail = () => {
           }
           setCaseStudy(mapped)
         } else {
-          setError('Case study not found')
+          // Check local data as fallback
+          const localCaseStudy = caseStudiesData[slug]
+          if (localCaseStudy) {
+            setCaseStudy(localCaseStudy)
+          } else {
+            setError('Case study not found')
+          }
         }
       } catch (err) {
         console.error('Error fetching case study:', err)
