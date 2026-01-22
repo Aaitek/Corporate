@@ -41,8 +41,12 @@ export default async function handler(req, res) {
 
     // Set appropriate headers for image serving
     res.setHeader('Content-Type', contentType)
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+    // Cache for 1 year but allow revalidation for social media crawlers
+    res.setHeader('Cache-Control', 'public, max-age=31536000, must-revalidate')
     res.setHeader('Access-Control-Allow-Origin', '*')
+    // Add CORS headers for social media crawlers
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
     
     // Return the image
     return res.status(200).send(Buffer.from(imageBuffer))
