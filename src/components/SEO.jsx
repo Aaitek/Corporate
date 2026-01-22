@@ -106,7 +106,18 @@ const SEO = ({
     console.log('⚠️ SEO - Using default image (footer-logo.png):', defaultImage)
   }
   
-  const ogImg = ensureAbsoluteImageUrl(finalOgImage)
+  // If ogImage is provided (article image), use it directly without ensureAbsoluteImageUrl
+  // This prevents any fallback to default image
+  let ogImg
+  if (ogImage && ogImage !== null && ogImage !== undefined && ogImage !== '' && ogImage !== 'null' && ogImage !== 'undefined') {
+    // Article image is provided - use it directly (it's already absolute from getPreviewImage)
+    ogImg = String(ogImage).trim()
+    console.log('✅ SEO - Using ogImage directly (article image):', ogImg)
+  } else {
+    // No article image - process the fallback image
+    ogImg = ensureAbsoluteImageUrl(finalOgImage)
+    console.log('⚠️ SEO - Using processed fallback image:', ogImg)
+  }
   
   // Debug: Log what image is being used
   console.log('SEO - Final Image Selection:', {
