@@ -425,10 +425,10 @@ const Header = () => {
       icon: '📄',
       columns: null, // Only category, no subcategories
       items: [
-        { label: 'Case Studies', path: '/partner-success' },
-        { label: 'Client Success Stories', path: '/partner-success' },
-        { label: 'Platform Migrations', path: '/partner-success' },
-        { label: 'AI & Automation Outcomes', path: '/partner-success' },
+        { label: 'Case Studies', path: '/case-studies' },
+        { label: 'Client Success Stories', path: '/partner-success/client-success-stories' },
+        { label: 'Platform Migrations', path: '/partner-success/platform-migrations' },
+        { label: 'AI & Automation Outcomes', path: '/partner-success/ai-automation-outcomes' },
       ],
     },
     resources: {
