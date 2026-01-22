@@ -157,6 +157,15 @@ const SEO = ({
       document.head.appendChild(ogImageMeta)
     }
     ogImageMeta.setAttribute('content', ogImg)
+    
+    // Debug log for image URL
+    if (process.env.NODE_ENV === 'development') {
+      console.log('SEO Component - Image URL:', {
+        ogImageProp: ogImage,
+        processedOgImg: ogImg,
+        defaultImage: defaultImage
+      })
+    }
 
     // Update og:image:width
     let ogImageWidthMeta = document.querySelector('meta[property="og:image:width"]')
