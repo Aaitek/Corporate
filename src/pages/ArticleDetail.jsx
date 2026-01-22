@@ -156,7 +156,8 @@ const ArticleDetail = () => {
     articleImageUrl: articleImageUrl,
     processedImageUrl: articleImage,
     articleTitle: article?.title,
-    willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined'
+    willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined',
+    finalImageForPreview: articleImage
   })
 
   // Structured data for SEO - article image is used here for previews

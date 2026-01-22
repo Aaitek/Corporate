@@ -71,7 +71,17 @@ const SEO = ({
   const title = seoTitle || pageTitle || `${siteName} - Empowering Businesses With AI, Data Analytics & Cloud`
   const description = seoDescription || pageDescription || 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
   const canonical = canonicalUrl || `${siteUrl}${location.pathname}`
+  // Prioritize ogImage prop (article images), then pageImage, then default
   const ogImg = ensureAbsoluteImageUrl(ogImage || pageImage || defaultImage)
+  
+  // Debug: Log what image is being used
+  console.log('SEO - Image Selection:', {
+    ogImageProp: ogImage,
+    pageImage: pageImage,
+    defaultImage: defaultImage,
+    finalImage: ogImg,
+    isArticleImage: !!ogImage && ogImage !== defaultImage
+  })
   const ogTitleText = ogTitle || title
   const ogDescText = ogDescription || description
   const twitterTitleText = twitterTitle || ogTitleText || title
