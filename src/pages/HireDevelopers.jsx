@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { getHireTalentSlug } from '../utils/slugHelper'
 
 const HireDevelopers = () => {
   const ref = useRef(null)
@@ -387,9 +388,11 @@ const HireDevelopers = () => {
                       {model.icon}
                 </div>
                     <div className="flex-1">
-                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-300">
-                        {model.title}
-                </h3>
+                      <Link to={`/hire-talent/${getHireTalentSlug(model.title)}`}>
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-300 cursor-pointer">
+                          {model.title}
+                        </h3>
+                      </Link>
                       <p className="text-xl font-semibold text-primary-600 mb-4">{model.subtitle}</p>
                       <p className="text-lg text-gray-700 leading-relaxed">{model.description}</p>
                     </div>
@@ -480,9 +483,11 @@ const HireDevelopers = () => {
                         {area.icon}
                 </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-300">
-                          {area.title}
-                </h3>
+                        <Link to={`/hire-talent/${getHireTalentSlug(area.title)}`}>
+                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors duration-300 cursor-pointer">
+                            {area.title}
+                          </h3>
+                        </Link>
                         <p className="text-sm font-semibold text-primary-600">{area.subtitle}</p>
                       </div>
                     </div>
