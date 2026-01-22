@@ -90,47 +90,75 @@ const BrandGuidelines = () => {
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6">🎨 Color Palette</h2>
           <h3 className="text-2xl font-bold text-gray-800 mb-6">Primary Colors</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div className="bg-[#1C1C1C] rounded-2xl p-6 text-white border-2 border-gray-800 shadow-lg">
-              <div className="text-2xl font-bold mb-2">#1C1C1C</div>
-              <div className="text-lg font-semibold mb-1">Deep Charcoal</div>
-              <div className="text-sm opacity-90">Primary Background</div>
-              <div className="text-xs opacity-75 mt-2">RGB: 28, 28, 28</div>
+            <div className="bg-primary-600 rounded-2xl p-6 text-white border-2 border-primary-700 shadow-lg">
+              <div className="text-2xl font-bold mb-2">#0284c7</div>
+              <div className="text-lg font-semibold mb-1">Primary Blue</div>
+              <div className="text-sm opacity-90">Primary Brand Color</div>
+              <div className="text-xs opacity-75 mt-2">RGB: 2, 132, 199</div>
+              <div className="text-xs opacity-75 mt-1">Tailwind: primary-600</div>
             </div>
-            <div className="bg-[#FBD506] rounded-2xl p-6 text-[#1C1C1C] border-2 border-yellow-300 shadow-lg">
-              <div className="text-2xl font-bold mb-2">#FBD506</div>
-              <div className="text-lg font-semibold mb-1">Aaitek Yellow</div>
-              <div className="text-sm opacity-90">Primary Accent</div>
-              <div className="text-xs opacity-75 mt-2">RGB: 251, 213, 6</div>
+            <div className="bg-primary-700 rounded-2xl p-6 text-white border-2 border-primary-800 shadow-lg">
+              <div className="text-2xl font-bold mb-2">#0369a1</div>
+              <div className="text-lg font-semibold mb-1">Primary Blue Dark</div>
+              <div className="text-sm opacity-90">Primary Dark Variant</div>
+              <div className="text-xs opacity-75 mt-2">RGB: 3, 105, 161</div>
+              <div className="text-xs opacity-75 mt-1">Tailwind: primary-700</div>
             </div>
-            <div className="bg-white rounded-2xl p-6 text-[#1C1C1C] border-2 border-gray-200 shadow-lg">
+            <div className="bg-accent-600 rounded-2xl p-6 text-white border-2 border-accent-700 shadow-lg">
+              <div className="text-2xl font-bold mb-2">#0891b2</div>
+              <div className="text-lg font-semibold mb-1">Accent Cyan</div>
+              <div className="text-sm opacity-90">Accent Brand Color</div>
+              <div className="text-xs opacity-75 mt-2">RGB: 8, 145, 178</div>
+              <div className="text-xs opacity-75 mt-1">Tailwind: accent-600</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 text-gray-900 border-2 border-gray-200 shadow-lg">
               <div className="text-2xl font-bold mb-2">#FFFFFF</div>
               <div className="text-lg font-semibold mb-1">White</div>
-              <div className="text-sm opacity-90">Primary Text</div>
+              <div className="text-sm opacity-90">Primary Text on Dark</div>
               <div className="text-xs opacity-75 mt-2">RGB: 255, 255, 255</div>
             </div>
-            <div className="bg-[#2E2E2E] rounded-2xl p-6 text-white border-2 border-gray-700 shadow-lg">
-              <div className="text-2xl font-bold mb-2">#2E2E2E</div>
-              <div className="text-lg font-semibold mb-1">Jet Gray</div>
+            <div className="bg-gray-900 rounded-2xl p-6 text-white border-2 border-gray-800 shadow-lg">
+              <div className="text-2xl font-bold mb-2">#1e293b</div>
+              <div className="text-lg font-semibold mb-1">Dark Background</div>
               <div className="text-sm opacity-90">Secondary Background</div>
-              <div className="text-xs opacity-75 mt-2">RGB: 46, 46, 46</div>
+              <div className="text-xs opacity-75 mt-2">RGB: 30, 41, 59</div>
+              <div className="text-xs opacity-75 mt-1">Tailwind: secondary-900</div>
             </div>
-            <div className="bg-[#F4F4F4] rounded-2xl p-6 text-[#1C1C1C] border-2 border-gray-300 shadow-lg">
-              <div className="text-2xl font-bold mb-2">#F4F4F4</div>
-              <div className="text-lg font-semibold mb-1">Soft Gray</div>
-              <div className="text-sm opacity-90">Secondary Text</div>
-              <div className="text-xs opacity-75 mt-2">RGB: 244, 244, 244</div>
+            <div className="bg-gray-50 rounded-2xl p-6 text-gray-900 border-2 border-gray-200 shadow-lg">
+              <div className="text-2xl font-bold mb-2">#f8fafc</div>
+              <div className="text-lg font-semibold mb-1">Light Gray</div>
+              <div className="text-sm opacity-90">Secondary Text Background</div>
+              <div className="text-xs opacity-75 mt-2">RGB: 248, 250, 252</div>
+              <div className="text-xs opacity-75 mt-1">Tailwind: secondary-100</div>
             </div>
           </div>
           <h3 className="text-2xl font-bold text-gray-800 mb-6">Extended Palette</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-[#FFF480] rounded-2xl p-6 text-[#1C1C1C] border-2 border-yellow-200 shadow-lg">
-              <div className="text-2xl font-bold mb-2">#FFF480</div>
-              <div className="text-lg font-semibold">Highlight Glow</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div className="bg-primary-500 rounded-2xl p-6 text-white border-2 border-primary-600 shadow-lg">
+              <div className="text-xl font-bold mb-2">#0ea5e9</div>
+              <div className="text-sm font-semibold mb-1">Primary 500</div>
+              <div className="text-xs opacity-75">RGB: 14, 165, 233</div>
             </div>
-            <div className="bg-gradient-to-r from-[#FBD506] to-[#FFF480] rounded-2xl p-6 text-[#1C1C1C] border-2 border-yellow-300 shadow-lg">
-              <div className="text-2xl font-bold mb-2">Gradient</div>
-              <div className="text-sm font-mono">linear-gradient(90deg, #FBD506 0%, #FFF480 100%)</div>
+            <div className="bg-primary-400 rounded-2xl p-6 text-white border-2 border-primary-500 shadow-lg">
+              <div className="text-xl font-bold mb-2">#38bdf8</div>
+              <div className="text-sm font-semibold mb-1">Primary 400</div>
+              <div className="text-xs opacity-75">RGB: 56, 189, 248</div>
             </div>
+            <div className="bg-accent-500 rounded-2xl p-6 text-white border-2 border-accent-600 shadow-lg">
+              <div className="text-xl font-bold mb-2">#06b6d4</div>
+              <div className="text-sm font-semibold mb-1">Accent 500</div>
+              <div className="text-xs opacity-75">RGB: 6, 182, 212</div>
+            </div>
+            <div className="bg-accent-400 rounded-2xl p-6 text-white border-2 border-accent-500 shadow-lg">
+              <div className="text-xl font-bold mb-2">#22d3ee</div>
+              <div className="text-sm font-semibold mb-1">Accent 400</div>
+              <div className="text-xs opacity-75">RGB: 34, 211, 238</div>
+            </div>
+          </div>
+          <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-accent-600 rounded-2xl p-6 text-white border-2 border-primary-500 shadow-lg">
+            <div className="text-xl font-bold mb-2">Primary Gradient</div>
+            <div className="text-sm font-mono opacity-90">linear-gradient(to right, #0284c7, #0369a1, #0891b2)</div>
+            <div className="text-xs opacity-75 mt-2">Used in hero sections and CTAs</div>
           </div>
         </motion.section>
 
@@ -180,7 +208,7 @@ const BrandGuidelines = () => {
             <ul className="space-y-2 text-gray-700">
               <li><strong>Headings:</strong> Sentence case, 0.5px letter spacing</li>
               <li><strong>Body text:</strong> Line-height 1.6 for readability</li>
-              <li><strong>Font color hierarchy:</strong> White → Yellow → Soft Gray</li>
+              <li><strong>Font color hierarchy:</strong> White → Primary Blue → Accent Cyan → Gray</li>
             </ul>
           </div>
         </motion.section>
@@ -201,7 +229,7 @@ const BrandGuidelines = () => {
                 <li className="flex items-start gap-2">
                   <span className="text-green-600 font-bold">✓</span>
                   <div>
-                    <strong>Primary Use:</strong> Full Aaitek logo (white & yellow) on dark background (#1C1C1C)
+                    <strong>Primary Use:</strong> Full Aaitek logo (white) on dark background (primary-600/700 or gray-900)
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
@@ -237,7 +265,7 @@ const BrandGuidelines = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-red-600 font-bold">✗</span>
-                  <div>Place on bright or yellow backgrounds</div>
+                  <div>Place on bright or conflicting color backgrounds</div>
                 </li>
               </ul>
             </div>
@@ -340,14 +368,14 @@ const BrandGuidelines = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Social & Marketing</h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Dark background, bold white typography</li>
-                <li>• Aaitek Yellow accent lines</li>
+                <li>• Primary Blue and Accent Cyan accent lines</li>
                 <li>• Consistent corner rounding and shadow depth</li>
               </ul>
             </div>
             <div className="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-lg">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Print</h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• Maintain strong contrast (Yellow on Black or White)</li>
+                <li>• Maintain strong contrast (Primary Blue/Accent Cyan on White or Dark)</li>
                 <li>• Prefer matte finish with spot gloss on logo</li>
               </ul>
             </div>
