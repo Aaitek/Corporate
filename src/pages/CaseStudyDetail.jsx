@@ -75,32 +75,50 @@ const CaseStudyDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
-          <p className="text-gray-600">Loading case study...</p>
+      <>
+        {/* Show loading state with basic SEO to prevent default meta tags */}
+        <SEO
+          seoTitle="Loading Case Study | Aaitek"
+          seoDescription="Loading case study details..."
+          canonicalUrl={`https://aaitek.com/case-study/${slug}`}
+          robots="noindex,nofollow"
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+            <p className="text-gray-600">Loading case study...</p>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   if (error || !caseStudy) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
-          <p className="text-gray-600 mb-6">{error || 'The requested case study could not be found.'}</p>
-          <Link
-            to="/case-studies"
-            className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
-          >
-            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Case Studies
-          </Link>
+      <>
+        {/* Show error state with basic SEO */}
+        <SEO
+          seoTitle="Case Study Not Found | Aaitek"
+          seoDescription="The requested case study could not be found."
+          canonicalUrl={`https://aaitek.com/case-study/${slug}`}
+          robots="noindex,nofollow"
+        />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center max-w-md">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
+            <p className="text-gray-600 mb-6">{error || 'The requested case study could not be found.'}</p>
+            <Link
+              to="/case-studies"
+              className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+            >
+              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Case Studies
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 

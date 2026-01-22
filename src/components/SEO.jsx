@@ -129,8 +129,27 @@ const SEO = ({
     isArticleImage: !!ogImage && ogImage !== null && ogImage !== undefined && ogImage !== '',
     willUseArticleImage: !!ogImage && ogImage !== null && ogImage !== undefined && ogImage !== ''
   })
-  const ogTitleText = ogTitle || title
-  const ogDescText = ogDescription || description
+  // CRITICAL: ogTitle and ogDescription MUST be used when provided
+  // Only fallback to title/description if ogTitle/ogDescription are not provided
+  // This ensures page-specific content shows in social media previews
+  const ogTitleText = (ogTitle && ogTitle !== null && ogTitle !== undefined && ogTitle !== '') 
+    ? ogTitle 
+    : title
+  const ogDescText = (ogDescription && ogDescription !== null && ogDescription !== undefined && ogDescription !== '') 
+    ? ogDescription 
+    : description
+  
+  // Debug: Log what title/description is being used
+  console.log('SEO - Title/Description Selection:', {
+    ogTitleProp: ogTitle,
+    ogDescriptionProp: ogDescription,
+    seoTitle: seoTitle,
+    seoDescription: seoDescription,
+    finalOgTitle: ogTitleText,
+    finalOgDescription: ogDescText,
+    willUseOgTitle: !!(ogTitle && ogTitle !== null && ogTitle !== undefined && ogTitle !== ''),
+    willUseOgDescription: !!(ogDescription && ogDescription !== null && ogDescription !== undefined && ogDescription !== '')
+  })
   const twitterTitleText = twitterTitle || ogTitleText || title
   const twitterDescText = twitterDescription || ogDescText || description
   const twitterImg = ensureAbsoluteImageUrl(twitterImage || ogImg)
