@@ -182,23 +182,33 @@ const SEO = ({
     }
     descMeta.setAttribute('content', description)
 
-    // Update og:description
-    let ogDescMeta = document.querySelector('meta[property="og:description"]')
-    if (!ogDescMeta) {
-      ogDescMeta = document.createElement('meta')
-      ogDescMeta.setAttribute('property', 'og:description')
-      document.head.appendChild(ogDescMeta)
-    }
+    // Update og:description - remove all existing first to ensure no duplicates
+    const existingOgDescs = document.querySelectorAll('meta[property="og:description"]')
+    existingOgDescs.forEach(meta => {
+      console.log('Removing old og:description:', meta.getAttribute('content'))
+      meta.remove()
+    })
+    
+    // Create new og:description meta tag
+    const ogDescMeta = document.createElement('meta')
+    ogDescMeta.setAttribute('property', 'og:description')
     ogDescMeta.setAttribute('content', ogDescText)
+    document.head.appendChild(ogDescMeta)
+    console.log('✅ Added new og:description:', ogDescText)
 
-    // Update og:title
-    let ogTitleMeta = document.querySelector('meta[property="og:title"]')
-    if (!ogTitleMeta) {
-      ogTitleMeta = document.createElement('meta')
-      ogTitleMeta.setAttribute('property', 'og:title')
-      document.head.appendChild(ogTitleMeta)
-    }
+    // Update og:title - remove all existing first to ensure no duplicates
+    const existingOgTitles = document.querySelectorAll('meta[property="og:title"]')
+    existingOgTitles.forEach(meta => {
+      console.log('Removing old og:title:', meta.getAttribute('content'))
+      meta.remove()
+    })
+    
+    // Create new og:title meta tag
+    const ogTitleMeta = document.createElement('meta')
+    ogTitleMeta.setAttribute('property', 'og:title')
     ogTitleMeta.setAttribute('content', ogTitleText)
+    document.head.appendChild(ogTitleMeta)
+    console.log('✅ Added new og:title:', ogTitleText)
 
     // Update og:url
     let ogUrlMeta = document.querySelector('meta[property="og:url"]')
