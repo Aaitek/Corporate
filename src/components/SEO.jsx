@@ -332,8 +332,9 @@ const SEO = ({
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:url" content={canonical} />
-      <meta property="og:title" content={ogTitleText} />
-      <meta property="og:description" content={ogDescText} />
+      {/* CRITICAL: Use keys to force React to update meta tags when values change */}
+      <meta property="og:title" content={ogTitleText} key={`og-title-${ogTitleText}-${location.pathname}`} />
+      <meta property="og:description" content={ogDescText} key={`og-desc-${ogDescText}-${location.pathname}`} />
       {/* Article image (from Strapi) or footer-logo.png fallback */}
       {/* CRITICAL: ogImg contains the article image when ogImage prop is provided */}
       <meta property="og:image" content={ogImg} key={`og-image-${ogImg}`} />
