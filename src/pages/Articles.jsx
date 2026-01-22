@@ -175,7 +175,7 @@ const Articles = () => {
     "@type": "CollectionPage",
     "name": "Articles - Aaitek",
     "description": "Expert perspectives on technology, delivery, and industry trends from Aaitek practitioners.",
-    "url": "https://aaitek.com.au/articles"
+    "url": "https://aaitek.com/articles"
   }
 
   return (
@@ -183,11 +183,11 @@ const Articles = () => {
       <SEO
         seoTitle="Articles - Insights & Expert Perspectives | Aaitek"
         seoDescription="Read expert articles and insights on technology, delivery, and industry trends from Aaitek practitioners, architects, and consultants."
-        canonicalUrl="https://aaitek.com.au/articles"
+        canonicalUrl="https://aaitek.com/articles"
         robots="index,follow"
         ogTitle="Articles - Aaitek Insights"
         ogDescription="Expert perspectives on technology, delivery, and industry trends."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

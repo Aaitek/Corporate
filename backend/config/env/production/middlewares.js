@@ -8,7 +8,7 @@ module.exports = [
         origin: [
           'https://www.aaitek.com',
           'https://aaitek.com',
-          'https://aaitek.com.au',
+          'https://aaitek.com',
           'http://localhost:3000',
           'http://localhost:5173',
           /^https:\/\/.*\.vercel\.app$/,

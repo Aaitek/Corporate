@@ -213,7 +213,7 @@ const ServiceDetail = () => {
     )
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   const canonicalUrl = `${siteUrl}/services/${slug}`
   const seoTitle = service ? `${service.title} - Service | Aaitek` : 'Service - Aaitek'
   

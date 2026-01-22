@@ -104,7 +104,7 @@ const Contact = () => {
     })
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
 
   return (
     <>
@@ -114,11 +114,11 @@ const Contact = () => {
         canonicalUrl={`${siteUrl}/contact`}
         ogTitle="Contact Us - Get in Touch"
         ogDescription="Get in touch with Aaitek. We're here to help transform your digital vision into reality."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterTitle="Contact Us - Get in Touch"
         twitterDescription="Get in touch with Aaitek to transform your digital vision."
-        twitterImage="https://aaitek.com.au/footer-logo.png"
+        twitterImage="https://aaitek.com/footer-logo.png"
         schemaType="ContactPage"
         indexable={true}
       />

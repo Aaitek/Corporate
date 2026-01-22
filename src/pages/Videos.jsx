@@ -136,7 +136,7 @@ const Videos = () => {
     "@type": "CollectionPage",
     "name": "Videos & Media - Aaitek",
     "description": "Short and long-form video content showcasing insights, product overviews, demos, and expert commentary.",
-    "url": "https://aaitek.com.au/videos"
+    "url": "https://aaitek.com/videos"
   }
 
   return (
@@ -144,11 +144,11 @@ const Videos = () => {
       <SEO
         seoTitle="Videos & Media - Aaitek"
         seoDescription="Watch video content from Aaitek including expert explainers, product walkthroughs, architecture overviews, and event highlights."
-        canonicalUrl="https://aaitek.com.au/videos"
+        canonicalUrl="https://aaitek.com/videos"
         robots="index,follow"
         ogTitle="Videos & Media - Aaitek"
         ogDescription="Visual content, demos, and thought leadership videos."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

@@ -192,7 +192,7 @@ const CaseStudies = () => {
     "@type": "CollectionPage",
     "name": "Case Studies - Aaitek",
     "description": "Explore real-world case studies showcasing Aaitek's successful digital transformation projects across industries.",
-    "url": "https://aaitek.com.au/case-studies"
+    "url": "https://aaitek.com/case-studies"
   }
 
   return (
@@ -200,11 +200,11 @@ const CaseStudies = () => {
       <SEO
         seoTitle="Case Studies - Aaitek Technology Specialists"
         seoDescription="Explore real-world case studies showcasing Aaitek's successful digital transformation projects across industries including finance, healthcare, government, and more."
-        canonicalUrl="https://aaitek.com.au/case-studies"
+        canonicalUrl="https://aaitek.com/case-studies"
         robots="index,follow"
         ogTitle="Case Studies - Aaitek"
         ogDescription="Real-world case studies demonstrating successful digital transformation projects."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

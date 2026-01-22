@@ -57,7 +57,7 @@ const Industries = () => {
     'Scalable, enterprise-ready architectures',
   ]
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
 
   return (
     <>
@@ -67,7 +67,7 @@ const Industries = () => {
         canonicalUrl={`${siteUrl}/industries`}
         ogTitle="Industries - Industry-Specific Solutions"
         ogDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs and challenges."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterTitle="Industries - Industry-Specific Solutions"
         twitterDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs."

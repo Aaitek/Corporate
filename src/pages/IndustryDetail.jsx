@@ -19,7 +19,7 @@ const IndustryDetail = () => {
     howAIMakesDifference: [],
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   const canonicalUrl = `${siteUrl}/industries/${slug}`
   const seoTitle = `${industry.title} - Industry Solutions | Aaitek`
   // Create a comprehensive, SEO-optimized description

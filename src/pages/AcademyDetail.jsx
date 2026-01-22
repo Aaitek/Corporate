@@ -23,7 +23,7 @@ const AcademyDetail = () => {
     setOpenFaq(openFaq === index ? null : index)
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   const canonicalUrl = `${siteUrl}/academy/${slug}`
   const seoTitle = `${course.title} - Academy Course | Aaitek`
   // Create a comprehensive, SEO-optimized description
@@ -50,7 +50,7 @@ const AcademyDetail = () => {
   }
 
   // Use logo for academy courses for consistent social sharing
-  const academyImage = 'https://aaitek.com.au/footer-logo.png'
+  const academyImage = 'https://aaitek.com/footer-logo.png'
 
   return (
     <>

@@ -148,7 +148,7 @@ const PressReleases = () => {
     "@type": "CollectionPage",
     "name": "Press Releases - Aaitek",
     "description": "Latest press releases, company news, and announcements from Aaitek Technology Specialists.",
-    "url": "https://aaitek.com.au/press-releases"
+    "url": "https://aaitek.com/press-releases"
   }
 
   return (
@@ -156,11 +156,11 @@ const PressReleases = () => {
       <SEO
         seoTitle="Press Releases - Aaitek Technology Specialists"
         seoDescription="Stay updated with the latest press releases, company news, partnerships, and announcements from Aaitek Technology Specialists."
-        canonicalUrl="https://aaitek.com.au/press-releases"
+        canonicalUrl="https://aaitek.com/press-releases"
         robots="index,follow"
         ogTitle="Press Releases - Aaitek"
         ogDescription="Latest press releases, company news, and announcements."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

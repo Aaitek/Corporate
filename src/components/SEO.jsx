@@ -29,8 +29,8 @@ const SEO = ({
 }) => {
   const location = useLocation()
   // Get the current origin (works for both Vercel deployment and production domain)
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com.au'
-  const siteUrl = 'https://aaitek.com.au'
+  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com'
+  const siteUrl = 'https://aaitek.com'
   const siteName = 'Aaitek'
   // Use footer logo for social sharing - use current origin so image is accessible from deployment URL
   const defaultImage = `${currentOrigin}/footer-logo.png`

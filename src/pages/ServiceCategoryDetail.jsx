@@ -404,7 +404,7 @@ const ServiceCategoryDetail = () => {
     return categoryImages[slug] || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80'
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   // Use logo for social sharing (consistent across all pages)
   const socialImage = `${siteUrl}/footer-logo.png`
   const canonicalUrl = `${siteUrl}/services/category/${slug}`

@@ -192,7 +192,7 @@ const PartnerSuccess = () => {
     })
   }, [filters, searchQuery, caseStudies])
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
 
   return (
     <>
@@ -202,7 +202,7 @@ const PartnerSuccess = () => {
         canonicalUrl={`${siteUrl}/partner-success`}
         ogTitle="Partner Success - Case Studies & Client Stories"
         ogDescription="Enterprise-grade outcomes, measurable impact, delivery reliability. Built for stakeholders and audits."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterTitle="Partner Success - Case Studies & Client Stories"
         twitterDescription="Enterprise-grade outcomes, measurable impact, delivery reliability."

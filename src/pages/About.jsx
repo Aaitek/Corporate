@@ -54,7 +54,7 @@ const About = () => {
     'Enterprise Platforms',
   ]
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
 
   return (
     <>
@@ -64,7 +64,7 @@ const About = () => {
         canonicalUrl={`${siteUrl}/about`}
         ogTitle="About Us - Who We Are"
         ogDescription="Learn about Aaitek, a premium technology partner focused on modern platforms, AI-first solutions, and enterprise-grade delivery."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterTitle="About Us - Who We Are"
         twitterDescription="Learn about Aaitek, a premium technology partner."

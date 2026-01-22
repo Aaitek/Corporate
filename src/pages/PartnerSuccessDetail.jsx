@@ -22,7 +22,7 @@ const PartnerSuccessDetail = () => {
     ctaLink: '/partner-success',
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   const canonicalUrl = `${siteUrl}/partner-success/${slug}`
   const seoTitle = `${item.title} - Partner Success | Aaitek`
   

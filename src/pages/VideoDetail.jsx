@@ -52,10 +52,10 @@ const VideoDetail = () => {
     "@type": "VideoObject",
     "name": video.title,
     "description": video.description,
-    "thumbnailUrl": video.image || "https://aaitek.com.au/footer-logo.png",
+    "thumbnailUrl": video.image || "https://aaitek.com/footer-logo.png",
     "uploadDate": video.date,
     "duration": video.duration,
-    "url": `https://aaitek.com.au/video/${slug}`,
+    "url": `https://aaitek.com/video/${slug}`,
   }
 
   return (
@@ -63,11 +63,11 @@ const VideoDetail = () => {
       <SEO
         seoTitle={`${video.title} - Video | Aaitek`}
         seoDescription={video.description}
-        canonicalUrl={`https://aaitek.com.au/video/${slug}`}
+        canonicalUrl={`https://aaitek.com/video/${slug}`}
         robots="index,follow"
         ogTitle={video.title}
         ogDescription={video.description}
-        ogImage={video.image || "https://aaitek.com.au/footer-logo.png"}
+        ogImage={video.image || "https://aaitek.com/footer-logo.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"

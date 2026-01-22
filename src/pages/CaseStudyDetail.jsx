@@ -111,7 +111,7 @@ const CaseStudyDetail = () => {
     "@type": "Article",
     "headline": caseStudy.title,
     "description": caseStudy.description,
-    "image": caseStudy.image || "https://aaitek.com.au/footer-logo.png",
+    "image": caseStudy.image || "https://aaitek.com/footer-logo.png",
     "author": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists"
@@ -121,13 +121,13 @@ const CaseStudyDetail = () => {
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/footer-logo.png"
+        "url": "https://aaitek.com/footer-logo.png"
       }
     },
-    "url": `https://aaitek.com.au/case-study/${slug}`,
+    "url": `https://aaitek.com/case-study/${slug}`,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://aaitek.com.au/case-study/${slug}`
+      "@id": `https://aaitek.com/case-study/${slug}`
     }
   }
 
@@ -136,11 +136,11 @@ const CaseStudyDetail = () => {
       <SEO
         seoTitle={`${caseStudy.title} - Case Study | Aaitek`}
         seoDescription={caseStudy.description}
-        canonicalUrl={`https://aaitek.com.au/case-study/${slug}`}
+        canonicalUrl={`https://aaitek.com/case-study/${slug}`}
         robots="index,follow"
         ogTitle={caseStudy.title}
         ogDescription={caseStudy.description}
-        ogImage={caseStudy.image || "https://aaitek.com.au/footer-logo.png"}
+        ogImage={caseStudy.image || "https://aaitek.com/footer-logo.png"}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="Article"

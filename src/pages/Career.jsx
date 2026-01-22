@@ -40,13 +40,13 @@ const Career = () => {
     "@type": "WebPage",
     "name": "Careers at Aaitek",
     "description": "Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering.",
-    "url": "https://aaitek.com.au/career",
+    "url": "https://aaitek.com/career",
     "publisher": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/footer-logo.png"
+        "url": "https://aaitek.com/footer-logo.png"
       }
     }
   }
@@ -56,11 +56,11 @@ const Career = () => {
       <SEO
         seoTitle="Careers - Join the Aaitek Team"
         seoDescription="Explore career opportunities at Aaitek. Build the future of digital transformation with us, working on enterprise-grade AI, cloud, and engineering projects."
-        canonicalUrl="https://aaitek.com.au/career"
+        canonicalUrl="https://aaitek.com/career"
         robots="index,follow"
         ogTitle="Careers - Join the Aaitek Team"
         ogDescription="Join the Aaitek team and build the future of digital transformation with us. Explore career opportunities in AI, cloud, and enterprise engineering."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="WebPage"

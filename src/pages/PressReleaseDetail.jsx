@@ -34,7 +34,7 @@ const PressReleaseDetail = () => {
       </p>
       <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Media Contact</h3>
       <p class="text-lg text-gray-700 mb-6">
-        For media inquiries, please contact press@aaitek.com.au
+        For media inquiries, please contact press@aaitek.com
       </p>
     `,
   } || {
@@ -57,17 +57,17 @@ const PressReleaseDetail = () => {
     "@type": "NewsArticle",
     "headline": pressRelease.title,
     "description": pressRelease.description,
-    "image": pressRelease.image || "https://aaitek.com.au/footer-logo.png",
+    "image": pressRelease.image || "https://aaitek.com/footer-logo.png",
     "datePublished": pressRelease.date,
     "publisher": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/footer-logo.png"
+        "url": "https://aaitek.com/footer-logo.png"
       }
     },
-    "url": `https://aaitek.com.au/press-release/${slug}`,
+    "url": `https://aaitek.com/press-release/${slug}`,
   }
 
   return (
@@ -75,11 +75,11 @@ const PressReleaseDetail = () => {
       <SEO
         seoTitle={`${pressRelease.title} - Press Release | Aaitek`}
         seoDescription={pressRelease.description}
-        canonicalUrl={`https://aaitek.com.au/press-release/${slug}`}
+        canonicalUrl={`https://aaitek.com/press-release/${slug}`}
         robots="index,follow"
         ogTitle={pressRelease.title}
         ogDescription={pressRelease.description}
-        ogImage={pressRelease.image || "https://aaitek.com.au/footer-logo.png"}
+        ogImage={pressRelease.image || "https://aaitek.com/footer-logo.png"}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="NewsArticle"

@@ -117,11 +117,11 @@ const Services = () => {
       <SEO
         seoTitle="Services - Aaitek Technology Specialists"
         seoDescription="Comprehensive technology services including AI solutions, cloud services, software engineering, digital transformation, and enterprise platforms."
-        canonicalUrl="https://aaitek.com.au/services"
+        canonicalUrl="https://aaitek.com/services"
         robots="index,follow"
         ogTitle="Services - Aaitek Technology Specialists"
         ogDescription="Explore Aaitek's comprehensive technology services: Product & Experience, Software Engineering, Cloud & DevOps, Data & AI, Digital Growth, Managed Services, and Enterprise Platforms."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Service"

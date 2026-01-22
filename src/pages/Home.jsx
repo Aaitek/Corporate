@@ -18,8 +18,8 @@ const Home = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Aaitek Technology Specialists",
-    "url": "https://aaitek.com.au",
-    "logo": "https://aaitek.com.au/footer-logo.png",
+    "url": "https://aaitek.com",
+    "logo": "https://aaitek.com/footer-logo.png",
     "description": "Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.",
     "address": {
       "@type": "PostalAddress",
@@ -33,7 +33,7 @@ const Home = () => {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Customer Service",
-      "email": "info@aaitek.com.au"
+      "email": "info@aaitek.com"
     }
   }
 
@@ -42,11 +42,11 @@ const Home = () => {
       <SEO
         seoTitle="Aaitek | Enterprise Digital Platforms & Composable DXP"
         seoDescription="Aaitek delivers enterprise-grade digital platforms across Sitecore XM Cloud, composable DXP, cloud engineering, and performance-led modernisation."
-        canonicalUrl="https://aaitek.com.au/"
+        canonicalUrl="https://aaitek.com/"
         robots="index,follow"
         ogTitle="Aaitek | Enterprise Digital Platform Specialists"
         ogDescription="We design, build, and optimise enterprise digital platforms using Sitecore XM Cloud, headless architectures, and cloud-native engineering."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Organization"

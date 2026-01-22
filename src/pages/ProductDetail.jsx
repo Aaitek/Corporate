@@ -17,7 +17,7 @@ const ProductDetail = () => {
     keyFeatures: [],
   }
 
-  const siteUrl = 'https://aaitek.com.au'
+  const siteUrl = 'https://aaitek.com'
   const canonicalUrl = `${siteUrl}/products/${slug}`
   const seoTitle = `${product.title} - Product | Aaitek`
   // Create a comprehensive, SEO-optimized description

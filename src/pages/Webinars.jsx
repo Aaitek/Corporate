@@ -147,7 +147,7 @@ const Webinars = () => {
     "@type": "CollectionPage",
     "name": "Webinars & Events - Aaitek",
     "description": "Educational webinars, panel discussions, and event recordings hosted or sponsored by Aaitek.",
-    "url": "https://aaitek.com.au/webinars"
+    "url": "https://aaitek.com/webinars"
   }
 
   return (
@@ -155,11 +155,11 @@ const Webinars = () => {
       <SEO
         seoTitle="Webinars & Events - Aaitek"
         seoDescription="Join live and on-demand webinars, panel discussions, and events hosted by Aaitek. Learn from industry experts about AI, cloud, and digital transformation."
-        canonicalUrl="https://aaitek.com.au/webinars"
+        canonicalUrl="https://aaitek.com/webinars"
         robots="index,follow"
         ogTitle="Webinars & Events - Aaitek"
         ogDescription="Educational webinars and events with industry experts."
-        ogImage="https://aaitek.com.au/footer-logo.png"
+        ogImage="https://aaitek.com/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

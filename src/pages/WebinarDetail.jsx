@@ -59,10 +59,10 @@ const WebinarDetail = () => {
     "@type": "VideoObject",
     "name": webinar.title,
     "description": webinar.description,
-    "thumbnailUrl": webinar.image || "https://aaitek.com.au/footer-logo.png",
+    "thumbnailUrl": webinar.image || "https://aaitek.com/footer-logo.png",
     "uploadDate": webinar.date,
     "duration": webinar.duration,
-    "url": `https://aaitek.com.au/webinar/${slug}`,
+    "url": `https://aaitek.com/webinar/${slug}`,
   }
 
   return (
@@ -70,11 +70,11 @@ const WebinarDetail = () => {
       <SEO
         seoTitle={`${webinar.title} - Webinar | Aaitek`}
         seoDescription={webinar.description}
-        canonicalUrl={`https://aaitek.com.au/webinar/${slug}`}
+        canonicalUrl={`https://aaitek.com/webinar/${slug}`}
         robots="index,follow"
         ogTitle={webinar.title}
         ogDescription={webinar.description}
-        ogImage={webinar.image || "https://aaitek.com.au/footer-logo.png"}
+        ogImage={webinar.image || "https://aaitek.com/footer-logo.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"
