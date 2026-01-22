@@ -1,5 +1,7 @@
 // Vercel Edge Middleware - intercepts all requests and serves proper meta tags for social crawlers
-import { NextRequest, NextResponse } from 'next/server'
+export const config = {
+  runtime: 'edge',
+}
 
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
@@ -85,9 +87,10 @@ async function fetchCaseStudy(slug: string) {
   }
 }
 
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  const userAgent = request.headers.get('user-agent') || ''
+export default async function handler(req: Request) {
+  const url = new URL(req.url)
+  const pathname = url.pathname
+  const userAgent = req.headers.get('user-agent') || ''
   
   // Check if it's a social media crawler
   const isSocialCrawler = 
@@ -101,7 +104,9 @@ export async function middleware(request: NextRequest) {
   
   // Only intercept for social crawlers
   if (!isSocialCrawler) {
-    return NextResponse.next()
+    return new Response(null, {
+      status: 200,
+    })
   }
   
   const siteUrl = 'https://aaitek.com'
@@ -195,23 +200,9 @@ export async function middleware(request: NextRequest) {
 </body>
 </html>`
   
-  return new NextResponse(html, {
+  return new Response(html, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
     },
   })
-}
-
-export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (images, etc.)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)).*)',
-  ],
 }
