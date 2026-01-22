@@ -1,47 +1,13 @@
 {
   "rewrites": [
     {
-      "source": "/api/articles",
-      "destination": "/api/articles"
-    },
-    {
-      "source": "/api/case-studies",
-      "destination": "/api/case-studies"
-    },
-    {
-      "source": "/api/products",
-      "destination": "/api/products"
-    },
-    {
-      "source": "/api/services",
-      "destination": "/api/services"
-    },
-    {
-      "source": "/api/testimonials",
-      "destination": "/api/testimonials"
-    },
-    {
-      "source": "/api/managed-services",
-      "destination": "/api/managed-services"
-    },
-    {
-      "source": "/api/contact-submissions",
-      "destination": "/api/contact-submission"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ]
-    }
   ]
 }
+

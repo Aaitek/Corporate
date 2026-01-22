@@ -359,7 +359,6 @@ const Header = () => {
             { label: 'Cybersecurity Foundations', path: '/academy/cybersecurity-foundations' },
             { label: 'Cloud Security', path: '/academy/cloud-security' },
             { label: 'AI Governance', path: '/academy/ai-governance' },
-            { label: 'Compliance & Risk Management', path: '/academy/compliance-risk-management' },
           ],
         },
         {

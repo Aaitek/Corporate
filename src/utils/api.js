@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const API_BASE = import.meta.env.VITE_API_URL
-
-if (!API_BASE) {
-  throw new Error('VITE_API_URL is missing. Set it in Vercel environment variables.')
-}
+// API_BASE is not needed since we use relative paths with Vercel API proxy
+// VITE_API_URL is only used for image URLs in development (getImageUrl function handles fallback)
 const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
