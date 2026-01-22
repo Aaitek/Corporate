@@ -227,75 +227,10 @@ const CaseStudyDetail = () => {
           ></motion.div>
         </div>
         
-        <div className="container-custom relative z-10 px-4 sm:px-6 2xl:ml-[250px] 2xl:mr-[250px]">
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
-            {/* Left Sidebar - Results and Technologies */}
-            <div className="lg:w-80 xl:w-96 flex-shrink-0">
-              <div className="space-y-6 sticky top-24">
-                {/* Results */}
-                {caseStudy.results && Object.keys(caseStudy.results).length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
-                        📊
-                      </div>
-                      <h2 className="text-xl font-extrabold text-gray-900">Results & Impact</h2>
-                    </div>
-                    <div className="space-y-3">
-                      {Object.entries(caseStudy.results).map(([key, value], index) => (
-                        <div key={index} className="p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
-                          <p className="text-xs font-semibold text-green-700 uppercase tracking-wider mb-1">
-                            {key.replace(/([A-Z])/g, ' $1').trim()}
-                          </p>
-                          <p className="text-base font-bold text-gray-900">{value}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Technologies Used */}
-                {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
-                        💻
-                      </div>
-                      <h2 className="text-xl font-extrabold text-gray-900">Technologies Used</h2>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {caseStudy.technologies.map((tech, index) => (
-                        <motion.span
-                          key={index}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: index * 0.05 }}
-                          className="px-3 py-1.5 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-lg border border-blue-200 text-sm"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            {/* Main Content Area */}
-            <div className="flex-1">
+        <div className="relative z-10 mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-[250px] max-w-[1920px]">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 xl:gap-12">
+            {/* Main Content Area - Left Side */}
+            <div className="flex-1 lg:max-w-4xl xl:max-w-5xl">
               {/* Video Section (if available) */}
               {caseStudy.video && (
                 <motion.div
@@ -373,6 +308,71 @@ const CaseStudyDetail = () => {
                   Back to Case Studies
                 </Link>
               </motion.div>
+            </div>
+
+            {/* Right Sidebar - Results and Technologies */}
+            <div className="lg:w-80 xl:w-96 flex-shrink-0">
+              <div className="space-y-6 sticky top-24">
+                {/* Results */}
+                {caseStudy.results && Object.keys(caseStudy.results).length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
+                        📊
+                      </div>
+                      <h2 className="text-xl font-extrabold text-gray-900">Results & Impact</h2>
+                    </div>
+                    <div className="space-y-3">
+                      {Object.entries(caseStudy.results).map(([key, value], index) => (
+                        <div key={index} className="p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
+                          <p className="text-xs font-semibold text-green-700 uppercase tracking-wider mb-1">
+                            {key.replace(/([A-Z])/g, ' $1').trim()}
+                          </p>
+                          <p className="text-base font-bold text-gray-900">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Technologies Used */}
+                {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
+                        💻
+                      </div>
+                      <h2 className="text-xl font-extrabold text-gray-900">Technologies Used</h2>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {caseStudy.technologies.map((tech, index) => (
+                        <motion.span
+                          key={index}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                          className="px-3 py-1.5 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-lg border border-blue-200 text-sm"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </div>
             </div>
           </div>
         </div>
