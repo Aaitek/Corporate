@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { vitePrerenderPlugin } from 'vite-prerender-plugin'
+import path from 'node:path'
 
 export default defineConfig({
   plugins: [
     react(),
     vitePrerenderPlugin({
       renderTarget: '#root', // MUST match your React mount element
+      prerenderScript: path.resolve('src/prerender.jsx'), // Explicitly point to prerender function
       // Add all routes for prerendering
       additionalPrerenderRoutes: [
         // Static routes
