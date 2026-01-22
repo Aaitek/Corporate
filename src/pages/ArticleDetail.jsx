@@ -36,7 +36,7 @@ const ArticleDetail = () => {
             author: item.attributes?.author || 'Aaitek Team',
             publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
             tags: item.attributes?.tags || [],
-            image: getImageUrl(item.attributes?.image, 'large'),
+            image: getImageUrl(item.attributes?.image, 'large') || getImageUrl(item.attributes?.image, 'medium') || getImageUrl(item.attributes?.image),
             fullContent: item.attributes?.content || '',
             description: item.attributes?.excerpt || item.attributes?.description || '',
           }
