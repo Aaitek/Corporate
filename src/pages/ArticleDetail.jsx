@@ -36,7 +36,7 @@ const ArticleDetail = () => {
             author: item.attributes?.author || 'Aaitek Team',
             publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
             tags: item.attributes?.tags || [],
-            image: getImageUrl(item.attributes?.image, 'large') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+            image: getImageUrl(item.attributes?.image, 'large'),
             fullContent: item.attributes?.content || '',
             description: item.attributes?.excerpt || item.attributes?.description || '',
           }
@@ -94,21 +94,21 @@ const ArticleDetail = () => {
     )
   }
 
-  // Ensure article image is absolute URL for social media previews
-  const articleImage = article.image && article.image.trim() 
-    ? (article.image.startsWith('http://') || article.image.startsWith('https://') 
-        ? article.image 
-        : `https://aaitek.com${article.image.startsWith('/') ? '' : '/'}${article.image}`)
-    : null
-
-  const previewImage = articleImage || "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+  // Ensure article image is absolute URL for SEO previews
+  // getImageUrl already returns absolute URLs from Railway, so use article.image directly if available
+  // Only fallback to black logo if no article image exists
+  const articleImage = article?.image && article.image.startsWith('http') 
+    ? article.image 
+    : article?.image 
+      ? `https://aaitek.com${article.image.startsWith('/') ? '' : '/'}${article.image}`
+      : "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": article.title,
     "description": article.description || article.excerpt,
-    "image": previewImage,
+    "image": articleImage,
     "author": {
       "@type": "Organization",
       "name": article.author || "Aaitek Technology Specialists"
@@ -134,10 +134,9 @@ const ArticleDetail = () => {
         robots="index,follow"
         ogTitle={article.title}
         ogDescription={article.description}
-        ogImage={previewImage}
+        ogImage={articleImage}
         ogType="article"
         twitterCard="summary_large_image"
-        twitterImage={previewImage}
         schemaType="Article"
         structuredData={structuredData}
         indexable={true}
