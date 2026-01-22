@@ -131,11 +131,11 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative pb-16 sm:pb-24 md:pb-32 overflow-hidden bg-gray-900 flex items-center"
+      className="relative pt-4 sm:pt-0 pb-8 sm:pb-16 md:pb-24 lg:pb-32 overflow-hidden bg-gray-900 flex items-center"
       style={{ 
         height: 'calc(100vh - var(--header-height, 80px))',
         minHeight: 'calc(100vh - var(--header-height, 80px))',
-        paddingTop: 'var(--header-height, 80px)'
+        paddingTop: 'calc(var(--header-height, 80px) + 1rem)'
       }}
     >
       {/* Gradient Background - Skyish Blue */}
@@ -213,7 +213,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary-500/20 border border-primary-400/30 mb-3 sm:mb-4 md:mb-5"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary-500/20 border border-primary-400/30 mb-2 sm:mb-4 md:mb-5"
               >
                 <motion.div
                   className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary-400"
@@ -227,7 +227,7 @@ const Hero = () => {
 
               {/* Main Heading with TypeIt */}
               <motion.h1
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-white mb-3 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
+                className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-extrabold text-white mb-2 sm:mb-4 md:mb-5 leading-tight px-2 sm:px-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -247,7 +247,7 @@ const Hero = () => {
               
               {/* Description */}
               <motion.p
-                className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 mb-3 sm:mb-4 md:mb-6 leading-relaxed px-2 sm:px-4 max-w-3xl mx-auto"
+                className="text-sm sm:text-sm md:text-base lg:text-lg text-gray-300 mb-2 sm:mb-4 md:mb-6 leading-relaxed px-2 sm:px-4 max-w-3xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -260,7 +260,7 @@ const Hero = () => {
               
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center items-center px-2 mb-10 sm:mb-12 md:mb-16 lg:mb-20"
+                className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center items-center px-2 mb-4 sm:mb-12 md:mb-16 lg:mb-20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
