@@ -251,6 +251,7 @@ const SEO = ({
       <meta property="og:url" content={canonical} />
       <meta property="og:title" content={ogTitleText} />
       <meta property="og:description" content={ogDescText} />
+      {/* Article image (from Strapi) or footer-logo.png fallback */}
       <meta property="og:image" content={ogImg} />
       <meta property="og:image:secure_url" content={ogImg} />
       <meta property="og:image:type" content={getImageType(ogImg)} />
