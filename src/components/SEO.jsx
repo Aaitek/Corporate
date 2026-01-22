@@ -295,8 +295,9 @@ const SEO = ({
       <meta property="og:title" content={ogTitleText} />
       <meta property="og:description" content={ogDescText} />
       {/* Article image (from Strapi) or footer-logo.png fallback */}
-      <meta property="og:image" content={ogImg} />
-      <meta property="og:image:secure_url" content={ogImg} />
+      {/* CRITICAL: ogImg contains the article image when ogImage prop is provided */}
+      <meta property="og:image" content={ogImg} key={`og-image-${ogImg}`} />
+      <meta property="og:image:secure_url" content={ogImg} key={`og-image-secure-${ogImg}`} />
       <meta property="og:image:type" content={getImageType(ogImg)} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
