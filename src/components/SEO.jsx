@@ -32,9 +32,9 @@ const SEO = ({
   const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com'
   const siteUrl = 'https://aaitek.com'
   const siteName = 'Aaitek'
-  // Use black logo for social sharing previews - use current origin so image is accessible from deployment URL
-  // URL encode the filename to handle spaces properly
-  const defaultImage = `${currentOrigin}/Aaitek%20logo%20in%20Black.png`
+  // Use black logo for social sharing previews - use absolute URL with proper encoding
+  // Use the main domain (not currentOrigin) to ensure consistency for social crawlers
+  const defaultImage = `https://aaitek.com/Aaitek%20logo%20in%20Black.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -45,13 +45,15 @@ const SEO = ({
       return imageUrl
     }
     
-    // If relative, make it absolute using current origin (so it works on Vercel deployments)
+    // If relative, make it absolute using main domain (not currentOrigin) for consistency
+    // This ensures social media crawlers always get the same URL
     if (imageUrl.startsWith('/')) {
-      return `${currentOrigin}${imageUrl}`
+      // Remove leading slash and use siteUrl
+      return `${siteUrl}${imageUrl}`
     }
     
     // If no leading slash, add it
-    return `${currentOrigin}/${imageUrl}`
+    return `${siteUrl}/${imageUrl}`
   }
   
   // Helper to detect image type from URL
