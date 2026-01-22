@@ -265,7 +265,7 @@ const ServiceDetail = () => {
     : `${siteUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
   
   // Use logo for social sharing (consistent across all pages)
-  const socialImage = `${siteUrl}/logo-black.png`
+  const socialImage = `${siteUrl}/footer-logo.png`
 
   return (
     <>

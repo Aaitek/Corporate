@@ -111,7 +111,7 @@ const CaseStudyDetail = () => {
     "@type": "Article",
     "headline": caseStudy.title,
     "description": caseStudy.description,
-    "image": caseStudy.image || "https://aaitek.com.au/logo-black.png",
+    "image": caseStudy.image || "https://aaitek.com.au/footer-logo.png",
     "author": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists"
@@ -121,7 +121,7 @@ const CaseStudyDetail = () => {
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com.au/logo-black.png"
+        "url": "https://aaitek.com.au/footer-logo.png"
       }
     },
     "url": `https://aaitek.com.au/case-study/${slug}`,
@@ -140,7 +140,7 @@ const CaseStudyDetail = () => {
         robots="index,follow"
         ogTitle={caseStudy.title}
         ogDescription={caseStudy.description}
-        ogImage={caseStudy.image || "https://aaitek.com.au/logo-black.png"}
+        ogImage={caseStudy.image || "https://aaitek.com.au/footer-logo.png"}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="Article"

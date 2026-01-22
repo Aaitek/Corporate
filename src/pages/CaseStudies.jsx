@@ -204,7 +204,7 @@ const CaseStudies = () => {
         robots="index,follow"
         ogTitle="Case Studies - Aaitek"
         ogDescription="Real-world case studies demonstrating successful digital transformation projects."
-        ogImage="https://aaitek.com.au/logo-black.png"
+        ogImage="https://aaitek.com.au/footer-logo.png"
         ogType="website"
         schemaType="CollectionPage"
         structuredData={structuredData}

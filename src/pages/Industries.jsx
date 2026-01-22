@@ -67,7 +67,7 @@ const Industries = () => {
         canonicalUrl={`${siteUrl}/industries`}
         ogTitle="Industries - Industry-Specific Solutions"
         ogDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs and challenges."
-        ogImage="https://aaitek.com.au/logo-black.png"
+        ogImage="https://aaitek.com.au/footer-logo.png"
         ogType="website"
         twitterTitle="Industries - Industry-Specific Solutions"
         twitterDescription="Industry-specific digital transformation solutions tailored to your sector's unique needs."

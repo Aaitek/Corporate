@@ -95,7 +95,7 @@ const Products = () => {
         canonicalUrl={`${siteUrl}/products`}
         ogTitle="Products - AI Agents & Platforms"
         ogDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."
-        ogImage="https://aaitek.com.au/logo-black.png"
+        ogImage="https://aaitek.com.au/footer-logo.png"
         ogType="website"
         twitterTitle="Products - AI Agents & Platforms"
         twitterDescription="Intelligent AI agents that automate business processes, enhance customer experience, and drive operational efficiency across industries."

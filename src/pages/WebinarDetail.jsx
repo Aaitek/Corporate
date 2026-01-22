@@ -59,7 +59,7 @@ const WebinarDetail = () => {
     "@type": "VideoObject",
     "name": webinar.title,
     "description": webinar.description,
-    "thumbnailUrl": webinar.image || "https://aaitek.com.au/logo-black.png",
+    "thumbnailUrl": webinar.image || "https://aaitek.com.au/footer-logo.png",
     "uploadDate": webinar.date,
     "duration": webinar.duration,
     "url": `https://aaitek.com.au/webinar/${slug}`,
@@ -74,7 +74,7 @@ const WebinarDetail = () => {
         robots="index,follow"
         ogTitle={webinar.title}
         ogDescription={webinar.description}
-        ogImage={webinar.image || "https://aaitek.com.au/logo-black.png"}
+        ogImage={webinar.image || "https://aaitek.com.au/footer-logo.png"}
         ogType="video.other"
         twitterCard="summary_large_image"
         schemaType="VideoObject"

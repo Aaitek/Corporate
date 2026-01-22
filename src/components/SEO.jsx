@@ -32,8 +32,8 @@ const SEO = ({
   const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com.au'
   const siteUrl = 'https://aaitek.com.au'
   const siteName = 'Aaitek'
-  // Use black logo for social sharing - use current origin so image is accessible from deployment URL
-  const defaultImage = `${currentOrigin}/logo-black.png`
+  // Use footer logo for social sharing - use current origin so image is accessible from deployment URL
+  const defaultImage = `${currentOrigin}/footer-logo.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -71,7 +71,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/logo-black.png`,
+      "logo": `${siteUrl}/footer-logo.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
@@ -235,7 +235,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/logo-black.png`,
+          "logo": `${siteUrl}/footer-logo.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]

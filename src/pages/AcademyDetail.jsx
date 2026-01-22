@@ -50,7 +50,7 @@ const AcademyDetail = () => {
   }
 
   // Use logo for academy courses for consistent social sharing
-  const academyImage = 'https://aaitek.com.au/logo-black.png'
+  const academyImage = 'https://aaitek.com.au/footer-logo.png'
 
   return (
     <>
