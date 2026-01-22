@@ -94,12 +94,21 @@ const ArticleDetail = () => {
     )
   }
 
+  // Ensure article image is absolute URL for social media previews
+  const articleImage = article.image && article.image.trim() 
+    ? (article.image.startsWith('http://') || article.image.startsWith('https://') 
+        ? article.image 
+        : `https://aaitek.com${article.image.startsWith('/') ? '' : '/'}${article.image}`)
+    : null
+
+  const previewImage = articleImage || "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": article.title,
     "description": article.description || article.excerpt,
-    "image": article.image || "https://aaitek.com/Aaitek%20logo%20in%20Black.png",
+    "image": previewImage,
     "author": {
       "@type": "Organization",
       "name": article.author || "Aaitek Technology Specialists"
@@ -125,9 +134,10 @@ const ArticleDetail = () => {
         robots="index,follow"
         ogTitle={article.title}
         ogDescription={article.description}
-        ogImage={article.image || "https://aaitek.com/Aaitek%20logo%20in%20Black.png"}
+        ogImage={previewImage}
         ogType="article"
         twitterCard="summary_large_image"
+        twitterImage={previewImage}
         schemaType="Article"
         structuredData={structuredData}
         indexable={true}
