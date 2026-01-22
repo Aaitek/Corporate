@@ -67,3 +67,23 @@ export const getServiceSlug = (serviceName) => {
   return serviceSlugMap[serviceName] || serviceNameToSlug(serviceName)
 }
 
+
+// Map of hire talent names to their exact slugs in hireTalentData.js
+export const hireTalentSlugMap = {
+  // Engagement Models
+  'Staff Augmentation': 'staff-augmentation',
+  'Dedicated Teams': 'dedicated-teams',
+  'On-Demand Support': 'on-demand-support',
+  
+  // Expertise Areas
+  'Frontend & Full-Stack Engineering': 'frontend-fullstack-engineering',
+  'Backend & API Engineering': 'backend-api-engineering',
+  'Cloud & DevOps': 'cloud-devops',
+  'Data & AI': 'data-ai',
+  'Enterprise Platforms': 'enterprise-platforms',
+}
+
+// Get slug for a hire talent name (uses map if available, otherwise generates)
+export const getHireTalentSlug = (talentName) => {
+  return hireTalentSlugMap[talentName] || serviceNameToSlug(talentName)
+}
