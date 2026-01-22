@@ -95,13 +95,31 @@ const ArticleDetail = () => {
   }
 
   // Ensure article image is absolute URL for SEO previews
-  // getImageUrl already returns absolute URLs from Railway, so use article.image directly if available
-  // Only fallback to black logo if no article image exists
-  const articleImage = article?.image && article.image.startsWith('http') 
-    ? article.image 
-    : article?.image 
-      ? `https://aaitek.com${article.image.startsWith('/') ? '' : '/'}${article.image}`
-      : "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+  // For social media crawlers, proxy Railway images through main domain
+  const getPreviewImage = (imageUrl) => {
+    if (!imageUrl) return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+    
+    // If already from main domain, use as is
+    if (imageUrl.includes('aaitek.com')) {
+      return imageUrl
+    }
+    
+    // If from Railway, proxy through main domain for social media crawlers
+    if (imageUrl.includes('railway.app') || imageUrl.includes('aaitech-production')) {
+      const encodedUrl = encodeURIComponent(imageUrl)
+      return `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
+    }
+    
+    // If already absolute URL, use as is
+    if (imageUrl.startsWith('http')) {
+      return imageUrl
+    }
+    
+    // If relative, make absolute
+    return `https://aaitek.com${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+  }
+  
+  const articleImage = getPreviewImage(article?.image)
 
   const structuredData = {
     "@context": "https://schema.org",
