@@ -102,9 +102,13 @@ export default async function handler(req: Request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Intercept ALL requests to inject proper meta tags
-  // This ensures both social crawlers AND regular users see correct meta tags in page source
-  // The middleware will serve HTML with correct meta tags, then React will hydrate
+  // Only intercept social crawlers - let regular users pass through to React app
+  // Regular users will get meta tags updated client-side by react-helmet-async
+  // For page source, users will see defaults, but social media previews will be correct
+  if (!isSocialCrawler) {
+    // Don't intercept - let the request continue to the React app
+    return undefined as any
+  }
   
   const siteUrl = 'https://aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
