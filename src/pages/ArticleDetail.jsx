@@ -36,7 +36,26 @@ const ArticleDetail = () => {
             author: item.attributes?.author || 'Aaitek Team',
             publishedAt: item.attributes?.publishedAt || new Date().toISOString(),
             tags: item.attributes?.tags || [],
-            image: getImageUrl(item.attributes?.image, 'large') || getImageUrl(item.attributes?.image, 'medium') || getImageUrl(item.attributes?.image),
+            image: (() => {
+              // Try to get image in order: large, medium, original
+              const largeImage = getImageUrl(item.attributes?.image, 'large')
+              const mediumImage = getImageUrl(item.attributes?.image, 'medium')
+              const originalImage = getImageUrl(item.attributes?.image)
+              
+              const finalImage = largeImage || mediumImage || originalImage
+              
+              // Debug log
+              console.log('Article Image Extraction:', {
+                hasImageData: !!item.attributes?.image,
+                largeImage,
+                mediumImage,
+                originalImage,
+                finalImage,
+                imageDataStructure: item.attributes?.image ? Object.keys(item.attributes.image) : null
+              })
+              
+              return finalImage
+            })(),
             fullContent: item.attributes?.content || '',
             description: item.attributes?.excerpt || item.attributes?.description || '',
           }
@@ -148,15 +167,26 @@ const ArticleDetail = () => {
   
   // Get the article image URL - getImageUrl returns Railway URLs
   const articleImageUrl = article?.image
+  
+  // Debug: Log raw image data before processing
+  console.log('Article Detail - Raw Image Data:', {
+    hasArticle: !!article,
+    articleImageRaw: article?.image,
+    articleImageType: typeof article?.image,
+    articleImageLength: article?.image?.length,
+    articleTitle: article?.title
+  })
+  
   const articleImage = getPreviewImage(articleImageUrl)
   
   // Debug log to help troubleshoot preview issues
-  console.log('Article Detail - Image Debug:', {
+  console.log('Article Detail - Image Processing:', {
     hasArticle: !!article,
     articleImageUrl: articleImageUrl,
     processedImageUrl: articleImage,
     articleTitle: article?.title,
-    willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined',
+    willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined' && articleImageUrl !== '',
+    isRailwayUrl: articleImageUrl?.includes('railway.app') || articleImageUrl?.includes('aaitech-production'),
     finalImageForPreview: articleImage
   })
 
