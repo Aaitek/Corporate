@@ -32,9 +32,9 @@ const SEO = ({
   const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com'
   const siteUrl = 'https://aaitek.com'
   const siteName = 'Aaitek'
-  // Use black logo for social sharing previews - use absolute URL with proper encoding
+  // Use footer logo for social sharing previews - use absolute URL
   // Use the main domain (not currentOrigin) to ensure consistency for social crawlers
-  const defaultImage = `https://aaitek.com/Aaitek%20logo%20in%20Black.png`
+  const defaultImage = `https://aaitek.com/footer-logo.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -85,7 +85,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/Aaitek%20logo%20in%20Black.png`,
+      "logo": `${siteUrl}/footer-logo.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
@@ -274,7 +274,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/Aaitek%20logo%20in%20Black.png`,
+          "logo": `${siteUrl}/footer-logo.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]
