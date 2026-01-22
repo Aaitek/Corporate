@@ -301,7 +301,7 @@ const ServiceCategoryDetail = () => {
         'API & Integration Engineering',
         'Cloud Migration & Modernisation',
         'Platform Optimisation',
-        'Digital Growth Services',
+        'Search & AI-Driven Optimisation',
         'Application Support & Maintenance',
         'Performance & Paid Marketing',
       ],
