@@ -96,27 +96,32 @@ const ArticleDetail = () => {
 
   // Ensure article image is absolute URL for SEO previews
   // For social media crawlers, proxy Railway images through main domain
+  // Add cache busting parameter to force social platforms to refresh
   const getPreviewImage = (imageUrl) => {
-    if (!imageUrl) return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+    if (!imageUrl) {
+      // Add cache busting to default logo too
+      return `https://aaitek.com/Aaitek%20logo%20in%20Black.png?v=${Date.now()}`
+    }
     
-    // If already from main domain, use as is
+    // If already from main domain, use as is (with cache busting)
     if (imageUrl.includes('aaitek.com')) {
-      return imageUrl
+      return `${imageUrl}${imageUrl.includes('?') ? '&' : '?'}v=${Date.now()}`
     }
     
     // If from Railway, proxy through main domain for social media crawlers
     if (imageUrl.includes('railway.app') || imageUrl.includes('aaitech-production')) {
       const encodedUrl = encodeURIComponent(imageUrl)
-      return `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
+      // Add cache busting to force refresh
+      return `https://aaitek.com/api/image-proxy?url=${encodedUrl}&v=${Date.now()}`
     }
     
-    // If already absolute URL, use as is
+    // If already absolute URL, use as is (with cache busting)
     if (imageUrl.startsWith('http')) {
-      return imageUrl
+      return `${imageUrl}${imageUrl.includes('?') ? '&' : '?'}v=${Date.now()}`
     }
     
     // If relative, make absolute
-    return `https://aaitek.com${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+    return `https://aaitek.com${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}?v=${Date.now()}`
   }
   
   const articleImage = getPreviewImage(article?.image)
