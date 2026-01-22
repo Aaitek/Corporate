@@ -8,11 +8,6 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "functions": {
-    "api/og.js": {
-      "runtime": "edge"
-    }
-  }
+  ]
 }
 
