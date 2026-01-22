@@ -131,11 +131,11 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative pt-4 sm:pt-0 pb-8 sm:pb-16 md:pb-24 lg:pb-32 overflow-hidden bg-gray-900 flex items-center"
+      className="relative pt-0 sm:pt-0 pb-8 sm:pb-16 md:pb-24 lg:pb-32 overflow-hidden bg-gray-900 flex items-start sm:items-center"
       style={{ 
         height: 'calc(100vh - var(--header-height, 80px))',
         minHeight: 'calc(100vh - var(--header-height, 80px))',
-        paddingTop: 'calc(var(--header-height, 80px) + 1rem)'
+        paddingTop: 'calc(var(--header-height, 80px) + 0.5rem)'
       }}
     >
       {/* Gradient Background - Skyish Blue */}
@@ -198,7 +198,7 @@ const Hero = () => {
       {/* Main Content */}
       <motion.div 
         style={{ y, opacity, scale }}
-        className="container-custom relative z-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-[250px]"
+        className="container-custom relative z-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-[250px] pt-4 sm:pt-0"
       >
         <div className="max-w-4xl mx-auto text-center">
           {/* Text Content */}
