@@ -40,7 +40,7 @@ const SEO = ({
   const ensureAbsoluteImageUrl = (imageUrl) => {
     if (!imageUrl) return defaultImage
     
-    // If already absolute, return as is
+    // If already absolute (including proxy URLs), return as is
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
       return imageUrl
     }
@@ -52,6 +52,17 @@ const SEO = ({
     
     // If no leading slash, add it
     return `${currentOrigin}/${imageUrl}`
+  }
+  
+  // Helper to detect image type from URL
+  const getImageType = (imageUrl) => {
+    if (!imageUrl) return 'image/png'
+    const url = imageUrl.toLowerCase()
+    if (url.includes('.jpg') || url.includes('.jpeg')) return 'image/jpeg'
+    if (url.includes('.png')) return 'image/png'
+    if (url.includes('.webp')) return 'image/webp'
+    if (url.includes('.gif')) return 'image/gif'
+    return 'image/png' // default
   }
   
   // Use provided values or fallback to defaults
@@ -205,7 +216,7 @@ const SEO = ({
       <meta property="og:description" content={ogDescText} />
       <meta property="og:image" content={ogImg} />
       <meta property="og:image:secure_url" content={ogImg} />
-      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:type" content={getImageType(ogImg)} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={ogTitleText} />

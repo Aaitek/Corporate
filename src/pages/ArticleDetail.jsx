@@ -140,11 +140,13 @@ const ArticleDetail = () => {
   const articleImageUrl = article?.image
   const articleImage = getPreviewImage(articleImageUrl)
   
-  // Debug log (remove in production if needed)
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Article image URL:', articleImageUrl)
-    console.log('Preview image URL:', articleImage)
-  }
+  // Debug log to help troubleshoot preview issues
+  console.log('Article Detail - Image Debug:', {
+    hasArticle: !!article,
+    articleImageUrl: articleImageUrl,
+    processedImageUrl: articleImage,
+    articleTitle: article?.title
+  })
 
   // Structured data for SEO - article image is used here for previews
   const structuredData = {
