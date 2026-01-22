@@ -139,10 +139,20 @@ const ArticleDetail = () => {
     
     // If from Railway, proxy through main domain for social media crawlers
     // This ensures social media crawlers can access the image
-    if (url.includes('railway.app') || url.includes('aaitech-production') || url.includes('localhost:1337')) {
+    // Check for Railway URLs more thoroughly
+    const isRailwayUrl = url.includes('railway.app') || 
+                         url.includes('aaitech-production') || 
+                         url.includes('aaitech-production.up.railway.app') ||
+                         url.startsWith('https://aaitech-production') ||
+                         url.includes('localhost:1337')
+    
+    if (isRailwayUrl) {
       const encodedUrl = encodeURIComponent(url)
       const proxyUrl = `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
-      console.log('Article image from Railway, proxying:', proxyUrl)
+      console.log('✅ Article image from Railway detected, proxying:', {
+        originalUrl: url,
+        proxyUrl: proxyUrl
+      })
       return proxyUrl
     }
     
