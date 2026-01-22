@@ -190,17 +190,25 @@ const ArticleDetail = () => {
     articleTitle: article?.title
   })
   
+  // Process the article image - this will return Railway URL or proxy URL
   const articleImage = getPreviewImage(articleImageUrl)
+  
+  // CRITICAL: Ensure article image is used if available, otherwise use footer logo
+  // This is the "final image" that should be shown in previews
+  const finalPreviewImage = articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined' && articleImageUrl !== ''
+    ? articleImage  // Use article image (Railway URL or proxy)
+    : "https://aaitek.com/footer-logo.png"  // Fallback to footer logo
   
   // Debug log to help troubleshoot preview issues
   console.log('Article Detail - Image Processing:', {
     hasArticle: !!article,
     articleImageUrl: articleImageUrl,
     processedImageUrl: articleImage,
+    finalPreviewImage: finalPreviewImage,
     articleTitle: article?.title,
     willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined' && articleImageUrl !== '',
     isRailwayUrl: articleImageUrl?.includes('railway.app') || articleImageUrl?.includes('aaitech-production'),
-    finalImageForPreview: articleImage
+    note: 'finalPreviewImage is what will be used in meta tags'
   })
 
   // Structured data for SEO - article image is used here for previews
@@ -210,7 +218,7 @@ const ArticleDetail = () => {
     "headline": article.title,
     "description": article.description || article.excerpt,
     // Article image is used here for social media previews
-    "image": articleImage,
+    "image": finalPreviewImage,
     "author": {
       "@type": "Organization",
       "name": article.author || "Aaitek Technology Specialists"
@@ -237,7 +245,7 @@ const ArticleDetail = () => {
         robots="index,follow"
         ogTitle={article.title}
         ogDescription={article.description}
-        ogImage={articleImage}
+        ogImage={finalPreviewImage}
         ogType="article"
         twitterCard="summary_large_image"
         schemaType="Article"
