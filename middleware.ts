@@ -102,23 +102,8 @@ export default async function handler(req: Request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Only intercept for social crawlers - let others pass through
-  // For non-crawlers, we need to fetch the original response and return it
-  if (!isSocialCrawler) {
-    // Fetch the original page and return it
-    try {
-      const response = await fetch(req)
-      return response
-    } catch (e) {
-      // If fetch fails, return a response that allows the request to continue
-      return new Response(null, {
-        status: 200,
-        headers: {
-          'x-middleware-next': '1',
-        },
-      })
-    }
-  }
+  // Intercept ALL requests to inject proper meta tags
+  // This ensures page source shows correct meta tags, not just for crawlers
   
   const siteUrl = 'https://aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
@@ -166,11 +151,57 @@ export default async function handler(req: Request) {
       image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
       type: 'website'
     }
+  } else if (pathname.startsWith('/academy/')) {
+    const slug = pathname.split('/academy/')[1]?.split('?')[0] || ''
+    if (slug) {
+      // Academy course data - matches academyData.js
+      const academyCourses: Record<string, { title: string; description: string }> = {
+        'full-stack-engineering': {
+          title: 'Full-Stack Engineering Training - Academy Course | Aaitek',
+          description: 'Build End-to-End Applications the Way Enterprises Do. This training develops engineers who can design, build, and maintain complete applications—from frontend to backend—using enterprise-ready patterns. Premium training course by Aaitek.',
+        },
+        'cloud-engineering': {
+          title: 'Cloud Engineering Training - Academy Course | Aaitek',
+          description: 'Design, Build, and Operate Cloud-Native Systems. Learn how modern systems are architected, deployed, and operated in cloud environments. Premium training course by Aaitek.',
+        },
+        'data-ai-engineering': {
+          title: 'Data & AI Engineering Training - Academy Course | Aaitek',
+          description: 'Turn Data into Intelligent, Actionable Systems. Designed for engineers working with data pipelines, analytics, and AI-enabled applications. Premium training course by Aaitek.',
+        },
+      }
+      
+      const course = academyCourses[slug]
+      if (course) {
+        meta = {
+          title: course.title,
+          description: course.description,
+          image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+          type: 'website'
+        }
+      } else {
+        // Fallback for unknown academy courses
+        const formattedTitle = slug.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+        meta = {
+          title: `${formattedTitle} - Academy Course | Aaitek`,
+          description: `Premium training course by Aaitek. Enterprise-ready outcomes and delivery readiness.`,
+          image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+          type: 'website'
+        }
+      }
+    } else {
+      meta = {
+        title: 'Academy - Training Courses | Aaitek',
+        description: 'Premium training courses by Aaitek. Enterprise-ready outcomes and delivery readiness.',
+        image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+        type: 'website'
+      }
+    }
   }
   
   const fullUrl = `${siteUrl}${pathname}`
   
-  // Return HTML with proper meta tags for social crawlers
+  // Return HTML with proper meta tags for ALL requests (crawlers and regular users)
+  // This ensures page source shows correct meta tags, not just for crawlers
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
