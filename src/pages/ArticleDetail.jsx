@@ -97,17 +97,17 @@ const ArticleDetail = () => {
   // Ensure article image is absolute URL for SEO previews
   // For social media crawlers, proxy Railway images through main domain
   const getPreviewImage = (imageUrl) => {
-    // If no image URL provided, use default logo
+    // If no image URL provided, use footer logo as fallback
     if (!imageUrl || imageUrl === null || imageUrl === undefined) {
-      return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+      return "https://aaitek.com/footer-logo.png"
     }
     
     // Convert to string if needed
     const url = String(imageUrl).trim()
     
-    // If empty string, use default logo
+    // If empty string, use footer logo as fallback
     if (!url || url === '') {
-      return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+      return "https://aaitek.com/footer-logo.png"
     }
     
     // If already from main domain, use as is
@@ -161,7 +161,7 @@ const ArticleDetail = () => {
       "name": "Aaitek Technology Specialists",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+        "url": "https://aaitek.com/footer-logo.png"
       }
     },
     "datePublished": article.publishedAt || new Date().toISOString(),
