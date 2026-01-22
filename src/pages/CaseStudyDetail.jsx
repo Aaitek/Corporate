@@ -227,115 +227,112 @@ const CaseStudyDetail = () => {
           ></motion.div>
         </div>
         
-        <div className="container-custom relative z-10">
-          <div className="max-w-6xl mx-auto">
-            {/* Results and Technologies Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 mb-16">
-              {/* Results */}
-              {caseStudy.results && Object.keys(caseStudy.results).length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, x: -50, rotateY: -15 }}
-                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
+        <div className="container-custom relative z-10 px-4 sm:px-6 2xl:ml-[250px] 2xl:mr-[250px]">
+          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
+            {/* Left Sidebar - Results and Technologies */}
+            <div className="lg:w-80 xl:w-96 flex-shrink-0">
+              <div className="space-y-6 sticky top-24">
+                {/* Results */}
+                {caseStudy.results && Object.keys(caseStudy.results).length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
                         📊
                       </div>
-                      <h2 className="text-2xl font-extrabold text-gray-900">Results & Impact</h2>
+                      <h2 className="text-xl font-extrabold text-gray-900">Results & Impact</h2>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {Object.entries(caseStudy.results).map(([key, value], index) => (
-                        <div key={index} className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
-                          <p className="text-sm font-semibold text-green-700 uppercase tracking-wider mb-1">
+                        <div key={index} className="p-3 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
+                          <p className="text-xs font-semibold text-green-700 uppercase tracking-wider mb-1">
                             {key.replace(/([A-Z])/g, ' $1').trim()}
                           </p>
-                          <p className="text-lg font-bold text-gray-900">{value}</p>
+                          <p className="text-base font-bold text-gray-900">{value}</p>
                         </div>
                       ))}
                     </div>
-                  </div>
-                </motion.div>
-              )}
+                  </motion.div>
+                )}
 
-              {/* Technologies Used */}
-              {caseStudy.technologies && caseStudy.technologies.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, x: 50, rotateY: 15 }}
-                  whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border-2 border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
+                {/* Technologies Used */}
+                {caseStudy.technologies && caseStudy.technologies.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
                         💻
                       </div>
-                      <h2 className="text-2xl font-extrabold text-gray-900">Technologies Used</h2>
+                      <h2 className="text-xl font-extrabold text-gray-900">Technologies Used</h2>
                     </div>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2">
                       {caseStudy.technologies.map((tech, index) => (
                         <motion.span
                           key={index}
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: index * 0.1 }}
-                          whileHover={{ scale: 1.1, rotate: 2 }}
-                          className="px-4 py-2 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-xl border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300"
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                          className="px-3 py-1.5 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-lg border border-blue-200 text-sm"
                         >
                           {tech}
                         </motion.span>
                       ))}
                     </div>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+
+            {/* Main Content Area */}
+            <div className="flex-1">
+              {/* Video Section (if available) */}
+              {caseStudy.video && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200"
+                >
+                  <div className="aspect-video bg-gray-900">
+                    {caseStudy.video.includes('youtube.com') || caseStudy.video.includes('youtu.be') ? (
+                      <iframe
+                        src={caseStudy.video.includes('youtu.be') 
+                          ? `https://www.youtube.com/embed/${caseStudy.video.split('/').pop()}`
+                          : `https://www.youtube.com/embed/${caseStudy.video.split('v=')[1]?.split('&')[0]}`
+                        }
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={caseStudy.title}
+                      />
+                    ) : caseStudy.video.includes('vimeo.com') ? (
+                      <iframe
+                        src={`https://player.vimeo.com/video/${caseStudy.video.split('/').pop()}`}
+                        className="w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        title={caseStudy.title}
+                      />
+                    ) : (
+                      <div dangerouslySetInnerHTML={{ __html: caseStudy.video }} />
+                    )}
                   </div>
                 </motion.div>
               )}
-            </div>
 
-            {/* Video Section (if available) */}
-            {caseStudy.video && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="mb-12 bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200"
-              >
-                <div className="aspect-video bg-gray-900">
-                  {caseStudy.video.includes('youtube.com') || caseStudy.video.includes('youtu.be') ? (
-                    <iframe
-                      src={caseStudy.video.includes('youtu.be') 
-                        ? `https://www.youtube.com/embed/${caseStudy.video.split('/').pop()}`
-                        : `https://www.youtube.com/embed/${caseStudy.video.split('v=')[1]?.split('&')[0]}`
-                      }
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title={caseStudy.title}
-                    />
-                  ) : caseStudy.video.includes('vimeo.com') ? (
-                    <iframe
-                      src={`https://player.vimeo.com/video/${caseStudy.video.split('/').pop()}`}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title={caseStudy.title}
-                    />
-                  ) : (
-                    <div dangerouslySetInnerHTML={{ __html: caseStudy.video }} />
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Full Content */}
+              {/* Full Content */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -344,38 +341,39 @@ const CaseStudyDetail = () => {
                 className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
               >
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
-              {caseStudy.fullContent ? (
-                <div 
-                  className="prose prose-lg max-w-none text-gray-700"
-                  dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
-                />
-              ) : caseStudy.description ? (
-                <div className="prose prose-lg max-w-none text-gray-700">
-                  <p className="text-lg leading-relaxed">{caseStudy.description}</p>
-                </div>
-              ) : (
-                <p className="text-gray-600 text-lg">Content coming soon...</p>
-              )}
+                {caseStudy.fullContent ? (
+                  <div 
+                    className="prose prose-lg max-w-none text-gray-700"
+                    dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
+                  />
+                ) : caseStudy.description ? (
+                  <div className="prose prose-lg max-w-none text-gray-700">
+                    <p className="text-lg leading-relaxed">{caseStudy.description}</p>
+                  </div>
+                ) : (
+                  <p className="text-gray-600 text-lg">Content coming soon...</p>
+                )}
               </motion.div>
 
-            {/* Back to Case Studies Link */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-12 text-center"
-            >
-              <Link
-                to="/case-studies"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary-600 to-accent-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              {/* Back to Case Studies Link */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-8 text-center"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Back to Case Studies
-              </Link>
-            </motion.div>
+                <Link
+                  to="/case-studies"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary-600 to-accent-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Back to Case Studies
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
