@@ -47,8 +47,8 @@ const CaseStudyDetail = () => {
           const localCaseStudy = caseStudiesData[slug]
           if (localCaseStudy) {
             setCaseStudy(localCaseStudy)
-          } else {
-            setError('Case study not found')
+        } else {
+          setError('Case study not found')
           }
         }
       } catch (err) {
@@ -83,12 +83,12 @@ const CaseStudyDetail = () => {
           canonicalUrl={`https://aaitek.com/case-study/${slug}`}
           robots="noindex,nofollow"
         />
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
-            <p className="text-gray-600">Loading case study...</p>
-          </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+          <p className="text-gray-600">Loading case study...</p>
         </div>
+      </div>
       </>
     )
   }
@@ -103,21 +103,21 @@ const CaseStudyDetail = () => {
           canonicalUrl={`https://aaitek.com/case-study/${slug}`}
           robots="noindex,nofollow"
         />
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center max-w-md">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
-            <p className="text-gray-600 mb-6">{error || 'The requested case study could not be found.'}</p>
-            <Link
-              to="/case-studies"
-              className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
-            >
-              <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Back to Case Studies
-            </Link>
-          </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
+          <p className="text-gray-600 mb-6">{error || 'The requested case study could not be found.'}</p>
+          <Link
+            to="/case-studies"
+            className="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+          >
+            <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Case Studies
+          </Link>
         </div>
+      </div>
       </>
     )
   }
@@ -249,43 +249,43 @@ const CaseStudyDetail = () => {
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 xl:gap-12">
             {/* Main Content Area - Left Side */}
             <div className="flex-1 lg:max-w-4xl xl:max-w-5xl">
-              {/* Video Section (if available) */}
-              {caseStudy.video && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+            {/* Video Section (if available) */}
+            {caseStudy.video && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
                   className="mb-8 bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200"
-                >
-                  <div className="aspect-video bg-gray-900">
-                    {caseStudy.video.includes('youtube.com') || caseStudy.video.includes('youtu.be') ? (
-                      <iframe
-                        src={caseStudy.video.includes('youtu.be') 
-                          ? `https://www.youtube.com/embed/${caseStudy.video.split('/').pop()}`
-                          : `https://www.youtube.com/embed/${caseStudy.video.split('v=')[1]?.split('&')[0]}`
-                        }
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title={caseStudy.title}
-                      />
-                    ) : caseStudy.video.includes('vimeo.com') ? (
-                      <iframe
-                        src={`https://player.vimeo.com/video/${caseStudy.video.split('/').pop()}`}
-                        className="w-full h-full"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                        title={caseStudy.title}
-                      />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: caseStudy.video }} />
-                    )}
-                  </div>
-                </motion.div>
-              )}
+              >
+                <div className="aspect-video bg-gray-900">
+                  {caseStudy.video.includes('youtube.com') || caseStudy.video.includes('youtu.be') ? (
+                    <iframe
+                      src={caseStudy.video.includes('youtu.be') 
+                        ? `https://www.youtube.com/embed/${caseStudy.video.split('/').pop()}`
+                        : `https://www.youtube.com/embed/${caseStudy.video.split('v=')[1]?.split('&')[0]}`
+                      }
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={caseStudy.title}
+                    />
+                  ) : caseStudy.video.includes('vimeo.com') ? (
+                    <iframe
+                      src={`https://player.vimeo.com/video/${caseStudy.video.split('/').pop()}`}
+                      className="w-full h-full"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      title={caseStudy.title}
+                    />
+                  ) : (
+                    <div dangerouslySetInnerHTML={{ __html: caseStudy.video }} />
+                  )}
+                </div>
+              </motion.div>
+            )}
 
-              {/* Full Content */}
+            {/* Full Content */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -294,38 +294,38 @@ const CaseStudyDetail = () => {
                 className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl"
               >
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
-                {caseStudy.fullContent ? (
-                  <div 
-                    className="prose prose-lg max-w-none text-gray-700"
-                    dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
-                  />
-                ) : caseStudy.description ? (
-                  <div className="prose prose-lg max-w-none text-gray-700">
-                    <p className="text-lg leading-relaxed">{caseStudy.description}</p>
-                  </div>
-                ) : (
-                  <p className="text-gray-600 text-lg">Content coming soon...</p>
-                )}
+              {caseStudy.fullContent ? (
+                <div 
+                  className="prose prose-lg max-w-none text-gray-700"
+                  dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
+                />
+              ) : caseStudy.description ? (
+                <div className="prose prose-lg max-w-none text-gray-700">
+                  <p className="text-lg leading-relaxed">{caseStudy.description}</p>
+                </div>
+              ) : (
+                <p className="text-gray-600 text-lg">Content coming soon...</p>
+              )}
               </motion.div>
 
-              {/* Back to Case Studies Link */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+            {/* Back to Case Studies Link */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
                 className="mt-8 text-center"
+            >
+              <Link
+                to="/case-studies"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary-600 to-accent-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <Link
-                  to="/case-studies"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-primary-600 to-accent-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                  Back to Case Studies
-                </Link>
-              </motion.div>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Case Studies
+              </Link>
+            </motion.div>
             </div>
 
             {/* Right Sidebar - Results and Technologies */}
