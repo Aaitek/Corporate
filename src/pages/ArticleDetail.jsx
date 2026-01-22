@@ -98,7 +98,8 @@ const ArticleDetail = () => {
   // For social media crawlers, proxy Railway images through main domain
   const getPreviewImage = (imageUrl) => {
     // If no image URL provided, use footer logo as fallback
-    if (!imageUrl || imageUrl === null || imageUrl === undefined) {
+    if (!imageUrl || imageUrl === null || imageUrl === undefined || imageUrl === 'null' || imageUrl === 'undefined') {
+      console.warn('Article has no image, using footer logo fallback')
       return "https://aaitek.com/footer-logo.png"
     }
     
@@ -106,12 +107,14 @@ const ArticleDetail = () => {
     const url = String(imageUrl).trim()
     
     // If empty string, use footer logo as fallback
-    if (!url || url === '') {
+    if (!url || url === '' || url === 'null' || url === 'undefined') {
+      console.warn('Article image URL is empty, using footer logo fallback')
       return "https://aaitek.com/footer-logo.png"
     }
     
-    // If already from main domain, use as is
+    // If already from main domain (including proxy), use as is
     if (url.includes('aaitek.com')) {
+      console.log('Article image is from main domain:', url)
       return url
     }
     
@@ -119,21 +122,28 @@ const ArticleDetail = () => {
     // This ensures social media crawlers can access the image
     if (url.includes('railway.app') || url.includes('aaitech-production') || url.includes('localhost:1337')) {
       const encodedUrl = encodeURIComponent(url)
-      return `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
+      const proxyUrl = `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
+      console.log('Article image from Railway, proxying:', proxyUrl)
+      return proxyUrl
     }
     
     // If already absolute URL (http/https), use as is
     if (url.startsWith('http://') || url.startsWith('https://')) {
+      console.log('Article image is absolute URL:', url)
       return url
     }
     
     // If relative URL (starts with /), make absolute
     if (url.startsWith('/')) {
-      return `https://aaitek.com${url}`
+      const absoluteUrl = `https://aaitek.com${url}`
+      console.log('Article image is relative, made absolute:', absoluteUrl)
+      return absoluteUrl
     }
     
     // Otherwise, treat as relative and add leading slash
-    return `https://aaitek.com/${url}`
+    const absoluteUrl = `https://aaitek.com/${url}`
+    console.log('Article image treated as relative, made absolute:', absoluteUrl)
+    return absoluteUrl
   }
   
   // Get the article image URL - getImageUrl returns Railway URLs
@@ -145,7 +155,8 @@ const ArticleDetail = () => {
     hasArticle: !!article,
     articleImageUrl: articleImageUrl,
     processedImageUrl: articleImage,
-    articleTitle: article?.title
+    articleTitle: article?.title,
+    willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined'
   })
 
   // Structured data for SEO - article image is used here for previews
