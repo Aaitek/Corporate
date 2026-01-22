@@ -71,7 +71,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/footer-logo.png`,
+      "logo": `${siteUrl}/Aaitek logo in Black.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
