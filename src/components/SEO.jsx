@@ -38,22 +38,39 @@ const SEO = ({
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
-    if (!imageUrl) return defaultImage
+    // If no image URL provided, use default
+    if (!imageUrl || imageUrl === null || imageUrl === undefined || imageUrl === '') {
+      console.warn('SEO - No image URL provided, using default:', defaultImage)
+      return defaultImage
+    }
     
-    // If already absolute (including proxy URLs), return as is
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-      return imageUrl
+    // Convert to string and trim
+    const url = String(imageUrl).trim()
+    
+    // If empty after trimming, use default
+    if (!url || url === '') {
+      console.warn('SEO - Empty image URL, using default:', defaultImage)
+      return defaultImage
+    }
+    
+    // If already absolute (including proxy URLs and Railway URLs), return as is
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      console.log('SEO - Image URL is already absolute:', url)
+      return url
     }
     
     // If relative, make it absolute using main domain (not currentOrigin) for consistency
     // This ensures social media crawlers always get the same URL
-    if (imageUrl.startsWith('/')) {
-      // Remove leading slash and use siteUrl
-      return `${siteUrl}${imageUrl}`
+    if (url.startsWith('/')) {
+      const absoluteUrl = `${siteUrl}${url}`
+      console.log('SEO - Converted relative to absolute:', absoluteUrl)
+      return absoluteUrl
     }
     
     // If no leading slash, add it
-    return `${siteUrl}/${imageUrl}`
+    const absoluteUrl = `${siteUrl}/${url}`
+    console.log('SEO - Added leading slash:', absoluteUrl)
+    return absoluteUrl
   }
   
   // Helper to detect image type from URL
@@ -71,16 +88,21 @@ const SEO = ({
   const title = seoTitle || pageTitle || `${siteName} - Empowering Businesses With AI, Data Analytics & Cloud`
   const description = seoDescription || pageDescription || 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
   const canonical = canonicalUrl || `${siteUrl}${location.pathname}`
+  
   // Prioritize ogImage prop (article images), then pageImage, then default
-  const ogImg = ensureAbsoluteImageUrl(ogImage || pageImage || defaultImage)
+  // IMPORTANT: ogImage prop takes highest priority for article images
+  const finalOgImage = ogImage || pageImage || defaultImage
+  const ogImg = ensureAbsoluteImageUrl(finalOgImage)
   
   // Debug: Log what image is being used
   console.log('SEO - Image Selection:', {
     ogImageProp: ogImage,
     pageImage: pageImage,
     defaultImage: defaultImage,
+    finalOgImage: finalOgImage,
     finalImage: ogImg,
-    isArticleImage: !!ogImage && ogImage !== defaultImage
+    isArticleImage: !!ogImage && ogImage !== defaultImage,
+    willUseArticleImage: !!ogImage
   })
   const ogTitleText = ogTitle || title
   const ogDescText = ogDescription || description
