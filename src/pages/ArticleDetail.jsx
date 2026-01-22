@@ -146,11 +146,13 @@ const ArticleDetail = () => {
     console.log('Preview image URL:', articleImage)
   }
 
+  // Structured data for SEO - article image is used here for previews
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": article.title,
     "description": article.description || article.excerpt,
+    // Article image is used here for social media previews
     "image": articleImage,
     "author": {
       "@type": "Organization",
@@ -159,6 +161,7 @@ const ArticleDetail = () => {
     "publisher": {
       "@type": "Organization",
       "name": "Aaitek Technology Specialists",
+      // Publisher logo (organization logo, not article image)
       "logo": {
         "@type": "ImageObject",
         "url": "https://aaitek.com/footer-logo.png"
