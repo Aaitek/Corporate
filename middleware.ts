@@ -103,9 +103,21 @@ export default async function handler(req: Request) {
     userAgent.includes('Discordbot')
   
   // Only intercept for social crawlers - let others pass through
+  // For non-crawlers, we need to fetch the original response and return it
   if (!isSocialCrawler) {
-    // Return undefined to let the request continue normally
-    return undefined as any
+    // Fetch the original page and return it
+    try {
+      const response = await fetch(req)
+      return response
+    } catch (e) {
+      // If fetch fails, return a response that allows the request to continue
+      return new Response(null, {
+        status: 200,
+        headers: {
+          'x-middleware-next': '1',
+        },
+      })
+    }
   }
   
   const siteUrl = 'https://aaitek.com'
