@@ -151,7 +151,7 @@ const SEO = ({
     }
     twitterTitleMeta.setAttribute('content', twitterTitleText)
 
-    // Update og:image
+    // Update og:image - ensure it's set correctly
     let ogImageMeta = document.querySelector('meta[property="og:image"]')
     if (!ogImageMeta) {
       ogImageMeta = document.createElement('meta')
@@ -160,13 +160,29 @@ const SEO = ({
     }
     ogImageMeta.setAttribute('content', ogImg)
     
+    // Also update og:image:secure_url
+    let ogImageSecureMeta = document.querySelector('meta[property="og:image:secure_url"]')
+    if (!ogImageSecureMeta) {
+      ogImageSecureMeta = document.createElement('meta')
+      ogImageSecureMeta.setAttribute('property', 'og:image:secure_url')
+      document.head.appendChild(ogImageSecureMeta)
+    }
+    ogImageSecureMeta.setAttribute('content', ogImg)
+    
     // Debug log for image URL
-    if (process.env.NODE_ENV === 'development') {
-      console.log('SEO Component - Image URL:', {
-        ogImageProp: ogImage,
-        processedOgImg: ogImg,
-        defaultImage: defaultImage
-      })
+    console.log('SEO Component - Image URL:', {
+      ogImageProp: ogImage,
+      processedOgImg: ogImg,
+      defaultImage: defaultImage,
+      imageType: getImageType(ogImg)
+    })
+    
+    // Verify image is accessible (in development)
+    if (process.env.NODE_ENV === 'development' && ogImg) {
+      const img = new Image()
+      img.onload = () => console.log('✅ Image is accessible:', ogImg)
+      img.onerror = () => console.error('❌ Image failed to load:', ogImg)
+      img.src = ogImg
     }
 
     // Update og:image:width
