@@ -22,16 +22,31 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid image source' })
     }
 
+    // Log the image URL for debugging
+    console.log('Image Proxy - Fetching image:', imageUrl)
+    
     // Fetch the image from Railway
     const response = await fetch(imageUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; AaitekImageProxy/1.0)',
+        'Accept': 'image/*,*/*',
       },
+      // Add redirect handling
+      redirect: 'follow',
     })
 
     if (!response.ok) {
+      const errorText = await response.text().catch(() => 'Unable to read error')
+      console.error('Image Proxy - Failed to fetch:', {
+        status: response.status,
+        statusText: response.statusText,
+        url: imageUrl,
+        error: errorText
+      })
       return res.status(response.status).json({ 
-        error: `Failed to fetch image: ${response.statusText}` 
+        error: `Failed to fetch image: ${response.statusText}`,
+        url: imageUrl,
+        status: response.status
       })
     }
 
@@ -51,10 +66,15 @@ export default async function handler(req, res) {
     // Return the image
     return res.status(200).send(Buffer.from(imageBuffer))
   } catch (error) {
-    console.error('Error proxying image:', error)
+    console.error('Image Proxy - Error:', {
+      message: error.message,
+      stack: error.stack,
+      url: req.query.url
+    })
     return res.status(500).json({ 
       error: 'Failed to proxy image',
-      message: error.message 
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     })
   }
 }

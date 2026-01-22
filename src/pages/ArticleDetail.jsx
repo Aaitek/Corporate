@@ -147,13 +147,19 @@ const ArticleDetail = () => {
                          url.includes('localhost:1337')
     
     if (isRailwayUrl) {
-      const encodedUrl = encodeURIComponent(url)
-      const proxyUrl = `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
-      console.log('✅ Article image from Railway detected, proxying:', {
+      // Try direct Railway URL first (Railway images are usually publicly accessible)
+      // If that doesn't work, we can fall back to proxy
+      // For now, use Railway URL directly since it's publicly accessible
+      console.log('✅ Article image from Railway detected:', {
         originalUrl: url,
-        proxyUrl: proxyUrl
+        usingDirectUrl: true
       })
-      return proxyUrl
+      return url
+      
+      // Alternative: Use proxy if direct access doesn't work
+      // const encodedUrl = encodeURIComponent(url)
+      // const proxyUrl = `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
+      // return proxyUrl
     }
     
     // If already absolute URL (http/https), use as is
