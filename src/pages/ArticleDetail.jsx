@@ -96,37 +96,55 @@ const ArticleDetail = () => {
 
   // Ensure article image is absolute URL for SEO previews
   // For social media crawlers, proxy Railway images through main domain
-  // Use article slug for cache busting (stable but unique per article)
   const getPreviewImage = (imageUrl) => {
-    const cacheBuster = slug || 'default'
+    // If no image URL provided, use default logo
+    if (!imageUrl || imageUrl === null || imageUrl === undefined) {
+      return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
+    }
     
-    if (!imageUrl) {
-      // Use default logo
+    // Convert to string if needed
+    const url = String(imageUrl).trim()
+    
+    // If empty string, use default logo
+    if (!url || url === '') {
       return "https://aaitek.com/Aaitek%20logo%20in%20Black.png"
     }
     
     // If already from main domain, use as is
-    if (imageUrl.includes('aaitek.com')) {
-      return imageUrl
+    if (url.includes('aaitek.com')) {
+      return url
     }
     
     // If from Railway, proxy through main domain for social media crawlers
     // This ensures social media crawlers can access the image
-    if (imageUrl.includes('railway.app') || imageUrl.includes('aaitech-production')) {
-      const encodedUrl = encodeURIComponent(imageUrl)
+    if (url.includes('railway.app') || url.includes('aaitech-production') || url.includes('localhost:1337')) {
+      const encodedUrl = encodeURIComponent(url)
       return `https://aaitek.com/api/image-proxy?url=${encodedUrl}`
     }
     
-    // If already absolute URL, use as is
-    if (imageUrl.startsWith('http')) {
-      return imageUrl
+    // If already absolute URL (http/https), use as is
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url
     }
     
-    // If relative, make absolute
-    return `https://aaitek.com${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`
+    // If relative URL (starts with /), make absolute
+    if (url.startsWith('/')) {
+      return `https://aaitek.com${url}`
+    }
+    
+    // Otherwise, treat as relative and add leading slash
+    return `https://aaitek.com/${url}`
   }
   
-  const articleImage = getPreviewImage(article?.image)
+  // Get the article image URL - getImageUrl returns Railway URLs
+  const articleImageUrl = article?.image
+  const articleImage = getPreviewImage(articleImageUrl)
+  
+  // Debug log (remove in production if needed)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Article image URL:', articleImageUrl)
+    console.log('Preview image URL:', articleImage)
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
