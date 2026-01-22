@@ -102,8 +102,14 @@ export default async function handler(req: Request) {
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot')
   
-  // Intercept ALL requests to inject proper meta tags
-  // This ensures page source shows correct meta tags, not just for crawlers
+  // Only intercept social crawlers - let regular users pass through to React app
+  // Regular users will get meta tags updated client-side by react-helmet-async
+  if (!isSocialCrawler) {
+    // Let the request pass through normally to the React app
+    return new Response(null, {
+      status: 200,
+    })
+  }
   
   const siteUrl = 'https://aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
@@ -200,8 +206,8 @@ export default async function handler(req: Request) {
   
   const fullUrl = `${siteUrl}${pathname}`
   
-  // Return HTML with proper meta tags for ALL requests (crawlers and regular users)
-  // This ensures page source shows correct meta tags, not just for crawlers
+  // Return HTML with proper meta tags for social crawlers
+  // This ensures social media previews show page-specific content
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
