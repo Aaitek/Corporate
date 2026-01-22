@@ -32,8 +32,8 @@ const SEO = ({
   const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com'
   const siteUrl = 'https://aaitek.com'
   const siteName = 'Aaitek'
-  // Use footer logo for social sharing - use current origin so image is accessible from deployment URL
-  const defaultImage = `${currentOrigin}/footer-logo.png`
+  // Use black logo for social sharing previews - use current origin so image is accessible from deployment URL
+  const defaultImage = `${currentOrigin}/Aaitek logo in Black.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -235,7 +235,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/footer-logo.png`,
+          "logo": `${siteUrl}/Aaitek logo in Black.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]
