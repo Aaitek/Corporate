@@ -76,17 +76,6 @@ const Videos = () => {
     setCurrentPage(1)
   }
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredVideos.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const paginatedVideos = filteredVideos.slice(startIndex, endIndex)
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filters, searchQuery])
-
   // Filter and search logic
   const filteredVideos = useMemo(() => {
     return videos.filter(video => {
@@ -118,6 +107,17 @@ const Videos = () => {
       return true
     })
   }, [filters, searchQuery, videos])
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredVideos.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedVideos = filteredVideos.slice(startIndex, endIndex)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },

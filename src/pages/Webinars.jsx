@@ -82,17 +82,6 @@ const Webinars = () => {
     setCurrentPage(1)
   }
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredWebinars.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const paginatedWebinars = filteredWebinars.slice(startIndex, endIndex)
-
-  // Reset to page 1 when filters change
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filters, searchQuery])
-
   // Filter and search logic
   const filteredWebinars = useMemo(() => {
     return webinars.filter(webinar => {
@@ -129,6 +118,17 @@ const Webinars = () => {
       return true
     })
   }, [filters, searchQuery, webinars])
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredWebinars.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedWebinars = filteredWebinars.slice(startIndex, endIndex)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, searchQuery])
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
