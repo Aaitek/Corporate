@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
-import App from './App'
+import { AppRoutes } from './AppRoutes'
 import { HelmetProvider } from 'react-helmet-async'
 
 // Import data files to get meta information
@@ -209,7 +209,7 @@ export async function prerender(data) {
   const html = renderToString(
     <HelmetProvider context={helmetContext}>
       <StaticRouter location={url}>
-        <App />
+        <AppRoutes />
       </StaticRouter>
     </HelmetProvider>
   )
