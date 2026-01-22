@@ -13,6 +13,12 @@ const Root = () => {
       once: true,
       mirror: false,
     })
+    
+    // Dispatch event for prerender plugin after React has rendered
+    // This ensures meta tags are updated before prerender captures the HTML
+    setTimeout(() => {
+      document.dispatchEvent(new Event('prerender-ready'))
+    }, 100)
   }, [])
 
   return <App />
