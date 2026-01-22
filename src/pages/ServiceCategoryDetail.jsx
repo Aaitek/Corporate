@@ -342,7 +342,7 @@ const ServiceCategoryDetail = () => {
         'Product Discovery & Strategy',
         'Web Platform Development',
         'Mobile Application Development',
-        'MVP Development',
+        'Custom Software Development',
         'UX & UI Design',
         'eCommerce Solutions',
       ],
@@ -404,10 +404,9 @@ const ServiceCategoryDetail = () => {
     return categoryImages[slug] || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80'
   }
 
+  const siteUrl = 'https://aaitek.com.au'
   // Use logo for social sharing (consistent across all pages)
   const socialImage = `${siteUrl}/logo-black.png`
-
-  const siteUrl = 'https://aaitek.com.au'
   const canonicalUrl = `${siteUrl}/services/category/${slug}`
   const seoTitle = category ? `${category.title} - Service Category | Aaitek` : 'Service Category - Aaitek'
   // Create a comprehensive description
