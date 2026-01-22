@@ -72,7 +72,7 @@ const SEO = ({
     "name": siteName,
     "url": canonical,
     ...(schemaType === 'Organization' && {
-      "logo": `${siteUrl}/Aaitek logo in Black.png`,
+      "logo": `${siteUrl}/Aaitek%20logo%20in%20Black.png`,
       "sameAs": [
         "https://www.linkedin.com/company/aaitek"
       ]
@@ -236,7 +236,7 @@ const SEO = ({
           "@type": "Organization",
           "name": siteName,
           "url": siteUrl,
-          "logo": `${siteUrl}/Aaitek logo in Black.png`,
+          "logo": `${siteUrl}/Aaitek%20logo%20in%20Black.png`,
           "sameAs": [
             "https://www.linkedin.com/company/aaitek"
           ]
