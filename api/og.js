@@ -105,10 +105,10 @@ export default async function handler(req) {
     userAgent.includes('Discordbot')
   
   const siteUrl = 'https://aaitek.com'
-    const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
-    const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
+  const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
+  const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
   const defaultImage = `${siteUrl}/footer-logo.png`
-    
+  
   let meta = {
     title: defaultTitle,
     description: defaultDescription,
@@ -153,9 +153,9 @@ export default async function handler(req) {
           title: `Case Study - ${defaultTitle}`,
           description: defaultDescription,
           image: defaultImage,
-        type: 'article'
+          type: 'article'
+        }
       }
-    }
     }
   } else if (pathname === '/articles') {
     meta = {
@@ -166,55 +166,55 @@ export default async function handler(req) {
     }
   } else if (pathname.startsWith('/video/')) {
     meta = {
-        title: `${defaultTitle} - Video`,
-        description: defaultDescription,
-        image: defaultImage,
-        type: 'video.other'
-      }
+      title: `${defaultTitle} - Video`,
+      description: defaultDescription,
+      image: defaultImage,
+      type: 'video.other'
+    }
   } else if (pathname.startsWith('/webinar/')) {
     meta = {
-        title: `${defaultTitle} - Webinar`,
-        description: defaultDescription,
-        image: defaultImage,
-        type: 'website'
-      }
+      title: `${defaultTitle} - Webinar`,
+      description: defaultDescription,
+      image: defaultImage,
+      type: 'website'
+    }
   } else if (pathname.startsWith('/press-release/')) {
     meta = {
-        title: `${defaultTitle} - Press Release`,
-        description: defaultDescription,
-        image: defaultImage,
-        type: 'article'
-      }
+      title: `${defaultTitle} - Press Release`,
+      description: defaultDescription,
+      image: defaultImage,
+      type: 'article'
+    }
   } else if (pathname.startsWith('/services/')) {
     const slug = pathname.split('/services/')[1]?.split('?')[0] || ''
     
-      const serviceMeta = {
-        'web-platform-development': {
-          title: 'Web Platform Development - Service | Aaitek',
-          description: 'Develop robust, scalable web platforms that grow with your business. From simple websites to complex web applications, we deliver solutions that perform.',
-          image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
-        },
-        'mobile-app-development': {
-          title: 'Mobile Application Development - Service | Aaitek',
-          description: 'Create powerful mobile applications for iOS and Android that engage users and drive business growth. From native to cross-platform solutions.',
-          image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
-        },
-        'ecommerce-solutions': {
-          title: 'eCommerce Solutions - Service | Aaitek',
-          description: 'Build high-performing eCommerce platforms that drive sales and provide exceptional shopping experiences. From setup to optimization.',
-          image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80',
-        },
-        'ux-ui-design': {
-          title: 'UX & UI Design - Service | Aaitek',
-          description: 'Transform user interactions with thoughtful design that combines aesthetics with functionality. Our UX/UI design services create digital experiences that users love.',
-          image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
-        },
-      }
-      
-      if (serviceMeta[slug]) {
+    const serviceMeta = {
+      'web-platform-development': {
+        title: 'Web Platform Development - Service | Aaitek',
+        description: 'Develop robust, scalable web platforms that grow with your business. From simple websites to complex web applications, we deliver solutions that perform.',
+        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
+      },
+      'mobile-app-development': {
+        title: 'Mobile Application Development - Service | Aaitek',
+        description: 'Create powerful mobile applications for iOS and Android that engage users and drive business growth. From native to cross-platform solutions.',
+        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
+      },
+      'ecommerce-solutions': {
+        title: 'eCommerce Solutions - Service | Aaitek',
+        description: 'Build high-performing eCommerce platforms that drive sales and provide exceptional shopping experiences. From setup to optimization.',
+        image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80',
+      },
+      'ux-ui-design': {
+        title: 'UX & UI Design - Service | Aaitek',
+        description: 'Transform user interactions with thoughtful design that combines aesthetics with functionality. Our UX/UI design services create digital experiences that users love.',
+        image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80',
+      },
+    }
+    
+    if (serviceMeta[slug]) {
       meta = {
-          ...serviceMeta[slug],
-          type: 'website',
+        ...serviceMeta[slug],
+        type: 'website',
       }
     } else {
       meta = {
@@ -226,29 +226,29 @@ export default async function handler(req) {
     }
   } else if (pathname.startsWith('/products/')) {
     const slug = pathname.split('/products/')[1]?.split('?')[0] || ''
-      
-      const productMeta = {
-        'ai-sales-agent': {
-          title: 'AI Sales Agent - Product | Aaitek',
-          description: 'Sales teams lose time on manual follow-ups, inconsistent engagement, and low-quality leads. The AI Sales Agent was built to remove friction from the sales lifecycle.',
-          image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
-        },
-        'ai-booking-agent': {
-          title: 'AI Booking Agent - Product | Aaitek',
-          description: 'Booking delays and manual coordination impact customer experience and operational efficiency. The AI Booking Agent was created to deliver instant, accurate, and seamless booking interactions.',
-          image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80',
-        },
-        'ai-trade-strategy-agent': {
-          title: 'AI Trade Strategy Agent - Product | Aaitek',
-          description: 'Modern markets generate vast volumes of data, yet decision-making often remains reactive. The AI Trade Strategy Agent was built to help organisations analyse trends, signals, and historical patterns.',
-          image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80',
-        },
-      }
-      
-      if (productMeta[slug]) {
+    
+    const productMeta = {
+      'ai-sales-agent': {
+        title: 'AI Sales Agent - Product | Aaitek',
+        description: 'Sales teams lose time on manual follow-ups, inconsistent engagement, and low-quality leads. The AI Sales Agent was built to remove friction from the sales lifecycle.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      },
+      'ai-booking-agent': {
+        title: 'AI Booking Agent - Product | Aaitek',
+        description: 'Booking delays and manual coordination impact customer experience and operational efficiency. The AI Booking Agent was created to deliver instant, accurate, and seamless booking interactions.',
+        image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80',
+      },
+      'ai-trade-strategy-agent': {
+        title: 'AI Trade Strategy Agent - Product | Aaitek',
+        description: 'Modern markets generate vast volumes of data, yet decision-making often remains reactive. The AI Trade Strategy Agent was built to help organisations analyse trends, signals, and historical patterns.',
+        image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80',
+      },
+    }
+    
+    if (productMeta[slug]) {
       meta = {
-          ...productMeta[slug],
-          type: 'website',
+        ...productMeta[slug],
+        type: 'website',
       }
     } else {
       meta = {
