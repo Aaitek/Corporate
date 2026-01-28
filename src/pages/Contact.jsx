@@ -118,10 +118,27 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      const errorMessage = error.response?.data?.error?.message 
-        || error.response?.data?.error
-        || error.message
-        || 'Failed to send message. Please try again or email us directly.'
+      console.error('Error response:', error.response?.data)
+      
+      // Extract detailed error message
+      let errorMessage = 'Failed to send message. Please try again or email us directly.'
+      
+      if (error.response?.data) {
+        if (error.response.data.error?.message) {
+          errorMessage = error.response.data.error.message
+        } else if (error.response.data.error) {
+          errorMessage = typeof error.response.data.error === 'string' 
+            ? error.response.data.error 
+            : JSON.stringify(error.response.data.error)
+        } else if (error.response.data.message) {
+          errorMessage = error.response.data.message
+        } else if (error.response.data.details) {
+          errorMessage = `Error: ${JSON.stringify(error.response.data.details)}`
+        }
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+      
       setSubmitStatus({
         type: 'error',
         message: errorMessage
