@@ -34,8 +34,10 @@
 2. **Set Environment Variables in Railway:**
    ```
    RESEND_API_KEY=re_xxxxxxxxxxxxx
-   CONTACT_NOTIFICATION_EMAIL=info@aaitek.com
+   CONTACT_NOTIFICATION_EMAIL=jitendra.soni@aaitek.com.au
    ```
+   
+   **Note:** If `CONTACT_NOTIFICATION_EMAIL` is not set, emails will default to `jitendra.soni@aaitek.com.au`
 
 3. **Deploy:**
    - The backend will automatically send emails when forms are submitted
@@ -55,7 +57,7 @@ To use:
 ### Email Notification Details
 
 **When:** Sent immediately after a form submission is saved
-**To:** Email address set in `CONTACT_NOTIFICATION_EMAIL` (default: info@aaitek.com)
+**To:** Email address set in `CONTACT_NOTIFICATION_EMAIL` (default: jitendra.soni@aaitek.com.au)
 **From:** `Aaitek Contact Form <noreply@aaitek.com>`
 **Subject:** `New Contact Form Submission from [Name]`
 **Content:** Includes all form fields (name, email, company, phone, service, message)

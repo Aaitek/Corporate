@@ -49,7 +49,7 @@ module.exports = createCoreController('api::contact-submission.contact-submissio
 
 // Email notification function
 async function sendEmailNotification({ name, email, company, phone, service, message }) {
-  const notificationEmail = process.env.CONTACT_NOTIFICATION_EMAIL || 'info@aaitek.com';
+  const notificationEmail = process.env.CONTACT_NOTIFICATION_EMAIL || 'jitendra.soni@aaitek.com.au';
   const resendApiKey = process.env.RESEND_API_KEY;
   
   // If Resend API key is configured, use Resend
