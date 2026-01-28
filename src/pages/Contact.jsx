@@ -61,16 +61,46 @@ const Contact = () => {
     setIsSubmitting(true)
     setSubmitStatus({ type: null, message: '' })
 
-    try {
-      // Use Vercel API proxy to avoid Railway Edge CORS issues
-      const response = await api.post('/api/contact-submissions', {
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || null,
-        phone: formData.phone || null,
-        service: formData.service || null,
-        message: formData.message,
+    // Client-side validation - trim and check required fields
+    const trimmedName = formData.name.trim()
+    const trimmedEmail = formData.email.trim()
+    const trimmedMessage = formData.message.trim()
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please fill in all required fields (Name, Email, and Message)'
       })
+      setIsSubmitting(false)
+      return
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedEmail)) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please enter a valid email address'
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      // Prepare the data to send
+      const submissionData = {
+        name: trimmedName,
+        email: trimmedEmail,
+        company: formData.company.trim() || null,
+        phone: formData.phone.trim() || null,
+        service: formData.service.trim() || null,
+        message: trimmedMessage,
+      }
+      
+      console.log('Submitting contact form with data:', submissionData)
+      
+      // Use Vercel API proxy to avoid Railway Edge CORS issues
+      const response = await api.post('/api/contact-submissions', submissionData)
 
       if (response.data) {
         setSubmitStatus({
