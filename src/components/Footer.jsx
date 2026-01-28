@@ -310,18 +310,15 @@ const Footer = () => {
                 Certifications
               </h4>
               <div className="flex flex-wrap gap-2">
-                {['Contentful Partner', 'Umbraco Partner', 'Sitecore Partner'].map((cert, index) => (
-                  <motion.span
-                    key={cert}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="text-xs px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg text-gray-700 border border-gray-200 hover:border-purple-400 hover:bg-purple-50 transition-all duration-300 font-medium"
-                  >
-                    {cert}
-                  </motion.span>
-                ))}
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-xs px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg text-gray-700 border border-gray-200 hover:border-purple-400 hover:bg-purple-50 transition-all duration-300 font-medium"
+                >
+                  🏆 Azure Sitecore Coveo
+                </motion.span>
               </div>
             </motion.div>
             <motion.div
