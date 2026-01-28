@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { marked } from 'marked'
 import SEO from '../components/SEO'
 import api, { getImageUrl } from '../utils/api'
 import caseStudiesData from '../data/caseStudiesData'
+
+// Configure marked for GitHub Flavored Markdown
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+})
 
 const CaseStudyDetail = () => {
   const { slug } = useParams()
@@ -296,8 +303,8 @@ const CaseStudyDetail = () => {
                 <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Case Study Details</h2>
                 {caseStudy.fullContent ? (
                   <div 
-                    className="prose prose-lg max-w-none text-gray-700"
-                    dangerouslySetInnerHTML={{ __html: caseStudy.fullContent }}
+                    className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-base prose-p:leading-7 prose-p:mb-4 prose-strong:text-gray-900 prose-strong:font-bold prose-a:text-blue-600 prose-a:underline prose-ul:list-disc prose-ul:ml-6 prose-ol:list-decimal prose-ol:ml-6 prose-li:mb-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100"
+                    dangerouslySetInnerHTML={{ __html: marked.parse(caseStudy.fullContent) }}
                   />
                 ) : caseStudy.description ? (
                   <div className="prose prose-lg max-w-none text-gray-700">
