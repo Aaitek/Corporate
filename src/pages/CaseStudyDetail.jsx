@@ -51,6 +51,61 @@ const CaseStudyDetail = () => {
         
         if (response?.data?.data && response.data.data.length > 0) {
           const item = response.data.data[0]
+          
+          // Parse results - handle both object and string JSON
+          let results = {}
+          const rawResults = item.attributes?.results
+          if (rawResults !== null && rawResults !== undefined) {
+            if (typeof rawResults === 'string') {
+              try {
+                const parsed = JSON.parse(rawResults)
+                results = typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+              } catch (e) {
+                console.warn('Failed to parse results JSON:', e)
+                results = {}
+              }
+            } else if (typeof rawResults === 'object' && !Array.isArray(rawResults)) {
+              results = rawResults
+            }
+          }
+          
+          // Parse technologies - handle both array and string JSON
+          let technologies = []
+          const rawTechnologies = item.attributes?.technologies
+          if (rawTechnologies !== null && rawTechnologies !== undefined) {
+            if (typeof rawTechnologies === 'string') {
+              try {
+                const parsed = JSON.parse(rawTechnologies)
+                technologies = Array.isArray(parsed) ? parsed : []
+              } catch (e) {
+                console.warn('Failed to parse technologies JSON:', e)
+                technologies = []
+              }
+            } else if (Array.isArray(rawTechnologies)) {
+              technologies = rawTechnologies
+            } else if (typeof rawTechnologies === 'object') {
+              // If it's an object, try to convert to array
+              technologies = Object.values(rawTechnologies).filter(v => v !== null && v !== undefined)
+            }
+          }
+          
+          // Final validation - ensure results is an object and technologies is an array
+          if (typeof results !== 'object' || results === null || Array.isArray(results)) {
+            results = {}
+          }
+          if (!Array.isArray(technologies)) {
+            technologies = []
+          }
+          
+          // Debug logging (remove in production if needed)
+          console.log('Case Study Data:', {
+            slug: item.attributes?.slug,
+            hasResults: Object.keys(results).length > 0,
+            resultsKeys: Object.keys(results),
+            hasTechnologies: technologies.length > 0,
+            technologiesCount: technologies.length
+          })
+          
           const mapped = {
             id: item.id,
             title: item.attributes?.title || '',
@@ -61,8 +116,8 @@ const CaseStudyDetail = () => {
             fullContent: item.attributes?.fullContent || '',
             category: item.attributes?.category || 'cloud',
             image: getImageUrl(item.attributes?.image, 'large') || 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80',
-            results: item.attributes?.results || {},
-            technologies: item.attributes?.technologies || [],
+            results: results,
+            technologies: technologies,
             video: null,
           }
           setCaseStudy(mapped)
