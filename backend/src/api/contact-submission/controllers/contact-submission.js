@@ -10,19 +10,43 @@ module.exports = createCoreController('api::contact-submission.contact-submissio
   async create(ctx) {
     try {
       // Log the incoming request for debugging
-      console.log('Contact submission request body:', JSON.stringify(ctx.request.body, null, 2));
+      console.log('=== CONTACT SUBMISSION REQUEST ===');
+      console.log('Full ctx.request.body:', JSON.stringify(ctx.request.body, null, 2));
+      console.log('ctx.request.body.data:', JSON.stringify(ctx.request.body.data, null, 2));
+      console.log('ctx.request.body keys:', Object.keys(ctx.request.body || {}));
       
-      // Extract data from Strapi's data wrapper (ctx.request.body.data) or directly (ctx.request.body)
-      const bodyData = ctx.request.body.data || ctx.request.body;
+      // Try multiple ways to extract data (Strapi can structure it differently)
+      let bodyData = null;
+      
+      if (ctx.request.body && ctx.request.body.data) {
+        bodyData = ctx.request.body.data;
+        console.log('Using ctx.request.body.data');
+      } else if (ctx.request.body && Object.keys(ctx.request.body).length > 0) {
+        bodyData = ctx.request.body;
+        console.log('Using ctx.request.body directly');
+      } else {
+        console.error('No data found in request body!');
+        return ctx.badRequest('No data provided in request');
+      }
+      
       console.log('Extracted bodyData:', JSON.stringify(bodyData, null, 2));
+      console.log('bodyData type:', typeof bodyData);
+      console.log('bodyData keys:', bodyData ? Object.keys(bodyData) : 'null/undefined');
       
-      // Extract and trim fields
-      const name = bodyData.name?.trim();
-      const email = bodyData.email?.trim();
-      const company = bodyData.company?.trim() || null;
-      const phone = bodyData.phone?.trim() || null;
-      const service = bodyData.service?.trim() || null;
-      const message = bodyData.message?.trim();
+      // Extract and trim fields - handle both string and object cases
+      const name = bodyData.name ? String(bodyData.name).trim() : '';
+      const email = bodyData.email ? String(bodyData.email).trim() : '';
+      const company = bodyData.company ? String(bodyData.company).trim() : null;
+      const phone = bodyData.phone ? String(bodyData.phone).trim() : null;
+      const service = bodyData.service ? String(bodyData.service).trim() : null;
+      const message = bodyData.message ? String(bodyData.message).trim() : '';
+      
+      console.log('Extracted values:', { name, email, company, phone, service, message });
+      console.log('Value checks:', { 
+        nameLength: name.length, 
+        emailLength: email.length, 
+        messageLength: message.length 
+      });
 
       // Validate required fields with detailed logging
       if (!name || name.length === 0 || !email || email.length === 0 || !message || message.length === 0) {
