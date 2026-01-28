@@ -9,13 +9,39 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::contact-submission.contact-submission', ({ strapi }) => ({
   async create(ctx) {
     try {
+      // Log the incoming request for debugging
+      console.log('Contact submission request body:', JSON.stringify(ctx.request.body, null, 2));
+      
       // Extract data from Strapi's data wrapper (ctx.request.body.data) or directly (ctx.request.body)
       const bodyData = ctx.request.body.data || ctx.request.body;
-      const { name, email, company, phone, service, message } = bodyData;
+      console.log('Extracted bodyData:', JSON.stringify(bodyData, null, 2));
+      
+      // Extract and trim fields
+      const name = bodyData.name?.trim();
+      const email = bodyData.email?.trim();
+      const company = bodyData.company?.trim() || null;
+      const phone = bodyData.phone?.trim() || null;
+      const service = bodyData.service?.trim() || null;
+      const message = bodyData.message?.trim();
 
-      // Validate required fields
-      if (!name || !email || !message) {
+      // Validate required fields with detailed logging
+      if (!name || name.length === 0 || !email || email.length === 0 || !message || message.length === 0) {
+        console.error('Validation failed:', { 
+          hasName: !!name && name.length > 0, 
+          hasEmail: !!email && email.length > 0, 
+          hasMessage: !!message && message.length > 0,
+          nameValue: name,
+          emailValue: email,
+          messageValue: message,
+          bodyData: bodyData
+        });
         return ctx.badRequest('Name, email, and message are required');
+      }
+      
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return ctx.badRequest('Please provide a valid email address');
       }
 
       // Create the submission
