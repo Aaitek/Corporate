@@ -85,17 +85,38 @@ const CaseStudyDetail = () => {
               technologies = rawTechnologies
             } else if (typeof rawTechnologies === 'object') {
               // If it's an object, try to convert to array
-              technologies = Object.values(rawTechnologies).filter(v => v !== null && v !== undefined)
+              const values = Object.values(rawTechnologies)
+              // Handle nested objects (e.g., {technology: "AWS"}) or direct values
+              technologies = values
+                .filter(v => v !== null && v !== undefined)
+                .map(v => {
+                  // If value is an object, try to extract string from common keys
+                  if (typeof v === 'object' && !Array.isArray(v)) {
+                    return v.technology || v.name || v.value || v.title || String(v)
+                  }
+                  // If value is already a string/number, return it as string
+                  return String(v)
+                })
             }
           }
           
-          // Final validation - ensure results is an object and technologies is an array
+          // Final validation - ensure results is an object and technologies is an array of strings
           if (typeof results !== 'object' || results === null || Array.isArray(results)) {
             results = {}
           }
           if (!Array.isArray(technologies)) {
             technologies = []
           }
+          // Ensure all technologies are strings (not objects)
+          technologies = technologies
+            .map(tech => {
+              if (typeof tech === 'object' && tech !== null) {
+                // Extract string from object if needed
+                return tech.technology || tech.name || tech.value || tech.title || JSON.stringify(tech)
+              }
+              return String(tech)
+            })
+            .filter(tech => tech && tech.trim().length > 0)
           
           // Debug logging (remove in production if needed)
           console.log('Case Study Data:', {
@@ -454,18 +475,27 @@ const CaseStudyDetail = () => {
                       <h2 className="text-xl font-extrabold text-gray-900">Technologies Used</h2>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {caseStudy.technologies.map((tech, index) => (
-                        <motion.span
-                          key={index}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: index * 0.05 }}
-                          className="px-3 py-1.5 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-lg border border-blue-200 text-sm"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
+                      {caseStudy.technologies.map((tech, index) => {
+                        // Ensure tech is always a string (safety check)
+                        const techString = typeof tech === 'string' 
+                          ? tech 
+                          : typeof tech === 'object' && tech !== null
+                          ? (tech.technology || tech.name || tech.value || tech.title || JSON.stringify(tech))
+                          : String(tech || '')
+                        
+                        return (
+                          <motion.span
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: index * 0.05 }}
+                            className="px-3 py-1.5 bg-gradient-to-br from-blue-100 to-cyan-100 text-blue-700 font-semibold rounded-lg border border-blue-200 text-sm"
+                          >
+                            {techString}
+                          </motion.span>
+                        )
+                      })}
                     </div>
                   </motion.div>
                 )}
