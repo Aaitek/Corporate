@@ -5,6 +5,33 @@ export const config = {
 
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
+// Type definitions for Strapi API responses
+interface StrapiResponse<T> {
+  data: T[]
+  meta?: any
+}
+
+interface StrapiArticle {
+  id: number
+  attributes: {
+    title?: string
+    excerpt?: string
+    description?: string
+    image?: any
+    slug?: string
+  }
+}
+
+interface StrapiCaseStudy {
+  id: number
+  attributes: {
+    title?: string
+    description?: string
+    image?: any
+    slug?: string
+  }
+}
+
 // Helper to get image URL from Strapi format
 const getImageUrl = (image: any, size = 'large') => {
   if (!image || !image.data) return null
@@ -33,7 +60,7 @@ async function fetchArticle(slug: string) {
     
     if (!response.ok) return null
     
-    const data = await response.json()
+    const data = await response.json() as StrapiResponse<StrapiArticle>
     if (data.data && data.data.length > 0) {
       const article = data.data[0]
       const imageUrl = getImageUrl(article.attributes?.image)
@@ -66,7 +93,7 @@ async function fetchCaseStudy(slug: string) {
     
     if (!response.ok) return null
     
-    const data = await response.json()
+    const data = await response.json() as StrapiResponse<StrapiCaseStudy>
     if (data.data && data.data.length > 0) {
       const caseStudy = data.data[0]
       const imageUrl = getImageUrl(caseStudy.attributes?.image)
