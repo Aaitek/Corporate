@@ -88,9 +88,13 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error)
+      const errorMessage = error.response?.data?.error?.message 
+        || error.response?.data?.error
+        || error.message
+        || 'Failed to send message. Please try again or email us directly.'
       setSubmitStatus({
         type: 'error',
-        message: error.response?.data?.error?.message || 'Failed to send message. Please try again or email us directly.'
+        message: errorMessage
       })
     } finally {
       setIsSubmitting(false)
