@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "aos": "^2.3.4",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
