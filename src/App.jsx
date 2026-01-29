@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
@@ -95,6 +96,7 @@ function App() {
         <Footer />
         <CookieConsent />
         <Analytics />
+        <SpeedInsights />
       </div>
     </Router>
   )
