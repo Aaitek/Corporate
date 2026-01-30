@@ -156,6 +156,13 @@ export async function prerender(data) {
     </HelmetProvider>
   )
   
+  // Ensure homepage uses footer-logo.png explicitly with cache-busting
+  let finalImage = meta.image
+  if (pathname === '/') {
+    // Add cache-busting parameter to force social media to refresh
+    finalImage = `${SITE}/footer-logo.png?v=2`
+  }
+  
   // Return HTML with page-specific meta tags
   // CRITICAL: canonical is ALWAYS the current page URL, never homepage
   return {
@@ -173,8 +180,9 @@ export async function prerender(data) {
         { type: 'meta', props: { property: 'og:url', content: canonical } },
         { type: 'meta', props: { property: 'og:title', content: meta.title } },
         { type: 'meta', props: { property: 'og:description', content: meta.description } },
-        { type: 'meta', props: { property: 'og:image', content: meta.image } },
-        { type: 'meta', props: { property: 'og:image:secure_url', content: meta.image } },
+        // CRITICAL: Homepage MUST use footer-logo.png
+        { type: 'meta', props: { property: 'og:image', content: finalImage } },
+        { type: 'meta', props: { property: 'og:image:secure_url', content: finalImage } },
         { type: 'meta', props: { property: 'og:image:width', content: '1200' } },
         { type: 'meta', props: { property: 'og:image:height', content: '630' } },
         { type: 'meta', props: { property: 'og:site_name', content: 'Aaitek Technology Specialists' } },
@@ -182,7 +190,7 @@ export async function prerender(data) {
         { type: 'meta', props: { name: 'twitter:card', content: 'summary_large_image' } },
         { type: 'meta', props: { name: 'twitter:title', content: meta.title } },
         { type: 'meta', props: { name: 'twitter:description', content: meta.description } },
-        { type: 'meta', props: { name: 'twitter:image', content: meta.image } },
+        { type: 'meta', props: { name: 'twitter:image', content: finalImage } },
       ]),
     },
   }

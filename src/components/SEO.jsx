@@ -34,7 +34,7 @@ const SEO = ({
   const siteName = 'Aaitek'
   // Use footer logo for social sharing previews - use absolute URL
   // Use the main domain (not currentOrigin) to ensure consistency for social crawlers
-  const defaultImage = `https://aaitek.com/footer-logo.png`
+  const defaultImage = `https://aaitek.com/footer-logo.png?v=2`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {

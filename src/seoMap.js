@@ -2,7 +2,7 @@
 // Each route has its own title, description, and image for social media previews
 
 const SITE = 'https://aaitek.com'
-const defaultImage = `${SITE}/footer-logo.png`
+const defaultImage = `${SITE}/footer-logo.png?v=2`
 const logoImage = `${SITE}/Aaitek%20logo%20in%20Black.png`
 
 // Import data to get dynamic route information
