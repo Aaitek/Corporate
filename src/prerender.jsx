@@ -7,7 +7,7 @@ import { SEO } from './seoMap'
 
 const SITE = 'https://aaitek.com'
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
-const defaultImage = `${SITE}/footer-logo.png`
+const defaultImage = `${SITE}/og-image.png`
 
 // Helper to normalize URL path
 const normalizeUrl = (url) => {
