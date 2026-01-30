@@ -156,17 +156,6 @@ export async function prerender(data) {
     </HelmetProvider>
   )
   
-  // CRITICAL: Ensure homepage ALWAYS uses footer-logo.png with cache-busting
-  let finalImage = meta.image
-  if (pathname === '/') {
-    // Force homepage to use footer-logo.png with cache-busting
-    finalImage = `${SITE}/footer-logo.png?v=3`
-    console.log('Homepage: Forcing footer-logo.png?v=3', finalImage)
-  } else {
-    // For other pages, use meta.image but ensure it's valid
-    finalImage = meta.image || defaultImage
-  }
-  
   // Return HTML with page-specific meta tags
   // CRITICAL: canonical is ALWAYS the current page URL, never homepage
   return {
@@ -184,9 +173,8 @@ export async function prerender(data) {
         { type: 'meta', props: { property: 'og:url', content: canonical } },
         { type: 'meta', props: { property: 'og:title', content: meta.title } },
         { type: 'meta', props: { property: 'og:description', content: meta.description } },
-        // CRITICAL: Homepage MUST use footer-logo.png
-        { type: 'meta', props: { property: 'og:image', content: finalImage } },
-        { type: 'meta', props: { property: 'og:image:secure_url', content: finalImage } },
+        { type: 'meta', props: { property: 'og:image', content: meta.image } },
+        { type: 'meta', props: { property: 'og:image:secure_url', content: meta.image } },
         { type: 'meta', props: { property: 'og:image:width', content: '1200' } },
         { type: 'meta', props: { property: 'og:image:height', content: '630' } },
         { type: 'meta', props: { property: 'og:site_name', content: 'Aaitek Technology Specialists' } },
@@ -194,7 +182,7 @@ export async function prerender(data) {
         { type: 'meta', props: { name: 'twitter:card', content: 'summary_large_image' } },
         { type: 'meta', props: { name: 'twitter:title', content: meta.title } },
         { type: 'meta', props: { name: 'twitter:description', content: meta.description } },
-        { type: 'meta', props: { name: 'twitter:image', content: finalImage } },
+        { type: 'meta', props: { name: 'twitter:image', content: meta.image } },
       ]),
     },
   }
