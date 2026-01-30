@@ -23,10 +23,11 @@ const createSEO = (title, description, image = defaultImage) => ({
 // Generate SEO map dynamically from data files
 const generateSEOMap = () => {
   const seoMap = {
-    // Homepage
+    // Homepage - use logo image for better social preview
     '/': createSEO(
       'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud',
-      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
+      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.',
+      logoImage
     ),
     
     // Static pages
