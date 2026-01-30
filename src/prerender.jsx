@@ -7,7 +7,7 @@ import { SEO } from './seoMap'
 
 const SITE = 'https://aaitek.com'
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
-const defaultImage = `${SITE}/og-image.png`
+const defaultImage = `${SITE}/footer-logo.png`
 
 // Helper to normalize URL path
 const normalizeUrl = (url) => {
@@ -146,15 +146,6 @@ export async function prerender(data) {
     }
   }
   
-  // Debug: Log the image URL being used
-  console.log(`[Prerender] Path: ${pathname}, Image: ${meta.image}`)
-  
-  // Ensure image URL is absolute
-  if (meta.image && !meta.image.startsWith('http')) {
-    meta.image = `${SITE}${meta.image.startsWith('/') ? '' : '/'}${meta.image}`
-    console.log(`[Prerender] Fixed image URL: ${meta.image}`)
-  }
-  
   // Render React app with StaticRouter
   const helmetContext = {}
   const html = renderToString(
@@ -184,10 +175,8 @@ export async function prerender(data) {
         { type: 'meta', props: { property: 'og:description', content: meta.description } },
         { type: 'meta', props: { property: 'og:image', content: meta.image } },
         { type: 'meta', props: { property: 'og:image:secure_url', content: meta.image } },
-        { type: 'meta', props: { property: 'og:image:type', content: 'image/png' } },
         { type: 'meta', props: { property: 'og:image:width', content: '1200' } },
         { type: 'meta', props: { property: 'og:image:height', content: '630' } },
-        { type: 'meta', props: { property: 'og:image:alt', content: meta.title } },
         { type: 'meta', props: { property: 'og:site_name', content: 'Aaitek Technology Specialists' } },
         
         { type: 'meta', props: { name: 'twitter:card', content: 'summary_large_image' } },

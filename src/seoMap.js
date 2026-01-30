@@ -2,7 +2,7 @@
 // Each route has its own title, description, and image for social media previews
 
 const SITE = 'https://aaitek.com'
-const defaultImage = `${SITE}/og-image.png`
+const defaultImage = `${SITE}/footer-logo.png`
 const logoImage = `${SITE}/Aaitek%20logo%20in%20Black.png`
 
 // Import data to get dynamic route information
@@ -23,11 +23,10 @@ const createSEO = (title, description, image = defaultImage) => ({
 // Generate SEO map dynamically from data files
 const generateSEOMap = () => {
   const seoMap = {
-    // Homepage - use footer-logo.png for social preview
+    // Homepage
     '/': createSEO(
       'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud',
-      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.',
-      defaultImage
+      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
     ),
     
     // Static pages

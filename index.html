@@ -3,104 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ===================== -->
-    <!-- BASIC SEO -->
-    <!-- ===================== -->
-    <title>Aaitek – Empowering Businesses With AI, Data Analytics & Cloud</title>
-    <meta
-      name="description"
-      content="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services."
-    />
-
-    <!-- ===================== -->
-    <!-- CANONICAL (IMPORTANT) -->
-    <!-- ===================== -->
-    <link rel="canonical" href="https://aaitek.com/" />
-
-    <!-- ===================== -->
-    <!-- OPEN GRAPH (LINKEDIN / FACEBOOK) -->
-    <!-- ===================== -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Aaitek Technology Specialists" />
-    <meta property="og:url" content="https://aaitek.com/" />
-    <meta
-      property="og:title"
-      content="Aaitek – Empowering Businesses With AI, Data Analytics & Cloud"
-    />
-    <meta
-      property="og:description"
-      content="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services."
-    />
-    <meta property="og:image" content="https://aaitek.com/og-image.png" />
-    <meta
-      property="og:image:secure_url"
-      content="https://aaitek.com/og-image.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content="Aaitek – Advanced AI Technology" />
-
-    <!-- ===================== -->
-    <!-- TWITTER CARD -->
-    <!-- ===================== -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Aaitek – Empowering Businesses With AI, Data Analytics & Cloud"
-    />
-    <meta
-      name="twitter:description"
-      content="Enterprise-grade AI, cloud solutions, and digital transformation services."
-    />
-    <meta name="twitter:image" content="https://aaitek.com/og-image.png" />
-
-    <!-- ===================== -->
-    <!-- FAVICONS -->
-    <!-- ===================== -->
-    <link rel="icon" type="image/png" href="/Aaitek logo in Black.png" />
-    <link rel="apple-touch-icon" href="/Aaitek logo in Black.png" />
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-
-    <!-- ===================== -->
-    <!-- PERFORMANCE -->
-    <!-- ===================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-
-    <!-- ===================== -->
-    <!-- GOOGLE ANALYTICS -->
-    <!-- ===================== -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-YMPRK2VMWV"
-    ></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMPRK2VMWV"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-YMPRK2VMWV");
-    </script>
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    <!-- ===================== -->
-    <!-- VERCEL ANALYTICS -->
-    <!-- ===================== -->
+      gtag('config', 'G-YMPRK2VMWV');
+    </script>
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/Aaitek logo in Black.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/Aaitek logo in Black.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/Aaitek logo in Black.png" />
+    <link rel="apple-touch-icon" href="/Aaitek logo in Black.png" />
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    
+    <!-- Note: All SEO meta tags (title, description, og:*, twitter:*, canonical) are injected by vite-prerender-plugin per route -->
+    
+    <!-- Vercel Web Analytics -->
     <script>
-      window.va =
-        window.va ||
-        function () {
-          (window.vaq = window.vaq || []).push(arguments);
-        };
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
-
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
