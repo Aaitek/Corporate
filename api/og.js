@@ -46,7 +46,7 @@ async function fetchArticle(slug) {
       return {
         title: article.attributes?.title || '',
         description: article.attributes?.excerpt || article.attributes?.description || '',
-        image: railwayImageUrl || 'https://aaitek.com/footer-logo.png',
+        image: railwayImageUrl || 'https://aaitek.com/og-image.png',
       }
     }
     return null
@@ -79,7 +79,7 @@ async function fetchCaseStudy(slug) {
       return {
         title: caseStudy.attributes?.title || '',
         description: caseStudy.attributes?.description || '',
-        image: railwayImageUrl || 'https://aaitek.com/footer-logo.png',
+        image: railwayImageUrl || 'https://aaitek.com/og-image.png',
       }
     }
     return null
@@ -107,7 +107,7 @@ export default async function handler(req) {
   const siteUrl = 'https://aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
   const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
-  const defaultImage = `${siteUrl}/footer-logo.png`
+  const defaultImage = `${siteUrl}/og-image.png`
   
   let meta = {
     title: defaultTitle,

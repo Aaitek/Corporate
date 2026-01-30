@@ -141,7 +141,7 @@ export default async function handler(req: Request) {
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
   const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
   // CRITICAL: Use absolute URL with proper protocol
-  const defaultImage = 'https://aaitek.com/footer-logo.png'
+  const defaultImage = 'https://aaitek.com/og-image.png'
   
   let meta = {
     title: defaultTitle,

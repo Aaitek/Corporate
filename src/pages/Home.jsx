@@ -46,7 +46,7 @@ const Home = () => {
         robots="index,follow"
         ogTitle="Aaitek | Enterprise Digital Platform Specialists"
         ogDescription="We design, build, and optimise enterprise digital platforms using Sitecore XM Cloud, headless architectures, and cloud-native engineering."
-        ogImage="https://aaitek.com/footer-logo.png"
+        ogImage="https://aaitek.com/og-image.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Organization"
