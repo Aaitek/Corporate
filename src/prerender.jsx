@@ -156,11 +156,15 @@ export async function prerender(data) {
     </HelmetProvider>
   )
   
-  // Ensure homepage uses footer-logo.png explicitly with cache-busting
+  // CRITICAL: Ensure homepage ALWAYS uses footer-logo.png with cache-busting
   let finalImage = meta.image
   if (pathname === '/') {
-    // Add cache-busting parameter to force social media to refresh
-    finalImage = `${SITE}/footer-logo.png?v=2`
+    // Force homepage to use footer-logo.png with cache-busting
+    finalImage = `${SITE}/footer-logo.png?v=3`
+    console.log('Homepage: Forcing footer-logo.png?v=3', finalImage)
+  } else {
+    // For other pages, use meta.image but ensure it's valid
+    finalImage = meta.image || defaultImage
   }
   
   // Return HTML with page-specific meta tags
