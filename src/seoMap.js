@@ -26,7 +26,8 @@ const generateSEOMap = () => {
     // Homepage
     '/': createSEO(
       'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud',
-      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
+      'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.',
+      defaultImage // Use footer-logo.png for homepage preview
     ),
     
     // Static pages
