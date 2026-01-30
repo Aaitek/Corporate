@@ -251,6 +251,7 @@ export default async function handler(req: Request) {
   <meta property="og:title" content="${meta.title}" />
   <meta property="og:description" content="${meta.description}" />
   <meta property="og:image" content="${meta.image}" />
+  <meta property="og:image:url" content="${meta.image}" />
   <meta property="og:image:secure_url" content="${meta.image}" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
