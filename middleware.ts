@@ -243,6 +243,7 @@ export default async function handler(req: Request) {
   <!-- Primary Meta Tags -->
   <title>${meta.title}</title>
   <meta name="description" content="${meta.description}" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="${meta.type}" />

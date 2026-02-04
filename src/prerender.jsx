@@ -166,6 +166,9 @@ export async function prerender(data) {
       elements: new Set([
         { type: 'meta', props: { name: 'description', content: meta.description } },
         
+        // CRITICAL: Robots meta tag for indexing - all pages should be indexable
+        { type: 'meta', props: { name: 'robots', content: 'index,follow,max-image-preview:large' } },
+        
         // CRITICAL: Canonical is ALWAYS the current page, never homepage
         { type: 'link', props: { rel: 'canonical', href: canonical } },
         
