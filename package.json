@@ -30,8 +30,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run generate-sitemap && vite build",
     "preview": "vite preview",
-    "strapi": "cd backend && npm run develop"
+    "strapi": "cd backend && npm run develop",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   }
 }
