@@ -74,7 +74,7 @@ const ServiceShowcase = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
             Enterprise Mobile Experience Platform
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto px-4 sm:px-6 text-center">
             A scalable, enterprise-grade mobile platform designed to support complex booking, operations, and customer engagement workflows. Built for performance, security, and reliability, it delivers seamless experiences across iOS and Android.
           </p>
         </motion.div>
@@ -95,19 +95,19 @@ const ServiceShowcase = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.1, ease: 'easeIn' }}
                 whileHover={{ x: 8, scale: 1.02 }}
-                className="group flex items-start gap-3 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-0"
+                className="group flex items-start gap-3 sm:gap-3 p-4 sm:p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-0"
               >
                 {/* Icon */}
-                <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform duration-0 flex-shrink-0`}>
+                <div className={`w-12 h-12 sm:w-12 sm:h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform duration-0 flex-shrink-0`}>
                   {feature.icon}
                 </div>
                 
                 {/* Content */}
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-0">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-0">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 text-xs leading-relaxed">
+                  <p className="text-gray-600 text-sm sm:text-xs leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -120,10 +120,10 @@ const ServiceShowcase = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.3, delay: 0.2, ease: 'easeIn' }}
-            className="relative flex items-center justify-center order-1 lg:order-2"
+            className="relative flex items-center justify-center order-1 lg:order-2 px-4 sm:px-0"
           >
             {/* Phone Mockups Container */}
-            <div className="relative flex items-center justify-center gap-3 md:gap-4">
+            <div className="relative flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
               {/* Phone 1 - Left */}
               <motion.div
                 initial={{ opacity: 0, y: 50, rotate: -8 }}
@@ -131,11 +131,11 @@ const ServiceShowcase = () => {
                 transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
                 className="relative z-10"
               >
-                <div className="w-32 md:w-40 h-[400px] md:h-[480px] bg-gradient-to-br from-blue-600 to-blue-800 rounded-[2rem] p-2 shadow-2xl border-6 border-gray-900">
+                <div className="w-28 sm:w-32 md:w-40 h-[360px] sm:h-[400px] md:h-[480px] bg-gradient-to-br from-blue-600 to-blue-800 rounded-[2rem] p-2 shadow-2xl border-4 sm:border-6 border-gray-900">
                   <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
                     <div className="p-3 h-full flex flex-col">
-                      <div className="h-10 bg-blue-600 rounded-lg mb-3 flex items-center justify-center">
-                        <span className="text-white font-semibold text-xs">Flight Search</span>
+                      <div className="h-10 bg-blue-600 rounded-lg mb-3 flex items-center justify-center px-2">
+                        <span className="text-white font-semibold text-xs text-center whitespace-nowrap overflow-hidden text-ellipsis">Flight Search</span>
                       </div>
                       <div className="space-y-2 flex-1">
                         {[1, 2, 3, 4].map((i) => (
@@ -154,11 +154,11 @@ const ServiceShowcase = () => {
                 transition={{ duration: 0.5, delay: 0.5, ease: 'easeOut' }}
                 className="relative z-20"
               >
-                <div className="w-36 md:w-44 h-[440px] md:h-[520px] bg-gradient-to-br from-cyan-500 to-cyan-700 rounded-[2rem] p-2 shadow-2xl border-6 border-gray-900">
+                <div className="w-32 sm:w-36 md:w-44 h-[400px] sm:h-[440px] md:h-[520px] bg-gradient-to-br from-cyan-500 to-cyan-700 rounded-[2rem] p-2 shadow-2xl border-4 sm:border-6 border-gray-900">
                   <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
                     <div className="p-3 h-full flex flex-col">
-                      <div className="h-12 bg-cyan-500 rounded-lg mb-3 flex items-center justify-center">
-                        <span className="text-white font-semibold text-sm">Booking Confirmed</span>
+                      <div className="h-12 bg-cyan-500 rounded-lg mb-3 flex items-center justify-center px-2">
+                        <span className="text-white font-semibold text-xs sm:text-sm text-center whitespace-nowrap overflow-hidden text-ellipsis">Booking Confirmed</span>
                       </div>
                       <div className="flex-1 bg-gradient-to-br from-cyan-50 to-white rounded-lg p-3 flex flex-col items-center justify-center">
                         <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-3">
@@ -179,11 +179,11 @@ const ServiceShowcase = () => {
                 transition={{ duration: 0.5, delay: 0.6, ease: 'easeOut' }}
                 className="relative z-10"
               >
-                <div className="w-32 md:w-40 h-[400px] md:h-[480px] bg-gradient-to-br from-gray-700 to-gray-900 rounded-[2rem] p-2 shadow-2xl border-6 border-gray-900">
+                <div className="w-28 sm:w-32 md:w-40 h-[360px] sm:h-[400px] md:h-[480px] bg-gradient-to-br from-gray-700 to-gray-900 rounded-[2rem] p-2 shadow-2xl border-4 sm:border-6 border-gray-900">
                   <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden relative">
                     <div className="p-3 h-full flex flex-col">
-                      <div className="h-10 bg-gray-800 rounded-lg mb-3 flex items-center justify-center">
-                        <span className="text-white font-semibold text-xs">Profile</span>
+                      <div className="h-10 bg-gray-800 rounded-lg mb-3 flex items-center justify-center px-2">
+                        <span className="text-white font-semibold text-xs text-center whitespace-nowrap overflow-hidden text-ellipsis">Profile</span>
                       </div>
                       <div className="flex-1 space-y-3">
                         <div className="h-20 bg-gray-100 rounded-lg"></div>
@@ -214,19 +214,19 @@ const ServiceShowcase = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.1, ease: 'easeIn' }}
                 whileHover={{ x: -8, scale: 1.02 }}
-                className="group flex items-start gap-3 p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-0"
+                className="group flex items-start gap-3 sm:gap-3 p-4 sm:p-4 bg-white rounded-xl border-2 border-gray-200 hover:border-primary-300 hover:shadow-lg transition-all duration-0"
               >
                 {/* Icon */}
-                <div className={`w-12 h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform duration-0 flex-shrink-0`}>
+                <div className={`w-12 h-12 sm:w-12 sm:h-12 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-110 transition-transform duration-0 flex-shrink-0`}>
                   {feature.icon}
                 </div>
                 
                 {/* Content */}
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-0">
+                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-0">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 text-xs leading-relaxed">
+                  <p className="text-gray-600 text-sm sm:text-xs leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
