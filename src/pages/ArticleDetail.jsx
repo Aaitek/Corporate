@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { marked } from 'marked'
 import SEO from '../components/SEO'
-import api, { getImageUrl } from '../utils/api'
+import api, { getImageUrl, fetchArticles } from '../utils/api'
 
 // Configure marked for GitHub Flavored Markdown
 marked.setOptions({
@@ -33,6 +33,7 @@ const ArticleDetail = () => {
   const [article, setArticle] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [relatedArticles, setRelatedArticles] = useState([])
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -84,6 +85,40 @@ const ArticleDetail = () => {
             description: item.attributes?.excerpt || item.attributes?.description || '',
           }
           setArticle(mapped)
+          
+          // Load related articles (excluding current one)
+          try {
+            const articlesResponse = await fetchArticles()
+            if (articlesResponse?.data && Array.isArray(articlesResponse.data)) {
+              const allArticles = articlesResponse.data
+                .map(item => {
+                  // Generate slug from title if missing
+                  let articleSlug = item.attributes?.slug || ''
+                  if (!articleSlug && item.attributes?.title) {
+                    articleSlug = item.attributes.title
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, '-')
+                      .replace(/(^-|-$)/g, '')
+                  }
+                  
+                  return {
+                    id: item.id,
+                    title: item.attributes?.title || '',
+                    slug: articleSlug || `article-${item.id}`,
+                    excerpt: item.attributes?.excerpt || item.attributes?.description || '',
+                    image: getImageUrl(item.attributes?.image, 'medium') || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+                    publishedAt: item.attributes?.publishedAt || '',
+                  }
+                })
+                .filter(art => art.slug !== slug && art.slug !== mapped.slug) // Exclude current article
+                .slice(0, 4) // Limit to 4 articles
+              
+              setRelatedArticles(allArticles)
+            }
+          } catch (err) {
+            console.error('Error fetching related articles:', err)
+            // Don't fail the whole page if related articles fail
+          }
         } else {
           setError('Article not found')
         }
@@ -325,107 +360,176 @@ const ArticleDetail = () => {
 
         {/* Main Content */}
         <section className="py-12 sm:py-16 lg:py-20">
-          <div className="container-custom max-w-4xl mx-auto">
-            {/* Video Section (if available) */}
-            {article.video && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="mb-12 bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200"
-              >
-                <div className="aspect-video bg-gray-900">
-                  {article.video.includes('youtube.com') || article.video.includes('youtu.be') ? (
-                    <iframe
-                      src={article.video.includes('youtu.be') 
-                        ? `https://www.youtube.com/embed/${article.video.split('/').pop()}`
-                        : `https://www.youtube.com/embed/${article.video.split('v=')[1]?.split('&')[0]}`
-                      }
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title={article.title}
-                    />
-                  ) : article.video.includes('vimeo.com') ? (
-                    <iframe
-                      src={`https://player.vimeo.com/video/${article.video.split('/').pop()}`}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title={article.title}
-                    />
-                  ) : (
-                    <div dangerouslySetInnerHTML={{ __html: article.video }} />
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Full Content */}
-            {(article.fullContent || article.content) ? (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl mb-8"
-              >
-                <div 
-                  className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-base prose-p:leading-7 prose-p:mb-4 prose-strong:text-gray-900 prose-strong:font-bold prose-a:text-blue-600 prose-a:underline prose-ul:list-disc prose-ul:ml-6 prose-ol:list-decimal prose-ol:ml-6 prose-li:mb-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100"
-                  dangerouslySetInnerHTML={{ 
-                    __html: renderContent(article.fullContent || article.content || 'No content available.')
-                  }}
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl mb-8"
-              >
-                <p className="text-gray-600 text-lg">Content coming soon...</p>
-              </motion.div>
-            )}
-
-            {/* Tags */}
-            {article.tags && article.tags.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="flex flex-wrap gap-3 mb-8"
-              >
-                {article.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 bg-blue-100 text-blue-700 font-semibold rounded-lg text-sm"
+          <div className="container-custom mx-auto px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 2xl:px-[250px] max-w-[1920px]">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 xl:gap-12">
+              {/* Main Content Area - Left Side */}
+              <div className="flex-1 lg:max-w-4xl xl:max-w-5xl">
+                {/* Video Section (if available) */}
+                {article.video && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 bg-white rounded-2xl overflow-hidden shadow-xl border-2 border-gray-200"
                   >
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
-            )}
+                    <div className="aspect-video bg-gray-900">
+                      {article.video.includes('youtube.com') || article.video.includes('youtu.be') ? (
+                        <iframe
+                          src={article.video.includes('youtu.be') 
+                            ? `https://www.youtube.com/embed/${article.video.split('/').pop()}`
+                            : `https://www.youtube.com/embed/${article.video.split('v=')[1]?.split('&')[0]}`
+                          }
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={article.title}
+                        />
+                      ) : article.video.includes('vimeo.com') ? (
+                        <iframe
+                          src={`https://player.vimeo.com/video/${article.video.split('/').pop()}`}
+                          className="w-full h-full"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowFullScreen
+                          title={article.title}
+                        />
+                      ) : (
+                        <div dangerouslySetInnerHTML={{ __html: article.video }} />
+                      )}
+                    </div>
+                  </motion.div>
+                )}
 
-            {/* Back to Articles */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <Link
-                to="/articles"
-                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Back to Articles
-              </Link>
-            </motion.div>
+                {/* Full Content */}
+                {(article.fullContent || article.content) ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl mb-8"
+                  >
+                    <div 
+                      className="prose prose-lg max-w-none text-gray-700 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-base prose-p:leading-7 prose-p:mb-4 prose-strong:text-gray-900 prose-strong:font-bold prose-a:text-blue-600 prose-a:underline prose-ul:list-disc prose-ul:ml-6 prose-ol:list-decimal prose-ol:ml-6 prose-li:mb-2 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100"
+                      dangerouslySetInnerHTML={{ 
+                        __html: renderContent(article.fullContent || article.content || 'No content available.')
+                      }}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-xl mb-8"
+                  >
+                    <p className="text-gray-600 text-lg">Content coming soon...</p>
+                  </motion.div>
+                )}
+
+                {/* Tags */}
+                {article.tags && article.tags.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-wrap gap-3 mb-8"
+                  >
+                    {article.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-4 py-2 bg-blue-100 text-blue-700 font-semibold rounded-lg text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </motion.div>
+                )}
+
+                {/* Back to Articles */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="text-center mt-8"
+                >
+                  <Link
+                    to="/articles"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    <svg className="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Back to Articles
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Right Sidebar - Read More Articles */}
+              {relatedArticles.length > 0 && (
+                <div className="lg:w-80 xl:w-96 flex-shrink-0">
+                  <div className="space-y-6 sticky top-24">
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6 }}
+                      className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-lg"
+                    >
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-2xl shadow-lg">
+                          📚
+                        </div>
+                        <h2 className="text-xl font-extrabold text-gray-900">Read More Articles</h2>
+                      </div>
+                      <div className="space-y-4">
+                        {relatedArticles.map((relatedArticle, index) => (
+                          <Link
+                            key={relatedArticle.id}
+                            to={`/article/${relatedArticle.slug}`}
+                            className="block group"
+                          >
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 0.3, delay: index * 0.1 }}
+                              className="bg-white rounded-xl overflow-hidden border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300"
+                            >
+                              {relatedArticle.image && (
+                                <div className="relative h-40 overflow-hidden">
+                                      <img
+                                        src={relatedArticle.image}
+                                        alt={relatedArticle.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                      />
+                                    </div>
+                              )}
+                              <div className="p-4">
+                                <h3 className="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                                  {relatedArticle.title}
+                                </h3>
+                                {relatedArticle.excerpt && (
+                                  <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+                                    {relatedArticle.excerpt}
+                                  </p>
+                                )}
+                                {relatedArticle.publishedAt && (
+                                  <p className="text-xs text-gray-500">
+                                    {formatDate(relatedArticle.publishedAt)}
+                                  </p>
+                                )}
+                              </div>
+                            </motion.div>
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </section>
       </div>
