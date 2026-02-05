@@ -1,6 +1,17 @@
 // Vercel Edge Middleware - intercepts all requests and serves proper meta tags for social crawlers
 export const config = {
   runtime: 'edge',
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - og-image.png (image file - let it be served directly)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico|og-image.png).*)',
+  ],
 }
 
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
