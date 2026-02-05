@@ -18,8 +18,8 @@ const Home = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Aaitek Technology Specialists",
-    "url": "https://aaitek.com",
-    "logo": "https://aaitek.com/Aaitek%20logo%20in%20Black.png",
+    "url": "https://www.aaitek.com",
+    "logo": "https://www.aaitek.com/Aaitek%20logo%20in%20Black.png",
     "description": "Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.",
     "address": {
       "@type": "PostalAddress",
@@ -40,13 +40,13 @@ const Home = () => {
   return (
     <>
       <SEO
-        seoTitle="Aaitek | Enterprise Digital Platforms & Composable DXP"
-        seoDescription="Aaitek delivers enterprise-grade digital platforms across Sitecore XM Cloud, composable DXP, cloud engineering, and performance-led modernisation."
-        canonicalUrl="https://aaitek.com/"
+        seoTitle="Aaitek - Empowering Businesses With AI, Data Analytics & Cloud"
+        seoDescription="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services."
+        canonicalUrl="https://www.aaitek.com/"
         robots="index,follow"
-        ogTitle="Aaitek | Enterprise Digital Platform Specialists"
-        ogDescription="We design, build, and optimise enterprise digital platforms using Sitecore XM Cloud, headless architectures, and cloud-native engineering."
-        ogImage="https://aaitek.com/og-image.png"
+        ogTitle="Aaitek – Empowering Businesses With AI, Data Analytics & Cloud"
+        ogDescription="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services."
+        ogImage="https://www.aaitek.com/og-image.png"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Organization"

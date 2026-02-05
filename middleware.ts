@@ -123,18 +123,22 @@ export default async function handler(req: Request) {
   
   // Check if it's a social media crawler
   // LinkedIn uses various user agents, so we check for multiple patterns
+  // CRITICAL: LinkedIn Post Inspector uses different user agents than the actual crawler
   const isSocialCrawler = 
     userAgent.includes('facebookexternalhit') ||
     userAgent.includes('Twitterbot') ||
     userAgent.includes('LinkedInBot') ||
     userAgent.includes('LinkedIn') ||
     userAgent.includes('linkedin') ||
+    userAgent.includes('LinkedInBot/1.0') ||
+    userAgent.includes('LinkedInBot/2.0') ||
     userAgent.includes('WhatsApp') ||
     userAgent.includes('Slackbot') ||
     userAgent.includes('SkypeUriPreview') ||
     userAgent.includes('Discordbot') ||
     userAgent.includes('Applebot') ||
-    userAgent.includes('Googlebot')
+    userAgent.includes('Googlebot') ||
+    userAgent.toLowerCase().includes('linkedin')
   
   // Only intercept social crawlers - let regular users pass through to React app
   // Regular users will get meta tags updated client-side by react-helmet-async
@@ -142,6 +146,11 @@ export default async function handler(req: Request) {
   if (!isSocialCrawler) {
     // Don't intercept - let the request continue to the React app
     return undefined as any
+  }
+  
+  // Log for debugging (only in development)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Middleware intercepting:', { pathname, userAgent, isSocialCrawler })
   }
   
   const siteUrl = SITE_URL
