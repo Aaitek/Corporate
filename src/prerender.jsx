@@ -156,6 +156,9 @@ export async function prerender(data) {
     </HelmetProvider>
   )
   
+  // Extract helmet tags from context (react-helmet-async populates this during SSR)
+  const { helmet } = helmetContext
+  
   // Return HTML with page-specific meta tags
   // CRITICAL: canonical is ALWAYS the current page URL, never homepage
   // SKIP meta tag injection for homepage (/) since it has static tags in index.html
@@ -167,8 +170,9 @@ export async function prerender(data) {
   headElements.add({ type: 'meta', props: { name: 'robots', content: 'index,follow,max-image-preview:large' } })
   headElements.add({ type: 'link', props: { rel: 'canonical', href: canonical } })
   
-  // Only inject OG/Twitter meta tags for non-homepage routes
-  // Homepage already has static meta tags in index.html
+  // CRITICAL: For homepage, DO NOT inject any OG/Twitter meta tags
+  // The static HTML in index.html already has them, and we don't want conflicts
+  // For non-homepage routes, inject OG/Twitter meta tags
   if (!isHomepage) {
     headElements.add({ type: 'meta', props: { name: 'description', content: meta.description } })
     headElements.add({ type: 'meta', props: { property: 'og:type', content: 'website' } })
