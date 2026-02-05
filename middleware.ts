@@ -3,17 +3,10 @@ export const config = {
   runtime: 'edge',
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - assets/ (Vite build output - JS, CSS files)
-     * - src/ (development source files)
-     * - favicon.ico (favicon file)
-     * - og-image.png and other image files
-     * - robots.txt, sitemap.xml
+     * Match all request paths - we'll filter out static assets in the handler
+     * Vercel's path-to-regexp doesn't support complex negative lookaheads
      */
-    '/((?!api|_next/static|_next/image|assets|src|favicon.ico|og-image\\.png|.*\\.(png|jpg|jpeg|gif|svg|webp|ico|avif|js|css|woff|woff2|ttf|eot)|robots\\.txt|sitemap\\.xml).*)',
+    '/(.*)',
   ],
 }
 
@@ -137,9 +130,12 @@ export default async function handler(req: Request) {
   // CRITICAL: Don't intercept static assets (JS, CSS, images, etc.)
   // These should be served directly by Vercel
   if (
+    pathname.startsWith('/api/') ||
     pathname.startsWith('/assets/') ||
     pathname.startsWith('/src/') ||
     pathname.startsWith('/_next/') ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
     pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|webp|ico|avif|woff|woff2|ttf|eot)$/i)
   ) {
     // Let static assets pass through - don't intercept
