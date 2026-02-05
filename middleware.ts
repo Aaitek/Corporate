@@ -126,24 +126,36 @@ export default async function handler(req: Request) {
   // LinkedIn uses various user agents, so we check for multiple patterns
   // CRITICAL: LinkedIn Post Inspector uses different user agents than the actual crawler
   // Also check referer for LinkedIn Post Inspector
+  // Make detection case-insensitive and more comprehensive
+  const ua = userAgent.toLowerCase()
+  const ref = referer.toLowerCase()
+  
   const isSocialCrawler = 
-    userAgent.includes('facebookexternalhit') ||
-    userAgent.includes('Twitterbot') ||
-    userAgent.includes('LinkedInBot') ||
-    userAgent.includes('LinkedIn') ||
-    userAgent.includes('linkedin') ||
-    userAgent.includes('LinkedInBot/1.0') ||
-    userAgent.includes('LinkedInBot/2.0') ||
-    userAgent.includes('WhatsApp') ||
-    userAgent.includes('Slackbot') ||
-    userAgent.includes('SkypeUriPreview') ||
-    userAgent.includes('Discordbot') ||
-    userAgent.includes('Applebot') ||
-    userAgent.includes('Googlebot') ||
-    userAgent.toLowerCase().includes('linkedin') ||
-    // Check referer for LinkedIn Post Inspector
-    referer.includes('linkedin.com/post-inspector') ||
-    referer.includes('linkedin.com/feed') ||
+    ua.includes('facebookexternalhit') ||
+    ua.includes('facebookcatalog') ||
+    ua.includes('twitterbot') ||
+    ua.includes('linkedinbot') ||
+    ua.includes('linkedin') ||
+    ua.includes('whatsapp') ||
+    ua.includes('slackbot') ||
+    ua.includes('skypeuripreview') ||
+    ua.includes('discordbot') ||
+    ua.includes('applebot') ||
+    ua.includes('googlebot') ||
+    ua.includes('bingbot') ||
+    ua.includes('yandexbot') ||
+    ua.includes('baiduspider') ||
+    ua.includes('duckduckbot') ||
+    ua.includes('slurp') ||
+    ua.includes('crawler') ||
+    ua.includes('spider') ||
+    ua.includes('bot') ||
+    // Check referer for social media platforms
+    ref.includes('linkedin.com') ||
+    ref.includes('facebook.com') ||
+    ref.includes('twitter.com') ||
+    ref.includes('whatsapp.com') ||
+    ref.includes('t.co') ||
     // Check for LinkedIn's internal crawler patterns
     userAgent.includes('LinkedIn') ||
     userAgent.includes('linkedin')
