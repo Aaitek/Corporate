@@ -34,7 +34,7 @@ const SEO = ({
   const siteName = 'Aaitek Technology Specialists'
   // Use og-image.png for social sharing previews - use absolute URL
   // Use the main domain (not currentOrigin) to ensure consistency for social crawlers
-  const defaultImage = `${siteUrl}/og-image.png`
+  const defaultImage = `${siteUrl}/og-image.png?v=2`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {

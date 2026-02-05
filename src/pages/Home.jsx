@@ -46,7 +46,7 @@ const Home = () => {
         robots="index,follow"
         ogTitle="Aaitek – Empowering Businesses With AI, Data Analytics & Cloud"
         ogDescription="Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services."
-        ogImage="https://www.aaitek.com/og-image.png"
+        ogImage="https://www.aaitek.com/og-image.png?v=2"
         ogType="website"
         twitterCard="summary_large_image"
         schemaType="Organization"
