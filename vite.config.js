@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import vitePrerenderPlugin from 'vite-prerender-plugin'
+import { vitePrerenderPlugin } from 'vite-prerender-plugin'
 import path from 'node:path'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
