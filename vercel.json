@@ -13,7 +13,7 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/((?!api|assets|src|_next|favicon.ico|.*\\.(png|jpg|jpeg|gif|svg|webp|ico|avif|js|css|woff|woff2|ttf|eot)|robots\\.txt|sitemap\\.xml).*)",
+      "source": "/((?!api|assets|src|_next|favicon\\.ico|.*\\.(png|jpg|jpeg|gif|svg|webp|ico|avif|js|css|woff|woff2|ttf|eot)|robots\\.txt|sitemap\\.xml).+)",
       "destination": "/index.html"
     }
   ]
