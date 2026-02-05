@@ -362,10 +362,20 @@ export default async function handler(req: Request) {
   
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/Aaitek logo in Black.png" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMPRK2VMWV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YMPRK2VMWV');
+  </script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <!-- Note: Script tags are injected by Vite build - this HTML is only for social crawlers -->
+  <!-- Regular users get the built HTML with proper script tags from Vercel -->
 </body>
 </html>`
   
