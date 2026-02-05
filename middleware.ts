@@ -120,10 +120,12 @@ export default async function handler(req: Request) {
   const url = new URL(req.url)
   const pathname = url.pathname
   const userAgent = req.headers.get('user-agent') || ''
+  const referer = req.headers.get('referer') || ''
   
   // Check if it's a social media crawler
   // LinkedIn uses various user agents, so we check for multiple patterns
   // CRITICAL: LinkedIn Post Inspector uses different user agents than the actual crawler
+  // Also check referer for LinkedIn Post Inspector
   const isSocialCrawler = 
     userAgent.includes('facebookexternalhit') ||
     userAgent.includes('Twitterbot') ||
@@ -138,7 +140,10 @@ export default async function handler(req: Request) {
     userAgent.includes('Discordbot') ||
     userAgent.includes('Applebot') ||
     userAgent.includes('Googlebot') ||
-    userAgent.toLowerCase().includes('linkedin')
+    userAgent.toLowerCase().includes('linkedin') ||
+    // Check referer for LinkedIn Post Inspector
+    referer.includes('linkedin.com/post-inspector') ||
+    referer.includes('linkedin.com/feed')
   
   // Only intercept social crawlers - let regular users pass through to React app
   // Regular users will get meta tags updated client-side by react-helmet-async
