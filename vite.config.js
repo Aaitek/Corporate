@@ -160,6 +160,11 @@ export default defineConfig(async () => {
         renderTarget: '#root', // MUST match your React mount element
         prerenderScript: path.resolve('src/prerender.jsx'), // Explicitly point to prerender function
         additionalPrerenderRoutes: routes,
+        // Preserve script tags from original HTML
+        postProcess: (html) => {
+          // Vite will inject script tags automatically, but we need to ensure they're preserved
+          return html
+        },
       }),
     ],
     server: {
