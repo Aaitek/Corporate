@@ -148,19 +148,13 @@ export default async function handler(req: Request) {
     userAgent.includes('LinkedIn') ||
     userAgent.includes('linkedin')
   
-  // CRITICAL: For homepage, intercept ALL requests to ensure LinkedIn gets correct meta tags
-  // LinkedIn Post Inspector might not match our user agent patterns, so we intercept all homepage requests
-  const isHomepage = pathname === '/' || pathname === ''
-  
-  // Only intercept social crawlers OR homepage requests
-  // Regular users on non-homepage routes will get meta tags updated client-side by react-helmet-async
-  if (!isSocialCrawler && !isHomepage) {
+  // Only intercept social crawlers - let regular users pass through to React app
+  // Regular users will get meta tags updated client-side by react-helmet-async
+  // For page source, users will see defaults, but social media previews will be correct
+  if (!isSocialCrawler) {
     // Don't intercept - let the request continue to the React app
     return undefined as any
   }
-  
-  // For homepage, always intercept to serve correct meta tags
-  // For other pages, only intercept social crawlers
   
   // Log for debugging (only in development)
   if (process.env.NODE_ENV !== 'production') {
