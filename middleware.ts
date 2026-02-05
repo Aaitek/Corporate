@@ -7,10 +7,13 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
+     * - assets/ (Vite build output - JS, CSS files)
+     * - src/ (development source files)
      * - favicon.ico (favicon file)
-     * - og-image.png (image file - let it be served directly)
+     * - og-image.png and other image files
+     * - robots.txt, sitemap.xml
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|og-image.png).*)',
+    '/((?!api|_next/static|_next/image|assets|src|favicon.ico|og-image\\.png|.*\\.(png|jpg|jpeg|gif|svg|webp|ico|avif|js|css|woff|woff2|ttf|eot)|robots\\.txt|sitemap\\.xml).*)',
   ],
 }
 
