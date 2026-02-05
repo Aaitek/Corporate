@@ -133,6 +133,19 @@ async function fetchCaseStudy(slug: string) {
 export default async function handler(req: Request) {
   const url = new URL(req.url)
   const pathname = url.pathname
+  
+  // CRITICAL: Don't intercept static assets (JS, CSS, images, etc.)
+  // These should be served directly by Vercel
+  if (
+    pathname.startsWith('/assets/') ||
+    pathname.startsWith('/src/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|webp|ico|avif|woff|woff2|ttf|eot)$/i)
+  ) {
+    // Let static assets pass through - don't intercept
+    return undefined as any
+  }
+  
   const userAgent = req.headers.get('user-agent') || ''
   const referer = req.headers.get('referer') || ''
   
