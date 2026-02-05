@@ -11,65 +11,110 @@ import { productsData } from './src/data/productsData.js'
 import { industriesData } from './src/data/industriesData.js'
 import { servicesData } from './src/data/servicesData.js'
 
-// Fetch dynamic routes from Strapi at build time
+// Fetch dynamic routes from Strapi at build time with timeout
 async function fetchDynamicRoutes() {
   const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
   const routes = []
+  const TIMEOUT = 5000 // 5 second timeout per request
+  
+  // Helper to fetch with timeout
+  const fetchWithTimeout = async (url) => {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), TIMEOUT)
+    try {
+      const response = await fetch(url, { signal: controller.signal })
+      clearTimeout(timeoutId)
+      return response
+    } catch (error) {
+      clearTimeout(timeoutId)
+      throw error
+    }
+  }
   
   try {
     // Fetch case studies
-    const caseStudiesRes = await fetch(`${RAILWAY_API_URL}/case-studies?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
-    const caseStudiesData = await caseStudiesRes.json()
-    if (caseStudiesData?.data) {
-      caseStudiesData.data.forEach(item => {
-        if (item.attributes?.slug) {
-          routes.push(`/case-study/${item.attributes.slug}`)
+    try {
+      const caseStudiesRes = await fetchWithTimeout(`${RAILWAY_API_URL}/case-studies?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
+      if (caseStudiesRes.ok) {
+        const caseStudiesData = await caseStudiesRes.json()
+        if (caseStudiesData?.data) {
+          caseStudiesData.data.forEach(item => {
+            if (item.attributes?.slug) {
+              routes.push(`/case-study/${item.attributes.slug}`)
+            }
+          })
         }
-      })
+      }
+    } catch (e) {
+      console.warn('Failed to fetch case studies:', e.message)
     }
     
     // Fetch articles
-    const articlesRes = await fetch(`${RAILWAY_API_URL}/articles?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
-    const articlesData = await articlesRes.json()
-    if (articlesData?.data) {
-      articlesData.data.forEach(item => {
-        if (item.attributes?.slug) {
-          routes.push(`/article/${item.attributes.slug}`)
+    try {
+      const articlesRes = await fetchWithTimeout(`${RAILWAY_API_URL}/articles?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
+      if (articlesRes.ok) {
+        const articlesData = await articlesRes.json()
+        if (articlesData?.data) {
+          articlesData.data.forEach(item => {
+            if (item.attributes?.slug) {
+              routes.push(`/article/${item.attributes.slug}`)
+            }
+          })
         }
-      })
+      }
+    } catch (e) {
+      console.warn('Failed to fetch articles:', e.message)
     }
     
     // Fetch press releases
-    const pressReleasesRes = await fetch(`${RAILWAY_API_URL}/press-releases?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
-    const pressReleasesData = await pressReleasesRes.json()
-    if (pressReleasesData?.data) {
-      pressReleasesData.data.forEach(item => {
-        if (item.attributes?.slug) {
-          routes.push(`/press-release/${item.attributes.slug}`)
+    try {
+      const pressReleasesRes = await fetchWithTimeout(`${RAILWAY_API_URL}/press-releases?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
+      if (pressReleasesRes.ok) {
+        const pressReleasesData = await pressReleasesRes.json()
+        if (pressReleasesData?.data) {
+          pressReleasesData.data.forEach(item => {
+            if (item.attributes?.slug) {
+              routes.push(`/press-release/${item.attributes.slug}`)
+            }
+          })
         }
-      })
+      }
+    } catch (e) {
+      console.warn('Failed to fetch press releases:', e.message)
     }
     
     // Fetch videos
-    const videosRes = await fetch(`${RAILWAY_API_URL}/videos?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
-    const videosData = await videosRes.json()
-    if (videosData?.data) {
-      videosData.data.forEach(item => {
-        if (item.attributes?.slug) {
-          routes.push(`/video/${item.attributes.slug}`)
+    try {
+      const videosRes = await fetchWithTimeout(`${RAILWAY_API_URL}/videos?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
+      if (videosRes.ok) {
+        const videosData = await videosRes.json()
+        if (videosData?.data) {
+          videosData.data.forEach(item => {
+            if (item.attributes?.slug) {
+              routes.push(`/video/${item.attributes.slug}`)
+            }
+          })
         }
-      })
+      }
+    } catch (e) {
+      console.warn('Failed to fetch videos:', e.message)
     }
     
     // Fetch webinars
-    const webinarsRes = await fetch(`${RAILWAY_API_URL}/webinars?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
-    const webinarsData = await webinarsRes.json()
-    if (webinarsData?.data) {
-      webinarsData.data.forEach(item => {
-        if (item.attributes?.slug) {
-          routes.push(`/webinar/${item.attributes.slug}`)
+    try {
+      const webinarsRes = await fetchWithTimeout(`${RAILWAY_API_URL}/webinars?fields[0]=slug&publicationState=live&pagination[limit]=1000`)
+      if (webinarsRes.ok) {
+        const webinarsData = await webinarsRes.json()
+        if (webinarsData?.data) {
+          webinarsData.data.forEach(item => {
+            if (item.attributes?.slug) {
+              routes.push(`/webinar/${item.attributes.slug}`)
+            }
+          })
         }
-      })
+      }
+    } catch (e) {
+      console.warn('Failed to fetch webinars:', e.message)
     }
   } catch (error) {
     console.warn('Warning: Could not fetch dynamic routes from Strapi:', error.message)
