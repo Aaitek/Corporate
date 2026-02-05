@@ -284,10 +284,10 @@ export default async function handler(req: Request) {
   // Ensure image is always set to defaultImage if not explicitly set
   if (!meta.image) {
     meta.image = defaultImage
+  } else {
+    // Ensure image URL is absolute and clean (no query params)
+    meta.image = ensureAbsoluteImageUrl(meta.image)
   }
-  
-  // Ensure image URL is absolute
-  meta.image = ensureAbsoluteImageUrl(meta.image)
   
   const fullUrl = `${siteUrl}${pathname}`
   
