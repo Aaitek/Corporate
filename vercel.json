@@ -5,21 +5,17 @@
   "installCommand": "npm install",
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
     },
     {
-      "source": "/(.*)",
+      "source": "/*",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/*",
       "headers": [
         {
           "key": "Cache-Control",
