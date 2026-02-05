@@ -196,7 +196,7 @@ export default async function handler(req: Request) {
   let meta = {
     title: defaultTitle,
     description: defaultDescription,
-    image: ensureAbsoluteImageUrl(defaultImage),
+    image: defaultImage, // Already absolute URL from DEFAULT_IMAGE constant
     type: 'website'
   }
   
