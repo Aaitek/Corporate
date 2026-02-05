@@ -158,37 +158,46 @@ export async function prerender(data) {
   
   // Return HTML with page-specific meta tags
   // CRITICAL: canonical is ALWAYS the current page URL, never homepage
+  // SKIP meta tag injection for homepage (/) since it has static tags in index.html
+  const isHomepage = pathname === '/'
+  
+  const headElements = new Set()
+  
+  // Always add robots and canonical (even for homepage, to ensure they're correct)
+  headElements.add({ type: 'meta', props: { name: 'robots', content: 'index,follow,max-image-preview:large' } })
+  headElements.add({ type: 'link', props: { rel: 'canonical', href: canonical } })
+  
+  // Only inject OG/Twitter meta tags for non-homepage routes
+  // Homepage already has static meta tags in index.html
+  if (!isHomepage) {
+    headElements.add({ type: 'meta', props: { name: 'description', content: meta.description } })
+    headElements.add({ type: 'meta', props: { property: 'og:type', content: 'website' } })
+    headElements.add({ type: 'meta', props: { property: 'og:url', content: canonical } })
+    headElements.add({ type: 'meta', props: { property: 'og:title', content: meta.title } })
+    headElements.add({ type: 'meta', props: { property: 'og:description', content: meta.description } })
+    headElements.add({ type: 'meta', props: { property: 'og:image', content: meta.image } })
+    headElements.add({ type: 'meta', props: { property: 'og:image:url', content: meta.image } })
+    headElements.add({ type: 'meta', props: { property: 'og:image:secure_url', content: meta.image } })
+    
+    const imageType = meta.image.endsWith('.png') ? 'image/png' : (meta.image.endsWith('.jpg') || meta.image.endsWith('.jpeg') ? 'image/jpeg' : 'image/png')
+    headElements.add({ type: 'meta', props: { property: 'og:image:type', content: imageType } })
+    headElements.add({ type: 'meta', props: { property: 'og:image:width', content: '1200' } })
+    headElements.add({ type: 'meta', props: { property: 'og:image:height', content: '630' } })
+    headElements.add({ type: 'meta', props: { property: 'og:image:alt', content: meta.title } })
+    headElements.add({ type: 'meta', props: { property: 'og:site_name', content: 'Aaitek Technology Specialists' } })
+    
+    headElements.add({ type: 'meta', props: { name: 'twitter:card', content: 'summary_large_image' } })
+    headElements.add({ type: 'meta', props: { name: 'twitter:title', content: meta.title } })
+    headElements.add({ type: 'meta', props: { name: 'twitter:description', content: meta.description } })
+    headElements.add({ type: 'meta', props: { name: 'twitter:image', content: meta.image } })
+  }
+  
   return {
     html,
     head: {
       lang: 'en',
       title: meta.title,
-      elements: new Set([
-        { type: 'meta', props: { name: 'description', content: meta.description } },
-        
-        // CRITICAL: Robots meta tag for indexing - all pages should be indexable
-        { type: 'meta', props: { name: 'robots', content: 'index,follow,max-image-preview:large' } },
-        
-        // CRITICAL: Canonical is ALWAYS the current page, never homepage
-        { type: 'link', props: { rel: 'canonical', href: canonical } },
-        
-        { type: 'meta', props: { property: 'og:type', content: 'website' } },
-        { type: 'meta', props: { property: 'og:url', content: canonical } },
-        { type: 'meta', props: { property: 'og:title', content: meta.title } },
-        { type: 'meta', props: { property: 'og:description', content: meta.description } },
-        { type: 'meta', props: { property: 'og:image', content: meta.image } },
-        { type: 'meta', props: { property: 'og:image:secure_url', content: meta.image } },
-        { type: 'meta', props: { property: 'og:image:type', content: meta.image.endsWith('.png') ? 'image/png' : meta.image.endsWith('.jpg') || meta.image.endsWith('.jpeg') ? 'image/jpeg' : 'image/png' } },
-        { type: 'meta', props: { property: 'og:image:width', content: '1200' } },
-        { type: 'meta', props: { property: 'og:image:height', content: '630' } },
-        { type: 'meta', props: { property: 'og:image:alt', content: meta.title } },
-        { type: 'meta', props: { property: 'og:site_name', content: 'Aaitek Technology Specialists' } },
-        
-        { type: 'meta', props: { name: 'twitter:card', content: 'summary_large_image' } },
-        { type: 'meta', props: { name: 'twitter:title', content: meta.title } },
-        { type: 'meta', props: { name: 'twitter:description', content: meta.description } },
-        { type: 'meta', props: { name: 'twitter:image', content: meta.image } },
-      ]),
+      elements: headElements,
     },
   }
 }
