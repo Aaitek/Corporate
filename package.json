@@ -30,7 +30,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/generate-routes.js",
+    "prebuild": "node scripts/generate-routes.js || true",
     "build": "(npm run generate-sitemap || true) && vite build",
     "preview": "vite preview",
     "strapi": "cd backend && npm run develop",

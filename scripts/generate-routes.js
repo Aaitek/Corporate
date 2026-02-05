@@ -206,6 +206,8 @@ try {
   writeFileSync(routesFile, JSON.stringify(routes, null, 2), 'utf-8')
   console.log(`✅ Routes file generated: ${routesFile}`)
 } catch (error) {
-  console.error('❌ Error generating routes:', error)
-  process.exit(1)
+  console.error('⚠️  Warning: Error generating routes:', error.message)
+  console.error('⚠️  Continuing with static routes only...')
+  // Don't exit - let the build continue with fallback routes
+  // The vite.config.js will handle missing routes.json gracefully
 }
