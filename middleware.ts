@@ -120,14 +120,19 @@ export default async function handler(req: Request) {
   const userAgent = req.headers.get('user-agent') || ''
   
   // Check if it's a social media crawler
+  // LinkedIn uses various user agents, so we check for multiple patterns
   const isSocialCrawler = 
     userAgent.includes('facebookexternalhit') ||
     userAgent.includes('Twitterbot') ||
     userAgent.includes('LinkedInBot') ||
+    userAgent.includes('LinkedIn') ||
+    userAgent.includes('linkedin') ||
     userAgent.includes('WhatsApp') ||
     userAgent.includes('Slackbot') ||
     userAgent.includes('SkypeUriPreview') ||
-    userAgent.includes('Discordbot')
+    userAgent.includes('Discordbot') ||
+    userAgent.includes('Applebot') ||
+    userAgent.includes('Googlebot')
   
   // Only intercept social crawlers - let regular users pass through to React app
   // Regular users will get meta tags updated client-side by react-helmet-async
@@ -137,15 +142,27 @@ export default async function handler(req: Request) {
     return undefined as any
   }
   
-  const siteUrl = 'https://aaitek.com'
+  const siteUrl = 'https://www.aaitek.com'
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
   const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
-  const defaultImage = `${siteUrl}/og-image.png` // Use og-image.png for better social previews
+  const defaultImage = `${siteUrl}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
+  
+  // Ensure image URL is absolute and accessible
+  const ensureAbsoluteImageUrl = (imageUrl: string): string => {
+    if (!imageUrl) return defaultImage
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl
+    }
+    if (imageUrl.startsWith('/')) {
+      return `${siteUrl}${imageUrl}`
+    }
+    return `${siteUrl}/${imageUrl}`
+  }
   
   let meta = {
     title: defaultTitle,
     description: defaultDescription,
-    image: defaultImage,
+    image: ensureAbsoluteImageUrl(defaultImage),
     type: 'website'
   }
   
@@ -158,7 +175,7 @@ export default async function handler(req: Request) {
         meta = {
           title: `${article.title} - Article | Aaitek`,
           description: article.description || defaultDescription,
-          image: article.image,
+          image: ensureAbsoluteImageUrl(article.image || defaultImage),
           type: 'article'
         }
       }
@@ -171,7 +188,7 @@ export default async function handler(req: Request) {
         meta = {
           title: `${caseStudy.title} - Case Study | Aaitek`,
           description: caseStudy.description || defaultDescription,
-          image: caseStudy.image,
+          image: ensureAbsoluteImageUrl(caseStudy.image || defaultImage),
           type: 'article'
         }
       }
@@ -245,18 +262,22 @@ export default async function handler(req: Request) {
   <meta name="description" content="${meta.description}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="${meta.type}" />
   <meta property="og:url" content="${fullUrl}" />
   <meta property="og:title" content="${meta.title}" />
   <meta property="og:description" content="${meta.description}" />
   <meta property="og:image" content="${meta.image}" />
+  <meta property="og:image:url" content="${meta.image}" />
   <meta property="og:image:secure_url" content="${meta.image}" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="${meta.title}" />
   <meta property="og:site_name" content="Aaitek Technology Specialists" />
+  
+  <!-- LinkedIn specific meta tags -->
+  <meta property="linkedin:owner" content="aaitek" />
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />

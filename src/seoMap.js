@@ -1,8 +1,8 @@
 // SEO map for all routes - used by prerender function
 // Each route has its own title, description, and image for social media previews
 
-const SITE = 'https://aaitek.com'
-const defaultImage = `${SITE}/og-image.png` // Use og-image.png for better social previews
+const SITE = 'https://www.aaitek.com'
+const defaultImage = `${SITE}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
 const logoImage = `${SITE}/Aaitek%20logo%20in%20Black.png`
 
 // Import data to get dynamic route information

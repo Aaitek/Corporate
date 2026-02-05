@@ -5,9 +5,9 @@ import { AppRoutes } from './AppRoutes'
 import { HelmetProvider } from 'react-helmet-async'
 import { SEO } from './seoMap'
 
-const SITE = 'https://aaitek.com'
+const SITE = 'https://www.aaitek.com'
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
-const defaultImage = `${SITE}/og-image.png` // Use og-image.png for better social previews
+const defaultImage = `${SITE}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
 
 // Helper to normalize URL path
 const normalizeUrl = (url) => {
