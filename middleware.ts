@@ -143,7 +143,10 @@ export default async function handler(req: Request) {
     userAgent.toLowerCase().includes('linkedin') ||
     // Check referer for LinkedIn Post Inspector
     referer.includes('linkedin.com/post-inspector') ||
-    referer.includes('linkedin.com/feed')
+    referer.includes('linkedin.com/feed') ||
+    // Check for LinkedIn's internal crawler patterns
+    userAgent.includes('LinkedIn') ||
+    userAgent.includes('linkedin')
   
   // Only intercept social crawlers - let regular users pass through to React app
   // Regular users will get meta tags updated client-side by react-helmet-async
