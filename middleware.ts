@@ -298,6 +298,8 @@ export default async function handler(req: Request) {
   
   <!-- LinkedIn specific meta tags -->
   <meta property="linkedin:owner" content="aaitek" />
+  <meta name="linkedin:image" content="${meta.image}" />
+  <meta name="linkedin:image" content="${meta.image}" />
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
