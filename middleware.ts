@@ -164,15 +164,19 @@ export default async function handler(req: Request) {
   const defaultImage = DEFAULT_IMAGE
   
   // Ensure image URL is absolute and accessible
+  // Add cache-busting parameter to force LinkedIn to fetch fresh image
   const ensureAbsoluteImageUrl = (imageUrl: string): string => {
-    if (!imageUrl) return defaultImage
+    if (!imageUrl) return `${defaultImage}?v=2`
+    let absoluteUrl: string
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-      return imageUrl
+      absoluteUrl = imageUrl
+    } else if (imageUrl.startsWith('/')) {
+      absoluteUrl = `${siteUrl}${imageUrl}`
+    } else {
+      absoluteUrl = `${siteUrl}/${imageUrl}`
     }
-    if (imageUrl.startsWith('/')) {
-      return `${siteUrl}${imageUrl}`
-    }
-    return `${siteUrl}/${imageUrl}`
+    // Add cache-busting parameter for social media crawlers
+    return absoluteUrl.includes('?') ? `${absoluteUrl}&v=2` : `${absoluteUrl}?v=2`
   }
   
   let meta = {
