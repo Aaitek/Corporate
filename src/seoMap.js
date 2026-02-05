@@ -136,7 +136,7 @@ const generateSEOMap = () => {
     seoMap[`/academy/${slug}`] = createSEO(
       `${course.title} - Academy Course | Aaitek`,
       description,
-      logoImage
+      defaultImage
     )
   })
   
@@ -155,7 +155,7 @@ const generateSEOMap = () => {
     seoMap[`/hire-talent/${slug}`] = createSEO(
       `${item.title} - Hire Talent | Aaitek`,
       description,
-      logoImage
+      defaultImage
     )
   })
   

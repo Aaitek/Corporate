@@ -4,6 +4,8 @@ export const config = {
 }
 
 const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
+const SITE_URL = 'https://www.aaitek.com'
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
 
 // Type definitions for Strapi API responses
 interface StrapiResponse<T> {
@@ -71,7 +73,7 @@ async function fetchArticle(slug: string) {
       return {
         title: article.attributes?.title || '',
         description: article.attributes?.excerpt || article.attributes?.description || '',
-        image: railwayImageUrl || 'https://aaitek.com/footer-logo.png',
+        image: railwayImageUrl || DEFAULT_IMAGE,
       }
     }
     return null
@@ -104,7 +106,7 @@ async function fetchCaseStudy(slug: string) {
       return {
         title: caseStudy.attributes?.title || '',
         description: caseStudy.attributes?.description || '',
-        image: railwayImageUrl || 'https://aaitek.com/footer-logo.png',
+        image: railwayImageUrl || DEFAULT_IMAGE,
       }
     }
     return null
@@ -142,10 +144,10 @@ export default async function handler(req: Request) {
     return undefined as any
   }
   
-  const siteUrl = 'https://www.aaitek.com'
+  const siteUrl = SITE_URL
   const defaultTitle = 'Aaitek - Empowering Businesses With AI, Data Analytics & Cloud'
   const defaultDescription = 'Transform your digital vision into reality with Aaitek. Enterprise-grade AI, cloud solutions, and digital transformation services.'
-  const defaultImage = `${siteUrl}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
+  const defaultImage = DEFAULT_IMAGE
   
   // Ensure image URL is absolute and accessible
   const ensureAbsoluteImageUrl = (imageUrl: string): string => {
@@ -197,7 +199,7 @@ export default async function handler(req: Request) {
     meta = {
       title: 'Articles - Insights & Expert Perspectives | Aaitek',
       description: 'Read expert articles and insights on technology, delivery, and industry trends from Aaitek practitioners, architects, and consultants.',
-      image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+      image: defaultImage,
       type: 'website'
     }
   } else if (pathname.startsWith('/academy/')) {
@@ -224,7 +226,7 @@ export default async function handler(req: Request) {
         meta = {
           title: course.title,
           description: course.description,
-          image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+          image: defaultImage,
           type: 'website'
         }
       } else {
@@ -233,7 +235,7 @@ export default async function handler(req: Request) {
         meta = {
           title: `${formattedTitle} - Academy Course | Aaitek`,
           description: `Premium training course by Aaitek. Enterprise-ready outcomes and delivery readiness.`,
-          image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+          image: defaultImage,
           type: 'website'
         }
       }
@@ -241,11 +243,19 @@ export default async function handler(req: Request) {
       meta = {
         title: 'Academy - Training Courses | Aaitek',
         description: 'Premium training courses by Aaitek. Enterprise-ready outcomes and delivery readiness.',
-        image: 'https://aaitek.com/Aaitek%20logo%20in%20Black.png',
+        image: defaultImage,
         type: 'website'
       }
     }
   }
+  
+  // Ensure image is always set to defaultImage if not explicitly set
+  if (!meta.image) {
+    meta.image = defaultImage
+  }
+  
+  // Ensure image URL is absolute
+  meta.image = ensureAbsoluteImageUrl(meta.image)
   
   const fullUrl = `${siteUrl}${pathname}`
   
@@ -270,6 +280,7 @@ export default async function handler(req: Request) {
   <meta property="og:image" content="${meta.image}" />
   <meta property="og:image:url" content="${meta.image}" />
   <meta property="og:image:secure_url" content="${meta.image}" />
+  <meta name="image" property="og:image" content="${meta.image}" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />

@@ -29,12 +29,12 @@ const SEO = ({
 }) => {
   const location = useLocation()
   // Get the current origin (works for both Vercel deployment and production domain)
-  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://aaitek.com'
-  const siteUrl = 'https://aaitek.com'
-  const siteName = 'Aaitek'
-  // Use footer logo for social sharing previews - use absolute URL
+  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://www.aaitek.com'
+  const siteUrl = 'https://www.aaitek.com'
+  const siteName = 'Aaitek Technology Specialists'
+  // Use og-image.png for social sharing previews - use absolute URL
   // Use the main domain (not currentOrigin) to ensure consistency for social crawlers
-  const defaultImage = `https://aaitek.com/footer-logo.png`
+  const defaultImage = `${siteUrl}/og-image.png`
   
   // Helper function to ensure image URL is absolute and valid
   const ensureAbsoluteImageUrl = (imageUrl) => {
@@ -103,7 +103,7 @@ const SEO = ({
   } else {
     // Last resort: use default image
     finalOgImage = defaultImage
-    console.log('⚠️ SEO - Using default image (footer-logo.png):', defaultImage)
+    console.log('⚠️ SEO - Using default image (og-image.png):', defaultImage)
   }
   
   // If ogImage is provided (article image), use it directly without ensureAbsoluteImageUrl
@@ -346,10 +346,12 @@ const SEO = ({
       {/* CRITICAL: Use keys to force React to update meta tags when values change */}
       <meta property="og:title" content={ogTitleText} key={`og-title-${ogTitleText}-${location.pathname}`} />
       <meta property="og:description" content={ogDescText} key={`og-desc-${ogDescText}-${location.pathname}`} />
-      {/* Article image (from Strapi) or footer-logo.png fallback */}
+      {/* Article image (from Strapi) or og-image.png fallback */}
       {/* CRITICAL: ogImg contains the article image when ogImage prop is provided */}
       <meta property="og:image" content={ogImg} key={`og-image-${ogImg}`} />
+      <meta property="og:image:url" content={ogImg} key={`og-image-url-${ogImg}`} />
       <meta property="og:image:secure_url" content={ogImg} key={`og-image-secure-${ogImg}`} />
+      <meta name="image" property="og:image" content={ogImg} key={`og-image-name-${ogImg}`} />
       <meta property="og:image:type" content={getImageType(ogImg)} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
