@@ -29,6 +29,6 @@ module.exports = [
   'strapi::query',
   'strapi::body',
   'strapi::session',
-  'strapi::favicon',
+  // Default favicon middleware expects ./favicon.ico; missing file returns 500 on /favicon.ico (noisy in prod).
   'strapi::public',
 ];
