@@ -11,7 +11,9 @@ module.exports = [
         'https://aaitek.com',
         'http://localhost:3000',
         'http://localhost:5173',
+        'http://localhost:1337',
         /^https:\/\/.*\.vercel\.app$/,
+        /^https:\/\/.*\.up\.railway\.app$/,
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
       headers: '*', // Allow all headers (simpler and more permissive)

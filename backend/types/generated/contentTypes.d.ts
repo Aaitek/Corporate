@@ -387,7 +387,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     excerpt: Attribute.Text;
     image: Attribute.Media<'images'>;
     publishedAt: Attribute.DateTime;
-    slug: Attribute.UID<'api::article.article', 'title'>;
+    slug: Attribute.UID<'api::article.article', 'title'> & Attribute.Required;
     tags: Attribute.JSON;
     title: Attribute.String & Attribute.Required;
     updatedAt: Attribute.DateTime;
@@ -436,6 +436,43 @@ export interface ApiCaseStudyCaseStudy extends Schema.CollectionType {
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::case-study.case-study',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactSubmissionContactSubmission
+  extends Schema.CollectionType {
+  collectionName: 'contact_submissions';
+  info: {
+    description: 'Contact form submissions from the website';
+    displayName: 'Contact Submission';
+    pluralName: 'contact-submissions';
+    singularName: 'contact-submission';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    company: Attribute.String;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-submission.contact-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    email: Attribute.Email & Attribute.Required;
+    message: Attribute.Text & Attribute.Required;
+    name: Attribute.String & Attribute.Required;
+    phone: Attribute.String;
+    read: Attribute.Boolean & Attribute.DefaultTo<false>;
+    service: Attribute.String;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::contact-submission.contact-submission',
       'oneToOne',
       'admin::user'
     > &
@@ -1047,6 +1084,7 @@ declare module '@strapi/types' {
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
       'api::case-study.case-study': ApiCaseStudyCaseStudy;
+      'api::contact-submission.contact-submission': ApiContactSubmissionContactSubmission;
       'api::managed-service.managed-service': ApiManagedServiceManagedService;
       'api::product.product': ApiProductProduct;
       'api::service.service': ApiServiceService;
