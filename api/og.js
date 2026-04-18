@@ -1,11 +1,14 @@
+import { getRailwayApiUrl, getStrapiOrigin } from './strapi-config.js'
+
+const RAILWAY_API_URL = getRailwayApiUrl()
+const STRAPI_ORIGIN = getStrapiOrigin()
+
 // This is a Vercel Edge Function that serves HTML with proper meta tags for social crawlers
 // It should be deployed as an edge function
 
 export const config = {
   runtime: 'edge',
 }
-
-const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
 // Helper to get image URL from Strapi format
 const getImageUrl = (image, size = 'large') => {
@@ -40,7 +43,7 @@ async function fetchArticle(slug) {
       const article = data.data[0]
       const imageUrl = getImageUrl(article.attributes?.image)
       const railwayImageUrl = imageUrl 
-        ? (imageUrl.startsWith('http') ? imageUrl : `https://aaitech-production.up.railway.app${imageUrl}`)
+        ? (imageUrl.startsWith('http') ? imageUrl : `${STRAPI_ORIGIN}${imageUrl}`)
         : null
       
       return {
@@ -73,7 +76,7 @@ async function fetchCaseStudy(slug) {
       const caseStudy = data.data[0]
       const imageUrl = getImageUrl(caseStudy.attributes?.image)
       const railwayImageUrl = imageUrl 
-        ? (imageUrl.startsWith('http') ? imageUrl : `https://aaitech-production.up.railway.app${imageUrl}`)
+        ? (imageUrl.startsWith('http') ? imageUrl : `${STRAPI_ORIGIN}${imageUrl}`)
         : null
       
       return {

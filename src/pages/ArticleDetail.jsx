@@ -199,11 +199,8 @@ const ArticleDetail = () => {
     // If from Railway, proxy through main domain for social media crawlers
     // This ensures social media crawlers can access the image
     // Check for Railway URLs more thoroughly
-    const isRailwayUrl = url.includes('railway.app') || 
-                         url.includes('aaitech-production') || 
-                         url.includes('aaitech-production.up.railway.app') ||
-                         url.startsWith('https://aaitech-production') ||
-                         url.includes('localhost:1337')
+    const isRailwayUrl =
+      url.includes('railway.app') || url.includes('localhost:1337')
     
     if (isRailwayUrl) {
       // Proxy Railway images through main domain for social media crawlers
@@ -266,7 +263,7 @@ const ArticleDetail = () => {
     finalPreviewImage: finalPreviewImage,
     articleTitle: article?.title,
     willUseArticleImage: !!articleImageUrl && articleImageUrl !== 'null' && articleImageUrl !== 'undefined' && articleImageUrl !== '',
-    isRailwayUrl: articleImageUrl?.includes('railway.app') || articleImageUrl?.includes('aaitech-production'),
+    isRailwayUrl: articleImageUrl?.includes('railway.app'),
     note: 'finalPreviewImage is what will be used in meta tags'
   })
 

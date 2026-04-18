@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getStrapiOrigin } from '../config/strapiClient.js'
 
 // API_BASE is not needed since we use relative paths with Vercel API proxy
 // VITE_API_URL is only used for image URLs in development (getImageUrl function handles fallback)
@@ -156,19 +157,18 @@ export const getImageUrl = (imageData, format = 'url') => {
     
     // Get the Railway API base URL for images (images are served directly from Railway, not proxied)
     // Images from Strapi are relative URLs like /uploads/... that need to be converted to absolute URLs
-    const railwayUrl = 'https://aaitech-production.up.railway.app'
+    const railwayUrl = getStrapiOrigin()
     const baseUrl = import.meta.env.MODE === 'production' || import.meta.env.PROD
-      ? railwayUrl  // Use Railway URL directly for images in production
-      : (import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || 'http://localhost:1337')
+      ? railwayUrl // Production: absolute media URLs from Strapi host
+      : import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || 'http://localhost:1337'
     
     // Remove /api from the end if present, and any trailing slashes
     let apiBase = baseUrl.replace(/\/api$/, '').replace(/\/$/, '')
     
     // If apiBase is empty or just whitespace, use default
     if (!apiBase || apiBase.trim() === '') {
-      apiBase = import.meta.env.MODE === 'production' || import.meta.env.PROD
-        ? railwayUrl
-        : 'http://localhost:1337'
+      apiBase =
+        import.meta.env.MODE === 'production' || import.meta.env.PROD ? railwayUrl : 'http://localhost:1337'
     }
     
     // Construct absolute URL - ensure no double slashes

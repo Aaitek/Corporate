@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fetchTestimonials } from '../utils/api'
+import { getStrapiOrigin } from '../../config/strapiClient.js'
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -21,8 +22,8 @@ const Testimonials = () => {
             company: item.attributes?.company || '',
             review: item.attributes?.content || '',
             rating: item.attributes?.rating || 5,
-            image: item.attributes?.image?.data?.attributes?.url 
-              ? `https://aaitech-production.up.railway.app${item.attributes.image.data.attributes.url}`
+            image: item.attributes?.image?.data?.attributes?.url
+              ? `${getStrapiOrigin()}${item.attributes.image.data.attributes.url}`
               : null,
             // Default values for UI
             project: 'Project',

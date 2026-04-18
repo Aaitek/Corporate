@@ -1,5 +1,7 @@
 // Vercel API proxy for testimonials - eliminates CORS issues
-const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
+import { getRailwayApiUrl } from './strapi-config.js'
+
+const RAILWAY_API_URL = getRailwayApiUrl()
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
