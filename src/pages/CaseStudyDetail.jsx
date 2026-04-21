@@ -152,7 +152,13 @@ const CaseStudyDetail = () => {
         }
       } catch (err) {
         console.error('Error fetching case study:', err)
-        setError('Failed to load case study')
+        // Fallback to local data if API is unavailable (e.g. Vercel proxy/Strapi downtime)
+        const localCaseStudy = caseStudiesData[slug]
+        if (localCaseStudy) {
+          setCaseStudy(localCaseStudy)
+        } else {
+          setError('Failed to load case study')
+        }
       } finally {
         setLoading(false)
       }

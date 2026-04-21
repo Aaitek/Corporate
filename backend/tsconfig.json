@@ -7,9 +7,12 @@
     "strict": true,
     "skipLibCheck": true,
     "types": ["node"],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": false,
     "rootDir": ".",
     "outDir": "build"
   },
-  "include": ["types/**/*.d.ts"],
+  "include": ["src/**/*.js", "types/**/*.d.ts"],
   "exclude": ["node_modules", "build", ".cache", ".tmp"]
 }

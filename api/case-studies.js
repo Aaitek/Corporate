@@ -1,5 +1,7 @@
 // Vercel API proxy for case studies - eliminates CORS issues
-const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
+// Prefer env var on Vercel. Fallback points at the Strapi (Corporate) Railway service.
+const RAILWAY_API_URL =
+  process.env.RAILWAY_API_URL || 'https://corporate-production-07c0.up.railway.app/api'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -40,7 +42,12 @@ export default async function handler(req, res) {
     })
 
     if (!response.ok) {
-      return res.status(response.status).json({ error: 'Failed to fetch case studies' })
+      const errorText = await response.text()
+      console.error('Railway API error:', response.status, response.statusText)
+      console.error('Railway API error body:', errorText)
+      return res
+        .status(response.status)
+        .json({ error: 'Failed to fetch case studies', status: response.status, body: errorText })
     }
 
     const data = await response.json()
@@ -51,6 +58,6 @@ export default async function handler(req, res) {
     return res.status(200).json(data)
   } catch (error) {
     console.error('Error proxying case studies:', error)
-    return res.status(500).json({ error: 'Internal server error' })
+    return res.status(502).json({ error: 'Bad gateway', detail: String(error?.message || error) })
   }
 }
