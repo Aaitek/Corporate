@@ -1,7 +1,5 @@
 // Vercel API proxy for articles - eliminates CORS issues
-import { getRailwayApiUrl } from './strapi-config.js'
-
-const RAILWAY_API_URL = getRailwayApiUrl()
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
 export default async function handler(req, res) {
   // Only allow GET requests
@@ -23,16 +21,11 @@ export default async function handler(req, res) {
     if (!isDetailPage) {
       queryParams.set('sort', 'publishedAt:desc')
     }
-    
-    // Add publicationState if not already in query
-    if (!req.query.publicationState) {
-      queryParams.set('publicationState', 'live')
-    }
-    
+
     // Add all query params from request (including nested filters)
     Object.keys(req.query).forEach(key => {
       // Skip params we've already set
-      if (key !== 'populate' && key !== 'sort' && key !== 'publicationState') {
+      if (key !== 'populate' && key !== 'sort') {
         // Handle nested filter params like filters[slug][$eq]
         // URLSearchParams will properly encode brackets
         queryParams.append(key, req.query[key])

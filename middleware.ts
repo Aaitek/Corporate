@@ -1,14 +1,11 @@
-import { getRailwayApiUrl, getStrapiOrigin } from './api/strapi-config.js'
-
-const RAILWAY_API_URL = getRailwayApiUrl()
-const STRAPI_ORIGIN = getStrapiOrigin()
-
 // Vercel Edge Middleware - intercepts all requests and serves proper meta tags for social crawlers
 export const config = {
   runtime: 'edge',
   // Omit matcher to match all routes, then filter in handler
   // This avoids any regex/capturing group issues
 }
+
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 const SITE_URL = 'https://www.aaitek.com'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png` // Use og-image.png for better social previews - MUST be absolute URL
 
@@ -72,7 +69,7 @@ async function fetchArticle(slug: string) {
       const article = data.data[0]
       const imageUrl = getImageUrl(article.attributes?.image)
       const railwayImageUrl = imageUrl 
-        ? (imageUrl.startsWith('http') ? imageUrl : `${STRAPI_ORIGIN}${imageUrl}`)
+        ? (imageUrl.startsWith('http') ? imageUrl : `https://aaitech-production.up.railway.app${imageUrl}`)
         : null
       
       return {
@@ -105,7 +102,7 @@ async function fetchCaseStudy(slug: string) {
       const caseStudy = data.data[0]
       const imageUrl = getImageUrl(caseStudy.attributes?.image)
       const railwayImageUrl = imageUrl 
-        ? (imageUrl.startsWith('http') ? imageUrl : `${STRAPI_ORIGIN}${imageUrl}`)
+        ? (imageUrl.startsWith('http') ? imageUrl : `https://aaitech-production.up.railway.app${imageUrl}`)
         : null
       
       return {

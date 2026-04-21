@@ -22,8 +22,9 @@ export default async function handler(req, res) {
     }
 
     // Validate that it's a Railway URL (for security)
-    const isValidRailwayUrl =
-      imageUrl.includes('railway.app') || imageUrl.startsWith('http://localhost:1337')
+    const isValidRailwayUrl = imageUrl.includes('aaitech-production.up.railway.app') || 
+                               imageUrl.includes('railway.app') ||
+                               imageUrl.startsWith('http://localhost:1337')
     
     if (!isValidRailwayUrl) {
       console.error('Image Proxy - Invalid image source:', imageUrl)

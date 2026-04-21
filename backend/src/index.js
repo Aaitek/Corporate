@@ -1,5 +1,7 @@
 'use strict';
 
+const ensurePublicReadPermissions = require('./bootstrap/ensure-public-read-permissions');
+
 module.exports = {
   register({ strapi }) {
     // Log to confirm this hook is being loaded
@@ -21,16 +23,21 @@ module.exports = {
           'https://aaitek.com',
           'http://localhost:3000',
           'http://localhost:5173',
+          'http://localhost:1337',
         ];
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        const isRailwayPreview = origin && /^https:\/\/.*\.up\.railway\.app$/.test(origin);
         
         // Log for debugging
         console.log('🔍 CORS Check - Origin:', origin, 'Path:', ctx.request.path);
         console.log('🔍 CORS Check - Allowed:', allowed);
         console.log('🔍 CORS Check - Is Vercel:', isVercelDomain);
-        console.log('🔍 CORS Check - Is Allowed:', origin && (allowed.includes(origin) || isVercelDomain));
-        
-        if (origin && (allowed.includes(origin) || isVercelDomain)) {
+        console.log(
+          '🔍 CORS Check - Is Allowed:',
+          origin && (allowed.includes(origin) || isVercelDomain || isRailwayPreview)
+        );
+
+        if (origin && (allowed.includes(origin) || isVercelDomain || isRailwayPreview)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
           ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
@@ -45,7 +52,7 @@ module.exports = {
         if (ctx.method === 'OPTIONS') {
           // For OPTIONS, we MUST respond with CORS headers even if origin check fails
           // This allows the browser to proceed with the actual request
-          if (origin && (allowed.includes(origin) || isVercelDomain)) {
+          if (origin && (allowed.includes(origin) || isVercelDomain || isRailwayPreview)) {
             ctx.set('Access-Control-Allow-Origin', origin);
             ctx.set('Access-Control-Allow-Credentials', 'true');
             ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
@@ -75,8 +82,10 @@ module.exports = {
           'https://aaitek.com',
           'http://localhost:3000',
           'http://localhost:5173',
+          'http://localhost:1337',
         ];
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        const isRailwayPreview = origin && /^https:\/\/.*\.up\.railway\.app$/.test(origin);
         
         // Disable caching for API routes (prevents Railway Edge from caching wrong variant)
         ctx.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
@@ -85,7 +94,7 @@ module.exports = {
         ctx.set('X-Accel-Expires', '0'); // Nginx/Railway Edge cache control
         
         // FORCE set CORS headers - override anything that might exist
-        if (origin && (allowed.includes(origin) || isVercelDomain)) {
+        if (origin && (allowed.includes(origin) || isVercelDomain || isRailwayPreview)) {
           // Remove any existing CORS headers first
           ctx.response.remove('Access-Control-Allow-Origin');
           ctx.response.remove('Access-Control-Allow-Credentials');
@@ -108,10 +117,12 @@ module.exports = {
     });
   },
   
-  bootstrap({ strapi }) {
+  async bootstrap({ strapi }) {
     // Log to confirm bootstrap is called
     console.log('🚀 Aaitek server hook: BOOTSTRAP function called');
-    
+
+    await ensurePublicReadPermissions(strapi);
+
     // Also add middleware in bootstrap as backup
     strapi.server.app.use(async (ctx, next) => {
       ctx.set('x-aaitek-bootstrap', 'LOADED');
@@ -126,10 +137,12 @@ module.exports = {
           'https://aaitek.com',
           'http://localhost:3000',
           'http://localhost:5173',
+          'http://localhost:1337',
         ];
         const isVercelDomain = origin && /^https:\/\/.*\.vercel\.app$/.test(origin);
+        const isRailwayPreview = origin && /^https:\/\/.*\.up\.railway\.app$/.test(origin);
         
-        if (origin && (allowed.includes(origin) || isVercelDomain)) {
+        if (origin && (allowed.includes(origin) || isVercelDomain || isRailwayPreview)) {
           ctx.set('Access-Control-Allow-Origin', origin);
           ctx.set('Access-Control-Allow-Credentials', 'true');
         }

@@ -7,10 +7,8 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node"],
-    "outDir": "build",
-    "rootDir": "."
+    "types": ["node"]
   },
-  "include": ["types/generated/**/*.d.ts"],
+  "include": ["types/**/*.d.ts"],
   "exclude": ["node_modules", "build", ".cache", ".tmp"]
 }

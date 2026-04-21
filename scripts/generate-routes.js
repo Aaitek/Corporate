@@ -4,16 +4,17 @@
 import { writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
-import { getRailwayApiUrl } from '../api/strapi-config.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+// Import data files
 import { academyData } from '../src/data/academyData.js'
 import { hireTalentData } from '../src/data/hireTalentData.js'
 import { partnerSuccessData } from '../src/data/partnerSuccessData.js'
 import { productsData } from '../src/data/productsData.js'
 import { industriesData } from '../src/data/industriesData.js'
 import { servicesData } from '../src/data/servicesData.js'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 // Helper function for fetch with timeout
 async function fetchWithTimeout(url, options = {}, timeout = 5000) {
@@ -34,7 +35,7 @@ async function fetchWithTimeout(url, options = {}, timeout = 5000) {
 
 // Fetch dynamic routes from Strapi
 async function fetchDynamicRoutes() {
-  const RAILWAY_API_URL = getRailwayApiUrl()
+  const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
   const routes = []
   
   // Fetch case studies

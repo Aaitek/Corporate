@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getStrapiOrigin } from '../config/strapiClient.js'
 
 // API_BASE is not needed since we use relative paths with Vercel API proxy
 // VITE_API_URL is only used for image URLs in development (getImageUrl function handles fallback)
@@ -33,7 +32,6 @@ export const fetchCaseStudies = async (category = null) => {
   // Use Vercel API proxy to avoid Railway Edge CORS issues
   const params = {
     populate: '*',
-    publicationState: 'live',
   }
   
   if (category) {
@@ -61,7 +59,6 @@ export const fetchArticles = async () => {
     params: {
       populate: '*',
       sort: 'publishedAt:desc',
-      publicationState: 'live',
     },
   })
   return response.data
@@ -157,10 +154,15 @@ export const getImageUrl = (imageData, format = 'url') => {
     
     // Get the Railway API base URL for images (images are served directly from Railway, not proxied)
     // Images from Strapi are relative URLs like /uploads/... that need to be converted to absolute URLs
-    const railwayUrl = getStrapiOrigin()
-    const baseUrl = import.meta.env.MODE === 'production' || import.meta.env.PROD
-      ? railwayUrl // Production: absolute media URLs from Strapi host
-      : import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || 'http://localhost:1337'
+    const railwayUrl = 'https://aaitech-production.up.railway.app'
+    const devStrapiOrigin =
+      import.meta.env.VITE_STRAPI_PROXY_TARGET?.replace(/\/$/, '') ||
+      import.meta.env.VITE_API_URL?.replace(/\/api$/, '') ||
+      'http://localhost:1337'
+    const baseUrl =
+      import.meta.env.MODE === 'production' || import.meta.env.PROD
+        ? railwayUrl
+        : devStrapiOrigin
     
     // Remove /api from the end if present, and any trailing slashes
     let apiBase = baseUrl.replace(/\/api$/, '').replace(/\/$/, '')
@@ -168,7 +170,9 @@ export const getImageUrl = (imageData, format = 'url') => {
     // If apiBase is empty or just whitespace, use default
     if (!apiBase || apiBase.trim() === '') {
       apiBase =
-        import.meta.env.MODE === 'production' || import.meta.env.PROD ? railwayUrl : 'http://localhost:1337'
+        import.meta.env.MODE === 'production' || import.meta.env.PROD
+          ? railwayUrl
+          : devStrapiOrigin
     }
     
     // Construct absolute URL - ensure no double slashes

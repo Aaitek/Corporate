@@ -1,7 +1,5 @@
 // Vercel API proxy for contact form submissions - eliminates CORS issues
-import { getRailwayApiUrl } from './strapi-config.js'
-
-const RAILWAY_API_URL = getRailwayApiUrl()
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

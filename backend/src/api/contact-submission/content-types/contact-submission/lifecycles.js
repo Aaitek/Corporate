@@ -58,9 +58,7 @@ async function sendEmailNotification({ name, email, company, phone, service, mes
     console.log('Message:', message);
     console.log('===================================');
     console.log(`\nTo receive email notifications, set RESEND_API_KEY and CONTACT_NOTIFICATION_EMAIL environment variables.`);
-    console.log(
-      `Submissions are saved in Strapi admin — open your PUBLIC_URL/admin → Content Manager → Contact Submission`
-    );
+    console.log(`Submissions are saved in Strapi admin: https://aaitech-production.up.railway.app/admin/content-manager/collection-types/api::contact-submission.contact-submission`);
   }
 }
 

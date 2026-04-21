@@ -2,19 +2,20 @@
 import { writeFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import { getRailwayApiUrl } from '../api/strapi-config.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const SITE_URL = 'https://www.aaitek.com'
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
+
+// Import data files
 import { academyData } from '../src/data/academyData.js'
 import { hireTalentData } from '../src/data/hireTalentData.js'
 import { partnerSuccessData } from '../src/data/partnerSuccessData.js'
 import { productsData } from '../src/data/productsData.js'
 import { industriesData } from '../src/data/industriesData.js'
 import { servicesData } from '../src/data/servicesData.js'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const SITE_URL = 'https://www.aaitek.com'
-const RAILWAY_API_URL = getRailwayApiUrl()
 
 async function fetchDynamicRoutes() {
   const routes = []

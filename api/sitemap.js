@@ -1,7 +1,5 @@
 // Vercel API route to generate sitemap.xml dynamically
-import { getRailwayApiUrl } from './strapi-config.js'
-
-const RAILWAY_API_URL = getRailwayApiUrl()
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 const SITE_URL = 'https://aaitek.com'
 
 async function fetchDynamicRoutes() {

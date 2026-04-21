@@ -45,7 +45,6 @@ const CaseStudyDetail = () => {
           params: {
             'filters[slug][$eq]': slug,
             populate: '*',
-            publicationState: 'live',
           },
         })
         

@@ -1,3 +1,0 @@
-# Ensures Strapi builds the admin bundle in production mode during Railway deploy.
-[variables]
-NODE_ENV = "production"

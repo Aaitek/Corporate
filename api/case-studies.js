@@ -1,7 +1,5 @@
 // Vercel API proxy for case studies - eliminates CORS issues
-import { getRailwayApiUrl } from './strapi-config.js'
-
-const RAILWAY_API_URL = getRailwayApiUrl()
+const RAILWAY_API_URL = process.env.RAILWAY_API_URL || 'https://aaitech-production.up.railway.app/api'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -18,11 +16,6 @@ export default async function handler(req, res) {
     // Check if this is a detail page request (has slug filter)
     const isDetailPage = req.query['filters[slug][$eq]'] || req.query.slug
     
-    // Add publicationState if not already in query
-    if (!req.query.publicationState) {
-      queryParams.set('publicationState', 'live')
-    }
-    
     // Add category filter if provided (for list pages)
     if (req.query.category && !isDetailPage) {
       queryParams.append('filters[category][$eq]', req.query.category)
@@ -31,7 +24,7 @@ export default async function handler(req, res) {
     // Add all query params from request (including nested filters)
     Object.keys(req.query).forEach(key => {
       // Skip params we've already handled
-      if (key !== 'category' && key !== 'populate' && key !== 'publicationState') {
+      if (key !== 'category' && key !== 'populate') {
         // Handle nested filter params like filters[slug][$eq]
         queryParams.append(key, req.query[key])
       }
