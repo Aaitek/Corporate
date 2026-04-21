@@ -6,8 +6,9 @@
     "moduleResolution": "node",
     "strict": true,
     "skipLibCheck": true,
-    "noEmit": true,
-    "types": ["node"]
+    "types": ["node"],
+    "rootDir": ".",
+    "outDir": "build"
   },
   "include": ["types/**/*.d.ts"],
   "exclude": ["node_modules", "build", ".cache", ".tmp"]

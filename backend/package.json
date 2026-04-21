@@ -6,9 +6,11 @@
   "scripts": {
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
-    "develop": "strapi develop",
+    "sync-config-to-build": "node scripts/sync-config-to-build.js",
+    "develop": "npm run sync-config-to-build && strapi develop",
+    "prestart": "npm run sync-config-to-build",
     "start": "strapi start",
-    "build": "strapi build",
+    "build": "strapi build && npm run sync-config-to-build",
     "strapi": "strapi"
   },
   "dependencies": {
